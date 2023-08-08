@@ -26,7 +26,7 @@ final class MainPageViewModel: MainPageViewModelProtocol {
 //        }
 //        LoginManager.shared.refreshToken()
         LoginManager.shared.deleteAll()
-        APIService.getUserProfile()
+//        APIService.getUserProfile()
     }
     func getPLaylists() {
         APIService.getPlaylist()

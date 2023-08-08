@@ -11,8 +11,6 @@ class LoginCoordinator: Coordinator {
     }
     
     func start() {
-//        let storyboard = UIStoryboard(name: "LoginStoryboard", bundle: nil)
-//        guard let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return }
         let loginViewController = LoginViewController.instantiate()
         let model = LoginViewModel()
         model.coordinator = self
@@ -20,6 +18,7 @@ class LoginCoordinator: Coordinator {
         navigationController.pushViewController(loginViewController, animated: true)
     }
     func showTabBar() {
+        print("go to tabbar")
         let tabbarCoordinator = TabBarCoordinator(navigationController: navigationController)
         tabbarCoordinator.start()
     }

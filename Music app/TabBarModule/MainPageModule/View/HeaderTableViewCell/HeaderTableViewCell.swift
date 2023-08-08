@@ -37,6 +37,6 @@ class HeaderTableViewCell: UITableViewCell {
         viewModel?.getPLaylists()
     }
     @IBAction func notificationButtonAction(_ sender: Any) {
-        
+        viewModel?.logout()
     }
 }

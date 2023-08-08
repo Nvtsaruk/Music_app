@@ -18,6 +18,7 @@ final class LoginViewModel: LoginViewModelProtocol {
         }
     }
     func goToTabBar() {
+        
         coordinator?.showTabBar()
     }
     

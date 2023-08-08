@@ -44,6 +44,9 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
     private func hideWebView() {
         viewModel?.updateClosure = { [weak self] in
             self?.webView.removeFromSuperview()
+            DispatchQueue.main.async {
+                self?.viewModel?.goToTabBar()
+            }
         }
     }
 }
