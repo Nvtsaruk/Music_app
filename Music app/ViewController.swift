@@ -57,16 +57,16 @@ class ViewController: UIViewController, WKNavigationDelegate {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(tempToken)"
         ]
-        AF.request(url, method: .get, headers: headers).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                // Handle the successful response
-                print(value)
-            case .failure(let error):
-                // Handle the error
-                print(error)
-            }
-        }
+//        AF.request(url, method: .get, headers: headers).responseJSON { response in
+//            switch response.result {
+//            case .success(let value):
+//                // Handle the successful response
+//                print(value)
+//            case .failure(let error):
+//                // Handle the error
+//                print(error)
+//            }
+//        }
         
     }
     
@@ -83,7 +83,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     
     func getToken(code: String) {
 
-        var url = "https://accounts.spotify.com/api/token"
+        let url = "https://accounts.spotify.com/api/token"
         let headers: HTTPHeaders = [
             "Content-Type": "application/x-www-form-urlencoded"
         ]

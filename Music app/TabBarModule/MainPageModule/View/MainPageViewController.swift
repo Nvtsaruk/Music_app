@@ -13,14 +13,14 @@ class MainPageViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    
+    //MARK: - Variables
+    var viewModel: MainPageViewModelProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
-        
         setupUI()
     }
     
@@ -45,6 +45,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let headerCell = tableView.dequeueReusableCell(withIdentifier: "HeaderTableViewCell") as? HeaderTableViewCell else { return UITableViewCell() }
+        headerCell.viewModel = viewModel
         guard let suggestedCell = tableView.dequeueReusableCell(withIdentifier: "SuggestedPlaylistTableViewCell") as? SuggestedPlaylistTableViewCell else { return UITableViewCell() }
         switch indexPath.section {
             case 0:
@@ -56,5 +57,13 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+    }
+}
+extension MainPageViewController: Storyboarded {
+    static func containingStoryboard() -> Storyboard {
+        .MainPage
+    }
 }

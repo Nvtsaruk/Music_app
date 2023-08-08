@@ -1,6 +1,10 @@
 import UIKit
 
 class TabBarCoordinator: Coordinator {
+    func goToUserProfile() {
+        
+    }
+    
     
     let navigationController: UINavigationController
     

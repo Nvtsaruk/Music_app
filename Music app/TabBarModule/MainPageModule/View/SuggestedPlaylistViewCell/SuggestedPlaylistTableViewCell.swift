@@ -23,11 +23,13 @@ final class SuggestedPlaylistTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
+        
+        self.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        let collectionNib = UINib(nibName: "SuggestePlaylistCollectionViewCell", bundle: nil)
-        collectionView.register(collectionNib, forCellWithReuseIdentifier: "SuggestePlaylistCollectionViewCell")
+        let collectionNib = UINib(nibName: "SuggestedPlaylistCollectionViewCell", bundle: nil)
+        collectionView.register(collectionNib, forCellWithReuseIdentifier: "SuggestedPlaylistCollectionViewCell")
     }
     
 
@@ -40,14 +42,28 @@ final class SuggestedPlaylistTableViewCell: UITableViewCell {
 }
 
 extension SuggestedPlaylistTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        2
+//    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        2
+        6
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SuggestePlaylistCollectionViewCell", for: indexPath) as? SuggestePlaylistCollectionViewCell else { return UICollectionViewCell()}
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SuggestedPlaylistCollectionViewCell", for: indexPath) as? SuggestedPlaylistCollectionViewCell else { return UICollectionViewCell()}
+        cell.playlistTitle.text = String(indexPath.row)
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+}
+
+extension SuggestedPlaylistTableViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.frame.width / 2) - 3
+        let height = (collectionView.frame.height / 3) - 6
+        return CGSize(width: width, height: height)
+    }
 }

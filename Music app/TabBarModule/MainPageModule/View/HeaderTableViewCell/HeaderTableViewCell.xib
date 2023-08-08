@@ -31,6 +31,9 @@
                                 <buttonConfiguration key="configuration" style="plain" image="bell" catalog="system">
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="notificationButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="r0e-vx-U3v"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cb7-gO-9ss">
                                 <rect key="frame" x="41" y="0.0" width="51" height="34.333333333333336"/>
@@ -38,6 +41,9 @@
                                 <buttonConfiguration key="configuration" style="plain" image="clock.badge.checkmark" catalog="system">
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="historyButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="rCU-Vb-47l"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cEu-ch-SoP">
                                 <rect key="frame" x="82" y="0.0" width="51" height="34.333333333333336"/>

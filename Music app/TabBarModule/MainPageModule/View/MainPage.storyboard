@@ -16,8 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Pgq-rf-kHC">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Pgq-rf-kHC">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <sections/>
                             </tableView>
@@ -26,9 +26,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Pgq-rf-kHC" firstAttribute="trailing" secondItem="n6t-48-EaU" secondAttribute="trailing" id="0j5-kn-i9K"/>
-                            <constraint firstItem="Pgq-rf-kHC" firstAttribute="bottom" secondItem="n6t-48-EaU" secondAttribute="bottom" id="8bK-qi-FOw"/>
                             <constraint firstItem="Pgq-rf-kHC" firstAttribute="leading" secondItem="n6t-48-EaU" secondAttribute="leading" id="KOq-cb-wqe"/>
-                            <constraint firstItem="Pgq-rf-kHC" firstAttribute="top" secondItem="n6t-48-EaU" secondAttribute="top" id="msd-to-4u8"/>
+                            <constraint firstItem="Pgq-rf-kHC" firstAttribute="bottom" secondItem="n6t-48-EaU" secondAttribute="bottom" constant="34" id="Ws9-L0-ABT"/>
+                            <constraint firstItem="n6t-48-EaU" firstAttribute="top" secondItem="Pgq-rf-kHC" secondAttribute="top" constant="59" id="y2V-ZP-ej1"/>
                         </constraints>
                     </view>
                     <connections>

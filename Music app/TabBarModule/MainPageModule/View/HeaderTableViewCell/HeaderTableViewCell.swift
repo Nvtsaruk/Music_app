@@ -12,6 +12,11 @@ class HeaderTableViewCell: UITableViewCell {
     //MARK: -IBOutlet
     
     @IBOutlet weak var headerGreetingLabel: UILabel!
+    
+    //MARK: - Variables
+    
+    var viewModel: MainPageViewModelProtocol?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = .clear
@@ -26,12 +31,12 @@ class HeaderTableViewCell: UITableViewCell {
     //MARK: -IBAction
     
     @IBAction func settingButtonAction(_ sender: Any) {
-        do {
-            let del = try KeychainManager.logout(for: "access_token")
-            print("Data from keychain", del)
-            
-        } catch {
-            print(error)
-        }
+        viewModel?.showUserProfile()
+    }
+    @IBAction func historyButtonAction(_ sender: Any) {
+        viewModel?.getPLaylists()
+    }
+    @IBAction func notificationButtonAction(_ sender: Any) {
+        
     }
 }

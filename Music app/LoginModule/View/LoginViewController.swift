@@ -40,16 +40,18 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
         let component = URLComponents(string: url.absoluteString)
         guard let code = component?.queryItems?.first(where: { $0.name == "code" })?.value else { return }
         viewModel?.loginCode = code
-//        print("Code: \(code)")
-//        if code != "" {
-//            webView.removeFromSuperview()
-//        }
-//        getToken(code: code)
     }
     private func hideWebView() {
         viewModel?.updateClosure = { [weak self] in
-            print("in closure")
             self?.webView.removeFromSuperview()
         }
     }
+}
+
+extension LoginViewController: Storyboarded {
+    static func containingStoryboard() -> Storyboard {
+        return .Login
+    }
+    
+    
 }

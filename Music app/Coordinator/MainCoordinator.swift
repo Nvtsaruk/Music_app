@@ -1,6 +1,10 @@
 import UIKit
 
 final class MainCoordinator: Coordinator {
+    func goToUserProfile() {
+        
+    }
+    
     
     let navigationController = UINavigationController()
     
@@ -27,12 +31,9 @@ final class MainCoordinator: Coordinator {
         loginCoordinator.start()
     }
     private func startTabBar() {
-//        let tabbarCoordinator = TabBarCoordinator()
-//        tabbarCoordinator.start()
-//        let temp = MainPageCoordinator(navigationController: navigationController)
-//        temp.start()
+
         let tabbarCoordinator = TabBarCoordinator(navigationController: navigationController)
         tabbarCoordinator.start()
-        print("Starting tabbar")
+
     }
 }

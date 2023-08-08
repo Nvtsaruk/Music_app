@@ -10,27 +10,30 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SuggestePlaylistCollectionViewCell" id="gTV-IL-0wX" customClass="SuggestePlaylistCollectionViewCell" customModule="Music_app" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="356" height="220"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SuggestedPlaylistCollectionViewCell" id="gTV-IL-0wX" customClass="SuggestedPlaylistCollectionViewCell" customModule="Music_app" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="212" height="139"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="356" height="220"/>
+                <rect key="frame" x="0.0" y="0.0" width="212" height="139"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i9R-gU-U5E">
-                        <rect key="frame" x="0.0" y="82.666666666666671" width="356" height="80.000000000000014"/>
+                        <rect key="frame" x="21.666666666666671" y="54" width="169" height="56"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="qPz-jp-ntN">
-                                <rect key="frame" x="8" y="9" width="64" height="62.666666666666671"/>
+                                <rect key="frame" x="4" y="5" width="48" height="46.666666666666671"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="N1S-1N-r42"/>
-                                    <constraint firstAttribute="height" constant="64" id="VQc-Sj-RLN"/>
+                                    <constraint firstAttribute="width" constant="48" id="N1S-1N-r42"/>
+                                    <constraint firstAttribute="height" constant="48" id="VQc-Sj-RLN"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7X1-PS-PTA">
-                                <rect key="frame" x="88" y="8" width="220" height="64"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playlist 1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7X1-PS-PTA">
+                                <rect key="frame" x="60" y="4" width="65" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="65" id="QGb-hR-dLJ"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -38,11 +41,11 @@
                         <constraints>
                             <constraint firstItem="7X1-PS-PTA" firstAttribute="bottom" secondItem="qPz-jp-ntN" secondAttribute="bottom" id="2Ao-x7-EGZ"/>
                             <constraint firstItem="7X1-PS-PTA" firstAttribute="top" secondItem="qPz-jp-ntN" secondAttribute="top" id="2fd-Kd-5uv"/>
-                            <constraint firstAttribute="bottom" secondItem="qPz-jp-ntN" secondAttribute="bottom" constant="8" id="2sC-8b-P5a"/>
-                            <constraint firstItem="qPz-jp-ntN" firstAttribute="leading" secondItem="i9R-gU-U5E" secondAttribute="leading" constant="8" id="9Zp-fj-DAL"/>
-                            <constraint firstItem="qPz-jp-ntN" firstAttribute="top" secondItem="i9R-gU-U5E" secondAttribute="top" constant="8" id="KrP-tZ-jn4"/>
-                            <constraint firstAttribute="trailing" secondItem="7X1-PS-PTA" secondAttribute="trailing" constant="48" id="Qk4-XO-vIC"/>
-                            <constraint firstItem="7X1-PS-PTA" firstAttribute="leading" secondItem="qPz-jp-ntN" secondAttribute="trailing" constant="16" id="dSL-2J-qti"/>
+                            <constraint firstAttribute="bottom" secondItem="qPz-jp-ntN" secondAttribute="bottom" constant="4" id="2sC-8b-P5a"/>
+                            <constraint firstItem="qPz-jp-ntN" firstAttribute="leading" secondItem="i9R-gU-U5E" secondAttribute="leading" constant="4" id="9Zp-fj-DAL"/>
+                            <constraint firstItem="qPz-jp-ntN" firstAttribute="top" secondItem="i9R-gU-U5E" secondAttribute="top" constant="4" id="KrP-tZ-jn4"/>
+                            <constraint firstAttribute="trailing" secondItem="7X1-PS-PTA" secondAttribute="trailing" constant="44" id="Qk4-XO-vIC"/>
+                            <constraint firstItem="7X1-PS-PTA" firstAttribute="leading" secondItem="qPz-jp-ntN" secondAttribute="trailing" constant="8" id="dSL-2J-qti"/>
                             <constraint firstItem="7X1-PS-PTA" firstAttribute="centerY" secondItem="qPz-jp-ntN" secondAttribute="centerY" id="fPn-ou-iUZ"/>
                         </constraints>
                     </view>
@@ -50,12 +53,16 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="7X1-PS-PTA" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="FWd-Cn-4St"/>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="trailing" secondItem="i9R-gU-U5E" secondAttribute="trailing" id="PWG-vZ-kes"/>
-                <constraint firstItem="i9R-gU-U5E" firstAttribute="leading" secondItem="ZTg-uK-7eu" secondAttribute="leading" id="xwX-Zt-0ZL"/>
+                <constraint firstItem="i9R-gU-U5E" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="O4n-Xz-6x4"/>
+                <constraint firstItem="i9R-gU-U5E" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="bf8-ip-VhK"/>
             </constraints>
-            <size key="customSize" width="356" height="220"/>
-            <point key="canvasLocation" x="254.96183206106869" y="11.267605633802818"/>
+            <size key="customSize" width="212" height="139"/>
+            <connections>
+                <outlet property="container" destination="i9R-gU-U5E" id="dn8-u3-M8S"/>
+                <outlet property="playlistImage" destination="qPz-jp-ntN" id="bMT-1n-i1K"/>
+                <outlet property="playlistTitle" destination="7X1-PS-PTA" id="v4U-iq-Oj0"/>
+            </connections>
+            <point key="canvasLocation" x="85.496183206106863" y="26.408450704225352"/>
         </collectionViewCell>
     </objects>
     <resources>

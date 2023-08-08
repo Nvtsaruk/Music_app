@@ -50,7 +50,7 @@ final class KeychainManager {
             kSecAttrAccount: tokenKey,
             kSecReturnData: kCFBooleanTrue as Any
         ]
-        let status = SecItemDelete(query as CFDictionary)
+        SecItemDelete(query as CFDictionary)
         return "deleted"
     }
 }
