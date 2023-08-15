@@ -7,6 +7,7 @@ enum Storyboard: String {
     case MyMediaPage
     case QuizPage
     case UserProfile
+    case UserDetails
     
     var instance : UIStoryboard {
         return UIStoryboard(name: self.rawValue, bundle: Bundle.main)
