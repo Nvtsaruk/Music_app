@@ -31,6 +31,7 @@ class MainPageCoordinator: Coordinator {
     func showUserDetails() {
         let viewModel = UserDetailsViewModel()
         viewModel.coordinator = self
+        // TODO: - delegate
         let userDetailsViewController = UserDetailsViewController.instantiate()
         userDetailsViewController.viewModel = viewModel
         navigationController.pushViewController(userDetailsViewController, animated: true)

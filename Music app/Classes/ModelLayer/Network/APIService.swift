@@ -40,7 +40,7 @@ class APIRequestInterceptor: RequestInterceptor {
             print(error)
         }
         var urlRequest = urlRequest
-                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        urlRequest.headers.add(.authorization(bearerToken: token.accessToken))
                 completion(.success(urlRequest))
     }
     
@@ -60,8 +60,6 @@ class APIService {
         static let sessionManager: Session = {
             let interceptor = APIRequestInterceptor()
             let configuration = URLSessionConfiguration.af.default
-    //            configuration.timeoutIntervalForRequest = 30
-    //            configuration.waitsForConnectivity = true
             let networkLogger = SpotifyNetworkLogger()
     
             return Session(configuration: configuration, interceptor: interceptor, eventMonitors: [networkLogger])
@@ -71,20 +69,19 @@ class APIService {
                                     url: String,
                                     _ completion: @escaping (ResultRequest<T>) -> Void) {
         
-        var tempToken: String = ""
-        do {
-            let data = try KeychainManager.getPassword(for: "access_token")
-            tempToken = String(decoding: data ?? Data(), as: UTF8.self)
-            print(tempToken)
-        } catch {
-            print(error)
-        }
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(tempToken)"
-        ]
+//        var tempToken: String = ""
+//        do {
+//            let data = try KeychainManager.getPassword(for: "access_token")
+//            tempToken = String(decoding: data ?? Data(), as: UTF8.self)
+//        } catch {
+//            print(error)
+//        }
+//        let headers: HTTPHeaders = [
+//            "Authorization": "Bearer \(tempToken)"
+//        ]
     
         //        AF.request(url, method: .get, headers: headers).responseDecodable(of: T.self) { response in
-        self.sessionManager.request(url, method: .get, headers: headers).responseDecodable(of: T.self) { response in
+        self.sessionManager.request(url, method: .get).responseDecodable(of: T.self) { response in
             switch response.result {
                 case .success(let value):
                     //                    print("here")
