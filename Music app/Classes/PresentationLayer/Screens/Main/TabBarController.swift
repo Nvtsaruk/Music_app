@@ -1,6 +1,27 @@
 import UIKit
 
-final class TabBarController: UITabBarController {
+class GradientTabBarController: UITabBarController {
+
+        let gradientlayer = CAGradientLayer()
+
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            setGradientBackground(colorOne: .black, colorTwo: UIColor(white: 1, alpha: 0))
+        }
+
+        func setGradientBackground(colorOne: UIColor, colorTwo: UIColor)  {
+            gradientlayer.frame = tabBar.bounds
+            gradientlayer.colors = [colorOne.cgColor, colorTwo.cgColor]
+            gradientlayer.locations = [0, 1]
+            gradientlayer.startPoint = CGPoint(x: 0.0, y: 1.0)
+            gradientlayer.endPoint = CGPoint(x: 0.0, y: 0.0)
+            self.tabBar.layer.insertSublayer(gradientlayer, at: 0)
+        }
+}
+final class TabBarController: UITabBarController, MainCoordinatorDelegate {
+//final class TabBarController: GradientTabBarController, MainCoordinatorDelegate {
+    
+    var coordinator: MainCoordinatorDelegate?
     
     private enum TabBarItems {
         case mainPage
@@ -37,16 +58,26 @@ final class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabBar()
+//        loadTabbarFromXib()
+    }
+    func showLogin() {
+        coordinator?.showLogin()
+    }
+    
+    private func loadTabbarFromXib() -> UITabBarController {
+        guard let view = Bundle.main.loadNibNamed("TabBarController", owner: self)?.first as? TabBarController else { return UITabBarController() }
+        return view
     }
     
     private func setupTabBar() {
         tabBar.barTintColor = UIColor.black
-        tabBar.isTranslucent = false
+        tabBar.isTranslucent = true
         tabBar.tintColor = .white
         tabBar.unselectedItemTintColor = .lightGray
         tabBar.backgroundColor = .black
         
         let mainPageViewController = MainPageCoordinator(navigationController: UINavigationController())
+        mainPageViewController.delegate = self
         mainPageViewController.start()
         let searchPageViewController = SearchPageCoordinator(navigationController: UINavigationController())
         searchPageViewController.start()
@@ -69,99 +100,27 @@ final class TabBarController: UITabBarController {
         viewControllers?[2].tabBarItem.image = UIImage(systemName: TabBarItems.myMedia.iconName)
         viewControllers?[3].tabBarItem.title = TabBarItems.quiz.title
         viewControllers?[3].tabBarItem.image = UIImage(systemName: TabBarItems.quiz.iconName)
-    
+        
+        let playerView = PlayerView()
+//        guard let playerView = Bundle.main.loadNibNamed("PlayerView", owner: self)?.first as? PlayerView else { return }
+        playerView.artistNameLabel.text = "qew"
+        playerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(playerView)
+        view.bringSubviewToFront(playerView)
+        
+        NSLayoutConstraint.activate([
+            playerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -115),
+            playerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            playerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+//        let testImage = UIImageView(image: UIImage(named: "tempImage"))
+//        testImage.frame = CGRect(x: 100, y: 100, width: 100, height: 200)
+//        view.addSubview(testImage)
     }
     
 }
-
-
-
-
-
-//class TabBarController: UITabBarController {
-//
-//
-//
-//    private enum TabBarItem: Int {
-//
-//
-//        case mainPage
-//        case searchPage
-//        case myMedia
-//        case quizz
-//
-//        var title: String {
-//            switch self {
-//                case .mainPage:
-//                    return "Main"
-//                case .searchPage:
-//                    return "Search"
-//                case .myMedia:
-//                    return "My music"
-//                case .quizz:
-//                    return "Quizz"
-//            }
-//        }
-//        var iconName: String {
-//            switch self {
-//                case .mainPage:
-//                    return "house.fill"
-//                case .searchPage:
-//                    return "person.crop.circle"
-//                case .myMedia:
-//                    return "person.crop.circle"
-//                case .quizz:
-//                    return "person.crop.circle"
-//            }
-//        }
-//    }
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        self.setupTabBar()
-//
-//    }
-//    private func setupTabBar() {
-//
-//        tabBar.barTintColor = UIColor.black
-//        tabBar.isTranslucent = false
-//        tabBar.tintColor = .white
-//        tabBar.unselectedItemTintColor = .lightGray
-//        tabBar.backgroundColor = .black
-//
-//        let storyboard = UIStoryboard(name: "MainPageStoryboard", bundle: nil)
-//        guard let mainPageViewController = storyboard.instantiateViewController(withIdentifier: "MainPageViewController") as? MainPageViewController else { return }
-//        let mainPageViewModel = MainPageViewModel()
-//        mainPageViewController.viewModel = mainPageViewModel
-//        let storyboard2 = UIStoryboard(name: "MainPageStoryboard", bundle: nil)
-//        guard let secondPageViewController = storyboard2.instantiateViewController(withIdentifier: "MainPageViewController") as? MainPageViewController else { return }
-//        let storyboard3 = UIStoryboard(name: "MainPageStoryboard", bundle: nil)
-//        guard let thirdPageViewController = storyboard3.instantiateViewController(withIdentifier: "MainPageViewController") as? MainPageViewController else { return }
-//        let storyboard4 = UIStoryboard(name: "MainPageStoryboard", bundle: nil)
-//        guard let fourthPageViewController = storyboard4.instantiateViewController(withIdentifier: "MainPageViewController") as? MainPageViewController else { return }
-//        let dataSource: [TabBarItem] = [.mainPage, .searchPage, .myMedia, .quizz]
-//        self.viewControllers = dataSource.map {
-//            switch $0 {
-//                case .mainPage:
-//                    return self.wrappedInNavigationController(with: mainPageViewController, title: $0.title)
-//                case .searchPage:
-//                    return self.wrappedInNavigationController(with: secondPageViewController, title: $0.title)
-//                case .myMedia:
-//                    return self.wrappedInNavigationController(with: thirdPageViewController, title: $0.title)
-//                case .quizz:
-//                    return self.wrappedInNavigationController(with: fourthPageViewController, title: $0.title)
-//            }
-//        }
-//
-//        self.viewControllers?.enumerated().forEach {
-//            $1.tabBarItem.title = dataSource[$0].title
-//            $1.tabBarItem.image = UIImage(systemName: dataSource[$0].iconName)
-//            $1.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: .zero, bottom: -5, right: .zero)
-//        }
-//    }
-//    private func wrappedInNavigationController(with: UIViewController, title: Any?) -> UINavigationController {
-//            return UINavigationController(rootViewController: with)
-//        }
-//
-//}
-
+extension TabBarController: Storyboarded {
+    static func containingStoryboard() -> Storyboard {
+        .TabBarController
+    }
+}

@@ -15,7 +15,6 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileDisplayName: UILabel!
     
-    @IBOutlet weak var account: UIView!
     @IBOutlet weak var userProfile: UIView!
     
     var viewModel: UserProfileViewModelProtocol?
@@ -32,10 +31,9 @@ class UserProfileViewController: UIViewController {
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
-            self.profileDisplayName.text = self.viewModel?.currentUser.name
-            if let avatar = viewModel?.currentUser.avatar {
-                //TODO: fix model
-                self.profileImage.image = UIImage(systemName: "person", withConfiguration: symbolConfig)
+            self.profileDisplayName.text = self.viewModel?.currentUser.display_name
+            if let url = viewModel?.currentUser.images?.first?.url {
+                self.profileImage.sd_setImage(with: url, placeholderImage: .checkmark)
             } else {
                 self.profileImage.image = UIImage(systemName: "person", withConfiguration: symbolConfig)
             }
@@ -46,9 +44,6 @@ class UserProfileViewController: UIViewController {
         let userProfileDidTap = UITapGestureRecognizer(target: self, action: #selector(didTap(_ :)))
         userProfile.addGestureRecognizer(userProfileDidTap)
 
-//        profileDisplayName.text = viewModel?.getUserInfo()
-        
-        
         view.backgroundColor = ColorConstants.backgroundColor
         
         logoutButtonOutlet.layer.cornerRadius = 19

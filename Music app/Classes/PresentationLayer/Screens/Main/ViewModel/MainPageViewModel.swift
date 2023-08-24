@@ -2,39 +2,69 @@ import Foundation
 
 protocol MainPageViewModelProtocol {
     func logout()
-    func getPLaylists()
-    func getNewRelises()
+    func getPlaylists()
+//    func getToplist()
     func start()
-    var mainPageData: NewReleasesPlaylist { get }
+    func showItemDetail(id: String)
+    var mainPageData: MainPageData { get }
     var updateClosure:( ()->Void )? { get set }
 }
-struct NewReleasesPlaylist {
-    var newReleases: NewReleases
-    var numRows: Int
+enum CellType {
+    case header
+    case topPlaylists
+    case playlists
+}
+
+struct MainPageData {
+    var topPlaylists: Toplist?
+    var playlists: [Toplist]
+    var numRows: [Int]
+    init(topPlaylists: Toplist? = nil,playlists: [Toplist]? = nil, numRows: [Int] = []) {
+        self.topPlaylists = topPlaylists
+        self.playlists = playlists ?? []
+        self.numRows = numRows
+    }
 }
 
 
 final class MainPageViewModel: MainPageViewModelProtocol {
-  
+    
     var updateClosure: (() -> Void)?
     var coordinator: MainPageCoordinator?
     
-    var mainPageData: NewReleasesPlaylist = NewReleasesPlaylist(newReleases: NewReleases(albums: Albums(items: [Album(album_type: "", id: "", images: [ImageModel(url: "")], name: "", release_date: "", total_tracks: 0, artists: [Artist(id: "", name: "", type: "")])])), numRows: 0) {
+    var mainPageData: MainPageData = MainPageData() {
         didSet {
             updateClosure?()
+            print(mainPageData.playlists.count)
+            
         }
     }
     
-    func getNewRelises() {
-        let url = "https://api.spotify.com/v1/browse/new-releases?limit=50&country=SE"
-        APIService.getData(NewReleases.self, url: url) { result in
-            switch result {
-                case .success(let data):
-                    self.mainPageData.newReleases = data
-                    self.mainPageData.numRows = data.albums.items.count
-                    print("NumROWS:", self.mainPageData.numRows)
-                case .failure(let error):
-                    print("Custom Error -> \(error)")
+//    func getToplist() {
+//        let url = APIUrls.topPlaylists.url
+//        APIService.getData(Toplist.self, url: url) { result in
+//            switch result {
+//                case .success(let data):
+//                    self.mainPageData.topPlaylists = data
+//                    self.mainPageData.numRows = data.playlists?.items?.count ?? 0
+//                    self.updateClosure?()
+//                case .failure(let error):
+//                    print("Custom Error -> \(error)")
+//            }
+//        }
+//    }
+    func getPlaylists() {
+        for urls in APIUrls.allCases {
+//            let url = APIUrls.relax.url
+            APIService.getData(Toplist.self, url: urls.url) { result in
+                switch result {
+                    case .success(let data):
+                        self.mainPageData.playlists.append(data)
+                        self.mainPageData.numRows.append(data.playlists?.items?.count ?? 0) 
+                        self.updateClosure?()
+                    case .failure(let error):
+                        print("Custom Error -> \(error)")
+                }
             }
         }
     }
@@ -42,18 +72,34 @@ final class MainPageViewModel: MainPageViewModelProtocol {
     func start() {
         let headerCell = HeaderTableViewCell()
         headerCell.delegate = self
+//        getToplist()
+        getPlaylists()
+    }
+    
+    func showItemDetail(id: String) {
+        coordinator?.showItemDetail(id: id)
     }
     
     func logout() {
         LoginManager.shared.deleteAll()
     }
-    func getPLaylists() {
-//        APIService.getPlaylist()
-    }
+    
 }
-//
+
+
 extension MainPageViewModel: HeaderTableViewCellDelegate {
     func goToUserProfile() {
         coordinator?.goToUserProfile()
+    }
+    func cleanKeychain() {
+//        LoginManager.shared.deleteAll()
+//        KeychainManager.logout(for: KeychainConstants.accessToken.key)
+        guard let wrongToken = "".data(using: .utf8) else { return }
+        do {
+            _ = try KeychainManager.logout(for: KeychainConstants.accessToken.key)
+            _ = try KeychainManager.save(token: wrongToken, tokenKey: KeychainConstants.accessToken.key)
+        } catch {
+            print(error)
+        }
     }
 }

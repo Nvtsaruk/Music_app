@@ -6,6 +6,8 @@ import UIKit
 
 class MainPageCoordinator: Coordinator {
     
+    weak var delegate: MainCoordinatorDelegate?
+    
     let navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
@@ -28,20 +30,28 @@ class MainPageCoordinator: Coordinator {
         navigationController.pushViewController(userProfileViewController, animated: true)
     }
     
-    func showUserDetails() {
+    func showUserDetails(currentUser: UserProfile) {
         let viewModel = UserDetailsViewModel()
         viewModel.coordinator = self
+        viewModel.currentUser = currentUser
         // TODO: - delegate
         let userDetailsViewController = UserDetailsViewController.instantiate()
         userDetailsViewController.viewModel = viewModel
         navigationController.pushViewController(userDetailsViewController, animated: true)
     }
     
-    func showLogin() {
-        
+    func showItemDetail(id: String) {
+        let viewModel = ItemDetailViewModel()
+        viewModel.coordinator = self
+        viewModel.id = id
+        let itemDetailViewController = ItemDetailViewController.instantiate()
+        itemDetailViewController.viewModel = viewModel
+        navigationController.pushViewController(itemDetailViewController, animated: true)
     }
-
     
+    func showLogin() {
+        delegate?.showLogin()
+    }
 }
 
 

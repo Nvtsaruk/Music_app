@@ -1,20 +1,8 @@
-//
-//  NetworkService.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 2.08.23.
-//
-// spotify login 3678715@gmail.com
-// pass 3678715Spotify
-
-
-
 import Foundation
 import Alamofire
 
 enum ResultRequest<T> {
     case success(T)
-    
     case failure(CustomErrors)
 }
 
@@ -33,9 +21,8 @@ class APIRequestInterceptor: RequestInterceptor {
         
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         do {
-            let data = try KeychainManager.getPassword(for: "access_token")
+            let data = try KeychainManager.getPassword(for: KeychainConstants.accessToken.key)
             self.token.accessToken = String(decoding: data ?? Data(), as: UTF8.self)
-            print("New token", self.token.accessToken)
         } catch {
             print(error)
         }
@@ -47,10 +34,17 @@ class APIRequestInterceptor: RequestInterceptor {
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
             if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
                 // Refresh token and retry
+                print("In token condition")
                 LoginManager().refreshToken()
+                completion(.retry)
             } else {
                 completion(.doNotRetry)
             }
+        if let response = error.asAFError, response.isResponseSerializationError {
+            print("In error condition")
+            LoginManager().refreshToken()
+            completion(.retry)
+        }
         }
 }
 
@@ -60,180 +54,29 @@ class APIService {
         static let sessionManager: Session = {
             let interceptor = APIRequestInterceptor()
             let configuration = URLSessionConfiguration.af.default
-            let networkLogger = SpotifyNetworkLogger()
+//            let networkLogger = SpotifyNetworkLogger()
     
-            return Session(configuration: configuration, interceptor: interceptor, eventMonitors: [networkLogger])
+//            return Session(configuration: configuration, interceptor: interceptor, eventMonitors: [networkLogger])
+            return Session(configuration: configuration, interceptor: interceptor)
         }()
     
     static func getData<T: Codable>(_: T.Type,
                                     url: String,
                                     _ completion: @escaping (ResultRequest<T>) -> Void) {
         
-//        var tempToken: String = ""
-//        do {
-//            let data = try KeychainManager.getPassword(for: "access_token")
-//            tempToken = String(decoding: data ?? Data(), as: UTF8.self)
-//        } catch {
-//            print(error)
-//        }
-//        let headers: HTTPHeaders = [
-//            "Authorization": "Bearer \(tempToken)"
-//        ]
-    
-        //        AF.request(url, method: .get, headers: headers).responseDecodable(of: T.self) { response in
         self.sessionManager.request(url, method: .get).responseDecodable(of: T.self) { response in
             switch response.result {
                 case .success(let value):
-                    //                    print("here")
-                    //                    print(value)
                     completion(.success(value))
                 case .failure(let error):
                     // Handle the error
+//                    LoginManager().refreshToken()
                     print("Error", error)
                     
             }
         }
     }
 }
-    
-    
-//    static func getPlaylist() {
-//        var tempToken: String = ""
-//        do {
-//            let data = try KeychainManager.getPassword(for: "access_token")
-//            tempToken = String(decoding: data ?? Data(), as: UTF8.self)
-//        } catch {
-//            print(error)
-//        }
-//        let url = "https://api.spotify.com/v1/browse/featured-playlists"
-//        let headers: HTTPHeaders = [
-//            "Authorization": "Bearer \(tempToken)"
-//        ]
-//        AF.request(url, method: .get, headers: headers).responseDecodable(of: FeaturedPlaylists.self) { response in
-//            switch response.result {
-//                case .success(let value):
-//                    //                     Handle the successful response
-//                    guard let statusCode = response.response?.statusCode else { return }
-//                    if statusCode == 401 {
-//
-//                        LoginManager().refreshToken()
-//                        //                        APIService.getUserProfile()
-//                        // interceptor
-//                    }
-//                    print("here")
-//                    print(value)
-//
-//                case .failure(let error):
-//                    // Handle the error
-//                    print(error)
-//
-//            }
-//
-//        }
-//    }
-
-
-    //    func getUserProfile(completion: @escaping (Result<UserProfile, Error>) -> Void) {
-    //        var tempToken: String = ""
-    //        do {
-    //            let data = try KeychainManager.getPassword(for: "access_token")
-    //            tempToken = String(decoding: data ?? Data(), as: UTF8.self)
-    //        } catch {
-    //            print(error)
-    //        }
-    //        let url = "https://api.spotify.com/v1/me"
-    //        let headers: HTTPHeaders = [
-    //            "Authorization": "Bearer \(tempToken)"
-    //        ]
-    //        let data = AF.request(url, method: .get, headers: headers).responseData { response in
-    //            switch response.result {
-    //            case .success(let data):
-    //                do {
-    //                    let decoder = JSONDecoder()
-    //                    let dataModel = try decoder.decode(UserProfile.self, from: data)
-    //                    DispatchQueue.main.async {
-    //                        completion(.success(dataModel))
-    //                    }
-    //
-    //                } catch {
-    //                    completion(.failure(error))
-    //                }
-    //                case .failure(let error):
-    //                    completion(.failure(error))
-    //            }
-    //        }
-    //    }
-    //    static func getUserProfile() -> CurrentUser {
-    //        var tempToken: String = ""
-    //        var currentUser: CurrentUser = CurrentUser(name: "") {
-    //            didSet {
-    //                return currentUser
-    //                print(currentUser.name)
-    //            }
-    //        }
-    //        do {
-    //            let data = try KeychainManager.getPassword(for: "access_token")
-    //            tempToken = String(decoding: data ?? Data(), as: UTF8.self)
-    //        } catch {
-    //            print(error)
-    //        }
-    //        let url = "https://api.spotify.com/v1/me"
-    //        let headers: HTTPHeaders = [
-    //            "Authorization": "Bearer \(tempToken)"
-    //        ]
-    //        let data = AF.request(url, method: .get, headers: headers).responseDecodable(of: UserProfile.self) { response in
-    //            switch response.result {
-    //                case .success(let value):
-    ////                     Handle the successful response
-    //                    guard let statusCode = response.response?.statusCode else { return }
-    //                    if statusCode == 401 {
-    //                        print("Token is old")
-    //                        LoginManager().refreshToken()
-    //                        APIService.getUserProfile()
-    //                    }
-    ////                    print("here")
-    ////                    print(value)
-    //                    currentUser.name = value.displayName
-    //
-    //                case .failure(let error):
-    //                    // Handle the error
-    //                   print(error)
-    //
-    //            }
-    //
-    //        }
-    //    }
-    
-    //    static func getNewReleases(completion: @escaping (Result<NewReleases, Error>) -> Void) {
-    //        var tempToken: String = ""
-    //        do {
-    //            let data = try KeychainManager.getPassword(for: "access_token")
-    //            tempToken = String(decoding: data ?? Data(), as: UTF8.self)
-    //        } catch {
-    //            print(error)
-    //        }
-    //        let url = "https://api.spotify.com/v1/browse/new-releases?limit=50&country=SE"
-    //        let headers: HTTPHeaders = [
-    //            "Authorization": "Bearer \(tempToken)"
-    //        ]
-    //        let data = AF.request(url, method: .get, headers: headers).responseData { response in
-    //            switch response.result {
-    //            case .success(let data):
-    //                do {
-    //                    let decoder = JSONDecoder()
-    //                    let dataModel = try decoder.decode(NewReleases.self, from: data)
-    //                    DispatchQueue.main.async {
-    //                        completion(.success(dataModel))
-    //                    }
-    //
-    //                } catch {
-    //                    completion(.failure(error))
-    //                }
-    //                case .failure(let error):
-    //                    completion(.failure(error))
-    //            }
-    //        }
-    //    }
     
 class SpotifyNetworkLogger: EventMonitor {
   //1

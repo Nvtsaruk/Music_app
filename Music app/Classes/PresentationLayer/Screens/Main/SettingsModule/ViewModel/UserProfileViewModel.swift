@@ -5,19 +5,27 @@ protocol UserProfileViewModelProtocol {
     func getUserInfo()
     func showDetails()
     var updateClosure:( ()->Void )? { get set }
-    var currentUser: CurrentUser { get }
+    var currentUser: UserProfile { get }
 }
 
-struct CurrentUser {
-    var name: String
-    var avatar: String?
-    var email: String
-}
+//struct CurrentUser {
+//    var name: String
+//    var avatar: URL?
+//    var email: String
+//    var subscribers: Int
+//    init(name: String = "", avatar: URL? = nil, email: String = "", subscribers: Int = 0) {
+//        self.name = name
+//        self.avatar = avatar
+//        self.email = email
+//        self.subscribers = subscribers
+//    }
+//}
 
 final class UserProfileViewModel: UserProfileViewModelProtocol {
+    
     var updateClosure: (() -> Void)?
     var coordinator: MainPageCoordinator?
-    var currentUser: CurrentUser = CurrentUser(name: "", email: "") {
+    var currentUser: UserProfile = UserProfile() {
         didSet {
             updateClosure?()
         }
@@ -25,12 +33,11 @@ final class UserProfileViewModel: UserProfileViewModelProtocol {
     var title = "Settings"
     
     func getUserInfo() {
-        let url = "https://api.spotify.com/v1/me"
+        let url = NetworkConstants.userProfileUrl
         APIService.getData(UserProfile.self, url: url) { result in
             switch result {
                 case .success(let data):
-                    self.currentUser.name = data.displayName
-                    self.currentUser.email = data.email
+                    self.currentUser = data
                 case .failure(let error):
                     print("Custom Error -> \(error)")
             }
@@ -38,12 +45,12 @@ final class UserProfileViewModel: UserProfileViewModelProtocol {
     }
     
     func showDetails() {
-        coordinator?.showUserDetails()
+        coordinator?.showUserDetails(currentUser: currentUser)
     }
     
     
     func logout() {
         LoginManager.shared.deleteAll()
-        
+        coordinator?.showLogin()
     }
 }

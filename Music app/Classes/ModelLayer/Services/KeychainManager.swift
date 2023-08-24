@@ -6,6 +6,19 @@ enum KeychainError: Error {
     case unknown(status: OSStatus)
 }
 
+enum KeychainConstants {
+    case accessToken
+    case refreshToken
+    var key: String {
+        switch self {
+            case .accessToken:
+                return "access_token"
+            case .refreshToken:
+                return "refresh_token"
+        }
+    }
+}
+
 final class KeychainManager {
     static func save(token: Data, tokenKey: String) throws -> String {
         let query: [CFString: Any] = [

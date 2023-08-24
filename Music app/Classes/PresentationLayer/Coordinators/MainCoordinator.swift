@@ -1,6 +1,10 @@
 import UIKit
 
-final class MainCoordinator: Coordinator {
+protocol MainCoordinatorDelegate: AnyObject {
+    func showLogin()
+}
+
+final class MainCoordinator: Coordinator, MainCoordinatorDelegate {
     
     let navigationController = UINavigationController()
     
@@ -19,6 +23,9 @@ final class MainCoordinator: Coordinator {
             print(error)
             return false
         }
+    }
+    func showLogin() {
+        start()
     }
     
     private func startLogin() {

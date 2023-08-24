@@ -1,24 +1,30 @@
 struct NewReleases: Codable {
-    let albums: Albums
-}
-struct Albums: Codable {
-    let items: [Album]
+    let albums: NewReleasesAlbums
 }
 
-struct Album: Codable {
-    let album_type: String
-//    let available_markets: [String]
-    let id: String
-    let images: [ImageModel]
-    let name: String
-    let release_date: String
+struct NewReleasesAlbums: Codable {
+    let total: Int
+    let items: [NewReleasesItem]
+}
+
+struct NewReleasesItem: Codable {
+    let album_type: String //Maybe enum
     let total_tracks: Int
-    let artists: [Artist]
+//    let href: String?
+    let id: String?
+    let images: [ImageModel]?
+    let name: String?
+    let release_date: String?
+//    let type: String?
+    let genres: [String]?
+    let label: String?
+    let artists: [NewReleasesArtist]
 }
 
-struct Artist: Codable {
-    let id: String
-    let name: String
-    let type: String
+struct NewReleasesArtist: Codable {
+//    let href: String?
+    let id: String?
+    let name: String?
+    let type: String?
 }
 

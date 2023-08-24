@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SuggestedPlaylistCollectionViewCell: UICollectionViewCell {
+final class TopPlaylistCollectionViewCell: UICollectionViewCell {
     
     //MARK: -IBOutlet
     
@@ -16,6 +16,8 @@ final class SuggestedPlaylistCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var playlistTitle: UILabel!
     
+    @IBOutlet weak var totalTracksLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -23,7 +25,7 @@ final class SuggestedPlaylistCollectionViewCell: UICollectionViewCell {
         container.backgroundColor = .darkGray
         container.clipsToBounds = true
         container.layer.cornerRadius = 8
-        playlistImage.layer.cornerRadius = 4
+        playlistImage.layer.cornerRadius = 8
     }
 
 }

@@ -33,12 +33,12 @@ class LoginManager {
                     guard let accessToken = value.access_token.data(using: .utf8) else { return }
                     guard let refreshToken = value.refresh_token?.data(using: .utf8) else { return }
                     do {
-                        _ = try KeychainManager.save(token: accessToken, tokenKey: "access_token")
+                        _ = try KeychainManager.save(token: accessToken, tokenKey: KeychainConstants.accessToken.key)
                     } catch {
                         print(error)
                     }
                     do {
-                        _ = try KeychainManager.save(token: refreshToken, tokenKey: "refresh_token")
+                        _ = try KeychainManager.save(token: refreshToken, tokenKey: KeychainConstants.refreshToken.key)
                     } catch {
                         print(error)
                     }
@@ -60,15 +60,15 @@ class LoginManager {
         ]
         var refreshToken = ""
         do {
-            let keychainRefresh = try KeychainManager.getPassword(for: "refresh_token")
+            let keychainRefresh = try KeychainManager.getPassword(for: KeychainConstants.refreshToken.key)
             refreshToken = String(decoding: keychainRefresh ?? Data(), as: UTF8.self)
         } catch {
             print(error)
         }
         
         let parameters: [String: String] = [
-            "grant_type": "refresh_token",
-            "refresh_token" : refreshToken
+            "grant_type": KeychainConstants.refreshToken.key,
+            KeychainConstants.refreshToken.key : refreshToken
         ]
         
         AF.request(NetworkConstants.tokenAPIUrl, method: .post, parameters: parameters, encoder: URLEncodedFormParameterEncoder.default, headers: headers).responseDecodable(of: TokenRequest.self) { response in
@@ -77,8 +77,8 @@ class LoginManager {
                     // Handle the successful response
                     guard let accessToken = value.access_token.data(using: .utf8) else { return }
                     do {
-                        _ = try KeychainManager.logout(for: "access_token")
-                        _ = try KeychainManager.save(token: accessToken, tokenKey: "access_token")
+                        _ = try KeychainManager.logout(for: KeychainConstants.accessToken.key)
+                        _ = try KeychainManager.save(token: accessToken, tokenKey: KeychainConstants.accessToken.key)
                     } catch {
                         print(error)
                     }

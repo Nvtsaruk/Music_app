@@ -8,6 +8,8 @@ enum Storyboard: String {
     case QuizPage
     case UserProfile
     case UserDetails
+    case ItemDetail
+    case TabBarController
     
     var instance : UIStoryboard {
         return UIStoryboard(name: self.rawValue, bundle: Bundle.main)

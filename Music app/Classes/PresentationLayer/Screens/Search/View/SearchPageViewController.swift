@@ -14,33 +14,42 @@ class SearchPageViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     var viewModel: SearchPageViewModel?
-
+    
+    var numRows: Int = 0 {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        bindViewModel()
+        
     }
     
     private func setupUI() {
         tableView.dataSource = self
         tableView.delegate = self
     }
-
+    private func bindViewModel() {
+        viewModel?.updateClosure = { [weak self] in
+            guard let self = self else { return }
+//            self.numRows = viewModel?.searchModel.albums.items.count ?? 0
+        }
+    }
 }
+
 
 extension SearchPageViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.count > 3 {
-            viewModel?.search(item: searchText)
-        } else {
-            print("Need more letters")
-        }
-        
+        viewModel?.search(item: searchText)
     }
 }
 
 extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
+        numRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

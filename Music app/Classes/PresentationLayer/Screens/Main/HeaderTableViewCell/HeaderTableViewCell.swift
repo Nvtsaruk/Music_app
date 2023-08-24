@@ -9,6 +9,7 @@ import UIKit
 
 protocol HeaderTableViewCellDelegate: AnyObject {
     func goToUserProfile()
+    func cleanKeychain()
 }
 
 
@@ -43,6 +44,6 @@ class HeaderTableViewCell: UITableViewCell {
         //        viewModel?.getPLaylists()
     }
     @IBAction func notificationButtonAction(_ sender: Any) {
-        //        viewModel?.logout()
+        delegate?.cleanKeychain()
     }
 }
