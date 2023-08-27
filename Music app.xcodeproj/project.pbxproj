@@ -81,6 +81,7 @@
 		CC7C61A32A963ECE009DCB9E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7C61A22A963ECE009DCB9E /* PlayerView.swift */; };
 		CC7C61AF2A9640BC009DCB9E /* PlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7C61AE2A9640BC009DCB9E /* PlayerView.xib */; };
 		CC7C61B12A978F20009DCB9E /* PlayerViewOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7C61B02A978F20009DCB9E /* PlayerViewOld.swift */; };
+		CC7C621C2A98E4B5009DCB9E /* CollapsedPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7C621B2A98E4B5009DCB9E /* CollapsedPlayerViewController.swift */; };
 		D5B4A4EAD928BFB74195390F /* libPods-Music app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C5652567028BF0EE070A3B /* libPods-Music app.a */; };
 /* End PBXBuildFile section */
 
@@ -163,6 +164,7 @@
 		CC7C61A22A963ECE009DCB9E /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		CC7C61AE2A9640BC009DCB9E /* PlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerView.xib; sourceTree = "<group>"; };
 		CC7C61B02A978F20009DCB9E /* PlayerViewOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewOld.swift; sourceTree = "<group>"; };
+		CC7C621B2A98E4B5009DCB9E /* CollapsedPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsedPlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -600,6 +602,7 @@
 				CC351EA02A7E7CF8003EF23D /* ViewModel */,
 				CC351E9F2A7E7CF2003EF23D /* View */,
 				CC351ED72A7E952E003EF23D /* TabBarController.swift */,
+				CC7C621B2A98E4B5009DCB9E /* CollapsedPlayerViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -804,6 +807,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC351E852A7D39BB003EF23D /* CoordinatorProtocol.swift in Sources */,
+				CC7C621C2A98E4B5009DCB9E /* CollapsedPlayerViewController.swift in Sources */,
 				CC351E872A7D3A30003EF23D /* MainCoordinator.swift in Sources */,
 				CC351F272A7FD51E003EF23D /* MainPageViewModel.swift in Sources */,
 				CC7C61A32A963ECE009DCB9E /* PlayerView.swift in Sources */,

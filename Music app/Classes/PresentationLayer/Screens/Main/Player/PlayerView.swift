@@ -9,6 +9,8 @@ class PlayerView: UIView {
     @IBOutlet weak var trackImage: UIImageView!
     @IBOutlet weak var container: UIView!
     
+    
+    var isPlaying: Bool = false
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.configureView()
@@ -16,8 +18,10 @@ class PlayerView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.alpha = 0
         self.configureView()
     }
+    
     
     private func configureView() {
         let subview = self.loadViewFromXib()
@@ -36,7 +40,16 @@ class PlayerView: UIView {
         
         return view
     }
+    
+    
     @IBAction func playButtonAction(_ sender: Any) {
-        print("Wokring")
+        if isPlaying == true {
+            playButtonOutlet.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            isPlaying = false
+            
+        } else {
+            playButtonOutlet.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            isPlaying = true
+        }
     }
 }
