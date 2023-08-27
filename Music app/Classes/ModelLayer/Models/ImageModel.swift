@@ -1,11 +1,10 @@
 import Foundation
 struct ImageModel: Codable {
-    let url: URL?
-    let height: Int?
-    let width: Int?
-    init(url: URL? = nil, height: Int? = nil, width: Int? = nil) {
+    let url: URL
+    init(url: URL) {
         self.url = url
-        self.height = height
-        self.width = width
+    }
+    init() {
+        self.url = URL(string: "")!
     }
 }

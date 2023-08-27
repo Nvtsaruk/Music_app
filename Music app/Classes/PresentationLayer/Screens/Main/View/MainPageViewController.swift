@@ -37,7 +37,9 @@ class MainPageViewController: UIViewController {
         tableView.register(topPlaylistsNib, forCellReuseIdentifier: "TopPlaylistTableViewCell")
         let playlistsTableViewNib = UINib(nibName: "PlaylistsTableViewCell", bundle: nil)
         tableView.register(playlistsTableViewNib, forCellReuseIdentifier: "PlaylistsTableViewCell")
+//        self.tableView.contentInset = UIEdgeInsets(top: -30, left: 0, bottom: 0, right: 0)
     }
+    
     
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
@@ -68,12 +70,11 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let headerCell = tableView.dequeueReusableCell(withIdentifier: "HeaderTableViewCell") as? HeaderTableViewCell else { return UITableViewCell() }
         headerCell.delegate = viewModel as? any HeaderTableViewCellDelegate
         guard let topPlaylists = tableView.dequeueReusableCell(withIdentifier: "TopPlaylistTableViewCell") as? TopPlaylistTableViewCell else { return UITableViewCell() }
-        print(self.viewModel?.mainPageData.playlists.first)
         topPlaylists.numRows = self.viewModel?.mainPageData.numRows.first ?? 0
         topPlaylists.collectionData = self.viewModel?.mainPageData.playlists.first
         topPlaylists.delegate = self
@@ -104,6 +105,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor.white
+        header.textLabel?.text = header.textLabel!.text!.capitalized
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

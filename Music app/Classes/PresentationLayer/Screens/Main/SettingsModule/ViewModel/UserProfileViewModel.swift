@@ -8,19 +8,6 @@ protocol UserProfileViewModelProtocol {
     var currentUser: UserProfile { get }
 }
 
-//struct CurrentUser {
-//    var name: String
-//    var avatar: URL?
-//    var email: String
-//    var subscribers: Int
-//    init(name: String = "", avatar: URL? = nil, email: String = "", subscribers: Int = 0) {
-//        self.name = name
-//        self.avatar = avatar
-//        self.email = email
-//        self.subscribers = subscribers
-//    }
-//}
-
 final class UserProfileViewModel: UserProfileViewModelProtocol {
     
     var updateClosure: (() -> Void)?
@@ -47,7 +34,6 @@ final class UserProfileViewModel: UserProfileViewModelProtocol {
     func showDetails() {
         coordinator?.showUserDetails(currentUser: currentUser)
     }
-    
     
     func logout() {
         LoginManager.shared.deleteAll()

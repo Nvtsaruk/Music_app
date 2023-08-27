@@ -25,54 +25,62 @@ enum PlaylistsNames: CaseIterable {
         }
     }
 }
+
+
 struct PlaylistModel: Codable {
-    let collaborative: Bool?
     let description: String?
-    let followers: Followers?
-    let href: String?
-    let id: String?
+    let id: String
     let images: [ImageModel]?
     let name: String?
     let owner: PlaylistModelOwner?
-    let snapshot_id: String?
     var tracks: PlaylistModelTracks?
     let type: String? //enum
-    init(collaborative: Bool? = nil, description: String? = nil, followers: Followers? = nil, href: String? = nil, id: String? = nil, images: [ImageModel]? = nil, name: String? = nil, owner: PlaylistModelOwner? = nil, snapshot_id: String? = nil, tracks: PlaylistModelTracks? = nil, type: String? = nil) {
-        self.collaborative = collaborative
+    init(description: String?, id: String, images: [ImageModel]?, name: String?, owner: PlaylistModelOwner?, tracks: PlaylistModelTracks? = nil, type: String?) {
         self.description = description
-        self.followers = followers
-        self.href = href
         self.id = id
         self.images = images
         self.name = name
         self.owner = owner
-        self.snapshot_id = snapshot_id
         self.tracks = tracks
         self.type = type
+    }
+    init() {
+        self.description = ""
+        self.id = ""
+        self.images = []
+        self.name = ""
+        self.owner = PlaylistModelOwner()
+        self.tracks = PlaylistModelTracks()
+        self.type = ""
     }
 }
 
 struct PlaylistModelOwner: Codable {
     let display_name: String?
-    let href: String?
-    let id: String?
+    let id: String
     let type: String? //Maybe enum
-    init(display_name: String? = nil, href: String? = nil, id: String? = nil, type: String? = nil) {
+    init(display_name: String?, id: String, type: String?) {
         self.display_name = display_name
-        self.href = href
         self.id = id
         self.type = type
+    }
+    init() {
+        self.display_name = ""
+        self.id = ""
+        self.type = ""
     }
 }
 
 struct PlaylistModelTracks: Codable {
-    let href: String?
     let total: Int?
     var items: [PlaylistModelTracksItem]?
-    init(href: String? = nil, total: Int? = nil, items: [PlaylistModelTracksItem]? = nil) {
-        self.href = href
+    init(total: Int?, items: [PlaylistModelTracksItem]?) {
         self.total = total
         self.items = items
+    }
+    init() {
+        self.total = 0
+        self.items = []
     }
 }
 

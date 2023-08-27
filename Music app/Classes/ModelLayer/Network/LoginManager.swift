@@ -30,6 +30,7 @@ class LoginManager {
             switch response.result {
                 case .success(let value):
                     // Handle the successful response
+                    print("Access token", value.access_token)
                     guard let accessToken = value.access_token.data(using: .utf8) else { return }
                     guard let refreshToken = value.refresh_token?.data(using: .utf8) else { return }
                     do {

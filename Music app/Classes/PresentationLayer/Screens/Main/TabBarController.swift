@@ -1,28 +1,29 @@
 import UIKit
 
 class GradientTabBarController: UITabBarController {
-
-        let gradientlayer = CAGradientLayer()
-
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            setGradientBackground(colorOne: .black, colorTwo: UIColor(white: 1, alpha: 0))
-        }
-
-        func setGradientBackground(colorOne: UIColor, colorTwo: UIColor)  {
-            gradientlayer.frame = tabBar.bounds
-            gradientlayer.colors = [colorOne.cgColor, colorTwo.cgColor]
-            gradientlayer.locations = [0, 1]
-            gradientlayer.startPoint = CGPoint(x: 0.0, y: 1.0)
-            gradientlayer.endPoint = CGPoint(x: 0.0, y: 0.0)
-            self.tabBar.layer.insertSublayer(gradientlayer, at: 0)
-        }
+    
+    let gradientlayer = CAGradientLayer()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setGradientBackground(colorOne: .black, colorTwo: UIColor(white: 1, alpha: 0))
+    }
+    
+    func setGradientBackground(colorOne: UIColor, colorTwo: UIColor)  {
+        gradientlayer.frame = tabBar.bounds
+        gradientlayer.colors = [colorOne.cgColor, colorTwo.cgColor]
+        gradientlayer.locations = [0, 1]
+        gradientlayer.startPoint = CGPoint(x: 0.0, y: 1.0)
+        gradientlayer.endPoint = CGPoint(x: 0.0, y: 0.0)
+        self.tabBar.layer.insertSublayer(gradientlayer, at: 0)
+    }
 }
 final class TabBarController: UITabBarController, MainCoordinatorDelegate {
-//final class TabBarController: GradientTabBarController, MainCoordinatorDelegate {
-    
+    //final class TabBarController: GradientTabBarController, MainCoordinatorDelegate {
+    var timer = Timer()
     var coordinator: MainCoordinatorDelegate?
-    
+    var playerViewController: CollapsedPlayerViewController = CollapsedPlayerViewController()
+    let player: PlayerView = PlayerView()
     private enum TabBarItems {
         case mainPage
         case searchPage
@@ -58,15 +59,10 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabBar()
-//        loadTabbarFromXib()
+        
     }
     func showLogin() {
         coordinator?.showLogin()
-    }
-    
-    private func loadTabbarFromXib() -> UITabBarController {
-        guard let view = Bundle.main.loadNibNamed("TabBarController", owner: self)?.first as? TabBarController else { return UITabBarController() }
-        return view
     }
     
     private func setupTabBar() {
@@ -101,22 +97,29 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate {
         viewControllers?[3].tabBarItem.title = TabBarItems.quiz.title
         viewControllers?[3].tabBarItem.image = UIImage(systemName: TabBarItems.quiz.iconName)
         
-        let playerView = PlayerView()
-//        guard let playerView = Bundle.main.loadNibNamed("PlayerView", owner: self)?.first as? PlayerView else { return }
-        playerView.artistNameLabel.text = "qew"
-        playerView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(playerView)
-        view.bringSubviewToFront(playerView)
-        
-        NSLayoutConstraint.activate([
-            playerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -115),
-            playerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            playerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-//        let testImage = UIImageView(image: UIImage(named: "tempImage"))
-//        testImage.frame = CGRect(x: 100, y: 100, width: 100, height: 200)
-//        view.addSubview(testImage)
+        player.frame = CGRect(x: 0, y: view.frame.height - 145, width: view.frame.width, height: 60)
+
+        self.view.addSubview(player)
+        showView()
+//        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(removeView), userInfo: nil, repeats: true)
     }
+    
+    @objc func removeView() {
+        hideView()
+//        player.removeFromSuperview()
+    }
+    private func hideView() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.player.alpha = 0
+            })
+    }
+    
+    private func showView() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.player.alpha = 1
+            })
+    }
+    
     
 }
 extension TabBarController: Storyboarded {
@@ -124,3 +127,5 @@ extension TabBarController: Storyboarded {
         .TabBarController
     }
 }
+
+

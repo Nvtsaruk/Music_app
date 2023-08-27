@@ -32,7 +32,7 @@ class UserProfileViewController: UIViewController {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
             self.profileDisplayName.text = self.viewModel?.currentUser.display_name
-            if let url = viewModel?.currentUser.images?.first?.url {
+            if let url = viewModel?.currentUser.images.first?.url {
                 self.profileImage.sd_setImage(with: url, placeholderImage: .checkmark)
             } else {
                 self.profileImage.image = UIImage(systemName: "person", withConfiguration: symbolConfig)

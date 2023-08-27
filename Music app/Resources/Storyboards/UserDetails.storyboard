@@ -44,6 +44,18 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="userId" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bvl-js-4Y3">
+                                <rect key="frame" x="15.999999999999996" y="222" width="47.666666666666657" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUC-QU-RQp">
+                                <rect key="frame" x="15.999999999999996" y="250.00000000000003" width="58.666666666666657" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -51,18 +63,24 @@
                             <constraint firstItem="QpF-rX-URb" firstAttribute="top" secondItem="aPR-rJ-PZc" secondAttribute="bottom" constant="32" id="26S-SP-4TD"/>
                             <constraint firstItem="vbi-Sd-Bcd" firstAttribute="leading" secondItem="aPR-rJ-PZc" secondAttribute="trailing" constant="16" id="9tx-FH-pWB"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="QpF-rX-URb" secondAttribute="trailing" constant="16" id="RyT-LJ-cNp"/>
+                            <constraint firstItem="Bvl-js-4Y3" firstAttribute="leading" secondItem="QpF-rX-URb" secondAttribute="leading" id="Rye-1v-tXe"/>
+                            <constraint firstItem="Bvl-js-4Y3" firstAttribute="top" secondItem="QpF-rX-URb" secondAttribute="bottom" constant="7.3333333333333144" id="WBa-UB-jzK"/>
                             <constraint firstItem="vbi-Sd-Bcd" firstAttribute="top" secondItem="aPR-rJ-PZc" secondAttribute="top" id="Xh5-zO-drC"/>
                             <constraint firstItem="aPR-rJ-PZc" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Yc0-9J-uAt"/>
                             <constraint firstItem="QpF-rX-URb" firstAttribute="leading" secondItem="aPR-rJ-PZc" secondAttribute="leading" id="asI-6y-ALj"/>
                             <constraint firstItem="vbi-Sd-Bcd" firstAttribute="bottom" secondItem="aPR-rJ-PZc" secondAttribute="bottom" id="ff5-Zy-muS"/>
+                            <constraint firstItem="aUC-QU-RQp" firstAttribute="leading" secondItem="Bvl-js-4Y3" secondAttribute="leading" id="lIP-bs-Qe6"/>
+                            <constraint firstItem="aUC-QU-RQp" firstAttribute="top" secondItem="Bvl-js-4Y3" secondAttribute="bottom" constant="7.6666666666666572" id="lXQ-hA-bIA"/>
                             <constraint firstItem="aPR-rJ-PZc" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="33" id="tMr-cw-JZi"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="avatarImage" destination="aPR-rJ-PZc" id="tD6-yc-t1p"/>
+                        <outlet property="countryLabel" destination="aUC-QU-RQp" id="UdB-va-VeJ"/>
                         <outlet property="emailLabel" destination="QpF-rX-URb" id="ncf-qp-uMj"/>
                         <outlet property="nameLabel" destination="U0M-qp-3sn" id="PlN-vB-Hr9"/>
-                        <outlet property="subscribersLabel" destination="4Ti-9e-85Q" id="eNz-ZW-uVb"/>
+                        <outlet property="planLabel" destination="4Ti-9e-85Q" id="Sld-Sr-v0Q"/>
+                        <outlet property="userIDLabel" destination="Bvl-js-4Y3" id="wyV-Eb-obS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
