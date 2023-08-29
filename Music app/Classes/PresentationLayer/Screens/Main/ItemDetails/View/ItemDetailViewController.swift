@@ -62,6 +62,7 @@ class ItemDetailViewController: UIViewController {
     
     
     @IBAction func playButtonAction(_ sender: Any) {
+        viewModel?.setPlayButton()
     }
     
 }
@@ -86,7 +87,7 @@ extension ItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func play(url:URL) {
-        print("playing \(url)")
+//        print("playing \(url)")
 
         do {
             let playerItem = AVPlayerItem(url: url)

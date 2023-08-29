@@ -30,26 +30,30 @@ class LoginManager {
             switch response.result {
                 case .success(let value):
                     // Handle the successful response
-                    print("Access token", value.access_token)
+//                    print("Access token", value.access_token)
                     guard let accessToken = value.access_token.data(using: .utf8) else { return }
                     guard let refreshToken = value.refresh_token?.data(using: .utf8) else { return }
-                    do {
-                        _ = try KeychainManager.save(token: accessToken, tokenKey: KeychainConstants.accessToken.key)
-                    } catch {
-                        print(error)
-                    }
-                    do {
-                        _ = try KeychainManager.save(token: refreshToken, tokenKey: KeychainConstants.refreshToken.key)
-                    } catch {
-                        print(error)
-                    }
+                    CredentialStorageService().saveAccessToken(token: accessToken)
+                    CredentialStorageService().saveRefreshToken(token: refreshToken)
+//                    KeychainManager().save(token: accessToken, tokenKey: KeychainConstants.accessToken.key)
+//                    KeychainManager().save(token: refreshToken, tokenKey: KeychainConstants.refreshToken.key)
+//                                        do {
+//                                            _ = try CredentialStorageService().save(token: accessToken, tokenKey: KeychainConstants.accessToken.key)
+//                                        } catch {
+//                                            print(error)
+//                                        }
+//                                        do {
+//                                            _ = try CredentialStorageService().save(token: refreshToken, tokenKey: KeychainConstants.refreshToken.key)
+//                                        } catch {
+//                                            print(error)
+//                                        }
                     
                 case .failure(let error):
                     print(error)
             }
         }
     }
-//    func refreshToken(completion: @escaping (Result<Token, Error>) -> Void) {
+    //    func refreshToken(completion: @escaping (Result<Token, Error>) -> Void) {
     func refreshToken() {
         let basicToken = AppConstants.clientID + ":" + AppConstants.clientSecret
         let data = basicToken.data(using: .utf8)
@@ -61,7 +65,7 @@ class LoginManager {
         ]
         var refreshToken = ""
         do {
-            let keychainRefresh = try KeychainManager.getPassword(for: KeychainConstants.refreshToken.key)
+            let keychainRefresh = try CredentialStorageService().getPassword(for: KeychainConstants.refreshToken.key)
             refreshToken = String(decoding: keychainRefresh ?? Data(), as: UTF8.self)
         } catch {
             print(error)
@@ -77,12 +81,15 @@ class LoginManager {
                 case .success(let value):
                     // Handle the successful response
                     guard let accessToken = value.access_token.data(using: .utf8) else { return }
-                    do {
-                        _ = try KeychainManager.logout(for: KeychainConstants.accessToken.key)
-                        _ = try KeychainManager.save(token: accessToken, tokenKey: KeychainConstants.accessToken.key)
-                    } catch {
-                        print(error)
-                    }
+                    CredentialStorageService().saveAccessToken(token: accessToken)
+//                    do {
+//                        _ = try CredentialStorageService().logout(for: KeychainConstants.accessToken.key)
+//                        _ = try CredentialStorageService().save(token: accessToken, tokenKey: KeychainConstants.accessToken.key)
+//                    } catch {
+//                        print(error)
+//                    }
+                    
+                    
                     
                 case .failure(let error):
                     print(error)
@@ -91,13 +98,13 @@ class LoginManager {
     }
     func deleteAll() {
         [kSecClassGenericPassword, kSecClassInternetPassword, kSecClassCertificate, kSecClassKey, kSecClassIdentity].forEach {
-                let status = SecItemDelete([
-                  kSecClass: $0,
-                  kSecAttrSynchronizable: kSecAttrSynchronizableAny
-                ] as CFDictionary)
-                if status != errSecSuccess && status != errSecItemNotFound {
-                    //Error while removing class $0
-                }
-              }
+            let status = SecItemDelete([
+                kSecClass: $0,
+                kSecAttrSynchronizable: kSecAttrSynchronizableAny
+            ] as CFDictionary)
+            if status != errSecSuccess && status != errSecItemNotFound {
+                //Error while removing class $0
+            }
+        }
     }
 }

@@ -23,7 +23,7 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate {
     var timer = Timer()
     var coordinator: MainCoordinatorDelegate?
     var playerViewController: CollapsedPlayerViewController = CollapsedPlayerViewController()
-    let player: PlayerView = PlayerView()
+    var player: PlayerView = PlayerView()
     private enum TabBarItems {
         case mainPage
         case searchPage
@@ -66,13 +66,14 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate {
     }
     
     private func setupTabBar() {
+        let playerViewModel = PlayerViewModel()
         tabBar.barTintColor = UIColor.black
         tabBar.isTranslucent = true
         tabBar.tintColor = .white
         tabBar.unselectedItemTintColor = .lightGray
         tabBar.backgroundColor = .black
         
-        let mainPageViewController = MainPageCoordinator(navigationController: UINavigationController())
+        let mainPageViewController = MainPageCoordinator(navigationController: UINavigationController(), playerViewModel: playerViewModel)
         mainPageViewController.delegate = self
         mainPageViewController.start()
         let searchPageViewController = SearchPageCoordinator(navigationController: UINavigationController())
@@ -98,7 +99,11 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate {
         viewControllers?[3].tabBarItem.image = UIImage(systemName: TabBarItems.quiz.iconName)
         
         player.frame = CGRect(x: 0, y: view.frame.height - 145, width: view.frame.width, height: 60)
-
+        
+//        print("Player in tabbar", player)
+        player.viewModel = playerViewModel
+//        print("In tab bar ", player?.viewModel)
+        print("Player in tabbar", player)
         self.view.addSubview(player)
         showView()
 //        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(removeView), userInfo: nil, repeats: true)

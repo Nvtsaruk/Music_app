@@ -9,8 +9,16 @@ class PlayerView: UIView {
     @IBOutlet weak var trackImage: UIImageView!
     @IBOutlet weak var container: UIView!
     
-    
-    var isPlaying: Bool = false
+    var viewModel: PlayerViewModelProtocol?
+    var isPlaying: Bool = false {
+        didSet {
+            if isPlaying == false {
+                playButtonOutlet.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            } else {
+                playButtonOutlet.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            }
+        }
+    }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.configureView()
@@ -20,10 +28,30 @@ class PlayerView: UIView {
         super.init(frame: frame)
         self.alpha = 0
         self.configureView()
+        print("Player in player", self)
+        playerBehavior()
+        
+    }
+    private func playerBehavior() {
+        print("ViewModel:", viewModel)
+        guard let playing = viewModel?.isPlaying else { return }
+        print("playing1", playing)
+        isPlaying = playing
+    }
+    private func bindViewModel() {
+        viewModel?.updateClosure = { [weak self] in
+            self?.playButtonOutlet.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        bindViewModel()
     }
     
     
     private func configureView() {
+        
         let subview = self.loadViewFromXib()
         subview.frame = self.bounds
         subview.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -43,12 +71,13 @@ class PlayerView: UIView {
     
     
     @IBAction func playButtonAction(_ sender: Any) {
+        viewModel?.showInteraction()
         if isPlaying == true {
-            playButtonOutlet.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            
             isPlaying = false
             
         } else {
-            playButtonOutlet.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            
             isPlaying = true
         }
     }

@@ -23,33 +23,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3DB6217D-3BBC-463A-9F77-5A1B0AAF516D"
+            uuid = "ED050137-CC72-40A7-8F39-597EEB5DC307"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Music app/Classes/ModelLayer/Network/APIService.swift"
+            filePath = "Music app/Classes/PresentationLayer/Screens/Main/ItemDetails/View/ItemDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "getData(_:url:_:)"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "playButtonAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "172A3170-63A6-4A3A-AF5E-F1F59EAFB9E3"
+            uuid = "705FB0A3-2DF5-497C-8943-D26B417D1BDB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Music app/Classes/ModelLayer/Network/APIService.swift"
+            filePath = "Music app/Classes/PresentationLayer/Screens/Main/ItemDetails/ViewModel/ItemDetailViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "retry(_:for:dueTo:completion:)"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "setPlayButton()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A690773D-5BCE-4B5A-82D1-D5516CA8BEE3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Music app/Classes/PresentationLayer/Screens/Main/Player/PlayerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "PlayerViewModel"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

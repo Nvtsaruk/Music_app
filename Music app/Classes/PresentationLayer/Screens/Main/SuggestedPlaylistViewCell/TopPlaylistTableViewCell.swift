@@ -21,7 +21,7 @@ final class TopPlaylistTableViewCell: UITableViewCell {
         didSet {
             collectionView.reloadData()
             self.delegate?.reloadTableView()
-            print("Collection view reload in numrows")
+//            print("Collection view reload in numrows")
         }
     }
     var collectionData: Toplist? {
@@ -30,7 +30,7 @@ final class TopPlaylistTableViewCell: UITableViewCell {
 //            DispatchQueue.main.async {
                 self.collectionView.reloadData()
             self.delegate?.reloadTableView()
-            print("Collection view reload")
+//            print("Collection view reload")
 //            }
 
         }

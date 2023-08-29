@@ -9,21 +9,13 @@ final class MainCoordinator: Coordinator, MainCoordinatorDelegate {
     let navigationController = UINavigationController()
     
     func start() {
-        if isUserLoggedIn() {
+        if CredentialStorageService().isUserLoggedIn() {
             startTabBar()
         } else {
             startLogin()
         }
     }
-    private func isUserLoggedIn() -> Bool {
-        do {
-            _ = try KeychainManager.getPassword(for: "access_token")
-            return true
-        } catch {
-            print(error)
-            return false
-        }
-    }
+    
     func showLogin() {
         start()
     }

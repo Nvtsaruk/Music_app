@@ -16,7 +16,10 @@ class TabBarCoordinator: Coordinator, MainCoordinatorDelegate {
     
     func start() {
 //        let tabBarController = TabBarController.instantiate()
+//        let player = PlayerView()
+//        tabBarController.player = player
         tabBarController.coordinator = self
+//        print(tabBarController.player)
         navigationController.navigationBar.isHidden = true
         navigationController.pushViewController(tabBarController, animated: true)
     }

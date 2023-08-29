@@ -58,7 +58,7 @@ extension MainPageViewController: ViewDelegate {
         viewModel?.showItemDetail(id: id)
     }
     func reloadTableView() {
-        print("delegate reload tale view")
+//        print("delegate reload tale view")
         tableView.reloadData()
     }
 }

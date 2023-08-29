@@ -35,7 +35,7 @@ final class MainPageViewModel: MainPageViewModelProtocol {
     var mainPageData: MainPageData = MainPageData() {
         didSet {
             updateClosure?()
-            print(mainPageData.playlists.count)
+//            print(mainPageData.playlists.count)
             
         }
     }
@@ -78,23 +78,28 @@ extension MainPageViewModel: HeaderTableViewCellDelegate {
         coordinator?.goToUserProfile()
     }
     func cleanKeychain() {
-        print("Clean")
+//        print("Clean")
         let right_Token = "BQD1qSeyAXA8AAtQagE5zlsKazoB7E1fmjnlAU8FcL5qx8BtfXluf7Eh3oqfw3v8hwsuQTxmdSkr9MzmZU0vVInwOTkMMbTum5rvA_rXLL4lmoj-5dH8-3UCnP-4gqwXvSxD8Ye3whV8ivk-NmihqsbSCeimaisjod7JAHjC8ZLYPxoItIz2Ba5LAF4HzMadHC7dtSK5T2owAaQjgDk2-R8a3z_EE5oU5hL3ISnFDAmxGnb_DwncCeSx5dg8OqcX8THR-uDi7JAcX2XLGyVpMxTCLCRcBe712iuTLffj-JsR-LkuZiF-zg"
         let wrongToken = "BQD1qSeyAXA8AAtQagE5zlsKazoB7E1fmjnlAU8FcL5qx8BtfXluf7Eh3oqfw3v8hwsuQTxmdSkr9MzmZU0vVInwOTkMMbTum5rvA_rXLL4lmoj-5dH8-3UCnP-4gqwXvSxD8Ye3whV8ivk-NmihqsbSCeimaisjod7JAHjC8ZLYPxoItIz2Ba5LAF4HzMadHC7dtSK5T2owAaQjgDk2-R8a3z_EE5oU5hL3ISnFDAmxGnb_DwncCeSx5dg8OqcX8THR-uDi7JAcX2XLGyVpMxTCLCRcBe712iuTLffj-JsR-LkuZiF-yr"
+//        KeychainManager().logout(for: KeychainConstants.accessToken.key)
         do {
-            _ = try KeychainManager.logout(for: KeychainConstants.accessToken.key)
+            _ = try CredentialStorageService().logout(for: KeychainConstants.accessToken.key)
         } catch {
             print(error)
         }
-        
+        guard let accessToken = wrongToken.data(using: .utf8) else { return }
+        CredentialStorageService().saveAccessToken(token: accessToken)
+//        KeychainManager().save(token: accessToken, tokenKey: KeychainConstants.accessToken.key)
+//        do {
+//            guard let accessToken = wrongToken.data(using: .utf8) else { return }
+//            _ = try CredentialStorageService().save(token: accessToken, tokenKey: KeychainConstants.accessToken.key)
+//        } catch {
+//            print(error)
+//        }
+//        let temp = try KeychainManager().getPassword(for: KeychainConstants.accessToken.key)
+//        print("token after reset", String(decoding: temp ?? Data(), as: UTF8.self))
         do {
-            guard let accessToken = wrongToken.data(using: .utf8) else { return }
-            _ = try KeychainManager.save(token: accessToken, tokenKey: KeychainConstants.accessToken.key)
-        } catch {
-            print(error)
-        }
-        do {
-            let temp = try KeychainManager.getPassword(for: KeychainConstants.accessToken.key)
+            let temp = try CredentialStorageService().getPassword(for: KeychainConstants.accessToken.key)
             print("token after reset", String(decoding: temp ?? Data(), as: UTF8.self))
         } catch {
             print(error)

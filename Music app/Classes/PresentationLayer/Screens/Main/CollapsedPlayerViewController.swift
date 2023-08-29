@@ -61,7 +61,7 @@ class CollapsedPlayerViewController: UIViewController {
             playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
             isPlaying = true
         }
-        print("Working button")
+//        print("Working button")
         
     }
     

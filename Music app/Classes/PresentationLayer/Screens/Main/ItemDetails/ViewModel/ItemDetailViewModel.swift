@@ -4,15 +4,20 @@ protocol ItemDetailViewModelProtocol {
     var details: String { get set }
     var playlist: PlaylistModel { get }
     var updateClosure:(() -> Void)? { get set }
+    func setPlayButton()
 }
 
 final class ItemDetailViewModel: ItemDetailViewModelProtocol {
     var coordinator: MainPageCoordinator?
+    var playerViewModel: PlayerViewModel?
     var id: String?
     var details: String = "Details" {
         didSet {
             updateClosure?()
         }
+    }
+    func setPlayButton() {
+        playerViewModel?.isPlaying = false
     }
     
     var updateClosure: (() -> Void)?
@@ -29,6 +34,7 @@ final class ItemDetailViewModel: ItemDetailViewModelProtocol {
     
     
     func getItems() {
+        print("I item detail view model", playerViewModel)
         let url = "https://api.spotify.com/v1/playlists/\(id ?? "")"
         APIService.getData(PlaylistModel.self, url: url) { result in
             switch result {
@@ -48,7 +54,7 @@ final class ItemDetailViewModel: ItemDetailViewModelProtocol {
                 indexArray.append(id)
             }
         }
-        print(indexArray)
+//        print(indexArray)
         indexArray.forEach { id in
             guard let itemsArray = playlist.tracks?.items else { return }
             for (i, v) in itemsArray.enumerated() {

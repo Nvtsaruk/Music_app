@@ -21,7 +21,7 @@ class APIRequestInterceptor: RequestInterceptor {
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         do {
-            let data = try KeychainManager.getPassword(for: KeychainConstants.accessToken.key)
+            let data = try CredentialStorageService().getPassword(for: KeychainConstants.accessToken.key)
             self.token.accessToken = String(decoding: data ?? Data(), as: UTF8.self)
         } catch {
             print(error)
@@ -35,19 +35,19 @@ class APIRequestInterceptor: RequestInterceptor {
         if let response = request.task?.response as? HTTPURLResponse, let responseError = error.asAFError, response.statusCode == 401 || response.statusCode == 400 || responseError.isResponseSerializationError {
             // Refresh token and retry
             print("In token condition")
-//            DispatchQueue.main.async {
-                LoginManager().refreshToken()
-//            }
+            //            DispatchQueue.main.async {
+            LoginManager().refreshToken()
+            //            }
             
             completion(.retry)
         } else {
             completion(.doNotRetry)
         }
-//        if let , response.isResponseSerializationError {
-//            print("In error condition")
-//            LoginManager().refreshToken()
-//            completion(.retry)
-//        }
+        //        if let , response.isResponseSerializationError {
+        //            print("In error condition")
+        //            LoginManager().refreshToken()
+        //            completion(.retry)
+        //        }
     }
 }
 
@@ -70,7 +70,7 @@ class APIService {
         self.sessionManager.request(url, method: .get).responseDecodable(of: T.self) { response in
             switch response.result {
                 case .success(let value):
-                    print("Value", value)
+//                    print("Value", value)
                     completion(.success(value))
                 case .failure(let error):
                     // Handle the error
