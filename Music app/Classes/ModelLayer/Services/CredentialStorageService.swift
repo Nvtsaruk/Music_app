@@ -41,6 +41,8 @@ final class CredentialStorageService {
 
     func getPassword(for tokenKey: String) throws -> Data? {
         let result = keychain.getData(tokenKey)
+        guard let resultTemp = result else { return Data()}
+//        print("qweqweqeqe", String(data: resultTemp, encoding: .utf8))
         return result
     }
 
@@ -100,3 +102,9 @@ final class CredentialStorageService {
 //        return "deleted"
 //    }
 }
+
+// singleton
+//class Singleton {
+//    static var singleton = Singleton()
+//    private init(){}
+//}

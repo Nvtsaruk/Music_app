@@ -80,7 +80,7 @@ extension MainPageViewModel: HeaderTableViewCellDelegate {
     func cleanKeychain() {
 //        print("Clean")
         let right_Token = "BQD1qSeyAXA8AAtQagE5zlsKazoB7E1fmjnlAU8FcL5qx8BtfXluf7Eh3oqfw3v8hwsuQTxmdSkr9MzmZU0vVInwOTkMMbTum5rvA_rXLL4lmoj-5dH8-3UCnP-4gqwXvSxD8Ye3whV8ivk-NmihqsbSCeimaisjod7JAHjC8ZLYPxoItIz2Ba5LAF4HzMadHC7dtSK5T2owAaQjgDk2-R8a3z_EE5oU5hL3ISnFDAmxGnb_DwncCeSx5dg8OqcX8THR-uDi7JAcX2XLGyVpMxTCLCRcBe712iuTLffj-JsR-LkuZiF-zg"
-        let wrongToken = "BQD1qSeyAXA8AAtQagE5zlsKazoB7E1fmjnlAU8FcL5qx8BtfXluf7Eh3oqfw3v8hwsuQTxmdSkr9MzmZU0vVInwOTkMMbTum5rvA_rXLL4lmoj-5dH8-3UCnP-4gqwXvSxD8Ye3whV8ivk-NmihqsbSCeimaisjod7JAHjC8ZLYPxoItIz2Ba5LAF4HzMadHC7dtSK5T2owAaQjgDk2-R8a3z_EE5oU5hL3ISnFDAmxGnb_DwncCeSx5dg8OqcX8THR-uDi7JAcX2XLGyVpMxTCLCRcBe712iuTLffj-JsR-LkuZiF-yr"
+        let wrongToken = "BQAreOfwnCKhvpsuOXzGNYrHzdUrLLNUaAZZsH8rBU1gvmhcPrNHNnjL6zs_c1tWkqHQF-yVYlaz5aOq5ez4ThR9gw2mEDDcAvgQrxhn7TY9Cf8Tl4nNxa5gCcX385a3N_OXSuz76uys4kGze7bsiW_I4Kb8CbvuGqq509k9UVbucwGXDrIjb8J7bNaoHncpkJN7EYmMBXA3JCDK9si6qyeZkHy4nZ7J616K354RJlII-W-_YS-gOGY4XepyyzZo4wMDjoKLQjFkiUiYgejAUMzWJKfUryrAA4agoRK855UQTI9-YwElZe"
 //        KeychainManager().logout(for: KeychainConstants.accessToken.key)
         do {
             _ = try CredentialStorageService().logout(for: KeychainConstants.accessToken.key)
