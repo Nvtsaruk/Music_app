@@ -23,38 +23,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "ED050137-CC72-40A7-8F39-597EEB5DC307"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Music app/Classes/PresentationLayer/Screens/Main/ItemDetails/View/ItemDetailViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "playButtonAction(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "705FB0A3-2DF5-497C-8943-D26B417D1BDB"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Music app/Classes/PresentationLayer/Screens/Main/ItemDetails/ViewModel/ItemDetailViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "setPlayButton()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "A690773D-5BCE-4B5A-82D1-D5516CA8BEE3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -64,8 +32,104 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "11"
             endingLineNumber = "11"
-            landmarkName = "PlayerViewModel"
-            landmarkType = "3">
+            landmarkName = "isPlaying"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6BAD6490-FA77-4953-9457-D8BA0DCACA3D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Music app/Classes/PresentationLayer/Screens/Main/Player/PlayerView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "awakeFromNib()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6BAD6490-FA77-4953-9457-D8BA0DCACA3D - 2a55c79d7096f66c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Music_app.PlayerView.configureView() -&gt; ()"
+                  moduleName = "Music app"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tsaruknick/Developer/IT_academy/Final_Project/Music%20app/Music%20app/Classes/PresentationLayer/Screens/Main/Player/PlayerView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "224">
+               </Location>
+               <Location
+                  uuid = "6BAD6490-FA77-4953-9457-D8BA0DCACA3D - b4de568800407684"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Music_app.PlayerView.awakeFromNib() -&gt; ()"
+                  moduleName = "Music app"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tsaruknick/Developer/IT_academy/Final_Project/Music%20app/Music%20app/Classes/PresentationLayer/Screens/Main/Player/PlayerView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "432">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "122B309E-261B-4E17-9229-A0AAD6C81420"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Music app/Classes/PresentationLayer/Screens/Main/Player/PlayerView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "awakeFromNib()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "122B309E-261B-4E17-9229-A0AAD6C81420 - b4de568800407663"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Music_app.PlayerView.awakeFromNib() -&gt; ()"
+                  moduleName = "Music app"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tsaruknick/Developer/IT_academy/Final_Project/Music%20app/Music%20app/Classes/PresentationLayer/Screens/Main/Player/PlayerView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "432">
+               </Location>
+               <Location
+                  uuid = "122B309E-261B-4E17-9229-A0AAD6C81420 - b4de568800407600"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Music_app.PlayerView.awakeFromNib() -&gt; ()"
+                  moduleName = "Music app"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tsaruknick/Developer/IT_academy/Final_Project/Music%20app/Music%20app/Classes/PresentationLayer/Screens/Main/Player/PlayerView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "56">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

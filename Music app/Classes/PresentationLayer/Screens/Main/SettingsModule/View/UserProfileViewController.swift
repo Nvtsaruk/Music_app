@@ -16,7 +16,11 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var profileDisplayName: UILabel!
     
     @IBOutlet weak var userProfile: UIView!
-    
+    var isLoading: Bool = false {
+        didSet{
+            print("Is Loading", isLoading)
+        }
+    }
     var viewModel: UserProfileViewModelProtocol?
     
     let symbolConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .medium, scale: .medium)
@@ -31,6 +35,7 @@ class UserProfileViewController: UIViewController {
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
+            self.isLoading = ((viewModel?.isLoading) != nil)
             self.profileDisplayName.text = self.viewModel?.currentUser.display_name
             if let url = viewModel?.currentUser.images.first?.url {
                 self.profileImage.sd_setImage(with: url, placeholderImage: .checkmark)

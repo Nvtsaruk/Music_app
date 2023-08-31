@@ -9,9 +9,8 @@ import UIKit
 import SDWebImage
 
 final class TopPlaylistTableViewCell: UITableViewCell {
-
-    //MARK: -IBOutlet
     
+    //MARK: -IBOutlet
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -19,29 +18,20 @@ final class TopPlaylistTableViewCell: UITableViewCell {
     
     var numRows = 0 {
         didSet {
-            collectionView.reloadData()
-            self.delegate?.reloadTableView()
-//            print("Collection view reload in numrows")
+//            collectionView.reloadData()
+//            self.delegate?.reloadTableView()
         }
     }
     var collectionData: Toplist? {
         didSet{
-//            guard let url = URL(string: collectionData?.albums.items[0].images?[0].url ?? "") else { return}
-//            DispatchQueue.main.async {
-                self.collectionView.reloadData()
+            self.collectionView.reloadData()
             self.delegate?.reloadTableView()
-//            print("Collection view reload")
-//            }
-
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        
         setupUI()
-        
     }
     
     private func setupUI() {
@@ -54,19 +44,16 @@ final class TopPlaylistTableViewCell: UITableViewCell {
         collectionView.register(collectionNib, forCellWithReuseIdentifier: "TopPlaylistCollectionViewCell")
     }
     
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
 }
 
 extension TopPlaylistTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
-//    func numberOfSections(in collectionView: UICollectionView) -> Int {
-//        2
-//    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         numRows
     }

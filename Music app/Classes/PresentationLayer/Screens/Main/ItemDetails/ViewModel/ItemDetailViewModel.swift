@@ -9,7 +9,6 @@ protocol ItemDetailViewModelProtocol {
 
 final class ItemDetailViewModel: ItemDetailViewModelProtocol {
     var coordinator: MainPageCoordinator?
-    var playerViewModel: PlayerViewModel?
     var id: String?
     var details: String = "Details" {
         didSet {
@@ -17,7 +16,7 @@ final class ItemDetailViewModel: ItemDetailViewModelProtocol {
         }
     }
     func setPlayButton() {
-        playerViewModel?.isPlaying = false
+       
     }
     
     var updateClosure: (() -> Void)?
@@ -34,7 +33,6 @@ final class ItemDetailViewModel: ItemDetailViewModelProtocol {
     
     
     func getItems() {
-        print("I item detail view model", playerViewModel)
         let url = "https://api.spotify.com/v1/playlists/\(id ?? "")"
         APIService.getData(PlaylistModel.self, url: url) { result in
             switch result {

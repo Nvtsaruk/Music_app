@@ -7,16 +7,15 @@
 
 import UIKit
 import SDWebImage
-import AVKit
 
-class ItemDetailViewController: UIViewController {
+final class ItemDetailViewController: UIViewController {
+    
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     
     var viewModel: ItemDetailViewModelProtocol?
-    var player: AVPlayer?
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel?.getItems()
@@ -62,7 +61,7 @@ class ItemDetailViewController: UIViewController {
     
     
     @IBAction func playButtonAction(_ sender: Any) {
-        viewModel?.setPlayButton()
+        AudioPlayerService.shared.pause()
     }
     
 }
@@ -82,26 +81,13 @@ extension ItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let url = viewModel?.playlist.tracks?.items?[indexPath.row].track?.preview_url else { return }
-        play(url: url)
+        guard let image = viewModel?.playlist.tracks?.items?[indexPath.row].track?.album?.images?.first?.url else { return }
+        guard let cacheImage = SDImageCache.shared.imageFromMemoryCache(forKey: image.absoluteString) else { return }
+        AudioPlayerService.shared.addItemForPlayer(PlayerItemModel(url: url, image: cacheImage, trackName: viewModel?.playlist.tracks?.items?[indexPath.row].track?.name ?? "", artistName: viewModel?.playlist.tracks?.items?[indexPath.row].track?.artists?.first?.name ?? ""))
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
-    func play(url:URL) {
-//        print("playing \(url)")
-
-        do {
-            let playerItem = AVPlayerItem(url: url)
-
-            self.player = AVPlayer(playerItem:playerItem)
-            player!.volume = 1.0
-            player!.play()
-        } catch let error as NSError {
-            self.player = nil
-            print(error.localizedDescription)
-        } catch {
-            print("AVAudioPlayer init failed")
-        }
-    }
+    
     
 }
 

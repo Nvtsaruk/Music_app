@@ -46,8 +46,6 @@ class MainPageCoordinator: Coordinator {
         let viewModel = ItemDetailViewModel()
         viewModel.coordinator = self
         viewModel.id = id
-        viewModel.playerViewModel = self.playerViewModel
-        print(viewModel.playerViewModel)
         let itemDetailViewController = ItemDetailViewController.instantiate()
         itemDetailViewController.viewModel = viewModel
         navigationController.pushViewController(itemDetailViewController, animated: true)

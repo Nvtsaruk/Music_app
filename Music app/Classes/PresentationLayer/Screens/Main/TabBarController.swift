@@ -18,7 +18,17 @@ class GradientTabBarController: UITabBarController {
         self.tabBar.layer.insertSublayer(gradientlayer, at: 0)
     }
 }
-final class TabBarController: UITabBarController, MainCoordinatorDelegate {
+final class TabBarController: UITabBarController, MainCoordinatorDelegate, AudioPlayerShowHideDelegate {
+    func showPlayer() {
+        showView()
+    }
+    
+    func hidePlayer() {
+        
+    }
+    
+    
+    
     //final class TabBarController: GradientTabBarController, MainCoordinatorDelegate {
     var timer = Timer()
     var coordinator: MainCoordinatorDelegate?
@@ -59,7 +69,7 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabBar()
-        
+        AudioPlayerService.shared.showHideDelegate = self
     }
     func showLogin() {
         coordinator?.showLogin()
@@ -105,7 +115,7 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate {
 //        print("In tab bar ", player?.viewModel)
         print("Player in tabbar", player)
         self.view.addSubview(player)
-        showView()
+//        showView()
 //        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(removeView), userInfo: nil, repeats: true)
     }
     
@@ -114,13 +124,13 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate {
 //        player.removeFromSuperview()
     }
     private func hideView() {
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.player.alpha = 0
             })
     }
     
     private func showView() {
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.player.alpha = 1
             })
     }

@@ -1,7 +1,21 @@
 
 import UIKit
 
-class PlayerView: UIView {
+class PlayerView: UIView, AudioPlayerDelegate {
+    func audioPlayerDidStartPlaying() {
+        playButtonOutlet.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        print("Playing")
+    }
+    
+    func audioPlayerDidStopPlaying() {
+        print("Plause")
+        playButtonOutlet.setImage(UIImage(systemName: "play.fill"), for: .normal)
+    }
+    func sendTrackInfo(image: UIImage, track: String, artist: String) {
+        trackImage.image = image
+        trackNameLabel.text = track
+        artistNameLabel.text = artist
+    }
     
     @IBOutlet weak var playButtonOutlet: UIButton!
     @IBOutlet weak var artistNameLabel: UILabel!
@@ -10,15 +24,7 @@ class PlayerView: UIView {
     @IBOutlet weak var container: UIView!
     
     var viewModel: PlayerViewModelProtocol?
-    var isPlaying: Bool = false {
-        didSet {
-            if isPlaying == false {
-                playButtonOutlet.setImage(UIImage(systemName: "play.fill"), for: .normal)
-            } else {
-                playButtonOutlet.setImage(UIImage(systemName: "pause.fill"), for: .normal)
-            }
-        }
-    }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.configureView()
@@ -28,16 +34,9 @@ class PlayerView: UIView {
         super.init(frame: frame)
         self.alpha = 0
         self.configureView()
-        print("Player in player", self)
-        playerBehavior()
-        
+        AudioPlayerService.shared.delegate = self
     }
-    private func playerBehavior() {
-        print("ViewModel:", viewModel)
-        guard let playing = viewModel?.isPlaying else { return }
-        print("playing1", playing)
-        isPlaying = playing
-    }
+    
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
             self?.playButtonOutlet.setImage(UIImage(systemName: "pause.fill"), for: .normal)
@@ -46,7 +45,9 @@ class PlayerView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        print("In player")
         bindViewModel()
+        AudioPlayerService.shared.delegate = self
     }
     
     
@@ -71,14 +72,6 @@ class PlayerView: UIView {
     
     
     @IBAction func playButtonAction(_ sender: Any) {
-        viewModel?.showInteraction()
-        if isPlaying == true {
-            
-            isPlaying = false
-            
-        } else {
-            
-            isPlaying = true
-        }
+        AudioPlayerService.shared.pause()
     }
 }

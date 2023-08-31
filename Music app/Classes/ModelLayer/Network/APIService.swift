@@ -57,9 +57,6 @@ class APIService {
     static let sessionManager: Session = {
         let interceptor = APIRequestInterceptor()
         let configuration = URLSessionConfiguration.af.default
-        //            let networkLogger = SpotifyNetworkLogger()
-        
-        //            return Session(configuration: configuration, interceptor: interceptor, eventMonitors: [networkLogger])
         return Session(configuration: configuration, interceptor: interceptor)
     }()
     
@@ -67,16 +64,16 @@ class APIService {
                                     url: String,
                                     _ completion: @escaping (ResultRequest<T>) -> Void) {
         
-        self.sessionManager.request(url, method: .get).responseDecodable(of: T.self) { response in
+        self.sessionManager.request(url, method: .get).validate().responseDecodable(of: T.self) { response in
+//            if response.response?.statusCode == 401 {
+//                print("TOKEN EPIRED")
+//            }
             switch response.result {
                 case .success(let value):
-//                    print("Value", value)
                     completion(.success(value))
                 case .failure(let error):
-                    // Handle the error
-                    //                    LoginManager().refreshToken()
                     print("Error", error)
-                    
+
             }
         }
     }

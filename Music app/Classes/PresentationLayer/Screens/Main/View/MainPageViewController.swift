@@ -5,7 +5,7 @@ protocol ViewDelegate: AnyObject {
     func reloadTableView()
 }
 
-class MainPageViewController: UIViewController {
+final class MainPageViewController: UIViewController {
 
     //MARK: - IBOutlet
     
@@ -16,7 +16,6 @@ class MainPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.delegate = self
         tableView.dataSource = self
         setupUI()
@@ -37,7 +36,6 @@ class MainPageViewController: UIViewController {
         tableView.register(topPlaylistsNib, forCellReuseIdentifier: "TopPlaylistTableViewCell")
         let playlistsTableViewNib = UINib(nibName: "PlaylistsTableViewCell", bundle: nil)
         tableView.register(playlistsTableViewNib, forCellReuseIdentifier: "PlaylistsTableViewCell")
-//        self.tableView.contentInset = UIEdgeInsets(top: -30, left: 0, bottom: 0, right: 0)
     }
     
     
@@ -58,8 +56,7 @@ extension MainPageViewController: ViewDelegate {
         viewModel?.showItemDetail(id: id)
     }
     func reloadTableView() {
-//        print("delegate reload tale view")
-        tableView.reloadData()
+//        tableView.reloadData()
     }
 }
 

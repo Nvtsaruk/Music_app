@@ -35,8 +35,6 @@ final class MainPageViewModel: MainPageViewModelProtocol {
     var mainPageData: MainPageData = MainPageData() {
         didSet {
             updateClosure?()
-//            print(mainPageData.playlists.count)
-            
         }
     }
 
@@ -47,7 +45,7 @@ final class MainPageViewModel: MainPageViewModelProtocol {
                     case .success(let data):
                         self.mainPageData.playlists.append(data)
                         self.mainPageData.numRows.append(data.playlists?.items?.count ?? 0)
-                        self.updateClosure?()
+//                        self.updateClosure?()
                     case .failure(let error):
                         print("Custom Error -> \(error)")
                 }
@@ -58,7 +56,6 @@ final class MainPageViewModel: MainPageViewModelProtocol {
     func start() {
         let headerCell = HeaderTableViewCell()
         headerCell.delegate = self
-        //        getToplist()
         getPlaylists()
     }
     
