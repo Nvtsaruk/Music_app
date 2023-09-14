@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -35,26 +35,15 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playlist 1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dDL-Ot-hFJ">
-                                <rect key="frame" x="67" y="49.333333333333336" width="65" height="9.6666666666666643"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="65" id="Xeg-Yu-jy1"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="7X1-PS-PTA" firstAttribute="top" secondItem="qPz-jp-ntN" secondAttribute="top" id="2fd-Kd-5uv"/>
                             <constraint firstAttribute="bottom" secondItem="qPz-jp-ntN" secondAttribute="bottom" constant="4" id="2sC-8b-P5a"/>
-                            <constraint firstItem="dDL-Ot-hFJ" firstAttribute="bottom" secondItem="qPz-jp-ntN" secondAttribute="bottom" id="6yb-fq-QWh"/>
                             <constraint firstItem="qPz-jp-ntN" firstAttribute="leading" secondItem="i9R-gU-U5E" secondAttribute="leading" constant="4" id="9Zp-fj-DAL"/>
                             <constraint firstItem="qPz-jp-ntN" firstAttribute="top" secondItem="i9R-gU-U5E" secondAttribute="top" constant="4" id="KrP-tZ-jn4"/>
                             <constraint firstAttribute="trailing" secondItem="7X1-PS-PTA" secondAttribute="trailing" constant="36" id="Qk4-XO-vIC"/>
                             <constraint firstItem="7X1-PS-PTA" firstAttribute="leading" secondItem="qPz-jp-ntN" secondAttribute="trailing" constant="8" id="dSL-2J-qti"/>
-                            <constraint firstItem="dDL-Ot-hFJ" firstAttribute="leading" secondItem="7X1-PS-PTA" secondAttribute="leading" id="v30-R1-xBf"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -69,7 +58,6 @@
                 <outlet property="container" destination="i9R-gU-U5E" id="dn8-u3-M8S"/>
                 <outlet property="playlistImage" destination="qPz-jp-ntN" id="bMT-1n-i1K"/>
                 <outlet property="playlistTitle" destination="7X1-PS-PTA" id="v4U-iq-Oj0"/>
-                <outlet property="totalTracksLabel" destination="dDL-Ot-hFJ" id="smM-cb-ZJa"/>
             </connections>
             <point key="canvasLocation" x="85.496183206106863" y="26.408450704225352"/>
         </collectionViewCell>

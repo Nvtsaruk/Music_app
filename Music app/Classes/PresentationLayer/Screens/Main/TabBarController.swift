@@ -19,21 +19,28 @@ class GradientTabBarController: UITabBarController {
     }
 }
 final class TabBarController: UITabBarController, MainCoordinatorDelegate, AudioPlayerShowHideDelegate {
-    func showPlayer() {
-        showView()
+    var playerInited: Bool = false {
+        didSet {
+            print("Player inited", playerInited)
+        }
     }
-    
-    func hidePlayer() {
+    func showCompactPlayer() {
+        if playerInited == false {
+            showPlayerView()
+            playerInited = true
+        }
         
     }
     
+    func showFullPlayer() {
+        removeView()
+        showFullPlayerView()
+    }
     
-    
-    //final class TabBarController: GradientTabBarController, MainCoordinatorDelegate {
     var timer = Timer()
     var coordinator: MainCoordinatorDelegate?
-    var playerViewController: CollapsedPlayerViewController = CollapsedPlayerViewController()
     var player: PlayerView = PlayerView()
+    var playerViewModel: PlayerViewModelProtocol?
     private enum TabBarItems {
         case mainPage
         case searchPage
@@ -69,13 +76,13 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabBar()
-        AudioPlayerService.shared.showHideDelegate = self
     }
     func showLogin() {
         coordinator?.showLogin()
     }
     
     private func setupTabBar() {
+        AudioPlayerService.shared.showHideDelegate = self
         let playerViewModel = PlayerViewModel()
         tabBar.barTintColor = UIColor.black
         tabBar.isTranslucent = true
@@ -83,7 +90,7 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
         tabBar.unselectedItemTintColor = .lightGray
         tabBar.backgroundColor = .black
         
-        let mainPageViewController = MainPageCoordinator(navigationController: UINavigationController(), playerViewModel: playerViewModel)
+        let mainPageViewController = MainPageCoordinator(navigationController: UINavigationController())
         mainPageViewController.delegate = self
         mainPageViewController.start()
         let searchPageViewController = SearchPageCoordinator(navigationController: UINavigationController())
@@ -108,20 +115,15 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
         viewControllers?[3].tabBarItem.title = TabBarItems.quiz.title
         viewControllers?[3].tabBarItem.image = UIImage(systemName: TabBarItems.quiz.iconName)
         
-        player.frame = CGRect(x: 0, y: view.frame.height - 145, width: view.frame.width, height: 60)
         
-//        print("Player in tabbar", player)
-        player.viewModel = playerViewModel
-//        print("In tab bar ", player?.viewModel)
-        print("Player in tabbar", player)
-        self.view.addSubview(player)
 //        showView()
 //        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(removeView), userInfo: nil, repeats: true)
     }
     
-    @objc func removeView() {
+    private func removeView() {
         hideView()
-//        player.removeFromSuperview()
+        player.removeFromSuperview()
+        self.playerInited = false
     }
     private func hideView() {
         UIView.animate(withDuration: 0.3, animations: {
@@ -129,12 +131,23 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
             })
     }
     
-    private func showView() {
+    private func showPlayerView() {
+        player.frame = CGRect(x: 0, y: view.frame.height - 145, width: view.frame.width, height: 60)
+        let playerViewModel = PlayerViewModel()
+        player.viewModel = playerViewModel
+        view.addSubview(player)
         UIView.animate(withDuration: 0.3, animations: {
             self.player.alpha = 1
             })
     }
-    
+    private func showFullPlayerView() {
+        removeView()
+        let fullPlayer = FullPlayerViewController.instantiate()
+        let viewModel = FullPlayerModel()
+        fullPlayer.viewModel = viewModel
+        fullPlayer.modalPresentationStyle = .fullScreen
+        present(fullPlayer, animated: true)
+    }
     
 }
 extension TabBarController: Storyboarded {

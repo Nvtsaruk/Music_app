@@ -2,13 +2,70 @@ import Foundation
 struct SearchResults: Codable {
     let albums: SearchAlbum
     let artists: SearchArtists
-    let playlists: SearchPlaylists
-    let tracks: SearchTracks
+//    let playlists: SearchPlaylists
+//    let tracks: SearchTracks
+    
+//    init(albums: SearchAlbum, artists: SearchArtists, playlists: SearchPlaylists, tracks: SearchTracks) {
+//        self.albums = albums
+//        self.artists = artists
+//        self.playlists = playlists
+//        self.tracks = tracks
+//    }
+//    init() {
+//        self.albums = SearchAlbum()
+//        self.artists = SearchArtists()
+//        self.playlists = SearchPlaylists()
+//        self.tracks = SearchTracks()
+//    }
+    init(albums: SearchAlbum, artists: SearchArtists) {
+        self.albums = albums
+        self.artists = artists
+    }
+    init() {
+        self.albums = SearchAlbum()
+        self.artists = SearchArtists()
+    }
 }
 
 struct SearchAlbum: Codable {
     let items: [SearchAlbumItem]
     let total: Int
+    
+    init(items: [SearchAlbumItem], total: Int) {
+        self.items = items
+        self.total = total
+    }
+    init() {
+        self.items = []
+        self.total = 0
+    }
+}
+
+struct SearchArtists: Codable {
+    let items: [SearchArtistsItem]
+    let total: Int
+    init(items: [SearchArtistsItem], total: Int) {
+        self.items = items
+        self.total = total
+    }
+    init() {
+        self.items = []
+        self.total = 0
+    }
+}
+
+struct SearchTracks: Codable {
+    let items: [SearchTracksItem]
+    let total: Int
+    
+    init(items: [SearchTracksItem], total: Int) {
+        self.items = items
+        self.total = total
+    }
+    init() {
+        self.items = []
+        self.total = 0
+    }
 }
 
 struct SearchAlbumItem: Codable {
@@ -23,6 +80,19 @@ struct SearchAlbumItem: Codable {
     let type: String? //Enum
 }
 
+struct SearchArtistsItem: Codable {
+//    let followers: Followers?
+//    let genres: [String]?
+    let href: String?
+    let id: String?
+    let images: [ImageModel]?
+    let name: String?
+//    let popularity: Int?
+    let type: String?
+}
+
+
+
 struct SearchAlbumItemArtists: Codable {
     let href: String?
     let id: String?
@@ -30,26 +100,7 @@ struct SearchAlbumItemArtists: Codable {
     let type: String?
 }
 
-struct SearchArtists: Codable {
-    let items: [SearchArtistsItem]
-    let total: Int
-}
 
-struct SearchArtistsItem: Codable {
-    let followers: Followers?
-    let genres: [String]?
-    let href: String?
-    let id: String?
-    let images: [ImageModel]?
-    let name: String?
-    let popularity: Int?
-    let type: String?
-}
-
-struct SearchTracks: Codable {
-    let items: [SearchTracksItem]
-    let total: Int
-}
 
 struct SearchTracksItem: Codable {
     let album: SearchTracksItemAlbum
@@ -87,5 +138,13 @@ struct SearchTracksItemArtists: Codable {
 struct SearchPlaylists: Codable {
     let items: [PlaylistModel]?
     let total: Int?
+    init(items: [PlaylistModel]?, total: Int?) {
+        self.items = items
+        self.total = total
+    }
+    init() {
+        self.items = []
+        self.total = 0
+    }
 }
 

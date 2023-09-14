@@ -1,30 +1,6 @@
 import Foundation
 
-enum PlaylistsNames: CaseIterable {
-    case topPlaylists
-//    case featuredPlaylists
-    case relax
-    case pop
-    case rock
-    case training
-    
-    var name: String {
-        switch self {
-            case .topPlaylists:
-                return "Хит-парады"
-            case .relax:
-                return "Релакс"
-//            case .featuredPlaylists:
-//                return "Выбери тот самый плейлист"
-            case .pop:
-                return "Поп"
-            case .rock:
-                return "Рок"
-            case .training:
-                return "Тренировка"
-        }
-    }
-}
+
 
 
 struct PlaylistModel: Codable {

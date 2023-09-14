@@ -33,21 +33,11 @@ class APIRequestInterceptor: RequestInterceptor {
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
         if let response = request.task?.response as? HTTPURLResponse, let responseError = error.asAFError, response.statusCode == 401 || response.statusCode == 400 || responseError.isResponseSerializationError {
-            // Refresh token and retry
-            print("In token condition")
-            //            DispatchQueue.main.async {
             LoginManager().refreshToken()
-            //            }
-            
             completion(.retry)
         } else {
             completion(.doNotRetry)
         }
-        //        if let , response.isResponseSerializationError {
-        //            print("In error condition")
-        //            LoginManager().refreshToken()
-        //            completion(.retry)
-        //        }
     }
 }
 
@@ -65,9 +55,6 @@ class APIService {
                                     _ completion: @escaping (ResultRequest<T>) -> Void) {
         
         self.sessionManager.request(url, method: .get).validate().responseDecodable(of: T.self) { response in
-//            if response.response?.statusCode == 401 {
-//                print("TOKEN EPIRED")
-//            }
             switch response.result {
                 case .success(let value):
                     completion(.success(value))

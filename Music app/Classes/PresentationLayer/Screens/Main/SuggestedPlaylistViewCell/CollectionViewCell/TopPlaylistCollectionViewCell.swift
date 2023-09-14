@@ -16,7 +16,7 @@ final class TopPlaylistCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var playlistTitle: UILabel!
     
-    @IBOutlet weak var totalTracksLabel: UILabel!
+//    @IBOutlet weak var totalTracksLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,6 +26,11 @@ final class TopPlaylistCollectionViewCell: UICollectionViewCell {
         container.clipsToBounds = true
         container.layer.cornerRadius = 8
         playlistImage.layer.cornerRadius = 8
+    }
+    
+    func configure(title: String, imageUrl: URL) {
+        playlistImage.sd_setImage(with: imageUrl, placeholderImage: .checkmark)
+        playlistTitle.text = title
     }
 
 }

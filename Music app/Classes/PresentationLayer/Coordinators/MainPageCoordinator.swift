@@ -9,11 +9,9 @@ class MainPageCoordinator: Coordinator {
     weak var delegate: MainCoordinatorDelegate?
     
     let navigationController: UINavigationController
-    let playerViewModel: PlayerViewModel
     
-    init(navigationController: UINavigationController, playerViewModel: PlayerViewModel) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.playerViewModel = playerViewModel
     }
     
     func start() {

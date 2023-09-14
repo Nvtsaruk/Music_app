@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArtistTableViewCell" rowHeight="93" id="KGk-i7-Jjw" customClass="ArtistTableViewCell" customModule="Music_app" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yeu-NY-qrW">
+                        <rect key="frame" x="8" y="8" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="3mR-ih-Y2R"/>
+                            <constraint firstAttribute="width" constant="50" id="a5O-Rn-9Hp"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSe-ju-6fN">
+                        <rect key="frame" x="66" y="22.666666666666671" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="yeu-NY-qrW" secondAttribute="bottom" constant="8" id="dZG-oV-I7K"/>
+                    <constraint firstItem="yeu-NY-qrW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="ePW-Bf-bnP"/>
+                    <constraint firstItem="lSe-ju-6fN" firstAttribute="leading" secondItem="yeu-NY-qrW" secondAttribute="trailing" constant="8" symbolic="YES" id="oAz-wS-0FB"/>
+                    <constraint firstItem="lSe-ju-6fN" firstAttribute="centerY" secondItem="yeu-NY-qrW" secondAttribute="centerY" id="thh-C6-nbJ"/>
+                    <constraint firstItem="yeu-NY-qrW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="wHi-bB-sHF"/>
+                    <constraint firstItem="yeu-NY-qrW" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="yih-AA-hdU"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="artistImage" destination="yeu-NY-qrW" id="6Co-T7-vdf"/>
+                <outlet property="artistName" destination="lSe-ju-6fN" id="4YD-wk-P7n"/>
+            </connections>
+            <point key="canvasLocation" x="97.70992366412213" y="-28.52112676056338"/>
+        </tableViewCell>
+    </objects>
+</document>

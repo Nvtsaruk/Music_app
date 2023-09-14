@@ -16,11 +16,11 @@ enum CellType {
 }
 
 struct MainPageData {
-    var topPlaylists: Toplist?
+    var playlistNames: [String]
     var playlists: [Toplist]
     var numRows: [Int]
-    init(topPlaylists: Toplist? = nil,playlists: [Toplist]? = nil, numRows: [Int] = []) {
-        self.topPlaylists = topPlaylists
+    init(playlistNames: [String] = [], playlists: [Toplist]? = nil, numRows: [Int] = []) {
+        self.playlistNames = playlistNames
         self.playlists = playlists ?? []
         self.numRows = numRows
     }
@@ -39,10 +39,11 @@ final class MainPageViewModel: MainPageViewModelProtocol {
     }
 
     func getPlaylists() {
-        for urls in APIUrls.allCases {
-            APIService.getData(Toplist.self, url: urls.url) { result in
+        for cases in APIUrls.allCases {
+            APIService.getData(Toplist.self, url: cases.url) { result in
                 switch result {
                     case .success(let data):
+                        self.mainPageData.playlistNames.append(cases.name)
                         self.mainPageData.playlists.append(data)
                         self.mainPageData.numRows.append(data.playlists?.items?.count ?? 0)
 //                        self.updateClosure?()
@@ -52,6 +53,7 @@ final class MainPageViewModel: MainPageViewModelProtocol {
             }
         }
     }
+
     
     func start() {
         let headerCell = HeaderTableViewCell()

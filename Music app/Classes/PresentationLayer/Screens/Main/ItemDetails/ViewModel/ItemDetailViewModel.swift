@@ -4,10 +4,12 @@ protocol ItemDetailViewModelProtocol {
     var details: String { get set }
     var playlist: PlaylistModel { get }
     var updateClosure:(() -> Void)? { get set }
-    func setPlayButton()
+    func playButtonAction()
+    func addPlayItems(itemIndex: Int)
+    var isPlaying: Bool { get set }
 }
 
-final class ItemDetailViewModel: ItemDetailViewModelProtocol {
+final class ItemDetailViewModel: ItemDetailViewModelProtocol, AudioPlayerDelegate {
     var coordinator: MainPageCoordinator?
     var id: String?
     var details: String = "Details" {
@@ -15,8 +17,12 @@ final class ItemDetailViewModel: ItemDetailViewModelProtocol {
             updateClosure?()
         }
     }
-    func setPlayButton() {
-       
+    
+    var isPlaying: Bool = false {
+        didSet {
+            print("Is playing model",isPlaying)
+            updateClosure?()
+        }
     }
     
     var updateClosure: (() -> Void)?
@@ -31,9 +37,24 @@ final class ItemDetailViewModel: ItemDetailViewModelProtocol {
         }
     }
     
+    func audioPlayerDidStartPlaying() {
+        isPlaying = true
+    }
+    
+    func audioPlayerDidStopPlaying() {
+        isPlaying = false
+    }
+    
+    func sendTrackInfo(playerItem: PlayerItemModel) {
+        
+    }
+    
+    func addPlayItems(itemIndex: Int) {
+        AudioPlayerService.shared.addPlaylistForPlayer(playlist, itemIndex: itemIndex)
+    }
     
     func getItems() {
-        let url = "https://api.spotify.com/v1/playlists/\(id ?? "")"
+        let url = NetworkConstants.baseUrl + NetworkConstants.playlists + (id ?? "")
         APIService.getData(PlaylistModel.self, url: url) { result in
             switch result {
                 case .success(let data):
@@ -43,7 +64,13 @@ final class ItemDetailViewModel: ItemDetailViewModelProtocol {
                     print("Custom Error -> \(error)")
             }
         }
+        AudioPlayerService.shared.delegate = self
     }
+    
+    func playButtonAction() {
+        AudioPlayerService.shared.playPause()
+    }
+    
     func removeNilSongs() {
         var indexArray: [String] = []
         playlist.tracks?.items?.forEach { item in
@@ -52,7 +79,6 @@ final class ItemDetailViewModel: ItemDetailViewModelProtocol {
                 indexArray.append(id)
             }
         }
-//        print(indexArray)
         indexArray.forEach { id in
             guard let itemsArray = playlist.tracks?.items else { return }
             for (i, v) in itemsArray.enumerated() {
@@ -62,4 +88,8 @@ final class ItemDetailViewModel: ItemDetailViewModelProtocol {
             }
         }
     }
+    deinit {
+        print("deinit")
+    }
 }
+

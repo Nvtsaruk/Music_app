@@ -1,31 +1,77 @@
-//
-//  FullPlayerViewController.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 31.08.23.
-//
 
 import UIKit
 
 class FullPlayerViewController: UIViewController {
-
+    
+    var viewModel: FullPlayerViewModelProtocol?
+    
+    @IBOutlet weak var albumImage: UIImageView!
+    
+    @IBOutlet weak var trackNameLabel: UILabel!
+    
+    @IBOutlet weak var artistNameLabel: UILabel!
+    
+    @IBOutlet weak var playbackPositionSlider: UISlider!
+    @IBOutlet weak var songLengthLabel: UILabel!
+    @IBOutlet weak var currentPlaybackTimeLabel: UILabel!
+    @IBOutlet weak var playPauseButtonOutlet: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        bindViewModel()
+        viewModel?.initPlayer()
+        albumImage.sd_setImage(with: viewModel?.playerItemData?.image)
+        trackNameLabel.text = viewModel?.playerItemData?.trackName
+        viewModel?.getCurrentPlaybackTime()
+        setupUI()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupUI() {
+        navigationController?.navigationBar.barTintColor = .black
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
+        navigationController?.navigationBar.topItem?.leftBarButtonItem?.tintColor = .white
+        navigationController?.navigationBar.tintColor = UIColor.white
     }
-    */
-
+    
+    private func bindViewModel() {
+        viewModel?.updatePlayerState = { [weak self] in
+            guard let self = self else { return }
+            if self.viewModel?.isPlaying == true {
+                self.playPauseButtonOutlet.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
+            } else {
+                self.playPauseButtonOutlet.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+            }
+            playbackPositionSlider.setValue(viewModel?.getSliderPosition() ?? 0, animated: false)
+            viewModel?.updatePlaybackTime()
+            DispatchQueue.main.async {
+                self.albumImage.sd_setImage(with: self.viewModel?.playerItemData?.image)
+            }
+            albumImage.sd_setImage(with: viewModel?.playerItemData?.image)
+            trackNameLabel.text = viewModel?.playerItemData?.trackName
+            artistNameLabel.text = viewModel?.playerItemData?.artistName
+            self.songLengthLabel.text = self.viewModel?.getSongLength()
+            
+            self.currentPlaybackTimeLabel.text = self.viewModel?.currentPosition
+        }
+    }
+    
+    @IBAction func playbackPositionSliderAction(_ sender: Any) {
+        viewModel?.stopTimer()
+        
+        viewModel?.setPlaybackTime(time: playbackPositionSlider.value)
+    }
+    @IBAction func previousButtonAction(_ sender: Any) {
+        viewModel?.previousItem()
+    }
+    @IBAction func nextButtonAction(_ sender: Any) {
+        viewModel?.nextItem()
+    }
+    @IBAction func playPauseButtonAction(_ sender: Any) {
+        viewModel?.playPauseButtonAction()
+    }
+    @IBAction func backButton(_ sender: Any) {
+        dismiss(animated: true)
+        viewModel?.showCompactPlayer()
+    }
 }
 
 extension FullPlayerViewController: Storyboarded {

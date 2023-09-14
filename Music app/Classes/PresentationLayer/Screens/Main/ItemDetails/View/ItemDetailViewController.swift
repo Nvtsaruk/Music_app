@@ -11,6 +11,7 @@ import SDWebImage
 final class ItemDetailViewController: UIViewController {
     
     
+    @IBOutlet weak var playButtonOutlet: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -19,7 +20,6 @@ final class ItemDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel?.getItems()
-        
         descriptionLabel.text = viewModel?.details
         bindViewModel()
         setupUI()
@@ -53,6 +53,12 @@ final class ItemDetailViewController: UIViewController {
                 backgroundLayer?.frame = view.frame
                 view.layer.insertSublayer(backgroundLayer ?? CAGradientLayer(), at: 0)
             }
+            print("Is playing in item detail", self.viewModel?.isPlaying)
+            if self.viewModel?.isPlaying == true {
+                self.playButtonOutlet.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
+            } else {
+                self.playButtonOutlet.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+            }
             descriptionLabel.text = viewModel?.details
             tableView.reloadData()
             
@@ -61,7 +67,7 @@ final class ItemDetailViewController: UIViewController {
     
     
     @IBAction func playButtonAction(_ sender: Any) {
-        AudioPlayerService.shared.pause()
+        viewModel?.playButtonAction()
     }
     
 }
@@ -80,10 +86,7 @@ extension ItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let url = viewModel?.playlist.tracks?.items?[indexPath.row].track?.preview_url else { return }
-        guard let image = viewModel?.playlist.tracks?.items?[indexPath.row].track?.album?.images?.first?.url else { return }
-        guard let cacheImage = SDImageCache.shared.imageFromMemoryCache(forKey: image.absoluteString) else { return }
-        AudioPlayerService.shared.addItemForPlayer(PlayerItemModel(url: url, image: cacheImage, trackName: viewModel?.playlist.tracks?.items?[indexPath.row].track?.name ?? "", artistName: viewModel?.playlist.tracks?.items?[indexPath.row].track?.artists?.first?.name ?? ""))
+        viewModel?.addPlayItems(itemIndex: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: false)
     }
     

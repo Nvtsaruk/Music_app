@@ -14,14 +14,11 @@ final class TopPlaylistTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    //MARK: -Variables
     weak var delegate: ViewDelegate?
     
-    var numRows = 0 {
-        didSet {
-//            collectionView.reloadData()
-//            self.delegate?.reloadTableView()
-        }
-    }
+    var numRows = 0
+    
     var collectionData: Toplist? {
         didSet{
             self.collectionView.reloadData()
@@ -60,10 +57,9 @@ extension TopPlaylistTableViewCell: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TopPlaylistCollectionViewCell", for: indexPath) as? TopPlaylistCollectionViewCell else { return UICollectionViewCell()}
-        cell.playlistTitle.text = collectionData?.playlists?.items?[indexPath.row].name
-        cell.totalTracksLabel.text = String(collectionData?.playlists?.items?[indexPath.row].tracks?.total ?? 0)
-        guard let url = collectionData?.playlists?.items?[indexPath.row].images?[0].url ?? URL(string: "") else { return cell }
-        cell.playlistImage.sd_setImage(with: url, placeholderImage: .checkmark)
+        guard let url = collectionData?.playlists?.items?[indexPath.row].images?[0].url ?? URL(string: ""),
+              let text = collectionData?.playlists?.items?[indexPath.row].name else { return cell }
+        cell.configure(title: text, imageUrl: url)
         return cell
     }
     

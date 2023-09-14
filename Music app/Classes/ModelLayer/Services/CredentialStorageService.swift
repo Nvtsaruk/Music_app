@@ -45,7 +45,6 @@ final class CredentialStorageService {
     }
 
     func logout(for tokenKey: String) {
-        print("Token deleted")
         keychain.clear()
     }
 }

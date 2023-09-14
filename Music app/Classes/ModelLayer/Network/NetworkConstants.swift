@@ -6,30 +6,43 @@ enum NetworkConstants {
     static let userProfileUrl = NetworkConstants.baseUrl + "me"
     static let requestSettings = "?country=BY&offset=0&limit=50"
     static let categories = "browse/categories/"
+    static let playlists = "playlists/"
+    static let search = "search?limit=10&type=album,artist,playlist,track&q="
 }
 
 enum APIUrls: CaseIterable {
     case topPlaylists
-//    case featuredPlaylists
     case relax
     case pop
     case rock
-    case training
+    case mood
     
     var url: String {
         switch self {
             case .topPlaylists:
                 return NetworkConstants.baseUrl + NetworkConstants.categories + "toplists/playlists" + NetworkConstants.requestSettings
-//            case .featuredPlaylists:
-//                return NetworkConstants.baseUrl + NetworkConstants.categories + "featured-playlists" + NetworkConstants.requestSettings
             case .relax:
                 return NetworkConstants.baseUrl + NetworkConstants.categories + "0JQ5DAqbMKFFzDl7qN9Apr/playlists" + NetworkConstants.requestSettings
             case .pop:
                 return NetworkConstants.baseUrl + NetworkConstants.categories + "0JQ5DAqbMKFEC4WFtoNRpw/playlists" + NetworkConstants.requestSettings
             case .rock:
                 return NetworkConstants.baseUrl + NetworkConstants.categories + "0JQ5DAqbMKFDXXwE9BDJAr/playlists" + NetworkConstants.requestSettings
-            case .training:
-                return NetworkConstants.baseUrl + NetworkConstants.categories + "0JQ5DAqbMKFAXlCG6QvYQ4/playlists" + NetworkConstants.requestSettings
+            case .mood:
+                return NetworkConstants.baseUrl + NetworkConstants.categories + "0JQ5DAqbMKFzHmL4tf05da/playlists" + NetworkConstants.requestSettings
+        }
+    }
+    var name: String {
+        switch self {
+            case .topPlaylists:
+                return "Хит-парады"
+            case .relax:
+                return "Релакс"
+            case .pop:
+                return "Поп"
+            case .rock:
+                return "Рок"
+            case .mood:
+                return "Настроение"
         }
     }
     

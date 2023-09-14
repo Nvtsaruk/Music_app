@@ -43,7 +43,6 @@ final class MainPageViewController: UIViewController {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
             self.tableView.reloadData()
-            print("Table reload")
         }
     }
     
@@ -62,7 +61,9 @@ extension MainPageViewController: ViewDelegate {
 
 extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        (viewModel?.mainPageData.playlists.count ?? 0) + 1
+        
+        print("Count",viewModel?.mainPageData.playlists.count)
+        return (viewModel?.mainPageData.playlists.count ?? 0) + 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
@@ -72,8 +73,14 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
         guard let headerCell = tableView.dequeueReusableCell(withIdentifier: "HeaderTableViewCell") as? HeaderTableViewCell else { return UITableViewCell() }
         headerCell.delegate = viewModel as? any HeaderTableViewCellDelegate
         guard let topPlaylists = tableView.dequeueReusableCell(withIdentifier: "TopPlaylistTableViewCell") as? TopPlaylistTableViewCell else { return UITableViewCell() }
-        topPlaylists.numRows = self.viewModel?.mainPageData.numRows.first ?? 0
-        topPlaylists.collectionData = self.viewModel?.mainPageData.playlists.first
+        guard let playlistNames = self.viewModel?.mainPageData.playlistNames else { return UITableViewCell() }
+        for (i, v) in playlistNames.enumerated() {
+            if v == "Хит-парады" {
+                topPlaylists.numRows = self.viewModel?.mainPageData.numRows[i] ?? 0
+                topPlaylists.collectionData = self.viewModel?.mainPageData.playlists[i]
+            }
+        }
+
         topPlaylists.delegate = self
         guard let playlists = tableView.dequeueReusableCell(withIdentifier: "PlaylistsTableViewCell") as? PlaylistsTableViewCell else { return UITableViewCell() }
         if indexPath.section >= 2 {
@@ -81,7 +88,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
             playlists.collectionData = self.viewModel?.mainPageData.playlists[indexPath.section - 1]
             playlists.delegate = self
         }
-        
+
         switch indexPath.section {
             case 0:
                 return headerCell
@@ -94,7 +101,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section > 0 {
-            return PlaylistsNames.allCases[section - 1].name
+            return viewModel?.mainPageData.playlistNames[section - 1]
         } else {
             return ""
         }
