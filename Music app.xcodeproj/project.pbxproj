@@ -913,6 +913,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC351E852A7D39BB003EF23D /* CoordinatorProtocol.swift in Sources */,
+				CC7C621C2A98E4B5009DCB9E /* CollapsedPlayerViewController.swift in Sources */,
 				CC351E872A7D3A30003EF23D /* MainCoordinator.swift in Sources */,
 				CC351F272A7FD51E003EF23D /* MainPageViewModel.swift in Sources */,
 				CC7C61A32A963ECE009DCB9E /* PlayerView.swift in Sources */,
