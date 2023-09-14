@@ -14,10 +14,10 @@ protocol AudioPlayerShowHideDelegate: AnyObject {
 
 struct PlayerItemModel {
     var url: URL
-    var image: URL
+    var image: String
     var trackName: String
     var artistName: String
-    init(url: URL, image: URL, trackName: String, artistName: String) {
+    init(url: URL, image: String, trackName: String, artistName: String) {
         self.url = url
         self.image = image
         self.trackName = trackName
@@ -25,7 +25,7 @@ struct PlayerItemModel {
     }
     init() {
         self.url = URL(string: "")!
-        self.image = URL(string: "")!
+        self.image = ""
         self.trackName = ""
         self.artistName = ""
     }

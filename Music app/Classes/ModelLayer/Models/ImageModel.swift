@@ -1,10 +1,10 @@
 import Foundation
 struct ImageModel: Codable {
-    let url: URL
-    init(url: URL) {
+    let url: String
+    init(url: String) {
         self.url = url
     }
     init() {
-        self.url = URL(string: "")!
+        self.url = ""
     }
 }

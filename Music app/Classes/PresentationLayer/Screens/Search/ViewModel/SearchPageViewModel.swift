@@ -33,7 +33,6 @@ final class SearchPageViewModel: SearchPageViewModelProtocol {
 //        let url = NetworkConstants.baseUrl + NetworkConstants.search + ((text as AnyObject).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
 //        let url = NetworkConstants.baseUrl + "search?q=\((text as AnyObject).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&type="
         let url = NetworkConstants.baseUrl + "search?type=album,artist&q=\((text as AnyObject).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
-        print("URL",url)
         APIService.getData(SearchResults.self, url: url) { result in
             switch result {
                 case .success(let data):

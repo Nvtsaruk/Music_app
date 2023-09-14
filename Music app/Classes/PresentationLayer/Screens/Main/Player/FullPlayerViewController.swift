@@ -19,7 +19,7 @@ class FullPlayerViewController: UIViewController {
         super.viewDidLoad()
         bindViewModel()
         viewModel?.initPlayer()
-        albumImage.sd_setImage(with: viewModel?.playerItemData?.image)
+        albumImage.webImage(url: viewModel?.playerItemData?.image ?? "")
         trackNameLabel.text = viewModel?.playerItemData?.trackName
         viewModel?.getCurrentPlaybackTime()
         setupUI()
@@ -42,10 +42,10 @@ class FullPlayerViewController: UIViewController {
             }
             playbackPositionSlider.setValue(viewModel?.getSliderPosition() ?? 0, animated: false)
             viewModel?.updatePlaybackTime()
-            DispatchQueue.main.async {
-                self.albumImage.sd_setImage(with: self.viewModel?.playerItemData?.image)
-            }
-            albumImage.sd_setImage(with: viewModel?.playerItemData?.image)
+//            DispatchQueue.main.async {
+//                self.albumImage.webImage(url: self.viewModel?.playerItemData?.image ?? "")
+//            }
+            albumImage.webImage(url: viewModel?.playerItemData?.image ?? "")
             trackNameLabel.text = viewModel?.playerItemData?.trackName
             artistNameLabel.text = viewModel?.playerItemData?.artistName
             self.songLengthLabel.text = self.viewModel?.getSongLength()

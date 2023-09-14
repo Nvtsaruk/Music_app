@@ -9,6 +9,7 @@ final class MainPageViewController: UIViewController {
 
     //MARK: - IBOutlet
     
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: - Variables
@@ -25,6 +26,11 @@ final class MainPageViewController: UIViewController {
     }
     
     private func setupUI() {
+        if viewModel?.isLoading == true {
+            loadingIndicator.startAnimating()
+            tableView.alpha = 0
+        } 
+        
         view.backgroundColor = .black
         navigationController?.navigationBar.barTintColor = .black
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
@@ -43,6 +49,10 @@ final class MainPageViewController: UIViewController {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
             self.tableView.reloadData()
+            UIView.animate(withDuration: 0.5, animations: {
+                self.tableView.alpha = 1
+                })
+            self.loadingIndicator.stopAnimating()
         }
     }
     
@@ -61,8 +71,6 @@ extension MainPageViewController: ViewDelegate {
 
 extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        
-        print("Count",viewModel?.mainPageData.playlists.count)
         return (viewModel?.mainPageData.playlists.count ?? 0) + 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

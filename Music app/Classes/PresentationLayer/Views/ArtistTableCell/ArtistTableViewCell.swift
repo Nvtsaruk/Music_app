@@ -19,9 +19,9 @@ class ArtistTableViewCell: UITableViewCell {
         artistImage.layer.cornerRadius = artistImage.frame.height / 2
     }
 
-    func configure(name: String, image: URL) {
+    func configure(name: String, image: String?) {
         artistName.text = name
-        artistImage.sd_setImage(with: image)
+        artistImage.webImage(url: image)
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

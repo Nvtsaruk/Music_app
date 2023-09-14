@@ -38,7 +38,7 @@ class UserProfileViewController: UIViewController {
             self.isLoading = ((viewModel?.isLoading) != nil)
             self.profileDisplayName.text = self.viewModel?.currentUser.display_name
             if let url = viewModel?.currentUser.images.first?.url {
-                self.profileImage.sd_setImage(with: url, placeholderImage: .checkmark)
+                self.profileImage.webImage(url: url)
             } else {
                 self.profileImage.image = UIImage(systemName: "person", withConfiguration: symbolConfig)
             }

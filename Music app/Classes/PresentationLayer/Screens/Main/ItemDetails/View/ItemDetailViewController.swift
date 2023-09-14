@@ -43,9 +43,9 @@ final class ItemDetailViewController: UIViewController {
             guard let self = self else { return }
             guard let url = viewModel?.playlist.images?.first?.url else { return }
             DispatchQueue.main.async {
-                self.itemImage.sd_setImage(with: url, placeholderImage: .checkmark)
+                self.itemImage.webImage(url: url)
             }
-            if let imageCached = SDImageCache.shared.imageFromMemoryCache(forKey: url.absoluteString) {
+            if let imageCached = SDImageCache.shared.imageFromMemoryCache(forKey: url) {
                 var colorTop = imageCached.findAverageColor()?.cgColor ?? CGColor(red: 1, green: 1, blue: 1, alpha: 1)
                 let colors = Colors(colorTop: colorTop, colorBottom: CGColor(gray: 0, alpha: 1))
                 view.backgroundColor = UIColor.clear
@@ -82,7 +82,7 @@ extension ItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
         cell.artistNameLabel.text = viewModel?.playlist.tracks?.items?[indexPath.row].track?.artists?.first?.name
         cell.trackNameLabel.text = viewModel?.playlist.tracks?.items?[indexPath.row].track?.name
         guard let url = viewModel?.playlist.tracks?.items?[indexPath.row].track?.album?.images?.first?.url else { return cell }
-        cell.albumImage.sd_setImage(with: url, placeholderImage: .checkmark)
+        cell.albumImage.webImage(url: url)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

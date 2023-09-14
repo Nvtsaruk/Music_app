@@ -37,7 +37,7 @@ class PlayerView: UIView {
                 self.playButtonOutlet.setImage(UIImage(systemName: "play.fill"), for: .normal)
             }
             
-            self.trackImage.sd_setImage(with: self.viewModel?.playerItemData?.image)
+            self.trackImage.webImage(url: self.viewModel?.playerItemData?.image ?? "")
             self.trackNameLabel.text = self.viewModel?.playerItemData?.trackName
             self.artistNameLabel.text = self.viewModel?.playerItemData?.artistName
         }

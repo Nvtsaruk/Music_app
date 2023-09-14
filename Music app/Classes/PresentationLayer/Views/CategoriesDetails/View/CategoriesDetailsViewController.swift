@@ -53,8 +53,8 @@ extension CategoriesDetailsViewController: UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaylistsCollectionViewCell", for: indexPath) as? PlaylistsCollectionViewCell else { return UICollectionViewCell()}
         cell.descriptionLabel.text = collectionData?.playlists?.items?[indexPath.row].description
-        guard let url = collectionData?.playlists?.items?[indexPath.row].images?[0].url ?? URL(string: "") else { return cell }
-        cell.imageView.sd_setImage(with: url, placeholderImage: .checkmark)
+        guard let url = collectionData?.playlists?.items?[indexPath.row].images?[0].url else { return cell }
+        cell.imageView.webImage(url: url)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -44,7 +44,6 @@ extension SearchPageViewController: UISearchBarDelegate{
         // Stop doing the search stuff
         // and clear the text in the search bar
         searchBar.text = ""
-        print("Cancel button")
         viewModel?.backToSearchCategories()
         
     }
@@ -58,13 +57,18 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
         2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel?.searchModel.albums.items.count ?? 0
+        switch section {
+            case 0:
+                return viewModel?.searchModel.artists.items.count ?? 0
+            default:
+                return viewModel?.searchModel.albums.items.count ?? 0
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let tableAlbumCell = tableView.dequeueReusableCell(withIdentifier: "AlbumTableViewCell") as? AlbumTableViewCell else { return UITableViewCell()}
         guard let tableArtistCell = tableView.dequeueReusableCell(withIdentifier: "ArtistTableViewCell") as? ArtistTableViewCell else {
-            print("Empty")
             return UITableViewCell()}
         if viewModel?.searchModel.albums.items[indexPath.row].type == "album" {
             guard let imageUrl = viewModel?.searchModel.albums.items[indexPath.row].images?.first?.url,
@@ -74,9 +78,11 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
             tableAlbumCell.configure(artist: artist, album: album, imageUrl: imageUrl)
         }
         if viewModel?.searchModel.artists.items[indexPath.row].type == "artist" {
-            guard let imageUrl = viewModel?.searchModel.artists.items[indexPath.row].images?.first?.url,
-                  let artist = viewModel?.searchModel.artists.items[indexPath.row].name
+            let imageUrl = viewModel?.searchModel.artists.items[indexPath.row].images?.first?.url
+            guard let artist = viewModel?.searchModel.artists.items[indexPath.row].name
+                    
             else { return UITableViewCell()}
+            print(artist)
             tableArtistCell.configure(name: artist, image: imageUrl)
         }
         
@@ -99,7 +105,7 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        
+        print(viewModel?.searchModel.artists.items[indexPath.row].name)
     }
 }
 

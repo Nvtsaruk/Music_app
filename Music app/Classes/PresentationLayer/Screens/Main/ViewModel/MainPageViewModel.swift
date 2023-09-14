@@ -3,11 +3,11 @@ import Foundation
 protocol MainPageViewModelProtocol {
     func logout()
     func getPlaylists()
-    //    func getToplist()
     func start()
     func showItemDetail(id: String)
     var mainPageData: MainPageData { get }
     var updateClosure:( ()->Void )? { get set }
+    var isLoading: Bool { get }
 }
 enum CellType {
     case header
@@ -31,7 +31,11 @@ final class MainPageViewModel: MainPageViewModelProtocol {
     
     var updateClosure: (() -> Void)?
     var coordinator: MainPageCoordinator?
-    
+    var isLoading: Bool = false {
+        didSet {
+            updateClosure?()
+        }
+    }
     var mainPageData: MainPageData = MainPageData() {
         didSet {
             updateClosure?()
@@ -39,6 +43,7 @@ final class MainPageViewModel: MainPageViewModelProtocol {
     }
 
     func getPlaylists() {
+        isLoading = true
         for cases in APIUrls.allCases {
             APIService.getData(Toplist.self, url: cases.url) { result in
                 switch result {
@@ -46,12 +51,12 @@ final class MainPageViewModel: MainPageViewModelProtocol {
                         self.mainPageData.playlistNames.append(cases.name)
                         self.mainPageData.playlists.append(data)
                         self.mainPageData.numRows.append(data.playlists?.items?.count ?? 0)
-//                        self.updateClosure?()
                     case .failure(let error):
                         print("Custom Error -> \(error)")
                 }
             }
         }
+        isLoading = false
     }
 
     

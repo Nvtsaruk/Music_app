@@ -115,9 +115,6 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
         viewControllers?[3].tabBarItem.title = TabBarItems.quiz.title
         viewControllers?[3].tabBarItem.image = UIImage(systemName: TabBarItems.quiz.iconName)
         
-        
-//        showView()
-//        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(removeView), userInfo: nil, repeats: true)
     }
     
     private func removeView() {

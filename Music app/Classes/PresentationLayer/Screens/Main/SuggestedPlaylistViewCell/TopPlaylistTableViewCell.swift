@@ -57,9 +57,9 @@ extension TopPlaylistTableViewCell: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TopPlaylistCollectionViewCell", for: indexPath) as? TopPlaylistCollectionViewCell else { return UICollectionViewCell()}
-        guard let url = collectionData?.playlists?.items?[indexPath.row].images?[0].url ?? URL(string: ""),
-              let text = collectionData?.playlists?.items?[indexPath.row].name else { return cell }
-        cell.configure(title: text, imageUrl: url)
+        let url = collectionData?.playlists?.items?[indexPath.row].images?[0].url
+        guard let text = collectionData?.playlists?.items?[indexPath.row].name else { return cell }
+        cell.configure(title: text, imageUrl: url ?? "")
         return cell
     }
     

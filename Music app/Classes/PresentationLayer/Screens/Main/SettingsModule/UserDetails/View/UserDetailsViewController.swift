@@ -56,7 +56,7 @@ class UserDetailsViewController: UIViewController {
         userIDLabel.text = "User ID: \(viewModel?.currentUser?.id ?? "")"
         emailLabel.text = "Email: \(viewModel?.currentUser?.email ?? "")"
         if let url = viewModel?.currentUser?.images.first?.url {
-            self.avatarImage.sd_setImage(with: url, placeholderImage: .checkmark)
+            self.avatarImage.webImage(url: url)
         } else {
             self.avatarImage.image = UIImage(systemName: "person", withConfiguration: symbolConfig)
         }

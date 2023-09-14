@@ -28,8 +28,8 @@ final class TopPlaylistCollectionViewCell: UICollectionViewCell {
         playlistImage.layer.cornerRadius = 8
     }
     
-    func configure(title: String, imageUrl: URL) {
-        playlistImage.sd_setImage(with: imageUrl, placeholderImage: .checkmark)
+    func configure(title: String, imageUrl: String) {
+        playlistImage.webImage(url: imageUrl)
         playlistTitle.text = title
     }
 

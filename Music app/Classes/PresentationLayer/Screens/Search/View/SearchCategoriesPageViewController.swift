@@ -78,8 +78,8 @@ extension SearchCategoriesPageViewController: UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: "SearchCollectionViewCell", for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell()}
         cell.titleLabel.text = viewModel?.categories?.categories.items[indexPath.row].name
-        guard let url = viewModel?.categories?.categories.items[indexPath.row].icons.first?.url else { return cell }
-        cell.albumImage.sd_setImage(with: url)
+        let url = viewModel?.categories?.categories.items[indexPath.row].icons.first?.url
+        cell.albumImage.webImage(url: url)
         cell.containerView.backgroundColor = colors.randomElement()
         return cell
     }

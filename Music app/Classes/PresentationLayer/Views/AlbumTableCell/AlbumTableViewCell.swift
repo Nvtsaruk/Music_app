@@ -19,8 +19,8 @@ class AlbumTableViewCell: UITableViewCell {
         
     }
     
-    func configure(artist: String, album: String, imageUrl: URL) {
-        albumImage.sd_setImage(with: imageUrl)
+    func configure(artist: String, album: String, imageUrl: String) {
+        albumImage.webImage(url: imageUrl)
         albumName.text = album
         artistName.text = artist
     }
