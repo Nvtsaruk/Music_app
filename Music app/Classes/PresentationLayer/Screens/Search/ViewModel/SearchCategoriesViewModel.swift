@@ -28,8 +28,6 @@ final class SearchCategoriesViewModel: SearchCategoriesViewModelProtocol {
                 switch result {
                     case .success(let data):
                         self.categories = data
-//                        print(data.categories.items)
-//                        self.updateClosure?()
                     case .failure(let error):
                         print("Custom Error -> \(error)")
                 }

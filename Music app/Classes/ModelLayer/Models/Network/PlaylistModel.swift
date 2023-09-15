@@ -89,11 +89,11 @@ struct Track: Codable {
     let href: String?
     let id: String?
     let name: String?
-    let preview_url: URL?
+    let preview_url: String?
     let track: Bool?
     let track_number: Int?
     let type: String? //ENUM
-    init(album: TrackAlbum? = nil, artists: [TrackAlbumArtist]? = nil, duration_ms: Int? = nil, href: String? = nil, id: String? = nil, name: String? = nil, preview_url: URL? = nil, track: Bool? = nil, track_number: Int? = nil, type: String? = nil) {
+    init(album: TrackAlbum? = nil, artists: [TrackAlbumArtist]? = nil, duration_ms: Int? = nil, href: String? = nil, id: String? = nil, name: String? = nil, preview_url: String? = nil, track: Bool? = nil, track_number: Int? = nil, type: String? = nil) {
         self.album = album
         self.artists = artists
         self.duration_ms = duration_ms

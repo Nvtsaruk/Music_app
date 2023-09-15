@@ -39,30 +39,30 @@ struct AlbumArtist: Codable {
 }
 
 struct AlbumTrack: Codable {
-    let total: Int
+//    let total: Int
     let items: [AlbumTrackItem]?
-    init(total: Int = 0, items: [AlbumTrackItem]? = nil) {
-        self.total = total
+    init(items: [AlbumTrackItem]? = nil) {
+//        self.total = total
         self.items = items
     }
 }
 
 struct AlbumTrackItem: Codable {
     let artists: [AlbumTrackItemArtist]?
-    let disc_number: Int
-    let duration_ms: Int
+//    let disc_number: Int
+//    let duration_ms: Int
     let id: String?
-    let is_playable: Bool?
-    let track_number: Int
+//    let is_playable: Bool?
+//    let track_number: Int
     let name: String?
     let type: String?
-    init(artists: [AlbumTrackItemArtist]? = nil, disc_number: Int = 0, duration_ms: Int = 0, id: String? = nil, is_playable: Bool? = nil, track_number: Int = 0, name: String? = nil, type: String? = nil) {
+    init(artists: [AlbumTrackItemArtist]? = nil, id: String? = nil, name: String? = nil, type: String? = nil) {
         self.artists = artists
-        self.disc_number = disc_number
-        self.duration_ms = duration_ms
+//        self.disc_number = disc_number
+//        self.duration_ms = duration_ms
         self.id = id
-        self.is_playable = is_playable
-        self.track_number = track_number
+//        self.is_playable = is_playable
+//        self.track_number = track_number
         self.name = name
         self.type = type
     }

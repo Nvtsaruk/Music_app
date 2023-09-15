@@ -14,6 +14,7 @@ class AlbumTableViewCell: UITableViewCell {
     @IBOutlet private weak var artistName: UILabel!
     @IBOutlet private weak var albumName: UILabel!
     @IBOutlet private weak var albumImage: UIImageView!
+    var itemType: String = ""
     override func awakeFromNib() {
         super.awakeFromNib()
         

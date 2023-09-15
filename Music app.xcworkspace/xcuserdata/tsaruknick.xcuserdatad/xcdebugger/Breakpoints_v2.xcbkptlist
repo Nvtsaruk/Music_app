@@ -30,8 +30,8 @@
             filePath = "Music app/Classes/PresentationLayer/Screens/Main/ItemDetails/ViewModel/ItemDetailViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "getItems()"
             landmarkType = "7">
             <Locations>

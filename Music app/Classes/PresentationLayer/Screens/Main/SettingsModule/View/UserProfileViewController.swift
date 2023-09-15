@@ -16,11 +16,7 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var profileDisplayName: UILabel!
     
     @IBOutlet weak var userProfile: UIView!
-    var isLoading: Bool = false {
-        didSet{
-            print("Is Loading", isLoading)
-        }
-    }
+    var isLoading: Bool = false 
     var viewModel: UserProfileViewModelProtocol?
     
     let symbolConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .medium, scale: .medium)

@@ -12,24 +12,7 @@ protocol AudioPlayerShowHideDelegate: AnyObject {
     func showFullPlayer()
 }
 
-struct PlayerItemModel {
-    var url: URL
-    var image: String
-    var trackName: String
-    var artistName: String
-    init(url: URL, image: String, trackName: String, artistName: String) {
-        self.url = url
-        self.image = image
-        self.trackName = trackName
-        self.artistName = artistName
-    }
-    init() {
-        self.url = URL(string: "")!
-        self.image = ""
-        self.trackName = ""
-        self.artistName = ""
-    }
-}
+
 
 final class AudioPlayerService {
     static var shared = AudioPlayerService()
@@ -49,7 +32,8 @@ final class AudioPlayerService {
             } else if itemIndex == playerItem.count {
                 itemIndex = 0
             }
-            guard let url = playerItem[itemIndex]?.url else { return }
+            guard let urlString = playerItem[itemIndex]?.url else { return }
+            guard let url = URL(string: urlString) else { return }
             play(url: url)
             if compactPlayerPresented == false {
                 presentCompactPlayer()
@@ -65,7 +49,6 @@ final class AudioPlayerService {
         item.tracks?.items?.forEach { item in
             guard let url = item.track?.preview_url else { return }
             guard let imageUrl = item.track?.album?.images?.first?.url else { return }
-//            guard let cachedImage = SDImageCache.shared.imageFromMemoryCache(forKey: imageUrl.absoluteString) else { return }
             guard let trackName = item.track?.name else { return }
             guard let artistName = item.track?.artists?.first?.name else { return }
             let playerItem = PlayerItemModel(url: url, image: imageUrl, trackName: trackName, artistName: artistName)

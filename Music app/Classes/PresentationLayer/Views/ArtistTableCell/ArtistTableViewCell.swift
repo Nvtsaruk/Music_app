@@ -11,6 +11,9 @@ class ArtistTableViewCell: UITableViewCell {
 
     @IBOutlet weak var artistName: UILabel!
     @IBOutlet weak var artistImage: UIImageView!
+    
+    
+    var itemType: String = ""
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()

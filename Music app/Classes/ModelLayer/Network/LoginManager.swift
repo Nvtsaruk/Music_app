@@ -29,31 +29,15 @@ class LoginManager {
         AF.request(NetworkConstants.tokenAPIUrl, method: .post, parameters: parameters, encoder: URLEncodedFormParameterEncoder.default, headers: headers).responseDecodable(of: TokenRequest.self) { response in
             switch response.result {
                 case .success(let value):
-                    // Handle the successful response
-//                    print("Access token", value.access_token)
                     guard let accessToken = value.access_token.data(using: .utf8) else { return }
                     guard let refreshToken = value.refresh_token?.data(using: .utf8) else { return }
                     CredentialStorageService().saveAccessToken(token: accessToken)
                     CredentialStorageService().saveRefreshToken(token: refreshToken)
-//                    KeychainManager().save(token: accessToken, tokenKey: KeychainConstants.accessToken.key)
-//                    KeychainManager().save(token: refreshToken, tokenKey: KeychainConstants.refreshToken.key)
-//                                        do {
-//                                            _ = try CredentialStorageService().save(token: accessToken, tokenKey: KeychainConstants.accessToken.key)
-//                                        } catch {
-//                                            print(error)
-//                                        }
-//                                        do {
-//                                            _ = try CredentialStorageService().save(token: refreshToken, tokenKey: KeychainConstants.refreshToken.key)
-//                                        } catch {
-//                                            print(error)
-//                                        }
-                    
                 case .failure(let error):
                     print(error)
             }
         }
     }
-    //    func refreshToken(completion: @escaping (Result<Token, Error>) -> Void) {
     func refreshToken() {
         let basicToken = AppConstants.clientID + ":" + AppConstants.clientSecret
         let data = basicToken.data(using: .utf8)
@@ -82,15 +66,6 @@ class LoginManager {
                     // Handle the successful response
                     guard let accessToken = value.access_token.data(using: .utf8) else { return }
                     CredentialStorageService().saveAccessToken(token: accessToken)
-//                    do {
-//                        _ = try CredentialStorageService().logout(for: KeychainConstants.accessToken.key)
-//                        _ = try CredentialStorageService().save(token: accessToken, tokenKey: KeychainConstants.accessToken.key)
-//                    } catch {
-//                        print(error)
-//                    }
-                    
-                    
-                    
                 case .failure(let error):
                     print(error)
             }

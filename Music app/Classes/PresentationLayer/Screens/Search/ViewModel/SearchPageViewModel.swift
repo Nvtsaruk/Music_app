@@ -16,7 +16,6 @@ final class SearchPageViewModel: SearchPageViewModelProtocol {
     
     var searchModel: SearchResults = SearchResults() {
         didSet {
-            print("Model count", searchModel.artists.items.count)
             updateClosure?()
         }
     }
@@ -36,7 +35,6 @@ final class SearchPageViewModel: SearchPageViewModelProtocol {
         APIService.getData(SearchResults.self, url: url) { result in
             switch result {
                 case .success(let data):
-//                    print("Trying to search", data.artists.items.first?.name)
                     self.searchModel = data
                 case .failure(let error):
                     print("Custom Error -> \(error)")

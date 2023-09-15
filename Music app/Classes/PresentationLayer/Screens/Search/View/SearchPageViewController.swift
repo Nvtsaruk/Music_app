@@ -35,7 +35,6 @@ class SearchPageViewController: UIViewController {
             guard let self = self else { return }
             //            self.numRows = viewModel?.categories?.categories.items.count ?? 0
             tableView.reloadData()
-            print("In closure", self.viewModel?.searchModel.albums.items.count)
         }
     }
 }
@@ -82,7 +81,6 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
             guard let artist = viewModel?.searchModel.artists.items[indexPath.row].name
                     
             else { return UITableViewCell()}
-            print(artist)
             tableArtistCell.configure(name: artist, image: imageUrl)
         }
         
@@ -105,7 +103,34 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        print(viewModel?.searchModel.artists.items[indexPath.row].name)
+        if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "ArtistTableViewCell" {
+            print("ARTIST")
+        } else {
+            let url = "https://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy/tracks"
+            APIService.getData(AlbumTrack.self, url: url) { result in
+                switch result {
+                    case .success(let data):
+                        guard let id = data.items?.first?.id else { return }
+                        self.getTrackUrl(id: id)
+                        data.items?.forEach{ item in
+                            print(item.name)
+                        }
+                    case .failure(let error):
+                        print("Custom Error -> \(error)")
+                }
+            }
+        }
+    }
+    func getTrackUrl(id: String) {
+        let url = "https://api.spotify.com/v1/tracks/\(id)"
+        APIService.getData(Track.self, url: url) { result in
+            switch result {
+                case .success(let data):
+                    print(data.album?.images?.first)
+                case .failure(let error):
+                    print("Custom Error -> \(error)")
+            }
+        }
     }
 }
 

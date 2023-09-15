@@ -10,23 +10,17 @@ final class CategoriesDetailsViewModel: CategoriesDetailsViewModelProtocol {
     
     var playlists: Toplist? = Toplist() {
         didSet {
-            print(playlists?.playlists?.items?.count)
             updateClosure?()
         }
     }
     var updateClosure: (() -> Void)?
     var id: String = ""{
         didSet {
-            print("ID:",id)
             getPlaylist()
         }
     }
-    var name: String = ""{
-        didSet {
-            print(name)
-            
-        }
-    }
+    
+    var name: String = ""
     
     func getPlaylist() {
         APIService.getData(Toplist.self, url: NetworkConstants.baseUrl + NetworkConstants.categories + id + "/playlists") { result in

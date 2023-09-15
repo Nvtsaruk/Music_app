@@ -8,7 +8,9 @@ protocol ItemDetailViewModelProtocol {
     func addPlayItems(itemIndex: Int)
     var isPlaying: Bool { get set }
 }
-
+struct ItemModel {
+    
+}
 final class ItemDetailViewModel: ItemDetailViewModelProtocol, AudioPlayerDelegate {
     var coordinator: MainPageCoordinator?
     var id: String?
@@ -20,7 +22,6 @@ final class ItemDetailViewModel: ItemDetailViewModelProtocol, AudioPlayerDelegat
     
     var isPlaying: Bool = false {
         didSet {
-            print("Is playing model",isPlaying)
             updateClosure?()
         }
     }

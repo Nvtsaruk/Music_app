@@ -53,7 +53,6 @@ final class ItemDetailViewController: UIViewController {
                 backgroundLayer?.frame = view.frame
                 view.layer.insertSublayer(backgroundLayer ?? CAGradientLayer(), at: 0)
             }
-            print("Is playing in item detail", self.viewModel?.isPlaying)
             if self.viewModel?.isPlaying == true {
                 self.playButtonOutlet.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
             } else {
