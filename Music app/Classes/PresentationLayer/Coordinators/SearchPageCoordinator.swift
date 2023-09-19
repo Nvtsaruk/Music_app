@@ -47,12 +47,20 @@ final class SearchPageCoordinator: Coordinator {
         categoriesDetailsViewController.viewModel = viewModel
         navigationController.pushViewController(categoriesDetailsViewController, animated: true)
     }
-    func showItemDetail(id: String) {
-        let viewModel = ItemDetailViewModel()
+    func showPlaylistDetail(id: String) {
+        let viewModel = PlaylistItemDetailViewModel()
 //        viewModel.coordinator = self
         viewModel.id = id
-        let itemDetailViewController = ItemDetailViewController.instantiate()
-        itemDetailViewController.viewModel = viewModel
-        navigationController.pushViewController(itemDetailViewController, animated: true)
+        let playlistItemDetailViewController = PlaylistItemDetailViewController.instantiate()
+        playlistItemDetailViewController.viewModel = viewModel
+        navigationController.pushViewController(playlistItemDetailViewController, animated: true)
+    }
+    func showArtistDetail(id: String) {
+        let viewModel = ArtistItemDetailViewModel()
+        viewModel.coordinator = self
+        viewModel.id = id
+        let artistItemDetailVC = ArtistItemDetailViewController.instantiate()
+        artistItemDetailVC.viewModel = viewModel
+        navigationController.pushViewController(artistItemDetailVC, animated: true)
     }
 }

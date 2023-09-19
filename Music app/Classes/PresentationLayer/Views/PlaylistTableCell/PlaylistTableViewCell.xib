@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlbumTableViewCell" rowHeight="124" id="KGk-i7-Jjw" customClass="AlbumTableViewCell" customModule="Music_app" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistTableViewCell" rowHeight="124" id="KGk-i7-Jjw" customClass="PlaylistTableViewCell" customModule="Music_app" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="124"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -26,12 +26,6 @@
                                     <constraint firstAttribute="width" constant="50" id="eD1-Ho-xnU"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92U-nz-tYw">
-                                <rect key="frame" x="78" y="44.666666666666664" width="28.666666666666671" height="13.333333333333336"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJm-ag-cA3">
                                 <rect key="frame" x="78" y="8" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -42,11 +36,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="VJm-ag-cA3" firstAttribute="leading" secondItem="Blh-4V-gLr" secondAttribute="trailing" constant="8" id="5Wh-KY-XxV"/>
-                            <constraint firstItem="92U-nz-tYw" firstAttribute="leading" secondItem="VJm-ag-cA3" secondAttribute="leading" id="7fv-8u-5E2"/>
                             <constraint firstItem="Blh-4V-gLr" firstAttribute="top" secondItem="nsr-S2-6T4" secondAttribute="top" constant="8" id="UVN-6Q-Xgc"/>
                             <constraint firstItem="Blh-4V-gLr" firstAttribute="centerY" secondItem="nsr-S2-6T4" secondAttribute="centerY" id="Vnw-D4-DtZ"/>
                             <constraint firstItem="Blh-4V-gLr" firstAttribute="leading" secondItem="nsr-S2-6T4" secondAttribute="leading" constant="20" symbolic="YES" id="eWw-2V-3RI"/>
-                            <constraint firstItem="92U-nz-tYw" firstAttribute="bottom" secondItem="Blh-4V-gLr" secondAttribute="bottom" id="h8X-yl-Bft"/>
                             <constraint firstItem="VJm-ag-cA3" firstAttribute="top" secondItem="Blh-4V-gLr" secondAttribute="top" id="iIt-2T-glu"/>
                             <constraint firstAttribute="bottom" secondItem="Blh-4V-gLr" secondAttribute="bottom" constant="8" id="uBw-5A-Iec"/>
                         </constraints>
@@ -63,9 +55,8 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="albumImage" destination="Blh-4V-gLr" id="xVi-B1-wOQ"/>
-                <outlet property="albumName" destination="92U-nz-tYw" id="LBb-66-9AJ"/>
-                <outlet property="artistName" destination="VJm-ag-cA3" id="9Da-U6-I9a"/>
+                <outlet property="playlistImage" destination="Blh-4V-gLr" id="CSB-rE-7LC"/>
+                <outlet property="playlistName" destination="VJm-ag-cA3" id="n3D-fk-Hya"/>
             </connections>
             <point key="canvasLocation" x="88.549618320610676" y="16.901408450704228"/>
         </tableViewCell>

@@ -7,7 +7,8 @@ enum NetworkConstants {
     static let requestSettings = "?country=BY&offset=0&limit=50"
     static let categories = "browse/categories/"
     static let playlists = "playlists/"
-    static let search = "search?limit=10&type=album,artist,playlist,track&q="
+    static let artists = "artists/"
+    static let search = "search?limit=5&type=album,artist,playlist,track&q="
 }
 
 enum APIUrls: CaseIterable {

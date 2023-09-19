@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-final class ItemDetailViewController: UIViewController {
+final class PlaylistItemDetailViewController: UIViewController {
     
     
     @IBOutlet weak var playButtonOutlet: UIButton!
@@ -16,7 +16,7 @@ final class ItemDetailViewController: UIViewController {
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    var viewModel: ItemDetailViewModelProtocol?
+    var viewModel: PlaylistItemDetailViewModelProtocol?
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel?.getItems()
@@ -34,8 +34,8 @@ final class ItemDetailViewController: UIViewController {
         itemImage.layer.shadowOpacity = 0.2
         itemImage.layer.shadowRadius = 30
         
-        let itemDetailNib = UINib(nibName: "ItemDetailTableViewCell", bundle: nil)
-        tableView.register(itemDetailNib, forCellReuseIdentifier: "ItemDetailTableViewCell")
+        let itemDetailNib = UINib(nibName: "TrackItemDetailTableViewCell", bundle: nil)
+        tableView.register(itemDetailNib, forCellReuseIdentifier: "TrackItemDetailTableViewCell")
     }
     
     private func bindViewModel() {
@@ -71,17 +71,17 @@ final class ItemDetailViewController: UIViewController {
     
 }
 
-extension ItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
+extension PlaylistItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel?.playlist.tracks?.items?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ItemDetailTableViewCell") as? ItemDetailTableViewCell else { return UITableViewCell() }
-        cell.artistNameLabel.text = viewModel?.playlist.tracks?.items?[indexPath.row].track?.artists?.first?.name
-        cell.trackNameLabel.text = viewModel?.playlist.tracks?.items?[indexPath.row].track?.name
-        guard let url = viewModel?.playlist.tracks?.items?[indexPath.row].track?.album?.images?.first?.url else { return cell }
-        cell.albumImage.webImage(url: url)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TrackItemDetailTableViewCell") as? TrackItemDetailTableViewCell else { return UITableViewCell() }
+        guard let artist = viewModel?.playlist.tracks?.items?[indexPath.row].track?.artists?.first?.name,
+              let track = viewModel?.playlist.tracks?.items?[indexPath.row].track?.name,
+              let url = viewModel?.playlist.tracks?.items?[indexPath.row].track?.album?.images?.first?.url else { return cell }
+        cell.configure(track: track, artist: artist, image: url)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -93,8 +93,8 @@ extension ItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-extension ItemDetailViewController: Storyboarded {
+extension PlaylistItemDetailViewController: Storyboarded {
     static func containingStoryboard() -> Storyboard {
-        .ItemDetail
+        .PlaylistItemDetail
     }
 }

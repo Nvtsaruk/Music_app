@@ -28,10 +28,7 @@ final class SearchPageViewModel: SearchPageViewModelProtocol {
     
     @objc private func searchQuery(_ timer: Timer) {
         guard let text = timer.userInfo else { return }
-        print("Searching for \(text) scheduled")
-//        let url = NetworkConstants.baseUrl + NetworkConstants.search + ((text as AnyObject).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
-//        let url = NetworkConstants.baseUrl + "search?q=\((text as AnyObject).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&type="
-        let url = NetworkConstants.baseUrl + "search?type=album,artist&q=\((text as AnyObject).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"
+        let url = NetworkConstants.baseUrl + NetworkConstants.search + ((text as AnyObject).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
         APIService.getData(SearchResults.self, url: url) { result in
             switch result {
                 case .success(let data):
@@ -40,6 +37,14 @@ final class SearchPageViewModel: SearchPageViewModelProtocol {
                     print("Custom Error -> \(error)")
             }
         }
+    }
+    
+    func showPlaylistDetail(id: String) {
+        coordinator?.showPlaylistDetail(id: id)
+    }
+    
+    func showArtistDetail(id: String) {
+        coordinator?.showArtistDetail(id: id)
     }
     
     func backToSearchCategories() {

@@ -63,9 +63,9 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="albumImage" destination="Blh-4V-gLr" id="xVi-B1-wOQ"/>
-                <outlet property="albumName" destination="92U-nz-tYw" id="LBb-66-9AJ"/>
-                <outlet property="artistName" destination="VJm-ag-cA3" id="9Da-U6-I9a"/>
+                <outlet property="albumImage" destination="Blh-4V-gLr" id="B3R-ah-d7v"/>
+                <outlet property="albumName" destination="VJm-ag-cA3" id="lbU-oG-rrH"/>
+                <outlet property="artistName" destination="92U-nz-tYw" id="baT-Ci-j4X"/>
             </connections>
             <point key="canvasLocation" x="88.549618320610676" y="16.901408450704228"/>
         </tableViewCell>

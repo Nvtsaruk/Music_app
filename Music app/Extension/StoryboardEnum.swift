@@ -9,10 +9,12 @@ enum Storyboard: String {
     case QuizPage
     case UserProfile
     case UserDetails
-    case ItemDetail
+    case PlaylistItemDetail
     case TabBarController
     case FullPlayer
     case CategoriesDetails
+    case AlbumItemDetail
+    case ArtistItemDetail
     
     var instance : UIStoryboard {
         return UIStoryboard(name: self.rawValue, bundle: Bundle.main)

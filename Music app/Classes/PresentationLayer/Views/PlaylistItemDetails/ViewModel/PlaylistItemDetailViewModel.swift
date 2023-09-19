@@ -1,5 +1,5 @@
 import Foundation
-protocol ItemDetailViewModelProtocol {
+protocol PlaylistItemDetailViewModelProtocol {
     func getItems()
     var details: String { get set }
     var playlist: PlaylistModel { get }
@@ -8,13 +8,13 @@ protocol ItemDetailViewModelProtocol {
     func addPlayItems(itemIndex: Int)
     var isPlaying: Bool { get set }
 }
-struct ItemModel {
+
+final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, AudioPlayerDelegateForDetails {
     
-}
-final class ItemDetailViewModel: ItemDetailViewModelProtocol, AudioPlayerDelegate {
     var coordinator: MainPageCoordinator?
     var id: String?
-    var details: String = "Details" {
+    var playingThisPlaylist: Bool = false
+    var details: String = "" {
         didSet {
             updateClosure?()
         }
@@ -22,6 +22,7 @@ final class ItemDetailViewModel: ItemDetailViewModelProtocol, AudioPlayerDelegat
     
     var isPlaying: Bool = false {
         didSet {
+            print("IS Playing", isPlaying)
             updateClosure?()
         }
     }
@@ -39,10 +40,12 @@ final class ItemDetailViewModel: ItemDetailViewModelProtocol, AudioPlayerDelegat
     }
     
     func audioPlayerDidStartPlaying() {
+        print("Start Playing")
         isPlaying = true
     }
     
     func audioPlayerDidStopPlaying() {
+        print("Stop Playing")
         isPlaying = false
     }
     
@@ -51,7 +54,17 @@ final class ItemDetailViewModel: ItemDetailViewModelProtocol, AudioPlayerDelegat
     }
     
     func addPlayItems(itemIndex: Int) {
-        AudioPlayerService.shared.addPlaylistForPlayer(playlist, itemIndex: itemIndex)
+        var playerPlaylist: [PlayerItemModel] = []
+        playlist.tracks?.items?.forEach { item in
+            guard let url = item.track?.preview_url else { return }
+            guard let imageUrl = item.track?.album?.images?.first?.url else { return }
+            guard let trackName = item.track?.name else { return }
+            guard let artistName = item.track?.artists?.first?.name else { return }
+            let playerItem = PlayerItemModel(url: url, image: imageUrl, trackName: trackName, artistName: artistName)
+            playerPlaylist.append(playerItem)
+        }
+        AudioPlayerService.shared.addPlaylistForPlayer(playerPlaylist, itemIndex: itemIndex)
+        playingThisPlaylist = true
     }
     
     func getItems() {
@@ -65,11 +78,15 @@ final class ItemDetailViewModel: ItemDetailViewModelProtocol, AudioPlayerDelegat
                     print("Custom Error -> \(error)")
             }
         }
-        AudioPlayerService.shared.delegate = self
+        AudioPlayerService.shared.detailsDelegate = self
     }
     
     func playButtonAction() {
-        AudioPlayerService.shared.playPause()
+        if AudioPlayerService.shared.playerItem.isEmpty || playingThisPlaylist == false {
+            addPlayItems(itemIndex: 0)
+        } else {
+            AudioPlayerService.shared.playPause()
+        }
     }
     
     func removeNilSongs() {
@@ -89,8 +106,6 @@ final class ItemDetailViewModel: ItemDetailViewModelProtocol, AudioPlayerDelegat
             }
         }
     }
-    deinit {
-        print("deinit")
-    }
+
 }
 

@@ -6,6 +6,11 @@ protocol AudioPlayerDelegate: AnyObject {
     func audioPlayerDidStopPlaying()
     func sendTrackInfo(playerItem: PlayerItemModel)
 }
+protocol AudioPlayerDelegateForDetails: AnyObject {
+    func audioPlayerDidStartPlaying()
+    func audioPlayerDidStopPlaying()
+    func sendTrackInfo(playerItem: PlayerItemModel)
+}
 
 protocol AudioPlayerShowHideDelegate: AnyObject {
     func showCompactPlayer()
@@ -20,10 +25,19 @@ final class AudioPlayerService {
     
     var player: AVPlayer? = AVPlayer()
     
-    var delegate: AudioPlayerDelegate?
-    var showHideDelegate: AudioPlayerShowHideDelegate?
+    weak var delegate: AudioPlayerDelegate?
+    weak var detailsDelegate: AudioPlayerDelegateForDetails?
+    weak var showHideDelegate: AudioPlayerShowHideDelegate?
     var playerItem: [PlayerItemModel?] = []
-    var isPlaying: Bool = false
+    var isPlaying: Bool = false {
+        didSet {
+            if isPlaying {
+                detailsDelegate?.audioPlayerDidStartPlaying()
+            } else {
+                detailsDelegate?.audioPlayerDidStopPlaying()
+            }
+        }
+    }
     var compactPlayerPresented: Bool = false
     var itemIndex: Int = 0 {
         didSet {
@@ -44,17 +58,11 @@ final class AudioPlayerService {
         }
     }
     
-    func addPlaylistForPlayer(_ item: PlaylistModel, itemIndex: Int) {
+    func addPlaylistForPlayer(_ item: [PlayerItemModel], itemIndex: Int) {
         self.playerItem = []
-        item.tracks?.items?.forEach { item in
-            guard let url = item.track?.preview_url else { return }
-            guard let imageUrl = item.track?.album?.images?.first?.url else { return }
-            guard let trackName = item.track?.name else { return }
-            guard let artistName = item.track?.artists?.first?.name else { return }
-            let playerItem = PlayerItemModel(url: url, image: imageUrl, trackName: trackName, artistName: artistName)
-            self.playerItem.append(playerItem)
-        }
+        self.playerItem = item
         self.itemIndex = itemIndex
+        initPlayerData()
     }
     
     func initPlayerData() {

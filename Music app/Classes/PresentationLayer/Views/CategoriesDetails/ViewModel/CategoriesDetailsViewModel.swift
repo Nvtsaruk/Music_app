@@ -33,7 +33,7 @@ final class CategoriesDetailsViewModel: CategoriesDetailsViewModelProtocol {
         }
     }
     func showItemDetail(id: String) {
-        coordinator?.showItemDetail(id: id)
+        coordinator?.showPlaylistDetail(id: id)
     }
     
 }

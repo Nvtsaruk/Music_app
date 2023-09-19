@@ -41,10 +41,10 @@ class MainPageCoordinator: Coordinator {
     }
     
     func showItemDetail(id: String) {
-        let viewModel = ItemDetailViewModel()
+        let viewModel = PlaylistItemDetailViewModel()
         viewModel.coordinator = self
         viewModel.id = id
-        let itemDetailViewController = ItemDetailViewController.instantiate()
+        let itemDetailViewController = PlaylistItemDetailViewController.instantiate()
         itemDetailViewController.viewModel = viewModel
         navigationController.pushViewController(itemDetailViewController, animated: true)
     }

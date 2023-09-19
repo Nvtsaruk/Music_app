@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ItemDetailTableViewCell: UITableViewCell {
+class TrackItemDetailTableViewCell: UITableViewCell {
 
     @IBOutlet weak var albumImage: UIImageView!
     
@@ -22,6 +22,12 @@ class ItemDetailTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func configure(track: String, artist: String, image: String) {
+        albumImage.webImage(url: image)
+        artistNameLabel.text = artist
+        trackNameLabel.text = track
     }
     
 }

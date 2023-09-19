@@ -20,53 +20,5 @@
             landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "36CC5537-D550-43E9-B8B1-7F63E32DA554"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Music app/Classes/PresentationLayer/Screens/Main/ItemDetails/ViewModel/ItemDetailViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "getItems()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "36CC5537-D550-43E9-B8B1-7F63E32DA554 - b538b3ea3653e620"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Music_app.ItemDetailViewModel.getItems() -&gt; ()"
-                  moduleName = "Music app"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tsaruknick/Developer/IT_academy/Final_Project/Music%20app/Music%20app/Classes/PresentationLayer/Screens/Main/ItemDetails/ViewModel/ItemDetailViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "388">
-               </Location>
-               <Location
-                  uuid = "36CC5537-D550-43E9-B8B1-7F63E32DA554 - de1f1396edefdd8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Music_app.ResultRequest&lt;Music_app.PlaylistModel&gt;) -&gt; () in Music_app.ItemDetailViewModel.getItems() -&gt; ()"
-                  moduleName = "Music app"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tsaruknick/Developer/IT_academy/Final_Project/Music%20app/Music%20app/Classes/PresentationLayer/Screens/Main/ItemDetails/ViewModel/ItemDetailViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "476">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

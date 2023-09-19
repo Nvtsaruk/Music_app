@@ -11,10 +11,15 @@ protocol PlayerViewModelProtocol {
     
     
 }
+protocol PlayerViewModelDelegate: AnyObject {
+    func startPlaying()
+    func stopPlaying()
+}
+
 
 class PlayerViewModel: PlayerViewModelProtocol, AudioPlayerDelegate {
     
-    
+    weak var delegate: PlayerViewModelDelegate?
     var playerItemData: PlayerItemModel? {
         didSet {
             updatePlayerState?()
@@ -24,10 +29,12 @@ class PlayerViewModel: PlayerViewModelProtocol, AudioPlayerDelegate {
     
     func audioPlayerDidStartPlaying() {
         isPlaying = true
+        delegate?.startPlaying()
     }
     
     func audioPlayerDidStopPlaying() {
         isPlaying = false
+        delegate?.stopPlaying()
     }
     
     func sendTrackInfo(playerItem: PlayerItemModel) {
@@ -39,6 +46,7 @@ class PlayerViewModel: PlayerViewModelProtocol, AudioPlayerDelegate {
     func initPlayer() {
         AudioPlayerService.shared.delegate = self
         AudioPlayerService.shared.initPlayerData()
+        isPlaying = AudioPlayerService.shared.isPlaying
     }
     
     var isPlaying: Bool = true {
