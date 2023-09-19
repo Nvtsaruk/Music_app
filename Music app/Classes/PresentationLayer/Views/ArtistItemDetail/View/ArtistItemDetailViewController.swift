@@ -66,7 +66,6 @@ extension ArtistItemDetailViewController: UITableViewDelegate, UITableViewDataSo
                       let track = viewModel?.topTracks[indexPath.row].name,
                       let url = viewModel?.topTracks[indexPath.row].album?.images?.first?.url else { return trackCell }
                 trackCell.configure(track: track, artist: artist, image: url)
-                print("Here")
                 return trackCell
             case 1:
                 return UITableViewCell()

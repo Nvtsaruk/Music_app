@@ -1,10 +1,3 @@
-//
-//  ItemDetailViewController.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 17.08.23.
-//
-
 import UIKit
 import SDWebImage
 
@@ -68,7 +61,6 @@ final class PlaylistItemDetailViewController: UIViewController {
     @IBAction func playButtonAction(_ sender: Any) {
         viewModel?.playButtonAction()
     }
-    
 }
 
 extension PlaylistItemDetailViewController: UITableViewDelegate, UITableViewDataSource {

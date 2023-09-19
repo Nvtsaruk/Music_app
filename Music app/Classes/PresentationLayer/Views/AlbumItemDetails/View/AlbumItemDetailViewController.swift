@@ -5,7 +5,6 @@ final class AlbumItemDetailViewController: UIViewController {
     //MARK: -IBOutlets
     
     @IBOutlet var albumImageOutlet: UIImageView!
-    @IBOutlet var artistImageOutlet: UIImageView!
     
     @IBOutlet var albumTitleLabel: UILabel!
     @IBOutlet var artistNameLabel: UILabel!
@@ -30,6 +29,7 @@ final class AlbumItemDetailViewController: UIViewController {
         tableView.delegate = self
         let itemDetailNib = UINib(nibName: "TrackItemDetailTableViewCell", bundle: nil)
         tableView.register(itemDetailNib, forCellReuseIdentifier: "TrackItemDetailTableViewCell")
+        
     }
     
     private func bindViewModel() {
@@ -52,12 +52,15 @@ final class AlbumItemDetailViewController: UIViewController {
             }
 //            descriptionLabel.text = viewModel?.details
             tableView.reloadData()
+            albumTitleLabel.text = viewModel?.album.name
+            artistNameLabel.text = viewModel?.album.tracks.items.first?.artists?.first?.name
+            typeAndYearLabel.text = (viewModel?.album.type ?? "") + " " + (viewModel?.album.release_date ?? "")
             
         }
     }
     
     @IBAction func playPauseButtonAction(_ sender: Any) {
-        
+        viewModel?.playButtonAction()
     }
 }
 
@@ -68,17 +71,15 @@ extension AlbumItemDetailViewController: UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TrackItemDetailTableViewCell") as? TrackItemDetailTableViewCell else { return UITableViewCell() }
-        print("HERE")
         guard let artist = viewModel?.album.tracks.items[indexPath.row].artists?.first?.name,
               let track = viewModel?.album.tracks.items[indexPath.row].name,
               let url = viewModel?.album.images?.first?.url
         else { return cell}
-        print(artist, track, url)
         cell.configure(track: track, artist: artist, image: url)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        viewModel?.addPlayItems(itemIndex: indexPath.row)
+        viewModel?.addPlayItems(itemIndex: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: false)
     }
 }

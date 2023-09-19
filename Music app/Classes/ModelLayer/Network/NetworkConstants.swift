@@ -10,6 +10,7 @@ enum NetworkConstants {
     static let artists = "artists/"
     static let albums = "albums/"
     static let search = "search?limit=5&type=album,artist,playlist,track&q="
+    static let topTracks = "/top-tracks?market=ES"
 }
 
 enum APIUrls: CaseIterable {

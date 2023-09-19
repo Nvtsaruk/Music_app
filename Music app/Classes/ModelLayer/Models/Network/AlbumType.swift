@@ -1,5 +1,5 @@
 enum AlbumType: String, Codable {
-    case album = "album"
-    case single = "single"
-    case compilation = "compilation"
+    case album
+    case single
+    case compilation
 }

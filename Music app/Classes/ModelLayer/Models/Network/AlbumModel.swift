@@ -70,7 +70,7 @@ struct Album: Codable {
     let images: [ImageModel]?
     let name: String
     let release_date: String
-    let tracks: AlbumTrack
+    var tracks: AlbumTrack
     let type: String
 //    let artists: [AlbumArtist]?
 //    init(id: String, images: [ImageModel]?, name: String, release_date: String, tracks: [AlbumTrack], type: String) {
@@ -100,7 +100,7 @@ struct Album: Codable {
 }
 
 struct AlbumTrack: Codable {
-    let items: [Track]
+    var items: [Track]
     init(items: [Track]) {
         self.items = items
     }

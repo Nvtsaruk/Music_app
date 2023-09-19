@@ -6,7 +6,7 @@ protocol AlbumItemDetailViewModelProtocol {
     var album: Album { get }
     var updateClosure:(() -> Void)? { get set }
     func playButtonAction()
-//    func addPlayItems(itemIndex: Int)
+        func addPlayItems(itemIndex: Int)
     var isPlaying: Bool { get set }
 }
 
@@ -32,6 +32,8 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, AudioPla
     var album: Album = Album() {
         didSet {
             if cleared == false {
+                print("Here")
+                removeNilSongs()
                 cleared = true
             }
             updateClosure?()
@@ -50,19 +52,21 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, AudioPla
         
     }
     
-//    func addPlayItems(itemIndex: Int) {
-//        var playerPlaylist: [PlayerItemModel] = []
-//        playlist.tracks?.items?.forEach { item in
-//            guard let url = item.track?.preview_url else { return }
-//            guard let imageUrl = item.track?.album?.images?.first?.url else { return }
-//            guard let trackName = item.track?.name else { return }
-//            guard let artistName = item.track?.artists?.first?.name else { return }
-//            let playerItem = PlayerItemModel(url: url, image: imageUrl, trackName: trackName, artistName: artistName)
-//            playerPlaylist.append(playerItem)
-//        }
-//        AudioPlayerService.shared.addPlaylistForPlayer(playerPlaylist, itemIndex: itemIndex)
-//        playingThisPlaylist = true
-//    }
+    func addPlayItems(itemIndex: Int) {
+        var playerPlaylist: [PlayerItemModel] = []
+        album.tracks.items.forEach { item in
+            print(item.album?.images?.first?.url)
+            guard let url = item.preview_url,
+//                  let imageUrl = item.album?.images?.first?.url,
+                  let artistName = item.artists?.first?.name else { return }
+            let trackName = item.name
+            let playerItem = PlayerItemModel(url: url, image: "", trackName: trackName, artistName: artistName)
+            playerPlaylist.append(playerItem)
+        }
+        print(playerPlaylist, itemIndex)
+        AudioPlayerService.shared.addPlaylistForPlayer(playerPlaylist, itemIndex: itemIndex)
+        playingThisPlaylist = true
+    }
     
     func getAlbumItems() {
         let url = NetworkConstants.baseUrl + NetworkConstants.albums + (id ?? "")
@@ -78,30 +82,29 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, AudioPla
     }
     
     func playButtonAction() {
-//        if AudioPlayerService.shared.playerItem.isEmpty || playingThisPlaylist == false {
-//            addPlayItems(itemIndex: 0)
-//        } else {
-//            AudioPlayerService.shared.playPause()
-//        }
+        if AudioPlayerService.shared.playerItem.isEmpty || playingThisPlaylist == false {
+            addPlayItems(itemIndex: 0)
+        } else {
+            AudioPlayerService.shared.playPause()
+        }
     }
     
-//    func removeNilSongs() {
-//        var indexArray: [String] = []
-//        playlist.tracks?.items?.forEach { item in
-//            if item.track?.preview_url == nil {
-//                guard let id = item.track?.id else { return }
-//                indexArray.append(id)
-//            }
-//        }
-//        indexArray.forEach { id in
-//            guard let itemsArray = playlist.tracks?.items else { return }
-//            for (i, v) in itemsArray.enumerated() {
-//                if id == v.track?.id {
-//                    playlist.tracks?.items?.remove(at: i)
-//                }
-//            }
-//        }
-//    }
-
+    func removeNilSongs() {
+        var indexArray: [String] = []
+        album.tracks.items.forEach { item in
+            if item.preview_url == nil {
+                indexArray.append(item.id)
+                print(item.id)
+            }
+        }
+        indexArray.forEach { id in
+            for (i, v) in album.tracks.items.enumerated() {
+                if id == v.id {
+                    album.tracks.items.remove(at: i)
+                }
+            }
+        }
+    }
+    
 }
 

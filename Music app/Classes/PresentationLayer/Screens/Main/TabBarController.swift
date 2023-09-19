@@ -21,7 +21,6 @@ class GradientTabBarController: UITabBarController {
 final class TabBarController: UITabBarController, MainCoordinatorDelegate, AudioPlayerShowHideDelegate {
     var playerInited: Bool = false {
         didSet {
-            print("Player inited", playerInited)
         }
     }
     func showCompactPlayer() {

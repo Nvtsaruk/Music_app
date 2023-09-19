@@ -48,7 +48,6 @@ final class SearchPageViewModel: SearchPageViewModelProtocol {
     }
     
     func showAlbumDetail(id: String) {
-        print(id)
         coordinator?.showAlbumDetail(id: id)
     }
     

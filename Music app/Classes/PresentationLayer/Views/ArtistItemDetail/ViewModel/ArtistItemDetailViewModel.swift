@@ -28,11 +28,17 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
             getArtistTracks()
         }
     }
+    var cleared = false
     var topTracks: [Track] = [] {
         didSet {
+            if cleared == false {
+                removeNilSongs()
+                cleared = true
+            }
             updateClosure?()
         }
     }
+   
     
     func getArtistInfo() {
         let url = NetworkConstants.baseUrl + NetworkConstants.artists + (id ?? "")
@@ -48,10 +54,7 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
         AudioPlayerService.shared.detailsDelegate = self
     }
     func getArtistTracks() {
-        guard let temp = id else { return }
-        let url = "https://api.spotify.com/v1/artists/\(temp)/top-tracks?market=ES"
-//        let url = NetworkConstants.baseUrl + NetworkConstants.artists + (id ?? "") + "/top-tracks"
-        print("URL", url)
+        let url = NetworkConstants.baseUrl + NetworkConstants.artists + (id ?? "") + NetworkConstants.topTracks
         APIService.getData(ArtistTopTrackModel.self, url: url) { result in
             switch result {
                 case .success(let data):
@@ -68,14 +71,29 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
         topTracks.forEach { item in
             guard let url = item.preview_url else { return }
             guard let imageUrl = item.album?.images?.first?.url else { return }
-//            guard let trackName = item.name else { return }
             guard let artistName = item.artists?.first?.name else { return }
             let trackName = item.name
             let playerItem = PlayerItemModel(url: url, image: imageUrl, trackName: trackName, artistName: artistName)
             playerPlaylist.append(playerItem)
         }
         AudioPlayerService.shared.addPlaylistForPlayer(playerPlaylist, itemIndex: itemIndex)
-//        playingThisPlaylist = true
+        playingThisPlaylist = true
+    }
+    
+    func removeNilSongs() {
+        var indexArray: [String] = []
+        topTracks.forEach { item in
+            if item.preview_url == nil {
+                indexArray.append(item.id)
+            }
+        }
+        indexArray.forEach { id in
+            for (i, v) in topTracks.enumerated() {
+                if id == v.id {
+                    topTracks.remove(at: i)
+                }
+            }
+        }
     }
     
     func playButtonAction() {
