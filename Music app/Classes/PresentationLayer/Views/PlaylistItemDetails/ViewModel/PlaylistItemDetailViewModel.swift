@@ -22,7 +22,6 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Au
     
     var isPlaying: Bool = false {
         didSet {
-            print("IS Playing", isPlaying)
             updateClosure?()
         }
     }
@@ -40,12 +39,10 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Au
     }
     
     func audioPlayerDidStartPlaying() {
-        print("Start Playing")
         isPlaying = true
     }
     
     func audioPlayerDidStopPlaying() {
-        print("Stop Playing")
         isPlaying = false
     }
     

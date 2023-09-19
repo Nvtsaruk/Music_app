@@ -8,6 +8,7 @@ enum NetworkConstants {
     static let categories = "browse/categories/"
     static let playlists = "playlists/"
     static let artists = "artists/"
+    static let albums = "albums/"
     static let search = "search?limit=5&type=album,artist,playlist,track&q="
 }
 

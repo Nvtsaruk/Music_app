@@ -32,10 +32,16 @@ final class ArtistItemDetailViewController: UIViewController {
             artistNameLabel.text = artistName
             artistImage.webImage(url: imageURL)
             tableView.reloadData()
+            if self.viewModel?.isPlaying == true {
+                self.playPauseButtonOutlet.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
+            } else {
+                self.playPauseButtonOutlet.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
+            }
         }
     }
 
     @IBAction func playPauseButtonAction(_ sender: Any) {
+        viewModel?.playButtonAction()
     }
 }
 

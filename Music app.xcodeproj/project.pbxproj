@@ -107,6 +107,9 @@
 		CC7C619A2A93A3B6009DCB9E /* PlaylistsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7C61982A93A3B6009DCB9E /* PlaylistsCollectionViewCell.xib */; };
 		CC7C61A32A963ECE009DCB9E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7C61A22A963ECE009DCB9E /* PlayerView.swift */; };
 		CC7C61AF2A9640BC009DCB9E /* PlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CC7C61AE2A9640BC009DCB9E /* PlayerView.xib */; };
+		CC885E102AB9F1A40016288A /* AlbumItemDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC4AF6BB2AB5D6BB008E966B /* AlbumItemDetail.storyboard */; };
+		CC9DAD572ABA05AB00323A60 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9DAD562ABA05AB00323A60 /* Track.swift */; };
+		CCC181C02AB9F5A2004205D1 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC181BF2AB9F5A2004205D1 /* Artist.swift */; };
 		CCEAD48B2AB6DDDA0052BBCF /* ArtistItemDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEAD48A2AB6DDDA0052BBCF /* ArtistItemDetailViewModel.swift */; };
 		CCEAD48D2AB6E1230052BBCF /* ArtistItemDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCEAD48C2AB6E1230052BBCF /* ArtistItemDetail.storyboard */; };
 		D5B4A4EAD928BFB74195390F /* libPods-Music app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C5652567028BF0EE070A3B /* libPods-Music app.a */; };
@@ -217,6 +220,8 @@
 		CC7C61982A93A3B6009DCB9E /* PlaylistsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaylistsCollectionViewCell.xib; sourceTree = "<group>"; };
 		CC7C61A22A963ECE009DCB9E /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		CC7C61AE2A9640BC009DCB9E /* PlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerView.xib; sourceTree = "<group>"; };
+		CC9DAD562ABA05AB00323A60 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		CCC181BF2AB9F5A2004205D1 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		CCEAD48A2AB6DDDA0052BBCF /* ArtistItemDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistItemDetailViewModel.swift; sourceTree = "<group>"; };
 		CCEAD48C2AB6E1230052BBCF /* ArtistItemDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArtistItemDetail.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -475,8 +480,10 @@
 				CC7C61622A8CB33E009DCB9E /* SearchModelTemp.swift */,
 				CC7C61892A91FB79009DCB9E /* SearchModel.swift */,
 				CC7C616D2A8F4184009DCB9E /* AlbumModel.swift */,
+				CCC181BF2AB9F5A2004205D1 /* Artist.swift */,
 				CC7C61802A8FA109009DCB9E /* ToplistPlaylistModel.swift */,
 				CC7C61822A8FB678009DCB9E /* PlaylistModel.swift */,
+				CC9DAD562ABA05AB00323A60 /* Track.swift */,
 				CC2ED5642AB9D64000F6078E /* ArtistTopTrackModel.swift */,
 			);
 			path = Network;
@@ -962,6 +969,7 @@
 				CC68C04C2A825B44001016F0 /* MyMediaPage.storyboard in Resources */,
 				CC16BC9E2A7A2FFE000850CD /* LaunchScreen.storyboard in Resources */,
 				CC7796772AB0DE8700FB67E8 /* ArtistTableViewCell.xib in Resources */,
+				CC885E102AB9F1A40016288A /* AlbumItemDetail.storyboard in Resources */,
 				CC16BC9B2A7A2FFE000850CD /* Assets.xcassets in Resources */,
 				CC7C616A2A8E6752009DCB9E /* PlaylistItemDetail.storyboard in Resources */,
 				CC68C0552A826586001016F0 /* QuizPage.storyboard in Resources */,
@@ -1052,6 +1060,7 @@
 				CC7C618C2A920A0D009DCB9E /* AlbumType.swift in Sources */,
 				CC7C617C2A8F8C4D009DCB9E /* FeaturedPlaylists.swift in Sources */,
 				CC16BC992A7A2FFD000850CD /* Music_app.xcdatamodeld in Sources */,
+				CC9DAD572ABA05AB00323A60 /* Track.swift in Sources */,
 				CC7796762AB0DE8700FB67E8 /* ArtistTableViewCell.swift in Sources */,
 				CC68C0532A825C1A001016F0 /* MyMediaPageCoordinator.swift in Sources */,
 				CC7C617F2A8F9AD3009DCB9E /* UIImage+AverageColor.swift in Sources */,
@@ -1088,6 +1097,7 @@
 				CC2ED5652AB9D64000F6078E /* ArtistTopTrackModel.swift in Sources */,
 				CC68C0592A8265F6001016F0 /* QuizPageViewModel.swift in Sources */,
 				CC7C61632A8CB33E009DCB9E /* SearchModelTemp.swift in Sources */,
+				CCC181C02AB9F5A2004205D1 /* Artist.swift in Sources */,
 				CC68C0922A855D61001016F0 /* ImageModel.swift in Sources */,
 				CC4AF6B52AB47F2E008E966B /* PlayerItemModel.swift in Sources */,
 				CC351E982A7D437B003EF23D /* LoginManager.swift in Sources */,

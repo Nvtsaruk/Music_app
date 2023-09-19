@@ -1,10 +1,12 @@
 import Foundation
 protocol ArtistItemDetailViewModelProtocol {
-    var artist: AlbumArtist { get }
+    var artist: Artist { get }
     var topTracks: [Track] { get }
     func getArtistInfo()
     var updateClosure: (() -> Void)? { get set }
     func addPlayItems(itemIndex: Int)
+    func playButtonAction()
+    var isPlaying: Bool { get set }
 }
 
 final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioPlayerDelegateForDetails {
@@ -13,8 +15,14 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
     var updateClosure: (() -> Void)?
     var coordinator: SearchPageCoordinator?
     var id: String?
+    var playingThisPlaylist: Bool = false
+    var isPlaying: Bool = false {
+        didSet {
+            updateClosure?()
+        }
+    }
     
-    var artist: AlbumArtist = AlbumArtist() {
+    var artist: Artist = Artist() {
         didSet {
             updateClosure?()
             getArtistTracks()
@@ -28,7 +36,7 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
     
     func getArtistInfo() {
         let url = NetworkConstants.baseUrl + NetworkConstants.artists + (id ?? "")
-        APIService.getData(AlbumArtist.self, url: url) { result in
+        APIService.getData(Artist.self, url: url) { result in
             switch result {
                 case .success(let data):
                     self.artist = data
@@ -57,12 +65,12 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
     
     func addPlayItems(itemIndex: Int) {
         var playerPlaylist: [PlayerItemModel] = []
-        
         topTracks.forEach { item in
             guard let url = item.preview_url else { return }
             guard let imageUrl = item.album?.images?.first?.url else { return }
-            guard let trackName = item.name else { return }
+//            guard let trackName = item.name else { return }
             guard let artistName = item.artists?.first?.name else { return }
+            let trackName = item.name
             let playerItem = PlayerItemModel(url: url, image: imageUrl, trackName: trackName, artistName: artistName)
             playerPlaylist.append(playerItem)
         }
@@ -70,12 +78,20 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
 //        playingThisPlaylist = true
     }
     
+    func playButtonAction() {
+        if AudioPlayerService.shared.playerItem.isEmpty || playingThisPlaylist == false {
+            addPlayItems(itemIndex: 0)
+        } else {
+            AudioPlayerService.shared.playPause()
+        }
+    }
+    
     func audioPlayerDidStartPlaying() {
-        
+        isPlaying = true
     }
     
     func audioPlayerDidStopPlaying() {
-        
+        isPlaying = false
     }
     
     func sendTrackInfo(playerItem: PlayerItemModel) {
@@ -83,6 +99,3 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
     }
 }
 
-
-//https://api.spotify.com/v1/artists/3RNrq3jvMZxD9ZyoOZbQOD/top-tracks
-//https://api.spotify.com/v1/artists/3RNrq3jvMZxD9ZyoOZbQOD/top-tracks?market=ES

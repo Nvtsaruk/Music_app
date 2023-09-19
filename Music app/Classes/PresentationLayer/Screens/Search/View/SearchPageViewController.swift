@@ -145,8 +145,6 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
                   let artist = viewModel?.searchModel.tracks.items[indexPath.row].artists.first?.name
             else { return }
             AudioPlayerService.shared.addPlaylistForPlayer([PlayerItemModel(url: previewURL, image: image, trackName: track, artistName: artist)], itemIndex: 0)
-            print("ROW",indexPath.row)
-            print("Section", indexPath.section)
         }
         if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "PlaylistTableViewCell" {
             guard let id = viewModel?.searchModel.playlists.items[indexPath.row].id else { return }
@@ -155,33 +153,23 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
         if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "ArtistTableViewCell" {
             guard let id = viewModel?.searchModel.artists.items[indexPath.row].id else { return }
             viewModel?.showArtistDetail(id: id)
-        } else {
-            let url = "https://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy/tracks"
-            APIService.getData(AlbumTrack.self, url: url) { result in
-                switch result {
-                    case .success(let data):
-                        guard let id = data.items?.first?.id else { return }
-                        self.getTrackUrl(id: id)
-                        data.items?.forEach{ item in
-                            print(item.name)
-                        }
-                    case .failure(let error):
-                        print("Custom Error -> \(error)")
-                }
-            }
+        }
+        if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "AlbumTableViewCell" {
+            guard let id = viewModel?.searchModel.albums.items[indexPath.row].id else { return }
+            viewModel?.showAlbumDetail(id: id)
         }
     }
-    func getTrackUrl(id: String) {
-        let url = "https://api.spotify.com/v1/tracks/\(id)"
-        APIService.getData(Track.self, url: url) { result in
-            switch result {
-                case .success(let data):
-                    print(data.album?.images?.first)
-                case .failure(let error):
-                    print("Custom Error -> \(error)")
-            }
-        }
-    }
+//    func getTrackUrl(id: String) {
+//        let url = "https://api.spotify.com/v1/tracks/\(id)"
+//        APIService.getData(Track.self, url: url) { result in
+//            switch result {
+//                case .success(let data):
+//                    print(data.album?.images?.first)
+//                case .failure(let error):
+//                    print("Custom Error -> \(error)")
+//            }
+//        }
+//    }
 }
 
 extension SearchPageViewController: Storyboarded {

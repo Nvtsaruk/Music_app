@@ -82,30 +82,7 @@ struct PlaylistModelTracksItemUser: Codable {
     }
 }
 
-struct Track: Codable {
-    let album: TrackAlbum?
-    let artists: [TrackAlbumArtist]?
-    let duration_ms: Int?
-    let href: String?
-    let id: String?
-    let name: String?
-    let preview_url: String?
-    let track: Bool?
-    let track_number: Int?
-    let type: String? //ENUM
-    init(album: TrackAlbum? = nil, artists: [TrackAlbumArtist]? = nil, duration_ms: Int? = nil, href: String? = nil, id: String? = nil, name: String? = nil, preview_url: String? = nil, track: Bool? = nil, track_number: Int? = nil, type: String? = nil) {
-        self.album = album
-        self.artists = artists
-        self.duration_ms = duration_ms
-        self.href = href
-        self.id = id
-        self.name = name
-        self.preview_url = preview_url
-        self.track = track
-        self.track_number = track_number
-        self.type = type
-    }
-}
+
 
 struct TrackAlbum: Codable {
     let album_type: String?

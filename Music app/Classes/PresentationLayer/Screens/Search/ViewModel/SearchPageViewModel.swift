@@ -47,6 +47,11 @@ final class SearchPageViewModel: SearchPageViewModelProtocol {
         coordinator?.showArtistDetail(id: id)
     }
     
+    func showAlbumDetail(id: String) {
+        print(id)
+        coordinator?.showAlbumDetail(id: id)
+    }
+    
     func backToSearchCategories() {
         coordinator?.popToRoot()
     }

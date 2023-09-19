@@ -63,4 +63,12 @@ final class SearchPageCoordinator: Coordinator {
         artistItemDetailVC.viewModel = viewModel
         navigationController.pushViewController(artistItemDetailVC, animated: true)
     }
+    func showAlbumDetail(id: String) {
+        let viewModel = AlbumItemDetailViewModel()
+        viewModel.coordinator = self
+        viewModel.id = id
+        let albumItemDetailVC = AlbumItemDetailViewController.instantiate()
+        albumItemDetailVC.viewModel = viewModel
+        navigationController.pushViewController(albumItemDetailVC, animated: true)
+    }
 }
