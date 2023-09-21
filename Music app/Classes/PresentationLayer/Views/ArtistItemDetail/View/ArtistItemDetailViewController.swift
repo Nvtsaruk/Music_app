@@ -86,3 +86,4 @@ extension ArtistItemDetailViewController: Storyboarded {
         .ArtistItemDetail
     }
 }
+

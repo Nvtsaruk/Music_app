@@ -79,32 +79,44 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()}
         guard let tablePlaylistCell = tableView.dequeueReusableCell(withIdentifier: "PlaylistTableViewCell") as? PlaylistTableViewCell else { return UITableViewCell()}
         guard let tableTrackCell = tableView.dequeueReusableCell(withIdentifier: "TrackItemDetailTableViewCell") as? TrackItemDetailTableViewCell else { return UITableViewCell()}
-        if viewModel?.searchModel.albums.items[indexPath.row].type == "album" {
-            guard let imageUrl = viewModel?.searchModel.albums.items[indexPath.row].images?.first?.url,
-                  let album = viewModel?.searchModel.albums.items[indexPath.row].name,
-                  let artist = viewModel?.searchModel.albums.items[indexPath.row].artists.first?.name
-            else { return UITableViewCell()}
-            tableAlbumCell.configure(artist: artist, album: album, imageUrl: imageUrl)
-        }
-        if viewModel?.searchModel.artists.items[indexPath.row].type == "artist" {
-            let imageUrl = viewModel?.searchModel.artists.items[indexPath.row].images?.first?.url
-            guard let artist = viewModel?.searchModel.artists.items[indexPath.row].name
-            else { return UITableViewCell()}
-            tableArtistCell.configure(name: artist, image: imageUrl)
-        }
-        if viewModel?.searchModel.playlists.items[indexPath.row].type == "playlist" {
-            guard let imageUrl = viewModel?.searchModel.playlists.items[indexPath.row].images?.first?.url,
-                  let playlist = viewModel?.searchModel.playlists.items[indexPath.row].name
-            else { return UITableViewCell()}
-            tablePlaylistCell.configure(playlist: playlist, imageUrl: imageUrl)
-        }
-        if viewModel?.searchModel.tracks.items.count != 0 {
-            if viewModel?.searchModel.tracks.items[indexPath.row].type == "track" {
-                guard let imageUrl = viewModel?.searchModel.tracks.items[indexPath.row].album.images?.first?.url,
-                      let track = viewModel?.searchModel.tracks.items[indexPath.row].name,
-                      let artist = viewModel?.searchModel.tracks.items[indexPath.row].artists.first?.name
+        guard let albumCount = viewModel?.searchModel.artists.items.count else { return UITableViewCell() }
+        if indexPath.row < albumCount - 1 {
+            if viewModel?.searchModel.albums.items[indexPath.row].type == "album" {
+                guard let imageUrl = viewModel?.searchModel.albums.items[indexPath.row].images?.first?.url,
+                      let album = viewModel?.searchModel.albums.items[indexPath.row].name,
+                      let artist = viewModel?.searchModel.albums.items[indexPath.row].artists.first?.name
                 else { return UITableViewCell()}
-                tableTrackCell.configure(track: track, artist: artist, image: imageUrl)
+                tableAlbumCell.configure(artist: artist, album: album, imageUrl: imageUrl)
+            }
+        }
+        guard let artistCount = viewModel?.searchModel.artists.items.count else { return UITableViewCell() }
+        if indexPath.row < artistCount - 1 {
+            if viewModel?.searchModel.artists.items[indexPath.row].type == "artist" {
+                let imageUrl = viewModel?.searchModel.artists.items[indexPath.row].images?.first?.url
+                guard let artist = viewModel?.searchModel.artists.items[indexPath.row].name
+                else { return UITableViewCell()}
+                tableArtistCell.configure(name: artist, image: imageUrl)
+            }
+        }
+        guard let playlistCount = viewModel?.searchModel.playlists.items.count else { return UITableViewCell() }
+        if indexPath.row < playlistCount - 1 {
+            if viewModel?.searchModel.playlists.items[indexPath.row].type == "playlist" {
+                guard let imageUrl = viewModel?.searchModel.playlists.items[indexPath.row].images?.first?.url,
+                      let playlist = viewModel?.searchModel.playlists.items[indexPath.row].name
+                else { return UITableViewCell()}
+                tablePlaylistCell.configure(playlist: playlist, imageUrl: imageUrl)
+            }
+        }
+        guard let trackCount = viewModel?.searchModel.tracks.items.count else { return UITableViewCell() }
+        if indexPath.row < trackCount - 1 {
+            if viewModel?.searchModel.tracks.items.count != 0 {
+                if viewModel?.searchModel.tracks.items[indexPath.row].type == "track" {
+                    guard let imageUrl = viewModel?.searchModel.tracks.items[indexPath.row].album.images?.first?.url,
+                          let track = viewModel?.searchModel.tracks.items[indexPath.row].name,
+                          let artist = viewModel?.searchModel.tracks.items[indexPath.row].artists.first?.name
+                    else { return UITableViewCell()}
+                    tableTrackCell.configure(track: track, artist: artist, image: imageUrl)
+                }
             }
         }
         

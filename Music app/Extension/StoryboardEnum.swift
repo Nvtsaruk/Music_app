@@ -15,6 +15,7 @@ enum Storyboard: String {
     case CategoriesDetails
     case AlbumItemDetail
     case ArtistItemDetail
+    case AddToPlaylist
     
     var instance : UIStoryboard {
         return UIStoryboard(name: self.rawValue, bundle: Bundle.main)
