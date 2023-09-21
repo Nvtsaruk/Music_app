@@ -1,9 +1,12 @@
 import Foundation
 protocol SearchPageViewModelProtocol {
     func search(item: String)
-//    var searchModel: SearchResults { get }
+    var searchModel: SearchResults { get }
     var updateClosure:( ()->Void )? { get set }
     func backToSearchCategories()
+    func showPlaylistDetail(id: String)
+    func showArtistDetail(id: String)
+    func showAlbumDetail(id: String)
 }
 
 final class SearchPageViewModel: SearchPageViewModelProtocol {
@@ -13,9 +16,14 @@ final class SearchPageViewModel: SearchPageViewModelProtocol {
     var lastScheduledSearch: Timer?
     
     var updateClosure: (() -> Void)?
-    
+    var cleared = false
     var searchModel: SearchResults = SearchResults() {
         didSet {
+            if cleared == false {
+                removeNilSongs()
+                cleared = true
+            }
+            print(searchModel.tracks.items.count)
             updateClosure?()
         }
     }
@@ -35,6 +43,21 @@ final class SearchPageViewModel: SearchPageViewModelProtocol {
                     self.searchModel = data
                 case .failure(let error):
                     print("Custom Error -> \(error)")
+            }
+        }
+    }
+    func removeNilSongs() {
+        var indexArray: [String] = []
+        searchModel.tracks.items.forEach { item in
+            if item.preview_url == nil {
+                indexArray.append(item.id)
+            }
+        }
+        indexArray.forEach { id in
+            for (i, v) in searchModel.tracks.items.enumerated() {
+                if id == v.id {
+                    searchModel.tracks.items.remove(at: i)
+                }
             }
         }
     }

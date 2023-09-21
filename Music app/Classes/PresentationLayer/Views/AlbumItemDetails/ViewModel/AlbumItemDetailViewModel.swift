@@ -32,7 +32,6 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, AudioPla
     var album: Album = Album() {
         didSet {
             if cleared == false {
-                print("Here")
                 removeNilSongs()
                 cleared = true
             }
@@ -54,16 +53,15 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, AudioPla
     
     func addPlayItems(itemIndex: Int) {
         var playerPlaylist: [PlayerItemModel] = []
+        let image = album.images?.first?.url
         album.tracks.items.forEach { item in
-            print(item.album?.images?.first?.url)
             guard let url = item.preview_url,
-//                  let imageUrl = item.album?.images?.first?.url,
+                  let imageUrl = image,
                   let artistName = item.artists?.first?.name else { return }
             let trackName = item.name
-            let playerItem = PlayerItemModel(url: url, image: "", trackName: trackName, artistName: artistName)
+            let playerItem = PlayerItemModel(url: url, image: imageUrl, trackName: trackName, artistName: artistName)
             playerPlaylist.append(playerItem)
         }
-        print(playerPlaylist, itemIndex)
         AudioPlayerService.shared.addPlaylistForPlayer(playerPlaylist, itemIndex: itemIndex)
         playingThisPlaylist = true
     }
@@ -82,10 +80,12 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, AudioPla
     }
     
     func playButtonAction() {
-        if AudioPlayerService.shared.playerItem.isEmpty || playingThisPlaylist == false {
-            addPlayItems(itemIndex: 0)
-        } else {
-            AudioPlayerService.shared.playPause()
+        if !album.tracks.items.isEmpty {
+            if AudioPlayerService.shared.playerItem.isEmpty || playingThisPlaylist == false {
+                addPlayItems(itemIndex: 0)
+            } else {
+                AudioPlayerService.shared.playPause()
+            }
         }
     }
     

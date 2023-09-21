@@ -3,7 +3,7 @@ struct SearchResults: Codable {
     let albums: SearchAlbum
     let artists: SearchArtists
     let playlists: SearchPlaylists
-    let tracks: SearchTracks
+    var tracks: SearchTracks
     
     init(albums: SearchAlbum, artists: SearchArtists, playlists: SearchPlaylists, tracks: SearchTracks) {
         self.albums = albums
@@ -57,7 +57,7 @@ struct SearchPlaylists: Codable {
 }
 
 struct SearchTracks: Codable {
-    let items: [SearchTracksItem]
+    var items: [SearchTracksItem]
     
     init(items: [SearchTracksItem]) {
         self.items = items

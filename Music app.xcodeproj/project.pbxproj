@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC07A7E12ABB5C7C0033ED2C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CC07A7E02ABB5C7C0033ED2C /* Realm */; };
+		CC07A7E32ABB5C7C0033ED2C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CC07A7E22ABB5C7C0033ED2C /* RealmSwift */; };
+		CC07A7E52ABB5C970033ED2C /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC07A7E42ABB5C970033ED2C /* DatabaseService.swift */; };
 		CC0C6DC22AA0DEDE00C18299 /* FullPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0C6DC12AA0DEDE00C18299 /* FullPlayerViewController.swift */; };
 		CC0C6DC42AA0DF1800C18299 /* FullPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC0C6DC32AA0DF1800C18299 /* FullPlayer.storyboard */; };
 		CC0C6DC62AA1B02C00C18299 /* FullPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0C6DC52AA1B02C00C18299 /* FullPlayerViewModel.swift */; };
@@ -119,6 +122,7 @@
 		03C5652567028BF0EE070A3B /* libPods-Music app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Music app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2280ABF89DE0A6DE50FA10BA /* Pods-Music app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Music app.debug.xcconfig"; path = "Target Support Files/Pods-Music app/Pods-Music app.debug.xcconfig"; sourceTree = "<group>"; };
 		BB57875C3D08EC7B7A0598B8 /* Pods-Music app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Music app.release.xcconfig"; path = "Target Support Files/Pods-Music app/Pods-Music app.release.xcconfig"; sourceTree = "<group>"; };
+		CC07A7E42ABB5C970033ED2C /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		CC0C6DC12AA0DEDE00C18299 /* FullPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPlayerViewController.swift; sourceTree = "<group>"; };
 		CC0C6DC32AA0DF1800C18299 /* FullPlayer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FullPlayer.storyboard; sourceTree = "<group>"; };
 		CC0C6DC52AA1B02C00C18299 /* FullPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPlayerViewModel.swift; sourceTree = "<group>"; };
@@ -233,6 +237,8 @@
 			files = (
 				CC3A38C22A9E27F3009E4036 /* KeychainSwift in Frameworks */,
 				CC68C0952A8A79FE001016F0 /* SDWebImage in Frameworks */,
+				CC07A7E12ABB5C7C0033ED2C /* Realm in Frameworks */,
+				CC07A7E32ABB5C7C0033ED2C /* RealmSwift in Frameworks */,
 				D5B4A4EAD928BFB74195390F /* libPods-Music app.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -701,6 +707,7 @@
 			children = (
 				CC351E9C2A7D4565003EF23D /* CredentialStorageService.swift */,
 				CC3A38C52A9F483D009E4036 /* AudioPlayerService.swift */,
+				CC07A7E42ABB5C970033ED2C /* DatabaseService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -918,6 +925,8 @@
 			packageProductDependencies = (
 				CC68C0942A8A79FE001016F0 /* SDWebImage */,
 				CC3A38C12A9E27F3009E4036 /* KeychainSwift */,
+				CC07A7E02ABB5C7C0033ED2C /* Realm */,
+				CC07A7E22ABB5C7C0033ED2C /* RealmSwift */,
 			);
 			productName = "Music app";
 			productReference = CC16BC8B2A7A2FFD000850CD /* Music app.app */;
@@ -950,6 +959,7 @@
 			packageReferences = (
 				CC68C0932A8A79FE001016F0 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				CC3A38C02A9E27F3009E4036 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				CC07A7DF2ABB5C7C0033ED2C /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = CC16BC8C2A7A2FFD000850CD /* Products */;
 			projectDirPath = "";
@@ -1074,6 +1084,7 @@
 				CC7C61902A939450009DCB9E /* PlaylistsTableViewCell.swift in Sources */,
 				CC351E8F2A7D3C58003EF23D /* TabbarCoordinator.swift in Sources */,
 				CC68C03F2A823F59001016F0 /* SearchCategoriesPageViewController.swift in Sources */,
+				CC07A7E52ABB5C970033ED2C /* DatabaseService.swift in Sources */,
 				CC351E9A2A7D43F2003EF23D /* NetworkConstants.swift in Sources */,
 				CC68C0502A825B9E001016F0 /* MyMediaPageViewModel.swift in Sources */,
 				CC0C6DD82AAF4DCD00C18299 /* CategoriesDetailsViewController.swift in Sources */,
@@ -1312,6 +1323,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CC07A7DF2ABB5C7C0033ED2C /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		CC3A38C02A9E27F3009E4036 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
@@ -1331,6 +1350,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CC07A7E02ABB5C7C0033ED2C /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC07A7DF2ABB5C7C0033ED2C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		CC07A7E22ABB5C7C0033ED2C /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC07A7DF2ABB5C7C0033ED2C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		CC3A38C12A9E27F3009E4036 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CC3A38C02A9E27F3009E4036 /* XCRemoteSwiftPackageReference "keychain-swift" */;

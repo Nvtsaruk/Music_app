@@ -19,9 +19,9 @@ struct MainPageData {
     var playlistNames: [String]
     var playlists: [Toplist]
     var numRows: [Int]
-    init(playlistNames: [String] = [], playlists: [Toplist]? = nil, numRows: [Int] = []) {
+    init(playlistNames: [String] = [], playlists: [Toplist] = [], numRows: [Int] = []) {
         self.playlistNames = playlistNames
-        self.playlists = playlists ?? []
+        self.playlists = []
         self.numRows = numRows
     }
 }

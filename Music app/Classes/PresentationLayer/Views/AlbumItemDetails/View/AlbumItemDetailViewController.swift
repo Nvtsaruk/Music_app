@@ -54,8 +54,7 @@ final class AlbumItemDetailViewController: UIViewController {
             tableView.reloadData()
             albumTitleLabel.text = viewModel?.album.name
             artistNameLabel.text = viewModel?.album.tracks.items.first?.artists?.first?.name
-            typeAndYearLabel.text = (viewModel?.album.type ?? "") + " " + (viewModel?.album.release_date ?? "")
-            
+            typeAndYearLabel.text = viewModel?.album.release_date ?? ""
         }
     }
     

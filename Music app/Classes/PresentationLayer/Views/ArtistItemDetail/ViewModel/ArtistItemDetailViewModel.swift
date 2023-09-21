@@ -1,6 +1,6 @@
 import Foundation
 protocol ArtistItemDetailViewModelProtocol {
-    var artist: Artist { get }
+    var artist: Artist? { get }
     var topTracks: [Track] { get }
     func getArtistInfo()
     var updateClosure: (() -> Void)? { get set }
@@ -22,7 +22,7 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
         }
     }
     
-    var artist: Artist = Artist() {
+    var artist: Artist? {
         didSet {
             updateClosure?()
             getArtistTracks()
@@ -97,10 +97,12 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
     }
     
     func playButtonAction() {
-        if AudioPlayerService.shared.playerItem.isEmpty || playingThisPlaylist == false {
-            addPlayItems(itemIndex: 0)
-        } else {
-            AudioPlayerService.shared.playPause()
+        if !topTracks.isEmpty {
+            if AudioPlayerService.shared.playerItem.isEmpty || playingThisPlaylist == false {
+                addPlayItems(itemIndex: 0)
+            } else {
+                AudioPlayerService.shared.playPause()
+            }
         }
     }
     

@@ -26,8 +26,8 @@ final class ArtistItemDetailViewController: UIViewController {
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
-            guard let imageURL = viewModel?.artist.images?.first?.url,
-            let artistName = viewModel?.artist.name
+            guard let imageURL = viewModel?.artist?.images?.first?.url,
+                  let artistName = viewModel?.artist?.name
             else { return }
             artistNameLabel.text = artistName
             artistImage.webImage(url: imageURL)

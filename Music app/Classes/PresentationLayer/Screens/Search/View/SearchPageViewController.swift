@@ -12,7 +12,7 @@ class SearchPageViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-    var viewModel: SearchPageViewModel?
+    var viewModel: SearchPageViewModelProtocol?
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -98,12 +98,14 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
             else { return UITableViewCell()}
             tablePlaylistCell.configure(playlist: playlist, imageUrl: imageUrl)
         }
-        if viewModel?.searchModel.tracks.items[indexPath.row].type == "track" {
-            guard let imageUrl = viewModel?.searchModel.tracks.items[indexPath.row].album.images?.first?.url,
-                  let track = viewModel?.searchModel.tracks.items[indexPath.row].name,
-                  let artist = viewModel?.searchModel.tracks.items[indexPath.row].artists.first?.name
-            else { return UITableViewCell()}
-            tableTrackCell.configure(track: track, artist: artist, image: imageUrl)
+        if viewModel?.searchModel.tracks.items.count != 0 {
+            if viewModel?.searchModel.tracks.items[indexPath.row].type == "track" {
+                guard let imageUrl = viewModel?.searchModel.tracks.items[indexPath.row].album.images?.first?.url,
+                      let track = viewModel?.searchModel.tracks.items[indexPath.row].name,
+                      let artist = viewModel?.searchModel.tracks.items[indexPath.row].artists.first?.name
+                else { return UITableViewCell()}
+                tableTrackCell.configure(track: track, artist: artist, image: imageUrl)
+            }
         }
         
         switch indexPath.section {

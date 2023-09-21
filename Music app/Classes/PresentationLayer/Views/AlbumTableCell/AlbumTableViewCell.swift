@@ -9,7 +9,7 @@ import UIKit
 
 
 
-class PlaylistTableViewCell: UITableViewCell {
+class AlbumTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var artistName: UILabel!
     @IBOutlet private weak var albumName: UILabel!
