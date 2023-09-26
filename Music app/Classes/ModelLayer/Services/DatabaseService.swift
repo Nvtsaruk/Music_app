@@ -1,195 +1,131 @@
-
-
-
-
-import Foundation
 import RealmSwift
 
-class DatabasePlaylistModel: Object {
-    @Persisted var name: String
-    @Persisted var trackId: String
+class DatabaseUser: Object {
+    @Persisted var userId: String
+    @Persisted var playlists: List<DatabasePlaylist>
     
-    convenience init(name: String, trackId: String) {
+    convenience init(userId: String, playlist: List<DatabasePlaylist>) {
         self.init()
-        self.name = name
-        self.trackId = trackId
+        self.userId = userId
+        self.playlists = playlist
     }
 }
 
-class Database<Entity> where Entity: Object {
+class DatabasePlaylist: Object {
+    @Persisted var playlistName: String
+    @Persisted var playlistImage: String
+    @Persisted var tracks: List<DatabaseTrack>
     
-    // MARK: - Properties
+    convenience init(playlistName: String, playlistImage: String,tracks: List<DatabaseTrack>) {
+        self.init()
+        self.playlistName = playlistName
+        self.playlistImage = playlistImage
+        self.tracks = tracks
+    }
+}
+
+class DatabaseTrack: Object {
+    @Persisted var artistName: String
+    @Persisted var trackName: String
+    @Persisted var image: String
+    @Persisted var trackId: String
     
-    private let configuration: Realm.Configuration
+    convenience init(_ model: UserPlaylistTrack) {
+        self.init()
+        self.artistName = model.artistName
+        self.trackName = model.trackName
+        self.image = model.image
+        self.trackId = model.trackID
+    }
+}
+
+struct UserPlaylist {
+    var playlistName: String
+    var tracks: [UserPlaylistTrack]
+}
+struct UserPlaylistTrack {
+    var artistName: String
+    var trackName: String
+    var image: String
+    var trackID: String
     
-    // MARK: - Lifecycle
-    
+    init(artistName: String, trackName: String, image: String, trackID: String) {
+        self.artistName = artistName
+        self.trackName = trackName
+        self.image = image
+        self.trackID = trackID
+    }
     init() {
-        self.configuration = Realm.Configuration.defaultConfiguration
+        self.artistName = ""
+        self.trackName = ""
+        self.image = ""
+        self.trackID = ""
     }
+}
+
+final class DatabaseService {
+    static var shared = DatabaseService()
+    private init() {}
     
-    // MARK: - Methods
+    let realm = try! Realm()
     
-    func write(block: () -> Void) {
-        
-        let realm = try! Realm(configuration: self.configuration)
-        
-        //TODO: - add autoreleasepool
-        realm.refresh()
-        
-        if realm.isInWriteTransaction {
-            block()
-        } else {
-            
-            try! realm.write {
-                block()
-            }
-        }
-    }
-    
-    func save(_ entity: Entity, update: Bool = true) {
-        let realm = try! Realm(configuration: self.configuration)
-        
-        realm.refresh()
-        
-        if realm.isInWriteTransaction {
-            realm.add(entity, update: update ? .all : .error)
-        } else {
-            try! realm.write {
-                realm.add(entity, update: update ? .all : .error)
-            }
-        }
-    }
-    
-    func saveEntities(_ entitites: [Entity], update: Bool = true) {
-        let realm = try! Realm(configuration: self.configuration)
-        
-        realm.refresh()
-        
+    func createPlaylist(userId: String, playlistName: String, item: UserPlaylistTrack) {
+        print(item)
+        let track = DatabaseTrack(item)
+        let playlist = DatabasePlaylist()
+        playlist.playlistName = playlistName
+        playlist.playlistImage = item.image
+        playlist.tracks.append(track)
+        let user = DatabaseUser()
+        user.userId = userId
+        user.playlists.append(playlist)
         try! realm.write {
-            realm.add(entitites, update: update ? .all : .error)
+            realm.add(user)
         }
     }
     
-    func deleteEntities(_ entities: Results<Entity>) {
-        autoreleasepool {
-            let realm = try! Realm(configuration: self.configuration)
-            try! realm.write {
-                realm.delete(entities)
-            }
+    func addToPlaylist(playlistName: String, item: UserPlaylistTrack) {
+        let playlists = realm.objects(DatabaseUser.self)
+        let userPlaylists = playlists.where {
+            $0.userId == "31rxgvo6ng6ry35wjsoes7xrzspa"
         }
-    }
-    
-    func getEntity(id: String) -> Entity {
-        let realm = try! Realm(configuration: self.configuration)
-        guard let entity = realm.object(ofType: Entity.self, forPrimaryKey: id) else { return Entity() }
-        return entity
-    }
-    
-    func getEntities(filter: NSPredicate) -> Results<Entity> {
-        let realm = try! Realm(configuration: self.configuration)
-        return realm.objects(Entity.self).filter(filter)
-    }
-    
-    func updateEntity(_ entity: Entity, block: (Entity) -> Void) {
-        autoreleasepool {
-            let realm = try! Realm(configuration: self.configuration)
-            realm.refresh()
-            
-            guard !entity.isInvalidated else { return }
-            
-            if realm.isInWriteTransaction {
-                block(entity)
-            } else {
+        let track = DatabaseTrack(item)
+        var playlistToAppend = DatabasePlaylist()
+        userPlaylists.first?.playlists.forEach{ item in
+            if item.playlistName == playlistName {
                 try! realm.write {
-                    block(entity)
+                    item.tracks.append(track)
                 }
             }
         }
     }
     
-    func updateEnties(_ entites: [Entity], block: (Entity) -> ()) {
-        autoreleasepool {
-            let realm = try! Realm(configuration: self.configuration)
-            
-            realm.refresh()
-            
-            if realm.isInWriteTransaction {
-                entites.forEach({ block($0) })
-            } else {
-                try! realm.write {
-                    entites.forEach({ block($0) })
-                }
-            }
+    func getPlaylists() -> [UserPlaylist] {
+        let playlists = realm.objects(DatabaseUser.self)
+        let userPlaylists = playlists.where {
+            $0.userId == "31rxgvo6ng6ry35wjsoes7xrzspa"
         }
-    }
-    
-    func update(_ entity: Entity, with dictionary: [String: Any?]) {
-        autoreleasepool {
-            do {
-                let realm = try! Realm(configuration: self.configuration)
-                try realm.write {
-                    guard !entity.isInvalidated else { return }
-                    for (key, value) in dictionary {
-                        entity.setValue(value, forKey: key)
-                    }
-                }
-            } catch {
-                print(error)
+        var userPlaylistsArray: [UserPlaylist] = []
+        userPlaylists.first?.playlists.forEach { item in
+            var tracks: [UserPlaylistTrack] = []
+            var playlistTrack = UserPlaylistTrack()
+            let playlistName = item.playlistName
+            item.tracks.forEach { track in
+                playlistTrack.artistName = track.artistName
+                playlistTrack.image = track.image
+                playlistTrack.trackID = track.trackId
+                playlistTrack.trackName = track.trackName
+                tracks.append(playlistTrack)
             }
+            let userPlaylist = UserPlaylist(playlistName: playlistName, tracks: tracks)
+            userPlaylistsArray.append(userPlaylist)
         }
+        return userPlaylistsArray
     }
-    
-    
-    func delete(_ entity: Entity) {
-        let realm = try! Realm(configuration: self.configuration)
+    func deletePlaylist() {
         try! realm.write {
-            guard !entity.isInvalidated else { return }
-            realm.delete(entity)
-        }
-    }
-    
-    func checkIfOwnerExists() -> Bool {
-        let realm = try! Realm(configuration: self.configuration)
-        return realm.objects(Entity.self).count > 0 ? true : false
-    }
-    
-    // MARK: - Getting data
-    
-    func getAllEntities() -> Results<Entity> {
-        let realm = try! Realm(configuration: self.configuration)
-        return realm.objects(Entity.self)
-    }
-    
-    func getRealm() -> Realm {
-        return try! Realm(configuration: self.configuration)
-    }
-    
-    static func logout() {
-        let realm = Database().getRealm()
-        
-        try! realm.write {
+            // Delete the Todo.
             realm.deleteAll()
         }
     }
-    
 }
-
-//final class DatabaseService {
-//    static var shared = DatabaseService()
-//    private init() {}
-//    
-//    func savePlaylist(userId: String, id: String, name: String) {
-//        var config = Realm.Configuration.defaultConfiguration
-//        config.fileURL!.deleteLastPathComponent()
-//        config.fileURL!.appendPathComponent(userId)
-//        config.fileURL!.appendPathExtension("realm")
-//        let realm = try! Realm(configuration: config)
-//        
-//        let playlistTemp = DatabasePlaylistModel(name: name, trackId: id)
-//        
-//        try! realm.write {
-//            realm.add(playlistTemp)
-//        }
-//    }
-//}

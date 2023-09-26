@@ -9,8 +9,18 @@ final class MyMediaPageCoordinator: Coordinator {
     
     func start() {
         let viewModel = MyMediaPageViewModel()
+        viewModel.coordinator = self
         let myMediaPageViewController = MyMediaPageViewController.instantiate()
         myMediaPageViewController.viewModel = viewModel
         navigationController.pushViewController(myMediaPageViewController, animated: true)
+    }
+    func showItemDetail(id: String, playlist: PlaylistModel) {
+        let viewModel = PlaylistItemDetailViewModel()
+        viewModel.playlist = playlist
+//        viewModel.coordinator = self
+//        viewModel.id = id
+        let itemDetailViewController = PlaylistItemDetailViewController.instantiate()
+        itemDetailViewController.viewModel = viewModel
+        navigationController.pushViewController(itemDetailViewController, animated: true)
     }
 }

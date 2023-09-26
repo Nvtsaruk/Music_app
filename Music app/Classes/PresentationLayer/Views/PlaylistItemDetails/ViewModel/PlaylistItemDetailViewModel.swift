@@ -1,5 +1,6 @@
 import Foundation
 protocol PlaylistItemDetailViewModelProtocol {
+    func start()
     func getItems()
     var details: String { get set }
     var playlist: PlaylistModel { get }
@@ -9,7 +10,7 @@ protocol PlaylistItemDetailViewModelProtocol {
     var isPlaying: Bool { get set }
 }
 
-final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, AudioPlayerDelegateForDetails {
+final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, AudioPlayerDelegateForDetails, TrackItemDetailTableViewCellDelegate {
     
     var coordinator: MainPageCoordinator?
     var id: String?
@@ -34,6 +35,7 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Au
                 removeNilSongs()
                 cleared = true
             }
+            print("I playlist view",playlist)
             updateClosure?()
         }
     }
@@ -48,6 +50,11 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Au
     
     func sendTrackInfo(playerItem: PlayerItemModel) {
         
+    }
+    func start() {
+        let trackDetailsCell = TrackItemDetailTableViewCell()
+        trackDetailsCell.delegate = self
+        updateClosure?()
     }
     
     func addPlayItems(itemIndex: Int) {
@@ -65,7 +72,8 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Au
     }
     
     func getItems() {
-        let url = NetworkConstants.baseUrl + NetworkConstants.playlists + (id ?? "")
+        guard let id = id else { return }
+        let url = NetworkConstants.baseUrl + NetworkConstants.playlists + (id)
         APIService.getData(PlaylistModel.self, url: url) { result in
             switch result {
                 case .success(let data):
@@ -75,7 +83,7 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Au
                     print("Custom Error -> \(error)")
             }
         }
-        AudioPlayerService.shared.detailsDelegate = self
+        
     }
     
     func playButtonAction() {
@@ -86,7 +94,22 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Au
         }
     }
     
+    func addToPlaylist(trackId: String) {
+        playlist.tracks?.items?.forEach{ item in
+            if item.track?.id == trackId {
+                guard let artistName = item.track?.artists?.first?.name,
+                      let trackName = item.track?.name,
+                      let image = item.track?.album?.images?.first?.url,
+                      let track = item.track?.preview_url
+                else { return }
+                let trackItem = UserPlaylistTrack(artistName: artistName, trackName: trackName, image: image, trackID: track)
+                coordinator?.showAddToPlaylist(trackItem: trackItem)
+            }
+        }
+    }
+    
     func removeNilSongs() {
+        guard let id = id else { return }
         var indexArray: [String] = []
         playlist.tracks?.items?.forEach { item in
             if item.track?.preview_url == nil {
@@ -103,6 +126,6 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Au
             }
         }
     }
-
+    
 }
 

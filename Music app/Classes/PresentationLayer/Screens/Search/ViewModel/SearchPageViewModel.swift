@@ -1,5 +1,6 @@
 import Foundation
 protocol SearchPageViewModelProtocol {
+    func start()
     func search(item: String)
     var searchModel: SearchResults { get }
     var updateClosure:( ()->Void )? { get set }
@@ -9,7 +10,9 @@ protocol SearchPageViewModelProtocol {
     func showAlbumDetail(id: String)
 }
 
-final class SearchPageViewModel: SearchPageViewModelProtocol {
+final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTableViewCellDelegate {
+    
+    
     
     
     var coordinator: SearchPageCoordinator?
@@ -28,9 +31,29 @@ final class SearchPageViewModel: SearchPageViewModelProtocol {
         }
     }
     
+    func start() {
+        let trackDetailsCell = TrackItemDetailTableViewCell()
+        trackDetailsCell.delegate = self
+    }
+    
     func search(item: String) {
         lastScheduledSearch?.invalidate()
         lastScheduledSearch = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(searchQuery(_:)), userInfo: item, repeats: false)
+        
+    }
+    
+    func addToPlaylist(trackId: String) {
+        searchModel.tracks.items.forEach{ item in
+            if item.id == trackId {
+                guard let artistName = item.artists.first?.name,
+                      let image = item.album.images?.first?.url
+                else { return }
+                let trackName = item.name
+                let track = item.id
+                let trackItem = UserPlaylistTrack(artistName: artistName, trackName: trackName, image: image, trackID: track)
+                coordinator?.showAddToPlaylist(trackItem: trackItem)
+            }
+        }
         
     }
     

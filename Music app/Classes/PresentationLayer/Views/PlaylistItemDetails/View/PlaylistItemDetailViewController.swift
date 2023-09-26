@@ -12,6 +12,7 @@ final class PlaylistItemDetailViewController: UIViewController {
     var viewModel: PlaylistItemDetailViewModelProtocol?
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel?.start()
         viewModel?.getItems()
         descriptionLabel.text = viewModel?.details
         bindViewModel()
@@ -29,15 +30,19 @@ final class PlaylistItemDetailViewController: UIViewController {
         
         let itemDetailNib = UINib(nibName: "TrackItemDetailTableViewCell", bundle: nil)
         tableView.register(itemDetailNib, forCellReuseIdentifier: "TrackItemDetailTableViewCell")
+        tableView.reloadData()
+        guard let url = viewModel?.playlist.images?.first?.url else { return }
+            self.itemImage.webImage(url: url)
     }
     
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
             guard let url = viewModel?.playlist.images?.first?.url else { return }
-            DispatchQueue.main.async {
+            print("URLLLL",url)
+//            DispatchQueue.main.async {
                 self.itemImage.webImage(url: url)
-            }
+//            }
             if let imageCached = SDImageCache.shared.imageFromMemoryCache(forKey: url) {
                 var colorTop = imageCached.findAverageColor()?.cgColor ?? CGColor(red: 1, green: 1, blue: 1, alpha: 1)
                 let colors = Colors(colorTop: colorTop, colorBottom: CGColor(gray: 0, alpha: 1))
@@ -70,10 +75,13 @@ extension PlaylistItemDetailViewController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TrackItemDetailTableViewCell") as? TrackItemDetailTableViewCell else { return UITableViewCell() }
+        cell.delegate = viewModel as? any TrackItemDetailTableViewCellDelegate
         guard let artist = viewModel?.playlist.tracks?.items?[indexPath.row].track?.artists?.first?.name,
               let track = viewModel?.playlist.tracks?.items?[indexPath.row].track?.name,
-              let url = viewModel?.playlist.tracks?.items?[indexPath.row].track?.album?.images?.first?.url else { return cell }
-        cell.configure(track: track, artist: artist, image: url)
+              let url = viewModel?.playlist.tracks?.items?[indexPath.row].track?.album?.images?.first?.url,
+              let id = viewModel?.playlist.tracks?.items?[indexPath.row].track?.id
+        else { return cell }
+        cell.configure(track: track, artist: artist, image: url, id: id)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

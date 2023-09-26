@@ -71,4 +71,11 @@ final class SearchPageCoordinator: Coordinator {
         albumItemDetailVC.viewModel = viewModel
         navigationController.pushViewController(albumItemDetailVC, animated: true)
     }
+    func showAddToPlaylist(trackItem: UserPlaylistTrack) {
+        let viewModel = AddToPlaylistViewModel()
+        viewModel.trackItem = trackItem
+        let addToPlaylistVC = AddToPlaylistViewController.instantiate()
+        addToPlaylistVC.viewModel = viewModel
+        navigationController.present(addToPlaylistVC, animated: true)
+    }
 }

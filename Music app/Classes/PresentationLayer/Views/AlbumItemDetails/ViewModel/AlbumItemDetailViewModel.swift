@@ -1,6 +1,7 @@
 
 import Foundation
 protocol AlbumItemDetailViewModelProtocol {
+    func start()
     func getAlbumItems()
     var details: String { get set }
     var album: Album { get }
@@ -10,7 +11,9 @@ protocol AlbumItemDetailViewModelProtocol {
     var isPlaying: Bool { get set }
 }
 
-final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, AudioPlayerDelegateForDetails {
+final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, AudioPlayerDelegateForDetails, TrackItemDetailTableViewCellDelegate {
+    
+    
     
     var coordinator: SearchPageCoordinator?
     var id: String?
@@ -39,6 +42,21 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, AudioPla
         }
     }
     
+    func addToPlaylist(trackId: String) {
+        album.tracks.items.forEach{ item in
+            if item.id == trackId {
+                guard let artistName = item.artists?.first?.name,
+                      let image = item.album?.images?.first?.url
+                else { return }
+                let trackName = item.name
+                let track = item.id
+                let trackItem = UserPlaylistTrack(artistName: artistName, trackName: trackName, image: image, trackID: track)
+                coordinator?.showAddToPlaylist(trackItem: trackItem)
+            }
+        }
+        
+    }
+    
     func audioPlayerDidStartPlaying() {
         isPlaying = true
     }
@@ -51,6 +69,10 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, AudioPla
         
     }
     
+    func start() {
+        let trackItem = TrackItemDetailTableViewCell()
+        trackItem.delegate = self
+    }
     func addPlayItems(itemIndex: Int) {
         var playerPlaylist: [PlayerItemModel] = []
         let image = album.images?.first?.url

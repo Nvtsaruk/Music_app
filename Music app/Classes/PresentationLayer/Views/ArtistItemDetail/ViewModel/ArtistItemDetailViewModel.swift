@@ -1,5 +1,6 @@
 import Foundation
 protocol ArtistItemDetailViewModelProtocol {
+    func start()
     var artist: Artist? { get }
     var topTracks: [Track] { get }
     func getArtistInfo()
@@ -9,7 +10,12 @@ protocol ArtistItemDetailViewModelProtocol {
     var isPlaying: Bool { get set }
 }
 
-final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioPlayerDelegateForDetails {
+final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioPlayerDelegateForDetails, TrackItemDetailTableViewCellDelegate {
+    func start() {
+        let trackCell = TrackItemDetailTableViewCell()
+        trackCell.delegate = self
+    }
+    
     
     
     var updateClosure: (() -> Void)?
@@ -38,7 +44,19 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
             updateClosure?()
         }
     }
-   
+    func addToPlaylist(trackId: String) {
+        topTracks.forEach{ item in
+            if item.id == trackId {
+                guard let artistName = item.artists?.first?.name,
+                      let image = item.album?.images?.first?.url
+                else { return }
+                let trackName = item.name
+                let track = item.id
+                let trackItem = UserPlaylistTrack(artistName: artistName, trackName: trackName, image: image, trackID: track)
+                coordinator?.showAddToPlaylist(trackItem: trackItem)
+            }
+        }
+    }
     
     func getArtistInfo() {
         let url = NetworkConstants.baseUrl + NetworkConstants.artists + (id ?? "")

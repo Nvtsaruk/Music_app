@@ -4,10 +4,10 @@ import Foundation
 
 
 struct PlaylistModel: Codable {
-    let description: String?
+    var description: String?
     let id: String
-    let images: [ImageModel]?
-    let name: String?
+    var images: [ImageModel]?
+    var name: String?
     let owner: PlaylistModelOwner?
     var tracks: PlaylistModelTracks?
     let type: String? //enum
@@ -63,7 +63,7 @@ struct PlaylistModelTracks: Codable {
 struct PlaylistModelTracksItem: Codable {
     let added_at: String? //Date
     let added_by: PlaylistModelTracksItemUser?
-    let track: Track?
+    var track: Track?
     init(added_at: String? = nil, added_by: PlaylistModelTracksItemUser? = nil, track: Track? = nil) {
         self.added_at = added_at
         self.added_by = added_by

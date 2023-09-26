@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		CC07A7E12ABB5C7C0033ED2C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CC07A7E02ABB5C7C0033ED2C /* Realm */; };
 		CC07A7E32ABB5C7C0033ED2C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CC07A7E22ABB5C7C0033ED2C /* RealmSwift */; };
-		CC07A7E52ABB5C970033ED2C /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC07A7E42ABB5C970033ED2C /* DatabaseService.swift */; };
+		CC07A7E52ABB5C970033ED2C /* DatabaseService_temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC07A7E42ABB5C970033ED2C /* DatabaseService_temp.swift */; };
 		CC0C6DC22AA0DEDE00C18299 /* FullPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0C6DC12AA0DEDE00C18299 /* FullPlayerViewController.swift */; };
 		CC0C6DC42AA0DF1800C18299 /* FullPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC0C6DC32AA0DF1800C18299 /* FullPlayer.storyboard */; };
 		CC0C6DC62AA1B02C00C18299 /* FullPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0C6DC52AA1B02C00C18299 /* FullPlayerViewModel.swift */; };
@@ -119,6 +119,7 @@
 		CC885E102AB9F1A40016288A /* AlbumItemDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC4AF6BB2AB5D6BB008E966B /* AlbumItemDetail.storyboard */; };
 		CC9DAD572ABA05AB00323A60 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9DAD562ABA05AB00323A60 /* Track.swift */; };
 		CCC181C02AB9F5A2004205D1 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC181BF2AB9F5A2004205D1 /* Artist.swift */; };
+		CCE53F122ABD9EBF00F05F4F /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE53F112ABD9EBF00F05F4F /* DatabaseService.swift */; };
 		CCEAD48B2AB6DDDA0052BBCF /* ArtistItemDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEAD48A2AB6DDDA0052BBCF /* ArtistItemDetailViewModel.swift */; };
 		CCEAD48D2AB6E1230052BBCF /* ArtistItemDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCEAD48C2AB6E1230052BBCF /* ArtistItemDetail.storyboard */; };
 		D5B4A4EAD928BFB74195390F /* libPods-Music app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C5652567028BF0EE070A3B /* libPods-Music app.a */; };
@@ -128,7 +129,7 @@
 		03C5652567028BF0EE070A3B /* libPods-Music app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Music app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2280ABF89DE0A6DE50FA10BA /* Pods-Music app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Music app.debug.xcconfig"; path = "Target Support Files/Pods-Music app/Pods-Music app.debug.xcconfig"; sourceTree = "<group>"; };
 		BB57875C3D08EC7B7A0598B8 /* Pods-Music app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Music app.release.xcconfig"; path = "Target Support Files/Pods-Music app/Pods-Music app.release.xcconfig"; sourceTree = "<group>"; };
-		CC07A7E42ABB5C970033ED2C /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		CC07A7E42ABB5C970033ED2C /* DatabaseService_temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService_temp.swift; sourceTree = "<group>"; };
 		CC0C6DC12AA0DEDE00C18299 /* FullPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPlayerViewController.swift; sourceTree = "<group>"; };
 		CC0C6DC32AA0DF1800C18299 /* FullPlayer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FullPlayer.storyboard; sourceTree = "<group>"; };
 		CC0C6DC52AA1B02C00C18299 /* FullPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPlayerViewModel.swift; sourceTree = "<group>"; };
@@ -238,6 +239,7 @@
 		CC7C61AE2A9640BC009DCB9E /* PlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerView.xib; sourceTree = "<group>"; };
 		CC9DAD562ABA05AB00323A60 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		CCC181BF2AB9F5A2004205D1 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
+		CCE53F112ABD9EBF00F05F4F /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		CCEAD48A2AB6DDDA0052BBCF /* ArtistItemDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistItemDetailViewModel.swift; sourceTree = "<group>"; };
 		CCEAD48C2AB6E1230052BBCF /* ArtistItemDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArtistItemDetail.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -755,7 +757,8 @@
 				CC351E9C2A7D4565003EF23D /* CredentialStorageService.swift */,
 				CC2C78392ABC93580090EF3E /* test.swift */,
 				CC3A38C52A9F483D009E4036 /* AudioPlayerService.swift */,
-				CC07A7E42ABB5C970033ED2C /* DatabaseService.swift */,
+				CC07A7E42ABB5C970033ED2C /* DatabaseService_temp.swift */,
+				CCE53F112ABD9EBF00F05F4F /* DatabaseService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1134,11 +1137,12 @@
 				CC4AF6BD2AB5D775008E966B /* AlbumItemDetailViewController.swift in Sources */,
 				CC3A38C62A9F483D009E4036 /* AudioPlayerService.swift in Sources */,
 				CC7C61872A8FC54F009DCB9E /* TrackItemDetailTableViewCell.swift in Sources */,
+				CCE53F122ABD9EBF00F05F4F /* DatabaseService.swift in Sources */,
 				CC351E8B2A7D3B02003EF23D /* LoginViewModelProtocol.swift in Sources */,
 				CC7C61902A939450009DCB9E /* PlaylistsTableViewCell.swift in Sources */,
 				CC351E8F2A7D3C58003EF23D /* TabbarCoordinator.swift in Sources */,
 				CC68C03F2A823F59001016F0 /* SearchCategoriesPageViewController.swift in Sources */,
-				CC07A7E52ABB5C970033ED2C /* DatabaseService.swift in Sources */,
+				CC07A7E52ABB5C970033ED2C /* DatabaseService_temp.swift in Sources */,
 				CC351E9A2A7D43F2003EF23D /* NetworkConstants.swift in Sources */,
 				CC68C0502A825B9E001016F0 /* MyMediaPageViewModel.swift in Sources */,
 				CC0C6DD82AAF4DCD00C18299 /* CategoriesDetailsViewController.swift in Sources */,

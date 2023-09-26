@@ -1,13 +1,6 @@
-//
-//  MyPlaylistTableViewCell.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 21.09.23.
-//
-
 import UIKit
 
-class MyPlaylistTableViewCell: UITableViewCell {
+final class MyPlaylistTableViewCell: UITableViewCell {
 
     @IBOutlet weak var numberOfTracksLabel: UILabel!
     @IBOutlet weak var playlistNameLabel: UILabel!
@@ -23,6 +16,12 @@ class MyPlaylistTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func configure(numTracks: String, name: String, image: String) {
+        numberOfTracksLabel.text = numTracks
+        playlistNameLabel.text = name
+        playlistImage.webImage(url: image)
     }
     
 }

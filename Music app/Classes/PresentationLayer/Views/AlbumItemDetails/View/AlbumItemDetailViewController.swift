@@ -19,6 +19,7 @@ final class AlbumItemDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel?.start()
         viewModel?.getAlbumItems()
         setupUI()
         bindViewModel()
@@ -70,11 +71,13 @@ extension AlbumItemDetailViewController: UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TrackItemDetailTableViewCell") as? TrackItemDetailTableViewCell else { return UITableViewCell() }
+        cell.delegate = viewModel as? any TrackItemDetailTableViewCellDelegate
         guard let artist = viewModel?.album.tracks.items[indexPath.row].artists?.first?.name,
               let track = viewModel?.album.tracks.items[indexPath.row].name,
-              let url = viewModel?.album.images?.first?.url
+              let url = viewModel?.album.images?.first?.url,
+              let id = viewModel?.album.tracks.items[indexPath.row].id
         else { return cell}
-        cell.configure(track: track, artist: artist, image: url)
+        cell.configure(track: track, artist: artist, image: url, id: id)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

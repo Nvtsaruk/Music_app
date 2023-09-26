@@ -15,6 +15,7 @@ class SearchPageViewController: UIViewController {
     var viewModel: SearchPageViewModelProtocol?
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel?.start()
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         searchBar.searchTextField.textColor = .white
         setupUI()
@@ -79,6 +80,7 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()}
         guard let tablePlaylistCell = tableView.dequeueReusableCell(withIdentifier: "PlaylistTableViewCell") as? PlaylistTableViewCell else { return UITableViewCell()}
         guard let tableTrackCell = tableView.dequeueReusableCell(withIdentifier: "TrackItemDetailTableViewCell") as? TrackItemDetailTableViewCell else { return UITableViewCell()}
+        tableTrackCell.delegate = viewModel as? any TrackItemDetailTableViewCellDelegate
         guard let albumCount = viewModel?.searchModel.artists.items.count else { return UITableViewCell() }
         if indexPath.row < albumCount - 1 {
             if viewModel?.searchModel.albums.items[indexPath.row].type == "album" {
@@ -113,9 +115,10 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
                 if viewModel?.searchModel.tracks.items[indexPath.row].type == "track" {
                     guard let imageUrl = viewModel?.searchModel.tracks.items[indexPath.row].album.images?.first?.url,
                           let track = viewModel?.searchModel.tracks.items[indexPath.row].name,
-                          let artist = viewModel?.searchModel.tracks.items[indexPath.row].artists.first?.name
+                          let artist = viewModel?.searchModel.tracks.items[indexPath.row].artists.first?.name,
+                          let id = viewModel?.searchModel.tracks.items[indexPath.row].id
                     else { return UITableViewCell()}
-                    tableTrackCell.configure(track: track, artist: artist, image: imageUrl)
+                    tableTrackCell.configure(track: track, artist: artist, image: imageUrl, id: id)
                 }
             }
         }

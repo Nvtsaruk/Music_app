@@ -1,6 +1,6 @@
 import Foundation
 struct ImageModel: Codable {
-    let url: String
+    var url: String
     init(url: String) {
         self.url = url
     }
