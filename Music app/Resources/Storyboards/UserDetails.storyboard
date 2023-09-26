@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--User Details View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="UserDetailsViewController" id="Y6W-OH-hqX" customClass="UserDetailsViewController" customModule="Music_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aPR-rJ-PZc">
+                                <rect key="frame" x="16" y="92" width="70.333333333333329" height="70.333333333333314"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="aPR-rJ-PZc" secondAttribute="height" multiplier="1:1" id="EAZ-Ji-KRU"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="vbi-Sd-Bcd">
+                                <rect key="frame" x="102.33333333333331" y="92" width="103.66666666666669" height="70.333333333333314"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0M-qp-3sn">
+                                        <rect key="frame" x="0.0" y="0.0" width="79.333333333333329" height="37"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 subscribers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ti-9e-85Q">
+                                        <rect key="frame" x="0.0" y="50" width="103.66666666666667" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QpF-rX-URb">
+                                <rect key="frame" x="16" y="194.33333333333334" width="361" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="userId" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bvl-js-4Y3">
+                                <rect key="frame" x="15.999999999999996" y="222" width="47.666666666666657" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUC-QU-RQp">
+                                <rect key="frame" x="15.999999999999996" y="250.00000000000003" width="58.666666666666657" height="20.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="QpF-rX-URb" firstAttribute="top" secondItem="aPR-rJ-PZc" secondAttribute="bottom" constant="32" id="26S-SP-4TD"/>
+                            <constraint firstItem="vbi-Sd-Bcd" firstAttribute="leading" secondItem="aPR-rJ-PZc" secondAttribute="trailing" constant="16" id="9tx-FH-pWB"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="QpF-rX-URb" secondAttribute="trailing" constant="16" id="RyT-LJ-cNp"/>
+                            <constraint firstItem="Bvl-js-4Y3" firstAttribute="leading" secondItem="QpF-rX-URb" secondAttribute="leading" id="Rye-1v-tXe"/>
+                            <constraint firstItem="Bvl-js-4Y3" firstAttribute="top" secondItem="QpF-rX-URb" secondAttribute="bottom" constant="7.3333333333333144" id="WBa-UB-jzK"/>
+                            <constraint firstItem="vbi-Sd-Bcd" firstAttribute="top" secondItem="aPR-rJ-PZc" secondAttribute="top" id="Xh5-zO-drC"/>
+                            <constraint firstItem="aPR-rJ-PZc" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Yc0-9J-uAt"/>
+                            <constraint firstItem="QpF-rX-URb" firstAttribute="leading" secondItem="aPR-rJ-PZc" secondAttribute="leading" id="asI-6y-ALj"/>
+                            <constraint firstItem="vbi-Sd-Bcd" firstAttribute="bottom" secondItem="aPR-rJ-PZc" secondAttribute="bottom" id="ff5-Zy-muS"/>
+                            <constraint firstItem="aUC-QU-RQp" firstAttribute="leading" secondItem="Bvl-js-4Y3" secondAttribute="leading" id="lIP-bs-Qe6"/>
+                            <constraint firstItem="aUC-QU-RQp" firstAttribute="top" secondItem="Bvl-js-4Y3" secondAttribute="bottom" constant="7.6666666666666572" id="lXQ-hA-bIA"/>
+                            <constraint firstItem="aPR-rJ-PZc" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="33" id="tMr-cw-JZi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="avatarImage" destination="aPR-rJ-PZc" id="tD6-yc-t1p"/>
+                        <outlet property="countryLabel" destination="aUC-QU-RQp" id="UdB-va-VeJ"/>
+                        <outlet property="emailLabel" destination="QpF-rX-URb" id="ncf-qp-uMj"/>
+                        <outlet property="nameLabel" destination="U0M-qp-3sn" id="PlN-vB-Hr9"/>
+                        <outlet property="planLabel" destination="4Ti-9e-85Q" id="Sld-Sr-v0Q"/>
+                        <outlet property="userIDLabel" destination="Bvl-js-4Y3" id="wyV-Eb-obS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="84.732824427480907" y="-49.295774647887328"/>
+        </scene>
+    </scenes>
+</document>

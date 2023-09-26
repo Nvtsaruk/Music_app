@@ -3,10 +3,19 @@ import UIKit
 enum Storyboard: String {
     case Login
     case MainPage
+    case SearchCategoriesPage
     case SearchPage
     case MyMediaPage
     case QuizPage
     case UserProfile
+    case UserDetails
+    case PlaylistItemDetail
+    case TabBarController
+    case FullPlayer
+    case CategoriesDetails
+    case AlbumItemDetail
+    case ArtistItemDetail
+    case AddToPlaylist
     
     var instance : UIStoryboard {
         return UIStoryboard(name: self.rawValue, bundle: Bundle.main)

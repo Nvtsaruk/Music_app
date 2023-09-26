@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main Page View Controller-->
+        <scene sceneID="xXj-g4-XhV">
+            <objects>
+                <viewController storyboardIdentifier="MainPageViewController" id="ZNQ-Nt-PpL" customClass="MainPageViewController" customModule="Music_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="t0L-iV-Jad">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Pgq-rf-kHC">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="828"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <sections/>
+                            </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="HuH-lB-27y">
+                                <rect key="frame" x="178" y="420" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="n6t-48-EaU"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Pgq-rf-kHC" firstAttribute="trailing" secondItem="n6t-48-EaU" secondAttribute="trailing" id="0j5-kn-i9K"/>
+                            <constraint firstItem="Pgq-rf-kHC" firstAttribute="leading" secondItem="n6t-48-EaU" secondAttribute="leading" id="KOq-cb-wqe"/>
+                            <constraint firstItem="HuH-lB-27y" firstAttribute="centerX" secondItem="n6t-48-EaU" secondAttribute="centerX" id="PeJ-Bc-i15"/>
+                            <constraint firstItem="Pgq-rf-kHC" firstAttribute="bottom" secondItem="n6t-48-EaU" secondAttribute="bottom" constant="10" id="Ws9-L0-ABT"/>
+                            <constraint firstItem="HuH-lB-27y" firstAttribute="centerY" secondItem="n6t-48-EaU" secondAttribute="centerY" id="x1l-hJ-4wG"/>
+                            <constraint firstItem="n6t-48-EaU" firstAttribute="top" secondItem="Pgq-rf-kHC" secondAttribute="top" constant="59" id="y2V-ZP-ej1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loadingIndicator" destination="HuH-lB-27y" id="yjf-6h-pZ4"/>
+                        <outlet property="tableView" destination="Pgq-rf-kHC" id="iIA-0h-KDJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Yx-fE-N1h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-724.4274809160305" y="-237.32394366197184"/>
+        </scene>
+    </scenes>
+</document>

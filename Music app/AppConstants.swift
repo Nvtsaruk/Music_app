@@ -5,5 +5,5 @@ enum AppConstants {
 }
 
 enum ColorConstants {
-    static var backgroundColor = UIColor.darkGray
+    static var backgroundColor = UIColor.black
 }
