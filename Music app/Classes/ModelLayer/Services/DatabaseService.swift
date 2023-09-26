@@ -68,7 +68,7 @@ final class DatabaseService {
     private init() {}
     
     let realm = try! Realm()
-    print("qweqweqweqweqweqweqweqwe")
+    
     func createPlaylist(userId: String, playlistName: String, item: UserPlaylistTrack) {
         let track = DatabaseTrack(item)
         let playlist = DatabasePlaylist()
@@ -103,6 +103,7 @@ final class DatabaseService {
 //        let userPlaylists = playlists.where {
 //            $0.userId == "31rxgvo6ng6ry35wjsoes7xrzspa"
 //        }
+        print("qweqweqweqweqweqwe")
         var userPlaylistsArray: [UserPlaylist] = []
         playlists.forEach { item in
             var tracks: [UserPlaylistTrack] = []
