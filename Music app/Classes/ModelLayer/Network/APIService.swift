@@ -50,7 +50,7 @@ class APIService {
         return Session(configuration: configuration, interceptor: interceptor)
     }()
     
-    static func getData<T: Codable>(_: T.Type,
+    static func getData<T: Decodable>(_: T.Type,
                                     url: String,
                                     _ completion: @escaping (ResultRequest<T>) -> Void) {
         
