@@ -103,7 +103,6 @@ final class DatabaseService {
 //        let userPlaylists = playlists.where {
 //            $0.userId == "31rxgvo6ng6ry35wjsoes7xrzspa"
 //        }
-        print("qweqweqweqweqweqwe")
         var userPlaylistsArray: [UserPlaylist] = []
         playlists.forEach { item in
             var tracks: [UserPlaylistTrack] = []
