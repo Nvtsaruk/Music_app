@@ -46,10 +46,26 @@ final class AddToPlaylistViewController: UIViewController {
         viewModel?.cancel()
     }
     @IBAction func createPlaylistButtonAction(_ sender: Any) {
-        viewModel?.createPlaylist(playlistName: "First")
+        var playlistName = ""
+        let alert = UIAlertController(title: "Playlist name", message: "Enter name of playlist", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+         
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Enter playlist name"
+        })
+         
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+         
+            if let name = alert.textFields?.first?.text {
+                playlistName = name
+                self.viewModel?.createPlaylist(playlistName: playlistName)
+            }
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
     }
     @IBAction func readyButtonAction(_ sender: Any) {
-        
+        dismiss(animated: true)
     }
     
 }
@@ -69,6 +85,14 @@ extension AddToPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
         return tablePlaylistCell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            viewModel?.deletePlaylist(playlistIndex: indexPath.row)
+//            objects.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel?.selectedPlaylist(id: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: false)
@@ -84,7 +108,3 @@ extension AddToPlaylistViewController: Storyboarded {
     }
 }
 
-#Preview {
-    let vc = AddToPlaylistViewController.instantiate()
-    return vc
-}

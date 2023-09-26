@@ -38,10 +38,10 @@ final class MyMediaPageViewModel: MyMediaPageViewModelProtocol {
         var tracksArray: [PlaylistModelTracksItem] = []
         databasePlaylist[id].tracks.forEach{ track in
             let trackID = track.trackID
-            print(trackID)
+            let trackImage = track.image
             let trackName = track.trackName
             let artistName = track.artistName
-            let track = PlaylistModelTracksItem(track: Track(id: "", name: trackName, preview_url: trackID, type: "track"))
+            let track = PlaylistModelTracksItem(track: Track(album: TrackAlbum(images: [ImageModel(url: trackImage)]),artists: [TrackAlbumArtist(name: artistName)], id: "", name: trackName, preview_url: trackID, type: "track"))
             tracksArray.append(track)
         }
         

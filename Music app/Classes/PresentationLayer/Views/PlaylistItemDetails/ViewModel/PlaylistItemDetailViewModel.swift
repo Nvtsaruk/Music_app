@@ -35,7 +35,6 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Au
                 removeNilSongs()
                 cleared = true
             }
-            print("I playlist view",playlist)
             updateClosure?()
         }
     }

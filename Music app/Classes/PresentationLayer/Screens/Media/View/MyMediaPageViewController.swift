@@ -29,8 +29,8 @@ class MyMediaPageViewController: UIViewController {
     private func setupUI() {
         tableView.delegate = self
         tableView.dataSource = self
-        let tablePlaylistNib = UINib(nibName: "MyPlaylistTableViewCell", bundle: nil)
-        tableView.register(tablePlaylistNib, forCellReuseIdentifier: "MyPlaylistTableViewCell")
+        let tablePlaylistNib = UINib(nibName: "PlaylistTableViewCell", bundle: nil)
+        tableView.register(tablePlaylistNib, forCellReuseIdentifier: "PlaylistTableViewCell")
     }
     
     private func bindViewModel() {
@@ -49,12 +49,11 @@ extension MyMediaPageViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let tablePlaylistCell = tableView.dequeueReusableCell(withIdentifier: "MyPlaylistTableViewCell") as? MyPlaylistTableViewCell else { return UITableViewCell()}
-        guard let numTracks = viewModel?.databasePlaylist[indexPath.row].tracks.count,
-              let name = viewModel?.databasePlaylist[indexPath.row].playlistName,
+        guard let tablePlaylistCell = tableView.dequeueReusableCell(withIdentifier: "PlaylistTableViewCell") as? PlaylistTableViewCell else { return UITableViewCell()}
+        guard let name = viewModel?.databasePlaylist[indexPath.row].playlistName,
               let image = viewModel?.databasePlaylist[indexPath.row].tracks.first?.image
         else { return tablePlaylistCell}
-        tablePlaylistCell.configure(numTracks: String(numTracks), name: name, image: image)
+        tablePlaylistCell.configure(playlist: name, imageUrl: image)
         return tablePlaylistCell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

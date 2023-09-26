@@ -39,10 +39,7 @@ final class PlaylistItemDetailViewController: UIViewController {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
             guard let url = viewModel?.playlist.images?.first?.url else { return }
-            print("URLLLL",url)
-//            DispatchQueue.main.async {
                 self.itemImage.webImage(url: url)
-//            }
             if let imageCached = SDImageCache.shared.imageFromMemoryCache(forKey: url) {
                 var colorTop = imageCached.findAverageColor()?.cgColor ?? CGColor(red: 1, green: 1, blue: 1, alpha: 1)
                 let colors = Colors(colorTop: colorTop, colorBottom: CGColor(gray: 0, alpha: 1))

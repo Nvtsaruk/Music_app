@@ -49,8 +49,8 @@ final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTab
                       let image = item.album.images?.first?.url
                 else { return }
                 let trackName = item.name
-                let track = item.id
-                let trackItem = UserPlaylistTrack(artistName: artistName, trackName: trackName, image: image, trackID: track)
+                let track = item.preview_url
+                let trackItem = UserPlaylistTrack(artistName: artistName, trackName: trackName, image: image, trackID: track ?? "")
                 coordinator?.showAddToPlaylist(trackItem: trackItem)
             }
         }
