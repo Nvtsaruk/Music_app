@@ -1,4 +1,4 @@
-struct AllCategories: Codable {
+struct AllCategories: Decodable {
     let categories: Categories
     init(categories: Categories) {
         self.categories = categories
@@ -8,7 +8,7 @@ struct AllCategories: Codable {
     }
 }
 
-struct Categories: Codable {
+struct Categories: Decodable {
     let items: [Category]
     init(items: [Category]) {
         self.items = items
@@ -18,7 +18,7 @@ struct Categories: Codable {
     }
 }
 
-struct Category: Codable {
+struct Category: Decodable {
     let id: String
     let name: String
     let icons: [ImageModel]
