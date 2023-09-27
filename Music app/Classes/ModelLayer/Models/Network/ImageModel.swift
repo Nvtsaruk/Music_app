@@ -1,10 +1,3 @@
-import Foundation
-struct ImageModel: Codable {
+struct ImageModel: Decodable {
     var url: String
-    init(url: String) {
-        self.url = url
-    }
-    init() {
-        self.url = ""
-    }
 }
