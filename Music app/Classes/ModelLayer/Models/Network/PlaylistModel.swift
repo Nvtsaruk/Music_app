@@ -1,122 +1,49 @@
-import Foundation
-
-
-
-
-struct PlaylistModel: Codable {
-    var description: String?
+struct PlaylistModel: Decodable {
+    var description: String
     let id: String
-    var images: [ImageModel]?
-    var name: String?
-    let owner: PlaylistModelOwner?
-    var tracks: PlaylistModelTracks?
-    let type: String? //enum
-    init(description: String?, id: String, images: [ImageModel]?, name: String?, owner: PlaylistModelOwner?, tracks: PlaylistModelTracks? = nil, type: String?) {
-        self.description = description
-        self.id = id
-        self.images = images
-        self.name = name
-        self.owner = owner
-        self.tracks = tracks
-        self.type = type
-    }
-    init() {
-        self.description = ""
-        self.id = ""
-        self.images = []
-        self.name = ""
-        self.owner = PlaylistModelOwner()
-        self.tracks = PlaylistModelTracks()
-        self.type = ""
-    }
+    var images: [ImageModel]
+    var name: String
+    let owner: PlaylistModelOwner
+    var tracks: PlaylistModelTracks
+    let type: String
 }
 
-struct PlaylistModelOwner: Codable {
-    let display_name: String?
+struct PlaylistModelOwner: Decodable {
+    let display_name: String
     let id: String
-    let type: String? //Maybe enum
-    init(display_name: String?, id: String, type: String?) {
-        self.display_name = display_name
-        self.id = id
-        self.type = type
-    }
-    init() {
-        self.display_name = ""
-        self.id = ""
-        self.type = ""
-    }
+    let type: String
 }
 
-struct PlaylistModelTracks: Codable {
-    let total: Int?
-    var items: [PlaylistModelTracksItem]?
-    init(total: Int?, items: [PlaylistModelTracksItem]?) {
-        self.total = total
-        self.items = items
-    }
-    init() {
-        self.total = 0
-        self.items = []
-    }
+struct PlaylistModelTracks: Decodable {
+    var items: [PlaylistModelTracksItem]
 }
 
-struct PlaylistModelTracksItem: Codable {
-    let added_at: String? //Date
-    let added_by: PlaylistModelTracksItemUser?
-    var track: Track?
-    init(added_at: String? = nil, added_by: PlaylistModelTracksItemUser? = nil, track: Track? = nil) {
-        self.added_at = added_at
-        self.added_by = added_by
-        self.track = track
-    }
+struct PlaylistModelTracksItem: Decodable {
+    let added_at: String
+    let added_by: PlaylistModelTracksItemUser
+    var track: Track
 }
 
-struct PlaylistModelTracksItemUser: Codable {
-    let href: String?
-    let id: String?
-    let type: String? //enum
-    init(href: String? = nil, id: String? = nil, type: String? = nil) {
-        self.href = href
-        self.id = id
-        self.type = type
-    }
+struct PlaylistModelTracksItemUser: Decodable {
+    let id: String
+    let type: String
 }
 
 
 
-struct TrackAlbum: Codable {
-    let album_type: String?
-    let artists: [TrackAlbumArtist]?
-    let href: String?
-    let id: String?
-    let images: [ImageModel]?
-    let name: String?
-    let release_date: String?
-    let total_tracks: Int?
-    let type: String? //enum
-    init(album_type: String? = nil, artists: [TrackAlbumArtist]? = nil, href: String? = nil, id: String? = nil, images: [ImageModel]? = nil, name: String? = nil, release_date: String? = nil, total_tracks: Int? = nil, type: String? = nil) {
-        self.album_type = album_type
-        self.artists = artists
-        self.href = href
-        self.id = id
-        self.images = images
-        self.name = name
-        self.release_date = release_date
-        self.total_tracks = total_tracks
-        self.type = type
-    }
+struct TrackAlbum: Decodable {
+    let album_type: String
+    let artists: [TrackAlbumArtist]
+    let id: String
+    let images: [ImageModel]
+    let name: String
+    let release_date: String
+    let type: String
 }
 
 struct TrackAlbumArtist: Codable {
-    let href: String?
-    let id: String?
-    let name: String?
-    let type: String? //enum
-    init(href: String? = nil, id: String? = nil, name: String? = nil, type: String? = nil) {
-        self.href = href
-        self.id = id
-        self.name = name
-        self.type = type
-    }
+    let id: String
+    let name: String
+    let type: String
 }
 
