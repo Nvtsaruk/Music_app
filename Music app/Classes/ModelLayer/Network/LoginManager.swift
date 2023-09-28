@@ -9,6 +9,8 @@ struct TokenRequest:Codable {
 class LoginManager {
     static let shared = LoginManager()
     
+    private init() {}
+    
     func getToken(loginCode: String) {
         
         let basicToken = AppConstants.clientID + ":" + AppConstants.clientSecret
