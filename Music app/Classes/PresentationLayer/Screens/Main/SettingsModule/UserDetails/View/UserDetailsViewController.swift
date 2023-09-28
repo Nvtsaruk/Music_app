@@ -1,10 +1,3 @@
-//
-//  UserDetailsViewController.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 15.08.23.
-//
-
 import UIKit
 
 class Colors {
@@ -51,10 +44,14 @@ class UserDetailsViewController: UIViewController {
     private func setupUI() {
         avatarImage.layer.cornerRadius = avatarImage.frame.height / 2
         nameLabel.text = viewModel?.currentUser?.display_name
-        planLabel.text = "Plan: \(viewModel?.currentUser?.product ?? "")"
-        countryLabel.text = "Country: \(viewModel?.currentUser?.country ?? "")"
-        userIDLabel.text = "User ID: \(viewModel?.currentUser?.id ?? "")"
-        emailLabel.text = "Email: \(viewModel?.currentUser?.email ?? "")"
+        let planLocalizedString = NSLocalizedString("plan", comment: "")
+        let countryLocalizedString = NSLocalizedString("country", comment: "")
+        let userIDLocalizedString = NSLocalizedString("userID", comment: "")
+        let emailLocalizedString = NSLocalizedString("email", comment: "")
+        planLabel.text = planLocalizedString + " " + (viewModel?.currentUser?.product ?? "")
+        countryLabel.text = countryLocalizedString + " " + (viewModel?.currentUser?.country ?? "")
+        userIDLabel.text = userIDLocalizedString + " " + (viewModel?.currentUser?.id ?? "")
+        emailLabel.text = emailLocalizedString + " " + (viewModel?.currentUser?.email ?? "")
         if let url = viewModel?.currentUser?.images.first?.url {
             self.avatarImage.webImage(url: url)
         } else {
