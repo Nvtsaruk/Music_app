@@ -1,6 +1,6 @@
 import RealmSwift
 
-class DatabaseUser: Object {
+final class DatabaseUser: Object {
     @Persisted var userId: String
     @Persisted var playlists: List<DatabasePlaylist>
     
@@ -11,7 +11,7 @@ class DatabaseUser: Object {
     }
 }
 
-class DatabasePlaylist: Object {
+final class DatabasePlaylist: Object {
     @Persisted var playlistName: String
     @Persisted var playlistImage: String
     @Persisted var tracks: List<DatabaseTrack>
@@ -24,7 +24,7 @@ class DatabasePlaylist: Object {
     }
 }
 
-class DatabaseTrack: Object {
+final class DatabaseTrack: Object {
     @Persisted var artistName: String
     @Persisted var trackName: String
     @Persisted var image: String
@@ -48,24 +48,19 @@ struct UserPlaylistTrack {
     var trackName: String
     var image: String
     var trackID: String
-    
-    init(artistName: String, trackName: String, image: String, trackID: String) {
-        self.artistName = artistName
-        self.trackName = trackName
-        self.image = image
-        self.trackID = trackID
-    }
-    init() {
-        self.artistName = ""
-        self.trackName = ""
-        self.image = ""
-        self.trackID = ""
-    }
 }
+
+protocol DatabaseServiceObserver: AnyObject {
+    func dataBaseUpdated()
+}
+
+
 
 final class DatabaseService {
     static var shared = DatabaseService()
     private init() {}
+    
+    private var observations = [ObjectIdentifier: Observation] ()
     
     let realm = try! Realm()
     
@@ -81,6 +76,7 @@ final class DatabaseService {
         try! realm.write {
             realm.add(user)
         }
+        baseDidChange()
     }
     
     func addToPlaylist(playlistName: String, item: UserPlaylistTrack) {
@@ -96,6 +92,7 @@ final class DatabaseService {
                 }
             }
         }
+        baseDidChange()
     }
     
     func getPlaylists() -> [UserPlaylist] {
@@ -106,13 +103,9 @@ final class DatabaseService {
         var userPlaylistsArray: [UserPlaylist] = []
         playlists.forEach { item in
             var tracks: [UserPlaylistTrack] = []
-            var playlistTrack = UserPlaylistTrack()
             let playlistName = item.playlists.first?.playlistName
             item.playlists.first?.tracks.forEach { track in
-                playlistTrack.artistName = track.artistName
-                playlistTrack.image = track.image
-                playlistTrack.trackID = track.trackId
-                playlistTrack.trackName = track.trackName
+                let playlistTrack = UserPlaylistTrack(artistName: track.artistName, trackName: track.trackName, image: track.image, trackID: track.trackId)
                 tracks.append(playlistTrack)
             }
             let userPlaylist = UserPlaylist(playlistName: playlistName ?? "", tracks: tracks)
@@ -129,5 +122,36 @@ final class DatabaseService {
         }
         let playlists = realm.objects(DatabaseUser.self)
         print(playlists.count)
+        baseDidChange()
+    }
+}
+
+private extension DatabaseService {
+    struct Observation {
+        weak var observer: DatabaseServiceObserver?
+    }
+}
+
+private extension DatabaseService {
+    func baseDidChange() {
+        for (id, observation) in observations {
+            guard let observer = observation.observer else {
+                observations.removeValue(forKey: id)
+                continue
+            }
+            observer.dataBaseUpdated()
+        }
+    }
+}
+
+extension DatabaseService {
+    func addObserver(_ observer: DatabaseServiceObserver) {
+        let id = ObjectIdentifier(observer)
+        observations[id] = Observation(observer: observer)
+    }
+    
+    func removeObserver(_ observer: DatabaseServiceObserver) {
+        let id = ObjectIdentifier(observer)
+        observations.removeValue(forKey: id)
     }
 }
