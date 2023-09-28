@@ -1,18 +1,6 @@
-//
-//  SearchPageCoordinator.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 8.08.23.
-//
-
-import Foundation
 import UIKit
 
 final class SearchPageCoordinator: Coordinator {
-    func goToUserProfile() {
-        
-    }
-    
     
     let navigationController: UINavigationController
     
@@ -49,7 +37,6 @@ final class SearchPageCoordinator: Coordinator {
     }
     func showPlaylistDetail(id: String) {
         let viewModel = PlaylistItemDetailViewModel()
-//        viewModel.coordinator = self
         viewModel.id = id
         let playlistItemDetailViewController = PlaylistItemDetailViewController.instantiate()
         playlistItemDetailViewController.viewModel = viewModel

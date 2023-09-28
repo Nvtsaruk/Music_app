@@ -14,7 +14,7 @@ final class LoginViewModel: LoginViewModelProtocol {
     var loginCode: String = "" {
         didSet {
             updateClosure?()
-            LoginManager().getToken(loginCode: loginCode)
+            LoginManager.shared.getToken(loginCode: loginCode)
         }
     }
     func goToTabBar() {
