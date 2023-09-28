@@ -3,7 +3,7 @@ protocol PlaylistItemDetailViewModelProtocol {
     func start()
     func getItems()
     var details: String { get set }
-    var playlist: PlaylistModel { get }
+    var playlist: PlaylistModel? { get }
     var updateClosure:(() -> Void)? { get set }
     func playButtonAction()
     func addPlayItems(itemIndex: Int)
@@ -29,7 +29,7 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Au
     
     var updateClosure: (() -> Void)?
     var cleared = false
-    var playlist: PlaylistModel = PlaylistModel() {
+    var playlist: PlaylistModel? {
         didSet {
             if cleared == false {
                 removeNilSongs()
@@ -58,12 +58,12 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Au
     
     func addPlayItems(itemIndex: Int) {
         var playerPlaylist: [PlayerItemModel] = []
-        playlist.tracks?.items?.forEach { item in
-            guard let url = item.track?.preview_url else { return }
-            guard let imageUrl = item.track?.album?.images?.first?.url else { return }
-            guard let trackName = item.track?.name else { return }
-            guard let artistName = item.track?.artists?.first?.name else { return }
-            let playerItem = PlayerItemModel(url: url, image: imageUrl, trackName: trackName, artistName: artistName)
+        playlist?.tracks.items.forEach { item in
+            guard let url = item.track.preview_url,
+                  let imageUrl = item.track.album.images.first?.url,
+                  let artistName = item.track.artists.first?.name else { return }
+            let trackName = item.track.name
+            let playerItem = PlayerItemModel(url: url, imageURL: imageUrl, trackName: trackName, artistName: artistName)
             playerPlaylist.append(playerItem)
         }
         AudioPlayerService.shared.addPlaylistForPlayer(playerPlaylist, itemIndex: itemIndex)
@@ -77,7 +77,7 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Au
             switch result {
                 case .success(let data):
                     self.playlist = data
-                    self.details = data.description ?? ""
+                    self.details = data.description
                 case .failure(let error):
                     print("Custom Error -> \(error)")
             }
@@ -94,13 +94,13 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Au
     }
     
     func addToPlaylist(trackId: String) {
-        playlist.tracks?.items?.forEach{ item in
-            if item.track?.id == trackId {
-                guard let artistName = item.track?.artists?.first?.name,
-                      let trackName = item.track?.name,
-                      let image = item.track?.album?.images?.first?.url,
-                      let track = item.track?.preview_url
+        playlist?.tracks.items.forEach{ item in
+            if item.track.id == trackId {
+                guard let artistName = item.track.artists.first?.name,
+                      let image = item.track.album.images.first?.url,
+                      let track = item.track.preview_url
                 else { return }
+                let trackName = item.track.name
                 let trackItem = UserPlaylistTrack(artistName: artistName, trackName: trackName, image: image, trackID: track)
                 coordinator?.showAddToPlaylist(trackItem: trackItem)
             }
@@ -108,19 +108,19 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Au
     }
     
     func removeNilSongs() {
-        guard let id = id else { return }
+        guard id != nil else { return }
         var indexArray: [String] = []
-        playlist.tracks?.items?.forEach { item in
-            if item.track?.preview_url == nil {
-                guard let id = item.track?.id else { return }
+        playlist?.tracks.items.forEach { item in
+            if item.track.preview_url == nil {
+                let id = item.track.id
                 indexArray.append(id)
             }
         }
         indexArray.forEach { id in
-            guard let itemsArray = playlist.tracks?.items else { return }
+            guard let itemsArray = playlist?.tracks.items else { return }
             for (i, v) in itemsArray.enumerated() {
-                if id == v.track?.id {
-                    playlist.tracks?.items?.remove(at: i)
+                if id == v.track.id {
+                    playlist?.tracks.items.remove(at: i)
                 }
             }
         }
