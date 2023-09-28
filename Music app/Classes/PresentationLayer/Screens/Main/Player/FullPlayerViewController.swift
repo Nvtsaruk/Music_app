@@ -19,7 +19,7 @@ class FullPlayerViewController: UIViewController {
         super.viewDidLoad()
         bindViewModel()
         viewModel?.initPlayer()
-        albumImage.webImage(url: viewModel?.playerItemData?.image ?? "")
+        albumImage.webImage(url: viewModel?.playerItemData?.imageURL ?? "")
         trackNameLabel.text = viewModel?.playerItemData?.trackName
         viewModel?.getCurrentPlaybackTime()
         setupUI()
@@ -45,7 +45,7 @@ class FullPlayerViewController: UIViewController {
 //            DispatchQueue.main.async {
 //                self.albumImage.webImage(url: self.viewModel?.playerItemData?.image ?? "")
 //            }
-            albumImage.webImage(url: viewModel?.playerItemData?.image ?? "")
+            albumImage.webImage(url: viewModel?.playerItemData?.imageURL ?? "")
             trackNameLabel.text = viewModel?.playerItemData?.trackName
             artistNameLabel.text = viewModel?.playerItemData?.artistName
             self.songLengthLabel.text = self.viewModel?.getSongLength()

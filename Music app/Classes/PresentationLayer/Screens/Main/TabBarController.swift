@@ -82,7 +82,7 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
     
     private func setupTabBar() {
         AudioPlayerService.shared.showHideDelegate = self
-        let playerViewModel = PlayerViewModel()
+//        let playerViewModel = PlayerViewModel()
         tabBar.barTintColor = UIColor.black
         tabBar.isTranslucent = true
         tabBar.tintColor = .white

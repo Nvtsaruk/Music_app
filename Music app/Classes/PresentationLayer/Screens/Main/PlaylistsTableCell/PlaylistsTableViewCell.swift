@@ -49,13 +49,13 @@ extension PlaylistsTableViewCell: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaylistsCollectionViewCell", for: indexPath) as? PlaylistsCollectionViewCell else { return UICollectionViewCell()}
-        cell.descriptionLabel.text = collectionData?.playlists?.items?[indexPath.row].description
-        guard let url = collectionData?.playlists?.items?[indexPath.row].images?[0].url else { return cell }
+        cell.descriptionLabel.text = collectionData?.playlists.items[indexPath.row].description
+        guard let url = collectionData?.playlists.items[indexPath.row].images[0].url else { return cell }
         cell.imageView.webImage(url: url)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.showItemDetail(id: collectionData?.playlists?.items?[indexPath.row].id ?? "")
+        delegate?.showItemDetail(id: collectionData?.playlists.items[indexPath.row].id ?? "")
     }
     
     
