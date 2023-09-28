@@ -83,7 +83,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
         guard let topPlaylists = tableView.dequeueReusableCell(withIdentifier: "TopPlaylistTableViewCell") as? TopPlaylistTableViewCell else { return UITableViewCell() }
         guard let playlistNames = self.viewModel?.mainPageData.playlistNames else { return UITableViewCell() }
         for (i, v) in playlistNames.enumerated() {
-            if v == "Хит-парады" {
+            if v == NSLocalizedString("topList", comment: "") {
                 topPlaylists.numRows = self.viewModel?.mainPageData.numRows[i] ?? 0
                 topPlaylists.collectionData = self.viewModel?.mainPageData.playlists[i]
             }

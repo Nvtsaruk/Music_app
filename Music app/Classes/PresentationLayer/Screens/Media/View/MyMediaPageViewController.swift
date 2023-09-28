@@ -1,23 +1,13 @@
-//
-//  MyMediaPageViewController.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 8.08.23.
-//
-
 import UIKit
 
-class MyMediaPageViewController: UIViewController {
+final class MyMediaPageViewController: UIViewController {
 
-    @IBOutlet weak var titleLabel: UILabel!
-   
-    
-    @IBOutlet weak var tableView: UITableView!
+    //MARK: - IBOutlets
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var tableView: UITableView!
     
     //MARK: - Variables
-    
     var viewModel: MyMediaPageViewModelProtocol?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +19,8 @@ class MyMediaPageViewController: UIViewController {
     private func setupUI() {
         tableView.delegate = self
         tableView.dataSource = self
-        let tablePlaylistNib = UINib(nibName: "PlaylistTableViewCell", bundle: nil)
-        tableView.register(tablePlaylistNib, forCellReuseIdentifier: "PlaylistTableViewCell")
+        let tablePlaylistNib = UINib(nibName: XibNames.playlist.name, bundle: nil)
+        tableView.register(tablePlaylistNib, forCellReuseIdentifier: XibNames.playlist.name)
     }
     
     private func bindViewModel() {
@@ -49,7 +39,7 @@ extension MyMediaPageViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let tablePlaylistCell = tableView.dequeueReusableCell(withIdentifier: "PlaylistTableViewCell") as? PlaylistTableViewCell else { return UITableViewCell()}
+        guard let tablePlaylistCell = tableView.dequeueReusableCell(withIdentifier: XibNames.playlist.name) as? PlaylistTableViewCell else { return UITableViewCell()}
         guard let name = viewModel?.databasePlaylist[indexPath.row].playlistName,
               let image = viewModel?.databasePlaylist[indexPath.row].tracks.first?.image
         else { return tablePlaylistCell}

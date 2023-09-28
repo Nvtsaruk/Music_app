@@ -50,7 +50,7 @@ final class MainPageViewModel: MainPageViewModelProtocol {
                     case .success(let data):
                         self.mainPageData.playlistNames.append(cases.name)
                         self.mainPageData.playlists.append(data)
-                        self.mainPageData.numRows.append(data.playlists?.items?.count ?? 0)
+                        self.mainPageData.numRows.append(data.playlists.items.count)
                     case .failure(let error):
                         print("Custom Error -> \(error)")
                 }
@@ -81,36 +81,5 @@ extension MainPageViewModel: HeaderTableViewCellDelegate {
     func goToUserProfile() {
         coordinator?.goToUserProfile()
     }
-    func cleanKeychain() {
-//        print("Clean")
-        let right_Token = "BQD1qSeyAXA8AAtQagE5zlsKazoB7E1fmjnlAU8FcL5qx8BtfXluf7Eh3oqfw3v8hwsuQTxmdSkr9MzmZU0vVInwOTkMMbTum5rvA_rXLL4lmoj-5dH8-3UCnP-4gqwXvSxD8Ye3whV8ivk-NmihqsbSCeimaisjod7JAHjC8ZLYPxoItIz2Ba5LAF4HzMadHC7dtSK5T2owAaQjgDk2-R8a3z_EE5oU5hL3ISnFDAmxGnb_DwncCeSx5dg8OqcX8THR-uDi7JAcX2XLGyVpMxTCLCRcBe712iuTLffj-JsR-LkuZiF-zg"
-        let wrongToken = "BQAreOfwnCKhvpsuOXzGNYrHzdUrLLNUaAZZsH8rBU1gvmhcPrNHNnjL6zs_c1tWkqHQF-yVYlaz5aOq5ez4ThR9gw2mEDDcAvgQrxhn7TY9Cf8Tl4nNxa5gCcX385a3N_OXSuz76uys4kGze7bsiW_I4Kb8CbvuGqq509k9UVbucwGXDrIjb8J7bNaoHncpkJN7EYmMBXA3JCDK9si6qyeZkHy4nZ7J616K354RJlII-W-_YS-gOGY4XepyyzZo4wMDjoKLQjFkiUiYgejAUMzWJKfUryrAA4agoRK855UQTI9-YwElZe"
-//        KeychainManager().logout(for: KeychainConstants.accessToken.key)
-        do {
-            _ = try CredentialStorageService().logout(for: KeychainConstants.accessToken.key)
-        } catch {
-            print(error)
-        }
-        guard let accessToken = wrongToken.data(using: .utf8) else { return }
-        CredentialStorageService().saveAccessToken(token: accessToken)
-//        KeychainManager().save(token: accessToken, tokenKey: KeychainConstants.accessToken.key)
-//        do {
-//            guard let accessToken = wrongToken.data(using: .utf8) else { return }
-//            _ = try CredentialStorageService().save(token: accessToken, tokenKey: KeychainConstants.accessToken.key)
-//        } catch {
-//            print(error)
-//        }
-//        let temp = try KeychainManager().getPassword(for: KeychainConstants.accessToken.key)
-//        print("token after reset", String(decoding: temp ?? Data(), as: UTF8.self))
-        do {
-            let temp = try CredentialStorageService().getPassword(for: KeychainConstants.accessToken.key)
-            print("token after reset", String(decoding: temp ?? Data(), as: UTF8.self))
-        } catch {
-            print(error)
-        }
-        
-    }
-    
-    
 }
 

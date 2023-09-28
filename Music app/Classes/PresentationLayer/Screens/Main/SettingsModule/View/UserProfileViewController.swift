@@ -32,8 +32,8 @@ class UserProfileViewController: UIViewController {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
             self.isLoading = ((viewModel?.isLoading) != nil)
-            self.profileDisplayName.text = self.viewModel?.currentUser.display_name
-            if let url = viewModel?.currentUser.images.first?.url {
+            self.profileDisplayName.text = self.viewModel?.currentUser?.display_name
+            if let url = viewModel?.currentUser?.images.first?.url {
                 self.profileImage.webImage(url: url)
             } else {
                 self.profileImage.image = UIImage(systemName: "person", withConfiguration: symbolConfig)
