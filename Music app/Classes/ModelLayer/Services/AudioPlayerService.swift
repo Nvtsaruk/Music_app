@@ -23,12 +23,12 @@ final class AudioPlayerService {
     static var shared = AudioPlayerService()
     private init() {}
     
-    var player: AVPlayer? = AVPlayer()
+    var player = AVPlayer()
     
     weak var delegate: AudioPlayerDelegate?
     weak var detailsDelegate: AudioPlayerDelegateForDetails?
     weak var showHideDelegate: AudioPlayerShowHideDelegate?
-    var playerItem: [PlayerItemModel?] = []
+    var playerItem: [PlayerItemModel] = []
     var isPlaying: Bool = false {
         didSet {
             if isPlaying {
@@ -46,14 +46,14 @@ final class AudioPlayerService {
             } else if itemIndex == playerItem.count {
                 itemIndex = 0
             }
-            guard let urlString = playerItem[itemIndex]?.url else { return }
+            let urlString = playerItem[itemIndex].url
             guard let url = URL(string: urlString) else { return }
             play(url: url)
             if compactPlayerPresented == false {
                 presentCompactPlayer()
                 compactPlayerPresented = true
             }
-            guard let playerItem = playerItem[itemIndex] else { return }
+            let playerItem = playerItem[itemIndex]
             delegate?.sendTrackInfo(playerItem: playerItem)
         }
     }
@@ -66,26 +66,26 @@ final class AudioPlayerService {
     }
     
     func initPlayerData() {
-        delegate?.sendTrackInfo(playerItem: playerItem[itemIndex] ?? PlayerItemModel())
+        let playerItem = playerItem[itemIndex]
+        delegate?.sendTrackInfo(playerItem: playerItem)
     }
     
     func play(url:URL) {
         let playerItem = AVPlayerItem(url: url)
-        
         self.player = AVPlayer(playerItem:playerItem)
-        player?.volume = 1.0
-        player?.play()
+        player.volume = 1.0
+        player.play()
         isPlaying = true
         delegate?.audioPlayerDidStartPlaying()
         
     }
     func playPause() {
         if isPlaying == true {
-            player?.pause()
+            player.pause()
             isPlaying = false
             delegate?.audioPlayerDidStopPlaying()
         } else {
-            player?.play()
+            player.play()
             isPlaying = true
             delegate?.audioPlayerDidStartPlaying()
         }
@@ -94,14 +94,13 @@ final class AudioPlayerService {
     
     func nextItem() {
         itemIndex += 1
-        guard let playerItem = playerItem[itemIndex] else { return }
+        let playerItem = playerItem[itemIndex]
         delegate?.sendTrackInfo(playerItem: playerItem)
     }
     
     func previousItem() {
         itemIndex -= 1
-        guard let playerItem = playerItem[itemIndex] else { return }
-        
+        let playerItem = playerItem[itemIndex]
         delegate?.sendTrackInfo(playerItem: playerItem)
     }
     
