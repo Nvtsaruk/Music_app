@@ -11,7 +11,7 @@ protocol AlbumItemDetailViewModelProtocol {
     var isPlaying: Bool { get set }
 }
 
-final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, AudioPlayerDelegateForDetails, TrackItemDetailTableViewCellDelegate {
+final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, TrackItemDetailTableViewCellDelegate {
     
     
     
@@ -100,7 +100,7 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, AudioPla
                     print("Custom Error -> \(error)")
             }
         }
-        AudioPlayerService.shared.detailsDelegate = self
+//        AudioPlayerService.shared.detailsDelegate = self
     }
     
     func playButtonAction() {

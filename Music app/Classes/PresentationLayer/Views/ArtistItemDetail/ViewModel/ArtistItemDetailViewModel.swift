@@ -10,7 +10,7 @@ protocol ArtistItemDetailViewModelProtocol {
     var isPlaying: Bool { get set }
 }
 
-final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioPlayerDelegateForDetails, TrackItemDetailTableViewCellDelegate {
+final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, TrackItemDetailTableViewCellDelegate {
     func start() {
         let trackCell = TrackItemDetailTableViewCell()
         trackCell.delegate = self
@@ -69,7 +69,7 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
             }
         }
         
-        AudioPlayerService.shared.detailsDelegate = self
+//        AudioPlayerService.shared.detailsDelegate = self
     }
     func getArtistTracks() {
         let url = NetworkConstants.baseUrl + NetworkConstants.artists + (id ?? "") + NetworkConstants.topTracks
@@ -81,7 +81,7 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
                     print("Custom Error -> \(error)")
             }
         }
-        AudioPlayerService.shared.detailsDelegate = self
+//        AudioPlayerService.shared.detailsDelegate = self
     }
     
     func addPlayItems(itemIndex: Int) {

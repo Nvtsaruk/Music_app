@@ -1,43 +1,36 @@
 import AVKit
 import SDWebImage
 
-protocol AudioPlayerDelegate: AnyObject {
-    func audioPlayerDidStartPlaying()
-    func audioPlayerDidStopPlaying()
-    func sendTrackInfo(playerItem: PlayerItemModel)
-}
-protocol AudioPlayerDelegateForDetails: AnyObject {
-    func audioPlayerDidStartPlaying()
-    func audioPlayerDidStopPlaying()
-    func sendTrackInfo(playerItem: PlayerItemModel)
-}
-
 protocol AudioPlayerShowHideDelegate: AnyObject {
     func showCompactPlayer()
     func showFullPlayer()
 }
 
-
+protocol AudioPlayerServiceObserver: AnyObject {
+    func audioPlayerPlaying(item: PlayerItemModel)
+    func audioPlayerPaused(item: PlayerItemModel)
+    func audioPlayerDidStop()
+}
+extension AudioPlayerServiceObserver {
+    func audioPlayerPlaying(item: PlayerItemModel) {}
+    func audioPlayerPaused(item: PlayerItemModel) {}
+    func audioPlayerDidStop() {}
+}
 
 final class AudioPlayerService {
     static var shared = AudioPlayerService()
     private init() {}
     
     var player = AVPlayer()
-    
-    weak var delegate: AudioPlayerDelegate?
-    weak var detailsDelegate: AudioPlayerDelegateForDetails?
+    private var observations = [ObjectIdentifier : Observation]()
     weak var showHideDelegate: AudioPlayerShowHideDelegate?
     var playerItem: [PlayerItemModel] = []
-    var isPlaying: Bool = false {
+    private var state = State.idle {
         didSet {
-            if isPlaying {
-                detailsDelegate?.audioPlayerDidStartPlaying()
-            } else {
-                detailsDelegate?.audioPlayerDidStopPlaying()
-            }
+            stateDidChange()
         }
     }
+
     var compactPlayerPresented: Bool = false
     var itemIndex: Int = 0 {
         didSet {
@@ -49,12 +42,13 @@ final class AudioPlayerService {
             let urlString = playerItem[itemIndex].url
             guard let url = URL(string: urlString) else { return }
             play(url: url)
+            
             if compactPlayerPresented == false {
                 presentCompactPlayer()
                 compactPlayerPresented = true
             }
             let playerItem = playerItem[itemIndex]
-            delegate?.sendTrackInfo(playerItem: playerItem)
+            state = .playing(playerItem)
         }
     }
     
@@ -67,7 +61,7 @@ final class AudioPlayerService {
     
     func initPlayerData() {
         let playerItem = playerItem[itemIndex]
-        delegate?.sendTrackInfo(playerItem: playerItem)
+        state = .playing(playerItem)
     }
     
     func play(url:URL) {
@@ -75,33 +69,33 @@ final class AudioPlayerService {
         self.player = AVPlayer(playerItem:playerItem)
         player.volume = 1.0
         player.play()
-        isPlaying = true
-        delegate?.audioPlayerDidStartPlaying()
         
     }
     func playPause() {
-        if isPlaying == true {
-            player.pause()
-            isPlaying = false
-            delegate?.audioPlayerDidStopPlaying()
-        } else {
-            player.play()
-            isPlaying = true
-            delegate?.audioPlayerDidStartPlaying()
+        switch state {
+            case .idle:
+                break
+            case .paused(let item):
+                print("Playing")
+                state = .playing(item)
+                player.play()
+            case .playing(let item):
+                print("Paused")
+                state = .paused(item)
+                player.pause()
         }
-        
     }
     
     func nextItem() {
         itemIndex += 1
         let playerItem = playerItem[itemIndex]
-        delegate?.sendTrackInfo(playerItem: playerItem)
+//        delegate?.sendTrackInfo(playerItem: playerItem)
     }
     
     func previousItem() {
         itemIndex -= 1
         let playerItem = playerItem[itemIndex]
-        delegate?.sendTrackInfo(playerItem: playerItem)
+//        delegate?.sendTrackInfo(playerItem: playerItem)
     }
     
     func presentCompactPlayer() {
@@ -110,5 +104,52 @@ final class AudioPlayerService {
     
     func presentFullPlayer() {
         showHideDelegate?.showFullPlayer()
+    }
+}
+
+private extension AudioPlayerService {
+    struct Observation {
+        weak var observer: AudioPlayerServiceObserver?
+    }
+}
+
+private extension AudioPlayerService {
+    enum State {
+        case idle
+        case playing(PlayerItemModel)
+        case paused(PlayerItemModel)
+    }
+}
+
+private extension AudioPlayerService {
+    func stateDidChange() {
+        for (id, observation) in observations {
+                    // If the observer is no longer in memory, we
+                    // can clean up the observation for its ID
+                    guard let observer = observation.observer else {
+                        observations.removeValue(forKey: id)
+                        continue
+                    }
+
+                    switch state {
+                    case .idle:
+                        observer.audioPlayerDidStop()
+                        case .playing(let item):
+                        observer.audioPlayerPlaying(item: item)
+                        case .paused(let item):
+                        observer.audioPlayerPaused(item: item)
+                    }
+                }
+    }
+}
+extension AudioPlayerService {
+    func addObserver(_ observer: AudioPlayerServiceObserver) {
+        let id = ObjectIdentifier(observer)
+        observations[id] = Observation(observer: observer)
+    }
+
+    func removeObserver(_ observer: AudioPlayerServiceObserver) {
+        let id = ObjectIdentifier(observer)
+        observations.removeValue(forKey: id)
     }
 }

@@ -10,7 +10,7 @@ protocol PlaylistItemDetailViewModelProtocol {
     var isPlaying: Bool { get set }
 }
 
-final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, AudioPlayerDelegateForDetails, TrackItemDetailTableViewCellDelegate {
+final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, TrackItemDetailTableViewCellDelegate {
     
     var coordinator: MainPageCoordinator?
     var id: String?
@@ -51,6 +51,7 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Au
         
     }
     func start() {
+        AudioPlayerService.shared.addObserver(self)
         let trackDetailsCell = TrackItemDetailTableViewCell()
         trackDetailsCell.delegate = self
         updateClosure?()
@@ -126,5 +127,19 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Au
         }
     }
     
+}
+
+extension PlaylistItemDetailViewModel: AudioPlayerServiceObserver {
+    func audioPlayerPlaying(item: PlayerItemModel) {
+        isPlaying = true
+    }
+    
+    func audioPlayerPaused(item: PlayerItemModel) {
+        isPlaying = false
+    }
+    
+    func audioPlayerDidStop() {
+        
+    }
 }
 
