@@ -39,7 +39,7 @@ class CategoriesDetailsViewController: UIViewController {
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
-            self.numRows = viewModel?.playlists?.playlists?.items?.count ?? 0
+            self.numRows = viewModel?.playlists?.playlists.items.count ?? 0
             self.collectionData = viewModel?.playlists
         }
     }
@@ -52,13 +52,13 @@ extension CategoriesDetailsViewController: UICollectionViewDelegate, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaylistsCollectionViewCell", for: indexPath) as? PlaylistsCollectionViewCell else { return UICollectionViewCell()}
-        cell.descriptionLabel.text = collectionData?.playlists?.items?[indexPath.row].description
-        guard let url = collectionData?.playlists?.items?[indexPath.row].images?[0].url else { return cell }
+        cell.descriptionLabel.text = collectionData?.playlists.items[indexPath.row].description
+        guard let url = collectionData?.playlists.items[indexPath.row].images[0].url else { return cell }
         cell.imageView.webImage(url: url)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel?.showItemDetail(id: collectionData?.playlists?.items?[indexPath.row].id ?? "")
+        viewModel?.showItemDetail(id: collectionData?.playlists.items[indexPath.row].id ?? "")
     }
     
     

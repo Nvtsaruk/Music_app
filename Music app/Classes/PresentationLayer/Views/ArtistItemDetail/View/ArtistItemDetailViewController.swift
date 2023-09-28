@@ -26,7 +26,7 @@ final class ArtistItemDetailViewController: UIViewController {
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
-            guard let imageURL = viewModel?.artist?.images?.first?.url,
+            guard let imageURL = viewModel?.artist?.images.first?.url,
                   let artistName = viewModel?.artist?.name
             else { return }
             artistNameLabel.text = artistName
@@ -62,9 +62,9 @@ extension ArtistItemDetailViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let trackCell = tableView.dequeueReusableCell(withIdentifier: "TrackItemDetailTableViewCell") as? TrackItemDetailTableViewCell else { return UITableViewCell() }
         trackCell.delegate = viewModel as? any TrackItemDetailTableViewCellDelegate
-        guard let artist = viewModel?.topTracks[indexPath.row].artists?.first?.name,
+        guard let artist = viewModel?.topTracks[indexPath.row].artists.first?.name,
               let track = viewModel?.topTracks[indexPath.row].name,
-              let url = viewModel?.topTracks[indexPath.row].album?.images?.first?.url,
+              let url = viewModel?.topTracks[indexPath.row].album.images.first?.url,
               let id = viewModel?.topTracks[indexPath.row].id
         else { return trackCell }
         trackCell.configure(track: track, artist: artist, image: url, id: id)

@@ -2,7 +2,7 @@ import Foundation
 protocol SearchPageViewModelProtocol {
     func start()
     func search(item: String)
-    var searchModel: SearchResults { get }
+    var searchModel: SearchResults? { get }
     var updateClosure:( ()->Void )? { get set }
     func backToSearchCategories()
     func showPlaylistDetail(id: String)
@@ -19,14 +19,13 @@ final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTab
     var lastScheduledSearch: Timer?
     
     var updateClosure: (() -> Void)?
-    var cleared = false
-    var searchModel: SearchResults = SearchResults() {
+    private var cleared = false
+    var searchModel: SearchResults? {
         didSet {
             if cleared == false {
                 removeNilSongs()
                 cleared = true
             }
-            print(searchModel.tracks.items.count)
             updateClosure?()
         }
     }
@@ -43,10 +42,10 @@ final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTab
     }
     
     func addToPlaylist(trackId: String) {
-        searchModel.tracks.items.forEach{ item in
+        searchModel?.tracks.items.forEach{ item in
             if item.id == trackId {
                 guard let artistName = item.artists.first?.name,
-                      let image = item.album.images?.first?.url
+                      let image = item.album.images.first?.url
                 else { return }
                 let trackName = item.name
                 let track = item.preview_url
@@ -71,15 +70,16 @@ final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTab
     }
     func removeNilSongs() {
         var indexArray: [String] = []
-        searchModel.tracks.items.forEach { item in
+        searchModel?.tracks.items.forEach { item in
             if item.preview_url == nil {
                 indexArray.append(item.id)
             }
         }
         indexArray.forEach { id in
-            for (i, v) in searchModel.tracks.items.enumerated() {
+            guard let enumeratedSearchModel = searchModel else { return }
+            for (i, v) in enumeratedSearchModel.tracks.items.enumerated() {
                 if id == v.id {
-                    searchModel.tracks.items.remove(at: i)
+                    searchModel?.tracks.items.remove(at: i)
                 }
             }
         }

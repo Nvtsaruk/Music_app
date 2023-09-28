@@ -47,8 +47,8 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
     func addToPlaylist(trackId: String) {
         topTracks.forEach{ item in
             if item.id == trackId {
-                guard let artistName = item.artists?.first?.name,
-                      let image = item.album?.images?.first?.url
+                guard let artistName = item.artists.first?.name,
+                      let image = item.album.images.first?.url
                 else { return }
                 let trackName = item.name
                 let track = item.preview_url
@@ -88,10 +88,10 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
         var playerPlaylist: [PlayerItemModel] = []
         topTracks.forEach { item in
             guard let url = item.preview_url else { return }
-            guard let imageUrl = item.album?.images?.first?.url else { return }
-            guard let artistName = item.artists?.first?.name else { return }
+            guard let imageUrl = item.album.images.first?.url else { return }
+            guard let artistName = item.artists.first?.name else { return }
             let trackName = item.name
-            let playerItem = PlayerItemModel(url: url, image: imageUrl, trackName: trackName, artistName: artistName)
+            let playerItem = PlayerItemModel(url: url, imageURL: imageUrl, trackName: trackName, artistName: artistName)
             playerPlaylist.append(playerItem)
         }
         AudioPlayerService.shared.addPlaylistForPlayer(playerPlaylist, itemIndex: itemIndex)

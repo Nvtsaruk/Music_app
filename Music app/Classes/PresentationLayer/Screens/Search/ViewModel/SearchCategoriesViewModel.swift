@@ -9,7 +9,7 @@ protocol SearchCategoriesViewModelProtocol {
 
 final class SearchCategoriesViewModel: SearchCategoriesViewModelProtocol {
     
-    var categories: AllCategories? = AllCategories() {
+    var categories: AllCategories? {
         didSet {
             updateClosure?()
         }

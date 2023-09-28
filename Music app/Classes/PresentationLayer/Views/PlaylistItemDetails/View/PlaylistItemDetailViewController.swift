@@ -31,17 +31,17 @@ final class PlaylistItemDetailViewController: UIViewController {
         let itemDetailNib = UINib(nibName: "TrackItemDetailTableViewCell", bundle: nil)
         tableView.register(itemDetailNib, forCellReuseIdentifier: "TrackItemDetailTableViewCell")
         tableView.reloadData()
-        guard let url = viewModel?.playlist.images?.first?.url else { return }
+        guard let url = viewModel?.playlist?.images.first?.url else { return }
             self.itemImage.webImage(url: url)
     }
     
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
-            guard let url = viewModel?.playlist.images?.first?.url else { return }
+            guard let url = viewModel?.playlist?.images.first?.url else { return }
                 self.itemImage.webImage(url: url)
             if let imageCached = SDImageCache.shared.imageFromMemoryCache(forKey: url) {
-                var colorTop = imageCached.findAverageColor()?.cgColor ?? CGColor(red: 1, green: 1, blue: 1, alpha: 1)
+                let colorTop = imageCached.findAverageColor()?.cgColor ?? CGColor(red: 1, green: 1, blue: 1, alpha: 1)
                 let colors = Colors(colorTop: colorTop, colorBottom: CGColor(gray: 0, alpha: 1))
                 view.backgroundColor = UIColor.clear
                 let backgroundLayer = colors.gl
@@ -67,16 +67,16 @@ final class PlaylistItemDetailViewController: UIViewController {
 
 extension PlaylistItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel?.playlist.tracks?.items?.count ?? 0
+        viewModel?.playlist?.tracks.items.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TrackItemDetailTableViewCell") as? TrackItemDetailTableViewCell else { return UITableViewCell() }
         cell.delegate = viewModel as? any TrackItemDetailTableViewCellDelegate
-        guard let artist = viewModel?.playlist.tracks?.items?[indexPath.row].track?.artists?.first?.name,
-              let track = viewModel?.playlist.tracks?.items?[indexPath.row].track?.name,
-              let url = viewModel?.playlist.tracks?.items?[indexPath.row].track?.album?.images?.first?.url,
-              let id = viewModel?.playlist.tracks?.items?[indexPath.row].track?.id
+        guard let artist = viewModel?.playlist?.tracks.items[indexPath.row].track.artists.first?.name,
+              let track = viewModel?.playlist?.tracks.items[indexPath.row].track.name,
+              let url = viewModel?.playlist?.tracks.items[indexPath.row].track.album.images.first?.url,
+              let id = viewModel?.playlist?.tracks.items[indexPath.row].track.id
         else { return cell }
         cell.configure(track: track, artist: artist, image: url, id: id)
         return cell

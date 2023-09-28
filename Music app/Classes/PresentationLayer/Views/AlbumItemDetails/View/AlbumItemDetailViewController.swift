@@ -36,10 +36,10 @@ final class AlbumItemDetailViewController: UIViewController {
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
-            guard let url = viewModel?.album.images?.first?.url else { return }
+            guard let url = viewModel?.album?.images.first?.url else { return }
                 self.albumImageOutlet.webImage(url: url)
             if let imageCached = SDImageCache.shared.imageFromMemoryCache(forKey: url) {
-                var colorTop = imageCached.findAverageColor()?.cgColor ?? CGColor(red: 1, green: 1, blue: 1, alpha: 1)
+                let colorTop = imageCached.findAverageColor()?.cgColor ?? CGColor(red: 1, green: 1, blue: 1, alpha: 1)
                 let colors = Colors(colorTop: colorTop, colorBottom: CGColor(gray: 0, alpha: 1))
                 view.backgroundColor = UIColor.clear
                 let backgroundLayer = colors.gl
@@ -53,9 +53,9 @@ final class AlbumItemDetailViewController: UIViewController {
             }
 //            descriptionLabel.text = viewModel?.details
             tableView.reloadData()
-            albumTitleLabel.text = viewModel?.album.name
-            artistNameLabel.text = viewModel?.album.tracks.items.first?.artists?.first?.name
-            typeAndYearLabel.text = viewModel?.album.release_date ?? ""
+            albumTitleLabel.text = viewModel?.album?.name
+            artistNameLabel.text = viewModel?.album?.tracks.items.first?.artists.first?.name
+            typeAndYearLabel.text = viewModel?.album?.release_date ?? ""
         }
     }
     
@@ -66,16 +66,16 @@ final class AlbumItemDetailViewController: UIViewController {
 
 extension AlbumItemDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel?.album.tracks.items.count ?? 0
+        viewModel?.album?.tracks.items.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TrackItemDetailTableViewCell") as? TrackItemDetailTableViewCell else { return UITableViewCell() }
         cell.delegate = viewModel as? any TrackItemDetailTableViewCellDelegate
-        guard let artist = viewModel?.album.tracks.items[indexPath.row].artists?.first?.name,
-              let track = viewModel?.album.tracks.items[indexPath.row].name,
-              let url = viewModel?.album.images?.first?.url,
-              let id = viewModel?.album.tracks.items[indexPath.row].id
+        guard let artist = viewModel?.album?.tracks.items[indexPath.row].artists.first?.name,
+              let track = viewModel?.album?.tracks.items[indexPath.row].name,
+              let url = viewModel?.album?.images.first?.url,
+              let id = viewModel?.album?.tracks.items[indexPath.row].id
         else { return cell}
         cell.configure(track: track, artist: artist, image: url, id: id)
         return cell

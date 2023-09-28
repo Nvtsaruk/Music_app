@@ -4,7 +4,7 @@ protocol AlbumItemDetailViewModelProtocol {
     func start()
     func getAlbumItems()
     var details: String { get set }
-    var album: Album { get }
+    var album: Album? { get }
     var updateClosure:(() -> Void)? { get set }
     func playButtonAction()
         func addPlayItems(itemIndex: Int)
@@ -32,7 +32,7 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, AudioPla
     
     var updateClosure: (() -> Void)?
     var cleared = false
-    var album: Album = Album() {
+    var album: Album? {
         didSet {
             if cleared == false {
                 removeNilSongs()
@@ -43,10 +43,11 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, AudioPla
     }
     
     func addToPlaylist(trackId: String) {
+        guard let album = album else { return }
         album.tracks.items.forEach{ item in
             if item.id == trackId {
-                guard let artistName = item.artists?.first?.name,
-                      let image = item.album?.images?.first?.url
+                guard let artistName = item.artists.first?.name,
+                      let image = item.album.images.first?.url
                 else { return }
                 let trackName = item.name
                 let track = item.id
@@ -75,13 +76,14 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, AudioPla
     }
     func addPlayItems(itemIndex: Int) {
         var playerPlaylist: [PlayerItemModel] = []
-        let image = album.images?.first?.url
+        let image = album?.images.first?.url
+        guard let album = album else { return }
         album.tracks.items.forEach { item in
             guard let url = item.preview_url,
                   let imageUrl = image,
-                  let artistName = item.artists?.first?.name else { return }
+                  let artistName = item.artists.first?.name else { return }
             let trackName = item.name
-            let playerItem = PlayerItemModel(url: url, image: imageUrl, trackName: trackName, artistName: artistName)
+            let playerItem = PlayerItemModel(url: url, imageURL: imageUrl, trackName: trackName, artistName: artistName)
             playerPlaylist.append(playerItem)
         }
         AudioPlayerService.shared.addPlaylistForPlayer(playerPlaylist, itemIndex: itemIndex)
@@ -102,6 +104,7 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, AudioPla
     }
     
     func playButtonAction() {
+        guard let album = album else { return }
         if !album.tracks.items.isEmpty {
             if AudioPlayerService.shared.playerItem.isEmpty || playingThisPlaylist == false {
                 addPlayItems(itemIndex: 0)
@@ -113,16 +116,17 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, AudioPla
     
     func removeNilSongs() {
         var indexArray: [String] = []
-        album.tracks.items.forEach { item in
+//        guard let album = album else { return }
+        album?.tracks.items.forEach { item in
             if item.preview_url == nil {
                 indexArray.append(item.id)
-                print(item.id)
             }
         }
         indexArray.forEach { id in
-            for (i, v) in album.tracks.items.enumerated() {
+            guard let enumeratedAlbum = album else { return }
+            for (i, v) in enumeratedAlbum.tracks.items.enumerated() {
                 if id == v.id {
-                    album.tracks.items.remove(at: i)
+                    album?.tracks.items.remove(at: i)
                 }
             }
         }

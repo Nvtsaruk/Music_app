@@ -8,7 +8,7 @@ final class CategoriesDetailsViewModel: CategoriesDetailsViewModelProtocol {
     
     var coordinator: SearchPageCoordinator?
     
-    var playlists: Toplist? = Toplist() {
+    var playlists: Toplist? {
         didSet {
             updateClosure?()
         }

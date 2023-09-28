@@ -63,13 +63,13 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
             case 0:
-                return viewModel?.searchModel.artists.items.count ?? 0
+                return viewModel?.searchModel?.artists.items.count ?? 0
             case 1:
-                return viewModel?.searchModel.tracks.items.count ?? 0
+                return viewModel?.searchModel?.tracks.items.count ?? 0
             case 2:
-                return viewModel?.searchModel.playlists.items.count ?? 0
+                return viewModel?.searchModel?.playlists.items.count ?? 0
             default:
-                return viewModel?.searchModel.albums.items.count ?? 0
+                return viewModel?.searchModel?.albums.items.count ?? 0
         }
         
     }
@@ -81,42 +81,42 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
         guard let tablePlaylistCell = tableView.dequeueReusableCell(withIdentifier: "PlaylistTableViewCell") as? PlaylistTableViewCell else { return UITableViewCell()}
         guard let tableTrackCell = tableView.dequeueReusableCell(withIdentifier: "TrackItemDetailTableViewCell") as? TrackItemDetailTableViewCell else { return UITableViewCell()}
         tableTrackCell.delegate = viewModel as? any TrackItemDetailTableViewCellDelegate
-        guard let albumCount = viewModel?.searchModel.artists.items.count else { return UITableViewCell() }
+        guard let albumCount = viewModel?.searchModel?.artists.items.count else { return UITableViewCell() }
         if indexPath.row < albumCount - 1 {
-            if viewModel?.searchModel.albums.items[indexPath.row].type == "album" {
-                guard let imageUrl = viewModel?.searchModel.albums.items[indexPath.row].images?.first?.url,
-                      let album = viewModel?.searchModel.albums.items[indexPath.row].name,
-                      let artist = viewModel?.searchModel.albums.items[indexPath.row].artists.first?.name
+            if viewModel?.searchModel?.albums.items[indexPath.row].type == "album" {
+                guard let imageUrl = viewModel?.searchModel?.albums.items[indexPath.row].images.first?.url,
+                      let album = viewModel?.searchModel?.albums.items[indexPath.row].name,
+                      let artist = viewModel?.searchModel?.albums.items[indexPath.row].artists.first?.name
                 else { return UITableViewCell()}
                 tableAlbumCell.configure(artist: artist, album: album, imageUrl: imageUrl)
             }
         }
-        guard let artistCount = viewModel?.searchModel.artists.items.count else { return UITableViewCell() }
+        guard let artistCount = viewModel?.searchModel?.artists.items.count else { return UITableViewCell() }
         if indexPath.row < artistCount - 1 {
-            if viewModel?.searchModel.artists.items[indexPath.row].type == "artist" {
-                let imageUrl = viewModel?.searchModel.artists.items[indexPath.row].images?.first?.url
-                guard let artist = viewModel?.searchModel.artists.items[indexPath.row].name
+            if viewModel?.searchModel?.artists.items[indexPath.row].type == "artist" {
+                let imageUrl = viewModel?.searchModel?.artists.items[indexPath.row].images.first?.url
+                guard let artist = viewModel?.searchModel?.artists.items[indexPath.row].name
                 else { return UITableViewCell()}
                 tableArtistCell.configure(name: artist, image: imageUrl)
             }
         }
-        guard let playlistCount = viewModel?.searchModel.playlists.items.count else { return UITableViewCell() }
+        guard let playlistCount = viewModel?.searchModel?.playlists.items.count else { return UITableViewCell() }
         if indexPath.row < playlistCount - 1 {
-            if viewModel?.searchModel.playlists.items[indexPath.row].type == "playlist" {
-                guard let imageUrl = viewModel?.searchModel.playlists.items[indexPath.row].images?.first?.url,
-                      let playlist = viewModel?.searchModel.playlists.items[indexPath.row].name
+            if viewModel?.searchModel?.playlists.items[indexPath.row].type == "playlist" {
+                guard let imageUrl = viewModel?.searchModel?.playlists.items[indexPath.row].images.first?.url,
+                      let playlist = viewModel?.searchModel?.playlists.items[indexPath.row].name
                 else { return UITableViewCell()}
                 tablePlaylistCell.configure(playlist: playlist, imageUrl: imageUrl)
             }
         }
-        guard let trackCount = viewModel?.searchModel.tracks.items.count else { return UITableViewCell() }
+        guard let trackCount = viewModel?.searchModel?.tracks.items.count else { return UITableViewCell() }
         if indexPath.row < trackCount - 1 {
-            if viewModel?.searchModel.tracks.items.count != 0 {
-                if viewModel?.searchModel.tracks.items[indexPath.row].type == "track" {
-                    guard let imageUrl = viewModel?.searchModel.tracks.items[indexPath.row].album.images?.first?.url,
-                          let track = viewModel?.searchModel.tracks.items[indexPath.row].name,
-                          let artist = viewModel?.searchModel.tracks.items[indexPath.row].artists.first?.name,
-                          let id = viewModel?.searchModel.tracks.items[indexPath.row].id
+            if viewModel?.searchModel?.tracks.items.count != 0 {
+                if viewModel?.searchModel?.tracks.items[indexPath.row].type == "track" {
+                    guard let imageUrl = viewModel?.searchModel?.tracks.items[indexPath.row].album.images.first?.url,
+                          let track = viewModel?.searchModel?.tracks.items[indexPath.row].name,
+                          let artist = viewModel?.searchModel?.tracks.items[indexPath.row].artists.first?.name,
+                          let id = viewModel?.searchModel?.tracks.items[indexPath.row].id
                     else { return UITableViewCell()}
                     tableTrackCell.configure(track: track, artist: artist, image: imageUrl, id: id)
                 }
@@ -156,23 +156,23 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "TrackItemDetailTableViewCell" {
-            guard let previewURL = viewModel?.searchModel.tracks.items[indexPath.row].preview_url,
-                  let image = viewModel?.searchModel.tracks.items[indexPath.row].album.images?.first?.url,
-                  let track = viewModel?.searchModel.tracks.items[indexPath.row].name,
-                  let artist = viewModel?.searchModel.tracks.items[indexPath.row].artists.first?.name
+            guard let previewURL = viewModel?.searchModel?.tracks.items[indexPath.row].preview_url,
+                  let image = viewModel?.searchModel?.tracks.items[indexPath.row].album.images.first?.url,
+                  let track = viewModel?.searchModel?.tracks.items[indexPath.row].name,
+                  let artist = viewModel?.searchModel?.tracks.items[indexPath.row].artists.first?.name
             else { return }
-            AudioPlayerService.shared.addPlaylistForPlayer([PlayerItemModel(url: previewURL, image: image, trackName: track, artistName: artist)], itemIndex: 0)
+            AudioPlayerService.shared.addPlaylistForPlayer([PlayerItemModel(url: previewURL, imageURL: image, trackName: track, artistName: artist)], itemIndex: 0)
         }
         if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "PlaylistTableViewCell" {
-            guard let id = viewModel?.searchModel.playlists.items[indexPath.row].id else { return }
+            guard let id = viewModel?.searchModel?.playlists.items[indexPath.row].id else { return }
             viewModel?.showPlaylistDetail(id: id)
         }
         if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "ArtistTableViewCell" {
-            guard let id = viewModel?.searchModel.artists.items[indexPath.row].id else { return }
+            guard let id = viewModel?.searchModel?.artists.items[indexPath.row].id else { return }
             viewModel?.showArtistDetail(id: id)
         }
         if tableView.cellForRow(at: indexPath)?.reuseIdentifier == "AlbumTableViewCell" {
-            guard let id = viewModel?.searchModel.albums.items[indexPath.row].id else { return }
+            guard let id = viewModel?.searchModel?.albums.items[indexPath.row].id else { return }
             viewModel?.showAlbumDetail(id: id)
         }
     }
