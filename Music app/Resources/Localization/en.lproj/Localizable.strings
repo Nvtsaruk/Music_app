@@ -2,3 +2,10 @@
 "email" = "Email:";
 "userID" = "UserID:";
 "country" = "Country:";
+
+"topList" = "Top list";
+"relax" = "Relax";
+"pop" = "Pop";
+"rock" = "Rock";
+"mood" = "Mood";
+
