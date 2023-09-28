@@ -59,16 +59,16 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Tr
     
     func addPlayItems(itemIndex: Int) {
         var playerPlaylist: [PlayerItemModel] = []
-        playlist?.tracks.items.forEach { item in
-            guard let url = item.track.preview_url,
-                  let imageUrl = item.track.album.images.first?.url,
-                  let artistName = item.track.artists.first?.name else { return }
-            let trackName = item.track.name
-            let playerItem = PlayerItemModel(url: url, imageURL: imageUrl, trackName: trackName, artistName: artistName)
-            playerPlaylist.append(playerItem)
-        }
-        AudioPlayerService.shared.addPlaylistForPlayer(playerPlaylist, itemIndex: itemIndex)
-        playingThisPlaylist = true
+//        playlist?.tracks.items.forEach { item in
+//            guard let url = item.track.preview_url,
+//                  let imageUrl = item.track.album.images.first?.url,
+//                  let artistName = item.track.artists.first?.name else { return }
+//            let trackName = item.track.name
+//            let playerItem = PlayerItemModel(url: url, imageURL: imageUrl, trackName: trackName, artistName: artistName)
+//            playerPlaylist.append(playerItem)
+//        }
+//        AudioPlayerService.shared.addPlaylistForPlayer(playerPlaylist, itemIndex: itemIndex)
+//        playingThisPlaylist = true
     }
     
     func getItems() {
@@ -95,36 +95,36 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Tr
     }
     
     func addToPlaylist(trackId: String) {
-        playlist?.tracks.items.forEach{ item in
-            if item.track.id == trackId {
-                guard let artistName = item.track.artists.first?.name,
-                      let image = item.track.album.images.first?.url,
-                      let track = item.track.preview_url
-                else { return }
-                let trackName = item.track.name
-                let trackItem = UserPlaylistTrack(artistName: artistName, trackName: trackName, image: image, trackID: track)
-                coordinator?.showAddToPlaylist(trackItem: trackItem)
-            }
-        }
+//        playlist?.tracks.items.forEach{ item in
+//            if item.track.id == trackId {
+//                guard let artistName = item.track.artists.first?.name,
+//                      let image = item.track.album.images.first?.url,
+//                      let track = item.track.preview_url
+//                else { return }
+//                let trackName = item.track.name
+//                let trackItem = UserPlaylistTrack(artistName: artistName, trackName: trackName, image: image, trackID: track)
+//                coordinator?.showAddToPlaylist(trackItem: trackItem)
+//            }
+//        }
     }
     
     func removeNilSongs() {
-        guard id != nil else { return }
-        var indexArray: [String] = []
-        playlist?.tracks.items.forEach { item in
-            if item.track.preview_url == nil {
-                let id = item.track.id
-                indexArray.append(id)
-            }
-        }
-        indexArray.forEach { id in
-            guard let itemsArray = playlist?.tracks.items else { return }
-            for (i, v) in itemsArray.enumerated() {
-                if id == v.track.id {
-                    playlist?.tracks.items.remove(at: i)
-                }
-            }
-        }
+//        guard id != nil else { return }
+//        var indexArray: [String] = []
+//        playlist?.tracks.items.forEach { item in
+//            if item.track.preview_url == nil {
+//                let id = item.track.id
+//                indexArray.append(id)
+//            }
+//        }
+//        indexArray.forEach { id in
+//            guard let itemsArray = playlist?.tracks.items else { return }
+//            for (i, v) in itemsArray.enumerated() {
+//                if id == v.track.id {
+//                    playlist?.tracks.items.remove(at: i)
+//                }
+//            }
+//        }
     }
     
 }

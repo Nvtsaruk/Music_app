@@ -41,7 +41,6 @@ struct SearchArtistsItem: Decodable {
 
 
 struct SearchAlbumItemArtists: Decodable {
-    let href: String
     let id: String
     let name: String
     let type: String
@@ -72,6 +71,5 @@ struct SearchTracksItemArtists: Decodable {
     let name: String
     let type: String
 }
-
 
 

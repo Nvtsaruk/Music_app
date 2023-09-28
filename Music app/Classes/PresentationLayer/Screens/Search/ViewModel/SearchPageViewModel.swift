@@ -53,7 +53,6 @@ final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTab
                 coordinator?.showAddToPlaylist(trackItem: trackItem)
             }
         }
-        
     }
     
     @objc private func searchQuery(_ timer: Timer) {
@@ -68,6 +67,7 @@ final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTab
             }
         }
     }
+    
     func removeNilSongs() {
         var indexArray: [String] = []
         searchModel?.tracks.items.forEach { item in

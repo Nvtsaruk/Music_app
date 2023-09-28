@@ -45,8 +45,6 @@ class SearchPageViewController: UIViewController {
 }
 extension SearchPageViewController: UISearchBarDelegate{
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        // Stop doing the search stuff
-        // and clear the text in the search bar
         searchBar.text = ""
         viewModel?.backToSearchCategories()
         
@@ -176,17 +174,17 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
             viewModel?.showAlbumDetail(id: id)
         }
     }
-//    func getTrackUrl(id: String) {
-//        let url = "https://api.spotify.com/v1/tracks/\(id)"
-//        APIService.getData(Track.self, url: url) { result in
-//            switch result {
-//                case .success(let data):
-//                    print(data.album?.images?.first)
-//                case .failure(let error):
-//                    print("Custom Error -> \(error)")
-//            }
-//        }
-//    }
+    func getTrackUrl(id: String) {
+        let url = "https://api.spotify.com/v1/tracks/\(id)"
+        APIService.getData(Track.self, url: url) { result in
+            switch result {
+                case .success(let data):
+                    print(data.album.images.first)
+                case .failure(let error):
+                    print("Custom Error -> \(error)")
+            }
+        }
+    }
 }
 
 extension SearchPageViewController: Storyboarded {

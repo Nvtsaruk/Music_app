@@ -15,7 +15,7 @@ struct PlaylistModelOwner: Decodable {
 }
 
 struct PlaylistModelTracks: Decodable {
-    var items: [PlaylistModelTracksItem]
+    var items: [PlaylistModelTracksItem]?
 }
 
 struct PlaylistModelTracksItem: Decodable {

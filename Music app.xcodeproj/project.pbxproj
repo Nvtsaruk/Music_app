@@ -22,7 +22,6 @@
 		CC0C6DDC2AAF4F0900C18299 /* CategoriesDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0C6DDB2AAF4F0900C18299 /* CategoriesDetailsViewModel.swift */; };
 		CC16BC8F2A7A2FFD000850CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16BC8E2A7A2FFD000850CD /* AppDelegate.swift */; };
 		CC16BC912A7A2FFD000850CD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16BC902A7A2FFD000850CD /* SceneDelegate.swift */; };
-		CC16BC992A7A2FFD000850CD /* Music_app.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC16BC972A7A2FFD000850CD /* Music_app.xcdatamodeld */; };
 		CC16BC9B2A7A2FFE000850CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC16BC9A2A7A2FFE000850CD /* Assets.xcassets */; };
 		CC16BC9E2A7A2FFE000850CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC16BC9C2A7A2FFE000850CD /* LaunchScreen.storyboard */; };
 		CC16BCA62A7A3E27000850CD /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC16BCA52A7A3E27000850CD /* APIService.swift */; };
@@ -118,13 +117,10 @@
 		CCE53F122ABD9EBF00F05F4F /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE53F112ABD9EBF00F05F4F /* DatabaseService.swift */; };
 		CCEAD48B2AB6DDDA0052BBCF /* ArtistItemDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEAD48A2AB6DDDA0052BBCF /* ArtistItemDetailViewModel.swift */; };
 		CCEAD48D2AB6E1230052BBCF /* ArtistItemDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCEAD48C2AB6E1230052BBCF /* ArtistItemDetail.storyboard */; };
-		D5B4A4EAD928BFB74195390F /* libPods-Music app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03C5652567028BF0EE070A3B /* libPods-Music app.a */; };
+		CCF7992D2AC5F94800824F91 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CCF7992C2AC5F94800824F91 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		03C5652567028BF0EE070A3B /* libPods-Music app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Music app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2280ABF89DE0A6DE50FA10BA /* Pods-Music app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Music app.debug.xcconfig"; path = "Target Support Files/Pods-Music app/Pods-Music app.debug.xcconfig"; sourceTree = "<group>"; };
-		BB57875C3D08EC7B7A0598B8 /* Pods-Music app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Music app.release.xcconfig"; path = "Target Support Files/Pods-Music app/Pods-Music app.release.xcconfig"; sourceTree = "<group>"; };
 		CC0C6DC12AA0DEDE00C18299 /* FullPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPlayerViewController.swift; sourceTree = "<group>"; };
 		CC0C6DC32AA0DF1800C18299 /* FullPlayer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FullPlayer.storyboard; sourceTree = "<group>"; };
 		CC0C6DC52AA1B02C00C18299 /* FullPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPlayerViewModel.swift; sourceTree = "<group>"; };
@@ -139,7 +135,6 @@
 		CC16BC8B2A7A2FFD000850CD /* Music app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Music app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC16BC8E2A7A2FFD000850CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC16BC902A7A2FFD000850CD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CC16BC982A7A2FFD000850CD /* Music_app.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Music_app.xcdatamodel; sourceTree = "<group>"; };
 		CC16BC9A2A7A2FFE000850CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC16BC9D2A7A2FFE000850CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CC16BC9F2A7A2FFE000850CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -242,11 +237,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCF7992D2AC5F94800824F91 /* Alamofire in Frameworks */,
 				CC3A38C22A9E27F3009E4036 /* KeychainSwift in Frameworks */,
 				CC68C0952A8A79FE001016F0 /* SDWebImage in Frameworks */,
 				CC07A7E12ABB5C7C0033ED2C /* Realm in Frameworks */,
 				CC07A7E32ABB5C7C0033ED2C /* RealmSwift in Frameworks */,
-				D5B4A4EAD928BFB74195390F /* libPods-Music app.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,18 +251,8 @@
 		AB64303CD3C691F8CA7DE0B4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2280ABF89DE0A6DE50FA10BA /* Pods-Music app.debug.xcconfig */,
-				BB57875C3D08EC7B7A0598B8 /* Pods-Music app.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		B771B040A6181E60B339D5FE /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				03C5652567028BF0EE070A3B /* libPods-Music app.a */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		CC0C6DC72AA9ED0600C18299 /* SearchCollectionViewCell */ = {
@@ -311,7 +296,6 @@
 				CC16BC8D2A7A2FFD000850CD /* Music app */,
 				CC16BC8C2A7A2FFD000850CD /* Products */,
 				AB64303CD3C691F8CA7DE0B4 /* Pods */,
-				B771B040A6181E60B339D5FE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -727,7 +711,6 @@
 		CC68C0842A83D673001016F0 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				CC16BC972A7A2FFD000850CD /* Music_app.xcdatamodeld */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -946,7 +929,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC16BCA22A7A2FFE000850CD /* Build configuration list for PBXNativeTarget "Music app" */;
 			buildPhases = (
-				666726EA324A989BE848B369 /* [CP] Check Pods Manifest.lock */,
 				CC16BC872A7A2FFD000850CD /* Sources */,
 				CC16BC882A7A2FFD000850CD /* Frameworks */,
 				CC16BC892A7A2FFD000850CD /* Resources */,
@@ -961,6 +943,7 @@
 				CC3A38C12A9E27F3009E4036 /* KeychainSwift */,
 				CC07A7E02ABB5C7C0033ED2C /* Realm */,
 				CC07A7E22ABB5C7C0033ED2C /* RealmSwift */,
+				CCF7992C2AC5F94800824F91 /* Alamofire */,
 			);
 			productName = "Music app";
 			productReference = CC16BC8B2A7A2FFD000850CD /* Music app.app */;
@@ -995,6 +978,7 @@
 				CC68C0932A8A79FE001016F0 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				CC3A38C02A9E27F3009E4036 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				CC07A7DF2ABB5C7C0033ED2C /* XCRemoteSwiftPackageReference "realm-swift" */,
+				CCF7992B2AC5F94800824F91 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = CC16BC8C2A7A2FFD000850CD /* Products */;
 			projectDirPath = "";
@@ -1044,31 +1028,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		666726EA324A989BE848B369 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Music app-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		CC16BC872A7A2FFD000850CD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1105,7 +1064,6 @@
 				CC351ED82A7E952E003EF23D /* TabBarController.swift in Sources */,
 				CC4AF6B12AB35F23008E966B /* UIImage+SdWebImage.swift in Sources */,
 				CC7C616C2A8F3AC1009DCB9E /* PlaylistItemDetailViewModel.swift in Sources */,
-				CC16BC992A7A2FFD000850CD /* Music_app.xcdatamodeld in Sources */,
 				CC9DAD572ABA05AB00323A60 /* Track.swift in Sources */,
 				CC7796762AB0DE8700FB67E8 /* ArtistTableViewCell.swift in Sources */,
 				CC68C0532A825C1A001016F0 /* MyMediaPageCoordinator.swift in Sources */,
@@ -1296,7 +1254,6 @@
 		};
 		CC16BCA32A7A2FFE000850CD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2280ABF89DE0A6DE50FA10BA /* Pods-Music app.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1324,7 +1281,6 @@
 		};
 		CC16BCA42A7A2FFE000850CD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB57875C3D08EC7B7A0598B8 /* Pods-Music app.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1398,6 +1354,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		CCF7992B2AC5F94800824F91 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1421,20 +1385,12 @@
 			package = CC68C0932A8A79FE001016F0 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
 		};
-/* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		CC16BC972A7A2FFD000850CD /* Music_app.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				CC16BC982A7A2FFD000850CD /* Music_app.xcdatamodel */,
-			);
-			currentVersion = CC16BC982A7A2FFD000850CD /* Music_app.xcdatamodel */;
-			path = Music_app.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
+		CCF7992C2AC5F94800824F91 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CCF7992B2AC5F94800824F91 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
-/* End XCVersionGroup section */
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CC16BC832A7A2FFD000850CD /* Project object */;
 }
