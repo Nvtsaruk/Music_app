@@ -134,11 +134,11 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    //    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
-    //        let header = view as! UITableViewHeaderFooterView
-    //        header.textLabel?.textColor = UIColor.white
-    //        header.textLabel?.text = header.textLabel!.text!.capitalized
-    //    }
+        func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+            let header = view as! UITableViewHeaderFooterView
+            header.textLabel?.textColor = UIColor.white
+            header.textLabel?.text = header.textLabel!.text!.capitalized
+        }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
             case 0:

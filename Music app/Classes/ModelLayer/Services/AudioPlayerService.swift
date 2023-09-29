@@ -76,11 +76,9 @@ final class AudioPlayerService {
             case .idle:
                 break
             case .paused(let item):
-                print("Playing")
                 state = .playing(item)
                 player.play()
             case .playing(let item):
-                print("Paused")
                 state = .paused(item)
                 player.pause()
         }
@@ -88,12 +86,12 @@ final class AudioPlayerService {
     
     func nextItem() {
         itemIndex += 1
-        let playerItem = playerItem[itemIndex]
+//        let playerItem = playerItem[itemIndex]
     }
     
     func previousItem() {
         itemIndex -= 1
-        let playerItem = playerItem[itemIndex]
+//        let playerItem = playerItem[itemIndex]
     }
     
     func presentCompactPlayer() {
