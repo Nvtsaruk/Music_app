@@ -32,9 +32,7 @@ final class MainPageViewController: UIViewController {
         } 
         
         view.backgroundColor = .black
-        navigationController?.navigationBar.barTintColor = .black
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
-        navigationController?.navigationBar.topItem?.leftBarButtonItem?.tintColor = .white
         navigationController?.navigationBar.tintColor = UIColor.white
         let headerNib = UINib(nibName: "HeaderTableViewCell", bundle: nil)
         tableView.register(headerNib, forCellReuseIdentifier: "HeaderTableViewCell")

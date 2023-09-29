@@ -83,9 +83,6 @@
 		CC68C04E2A825B50001016F0 /* MyMediaPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC68C04D2A825B50001016F0 /* MyMediaPageViewController.swift */; };
 		CC68C0502A825B9E001016F0 /* MyMediaPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC68C04F2A825B9E001016F0 /* MyMediaPageViewModel.swift */; };
 		CC68C0532A825C1A001016F0 /* MyMediaPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC68C0522A825C1A001016F0 /* MyMediaPageCoordinator.swift */; };
-		CC68C0552A826586001016F0 /* QuizPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC68C0542A826586001016F0 /* QuizPage.storyboard */; };
-		CC68C0572A82658F001016F0 /* QuizPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC68C0562A82658F001016F0 /* QuizPageViewController.swift */; };
-		CC68C0592A8265F6001016F0 /* QuizPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC68C0582A8265F6001016F0 /* QuizPageViewModel.swift */; };
 		CC68C05C2A826626001016F0 /* QuizPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC68C05B2A826626001016F0 /* QuizPageCoordinator.swift */; };
 		CC68C0922A855D61001016F0 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC68C0912A855D61001016F0 /* ImageModel.swift */; };
 		CC68C0952A8A79FE001016F0 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = CC68C0942A8A79FE001016F0 /* SDWebImage */; };
@@ -197,9 +194,6 @@
 		CC68C04D2A825B50001016F0 /* MyMediaPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMediaPageViewController.swift; sourceTree = "<group>"; };
 		CC68C04F2A825B9E001016F0 /* MyMediaPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMediaPageViewModel.swift; sourceTree = "<group>"; };
 		CC68C0522A825C1A001016F0 /* MyMediaPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMediaPageCoordinator.swift; sourceTree = "<group>"; };
-		CC68C0542A826586001016F0 /* QuizPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QuizPage.storyboard; sourceTree = "<group>"; };
-		CC68C0562A82658F001016F0 /* QuizPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizPageViewController.swift; sourceTree = "<group>"; };
-		CC68C0582A8265F6001016F0 /* QuizPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizPageViewModel.swift; sourceTree = "<group>"; };
 		CC68C05B2A826626001016F0 /* QuizPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizPageCoordinator.swift; sourceTree = "<group>"; };
 		CC68C0912A855D61001016F0 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		CC7796742AB0DE8700FB67E8 /* ArtistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistTableViewCell.swift; sourceTree = "<group>"; };
@@ -248,13 +242,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AB64303CD3C691F8CA7DE0B4 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		CC0C6DC72AA9ED0600C18299 /* SearchCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,7 +282,6 @@
 			children = (
 				CC16BC8D2A7A2FFD000850CD /* Music app */,
 				CC16BC8C2A7A2FFD000850CD /* Products */,
-				AB64303CD3C691F8CA7DE0B4 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -465,15 +451,6 @@
 			path = Media;
 			sourceTree = "<group>";
 		};
-		CC3F072E2A8BAB610018BF5B /* Game */ = {
-			isa = PBXGroup;
-			children = (
-				CC68C04A2A825B18001016F0 /* ViewModel */,
-				CC68C0492A825B12001016F0 /* View */,
-			);
-			path = Game;
-			sourceTree = "<group>";
-		};
 		CC3F07312A8BB44A0018BF5B /* UserDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -621,22 +598,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		CC68C0492A825B12001016F0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				CC68C0562A82658F001016F0 /* QuizPageViewController.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		CC68C04A2A825B18001016F0 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				CC68C0582A8265F6001016F0 /* QuizPageViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		CC68C07D2A83D55A001016F0 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -673,7 +634,6 @@
 				CC68C03C2A823F4E001016F0 /* SearchCategoriesPage.storyboard */,
 				CC0C6DD02AAA0BF900C18299 /* SearchPage.storyboard */,
 				CC68C04B2A825B44001016F0 /* MyMediaPage.storyboard */,
-				CC68C0542A826586001016F0 /* QuizPage.storyboard */,
 				CC351EA32A7E7D12003EF23D /* MainPage.storyboard */,
 				CC351F152A7FA782003EF23D /* HeaderTableViewCell.xib */,
 				CC351F1A2A7FBB07003EF23D /* TopPlaylistTableViewCell.xib */,
@@ -748,7 +708,6 @@
 		CC68C0892A84FB11001016F0 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				CC3F072E2A8BAB610018BF5B /* Game */,
 				CC3F072D2A8BAB4B0018BF5B /* Media */,
 				CC3F072C2A8BAB3B0018BF5B /* Search */,
 				CC68C08D2A84FB71001016F0 /* Auth */,
@@ -1002,7 +961,6 @@
 				CC885E102AB9F1A40016288A /* AlbumItemDetail.storyboard in Resources */,
 				CC16BC9B2A7A2FFE000850CD /* Assets.xcassets in Resources */,
 				CC7C616A2A8E6752009DCB9E /* PlaylistItemDetail.storyboard in Resources */,
-				CC68C0552A826586001016F0 /* QuizPage.storyboard in Resources */,
 				CC7C61AF2A9640BC009DCB9E /* PlayerView.xib in Resources */,
 				CC351F172A7FA782003EF23D /* HeaderTableViewCell.xib in Resources */,
 				CC0C6DDA2AAF4DE100C18299 /* CategoriesDetails.storyboard in Resources */,
@@ -1046,7 +1004,6 @@
 				CC16BCA62A7A3E27000850CD /* APIService.swift in Sources */,
 				CC68C0412A823F90001016F0 /* SearchPageCoordinator.swift in Sources */,
 				CC351E9D2A7D4565003EF23D /* CredentialStorageService.swift in Sources */,
-				CC68C0572A82658F001016F0 /* QuizPageViewController.swift in Sources */,
 				CC0C6DCA2AA9ED3800C18299 /* SearchCollectionViewCell.swift in Sources */,
 				CC351F1B2A7FBB07003EF23D /* TopPlaylistTableViewCell.swift in Sources */,
 				CC7C616E2A8F4184009DCB9E /* AlbumModel.swift in Sources */,
@@ -1103,7 +1060,6 @@
 				CC68C0252A80D6D7001016F0 /* UserProfile.swift in Sources */,
 				CC351EA22A7E7D0A003EF23D /* MainPageViewController.swift in Sources */,
 				CC2ED5652AB9D64000F6078E /* ArtistTopTrackModel.swift in Sources */,
-				CC68C0592A8265F6001016F0 /* QuizPageViewModel.swift in Sources */,
 				CCC181C02AB9F5A2004205D1 /* Artist.swift in Sources */,
 				CC68C0922A855D61001016F0 /* ImageModel.swift in Sources */,
 				CC4AF6B52AB47F2E008E966B /* PlayerItemModel.swift in Sources */,

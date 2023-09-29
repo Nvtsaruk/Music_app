@@ -43,6 +43,8 @@ class SearchCategoriesPageViewController: UIViewController {
     }
     
     private func setupUI() {
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = UIColor.white
         searchContainer.layer.cornerRadius = 8
         let didTap  = UITapGestureRecognizer(target: self, action: #selector(didTap))
         searchContainer.addGestureRecognizer(didTap)

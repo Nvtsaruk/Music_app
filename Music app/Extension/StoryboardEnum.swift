@@ -6,7 +6,6 @@ enum Storyboard: String {
     case SearchCategoriesPage
     case SearchPage
     case MyMediaPage
-    case QuizPage
     case UserProfile
     case UserDetails
     case PlaylistItemDetail

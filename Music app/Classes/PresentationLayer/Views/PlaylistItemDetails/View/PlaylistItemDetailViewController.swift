@@ -14,12 +14,14 @@ final class PlaylistItemDetailViewController: UIViewController {
         super.viewDidLoad()
         viewModel?.start()
         viewModel?.getItems()
-        descriptionLabel.text = viewModel?.details
+        
         bindViewModel()
         setupUI()
     }
     
     private func setupUI() {
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = UIColor.white
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -28,6 +30,7 @@ final class PlaylistItemDetailViewController: UIViewController {
         itemImage.layer.shadowOpacity = 0.2
         itemImage.layer.shadowRadius = 30
         
+        descriptionLabel.text = viewModel?.details
         let itemDetailNib = UINib(nibName: "TrackItemDetailTableViewCell", bundle: nil)
         tableView.register(itemDetailNib, forCellReuseIdentifier: "TrackItemDetailTableViewCell")
         tableView.reloadData()

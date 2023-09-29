@@ -44,7 +44,6 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
         case mainPage
         case searchPage
         case myMedia
-        case quiz
         
         var title: String {
             switch self {
@@ -54,8 +53,6 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
                     return "Search"
                 case .myMedia:
                     return "My music"
-                case .quiz:
-                    return "Quiz"
             }
         }
         var iconName: String {
@@ -66,8 +63,6 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
                     return "magnifyingglass"
                 case .myMedia:
                     return "tray.full.fill"
-                case .quiz:
-                    return "gamecontroller.fill"
             }
         }
     }
@@ -82,7 +77,6 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
     
     private func setupTabBar() {
         AudioPlayerService.shared.showHideDelegate = self
-//        let playerViewModel = PlayerViewModel()
         tabBar.barTintColor = UIColor.black
         tabBar.isTranslucent = true
         tabBar.tintColor = .white
@@ -96,13 +90,10 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
         searchPageViewController.start()
         let mediaPageViewController = MyMediaPageCoordinator(navigationController: UINavigationController())
         mediaPageViewController.start()
-        let quizPageViewController = QuizPageCoordinator(navigationController: UINavigationController())
-        quizPageViewController.start()
         
         viewControllers = [mainPageViewController.navigationController,
                            searchPageViewController.navigationController,
-                           mediaPageViewController.navigationController,
-                           quizPageViewController.navigationController
+                           mediaPageViewController.navigationController
         ]
         
         viewControllers?[0].tabBarItem.title = TabBarItems.mainPage.title
@@ -111,8 +102,6 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
         viewControllers?[1].tabBarItem.image = UIImage(systemName: TabBarItems.searchPage.iconName)
         viewControllers?[2].tabBarItem.title = TabBarItems.myMedia.title
         viewControllers?[2].tabBarItem.image = UIImage(systemName: TabBarItems.myMedia.iconName)
-        viewControllers?[3].tabBarItem.title = TabBarItems.quiz.title
-        viewControllers?[3].tabBarItem.image = UIImage(systemName: TabBarItems.quiz.iconName)
         
     }
     

@@ -25,6 +25,8 @@ class SearchPageViewController: UIViewController {
     private func setupUI() {
         tableView.dataSource = self
         tableView.delegate = self
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = UIColor.white
         let tableAlbumNib = UINib(nibName: "AlbumTableViewCell", bundle: nil)
         tableView.register(tableAlbumNib, forCellReuseIdentifier: "AlbumTableViewCell")
         let tablePlaylistNib = UINib(nibName: "PlaylistTableViewCell", bundle: nil)
