@@ -44,10 +44,10 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, TrackIte
     
     func addToPlaylist(trackId: String) {
         guard let album = album else { return }
+        guard let image = album.images.first?.url else { return }
         album.tracks.items.forEach{ item in
             if item.id == trackId {
-                guard let artistName = item.artists.first?.name,
-                      let image = item.album.images.first?.url
+                guard let artistName = item.artists.first?.name
                 else { return }
                 let trackName = item.name
                 let track = item.id
@@ -58,19 +58,8 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, TrackIte
         
     }
     
-    func audioPlayerDidStartPlaying() {
-        isPlaying = true
-    }
-    
-    func audioPlayerDidStopPlaying() {
-        isPlaying = false
-    }
-    
-    func sendTrackInfo(playerItem: PlayerItemModel) {
-        
-    }
-    
     func start() {
+        AudioPlayerService.shared.addObserver(self)
         let trackItem = TrackItemDetailTableViewCell()
         trackItem.delegate = self
     }
@@ -116,7 +105,6 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, TrackIte
     
     func removeNilSongs() {
         var indexArray: [String] = []
-//        guard let album = album else { return }
         album?.tracks.items.forEach { item in
             if item.preview_url == nil {
                 indexArray.append(item.id)
@@ -134,3 +122,13 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, TrackIte
     
 }
 
+extension AlbumItemDetailViewModel: AudioPlayerServiceObserver {
+    func audioPlayerPlaying(item: PlayerItemModel) {
+        isPlaying = true
+    }
+    
+    func audioPlayerPaused(item: PlayerItemModel) {
+        isPlaying = false
+    }
+
+}
