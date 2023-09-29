@@ -100,7 +100,7 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, TrackIte
                     print("Custom Error -> \(error)")
             }
         }
-//        AudioPlayerService.shared.detailsDelegate = self
+
     }
     
     func playButtonAction() {

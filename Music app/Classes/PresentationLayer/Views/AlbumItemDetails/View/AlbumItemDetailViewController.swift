@@ -51,7 +51,7 @@ final class AlbumItemDetailViewController: UIViewController {
             } else {
                 self.playPauseButtonOutlet.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
             }
-//            descriptionLabel.text = viewModel?.details
+            
             tableView.reloadData()
             albumTitleLabel.text = viewModel?.album?.name
             artistNameLabel.text = viewModel?.album?.tracks.items.first?.artists.first?.name
