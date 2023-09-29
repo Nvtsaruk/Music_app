@@ -12,11 +12,8 @@ protocol ArtistItemDetailViewModelProtocol {
 
 final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, TrackItemDetailTableViewCellDelegate {
     func start() {
-        let trackCell = TrackItemDetailTableViewCell()
-        trackCell.delegate = self
+        AudioPlayerService.shared.addObserver(self)
     }
-    
-    
     
     var updateClosure: (() -> Void)?
     var coordinator: SearchPageCoordinator?
@@ -68,8 +65,6 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, TrackI
                     print("Custom Error -> \(error)")
             }
         }
-        
-//        AudioPlayerService.shared.detailsDelegate = self
     }
     func getArtistTracks() {
         let url = NetworkConstants.baseUrl + NetworkConstants.artists + (id ?? "") + NetworkConstants.topTracks
@@ -81,7 +76,6 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, TrackI
                     print("Custom Error -> \(error)")
             }
         }
-//        AudioPlayerService.shared.detailsDelegate = self
     }
     
     func addPlayItems(itemIndex: Int) {
@@ -123,17 +117,16 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, TrackI
             }
         }
     }
-    
-    func audioPlayerDidStartPlaying() {
+
+}
+
+extension ArtistItemDetailViewModel: AudioPlayerServiceObserver {
+    func audioPlayerPlaying(item: PlayerItemModel) {
+        print("Here")
         isPlaying = true
     }
     
-    func audioPlayerDidStopPlaying() {
+    func audioPlayerPaused(item: PlayerItemModel) {
         isPlaying = false
     }
-    
-    func sendTrackInfo(playerItem: PlayerItemModel) {
-        
-    }
 }
-

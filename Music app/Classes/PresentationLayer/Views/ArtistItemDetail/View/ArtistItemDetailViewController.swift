@@ -12,6 +12,7 @@ final class ArtistItemDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel?.getArtistInfo()
+        viewModel?.start()
         bindViewModel()
         setupUI()
     }

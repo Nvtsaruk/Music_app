@@ -89,13 +89,11 @@ final class AudioPlayerService {
     func nextItem() {
         itemIndex += 1
         let playerItem = playerItem[itemIndex]
-//        delegate?.sendTrackInfo(playerItem: playerItem)
     }
     
     func previousItem() {
         itemIndex -= 1
         let playerItem = playerItem[itemIndex]
-//        delegate?.sendTrackInfo(playerItem: playerItem)
     }
     
     func presentCompactPlayer() {
@@ -124,8 +122,6 @@ private extension AudioPlayerService {
 private extension AudioPlayerService {
     func stateDidChange() {
         for (id, observation) in observations {
-                    // If the observer is no longer in memory, we
-                    // can clean up the observation for its ID
                     guard let observer = observation.observer else {
                         observations.removeValue(forKey: id)
                         continue

@@ -1,4 +1,5 @@
 import Alamofire
+import Foundation
 
 struct TokenRequest:Codable {
     let access_token: String

@@ -6,4 +6,3 @@ struct Track: Decodable {
     let preview_url: String?
     let type: String
 }
-

@@ -67,18 +67,18 @@ final class PlaylistItemDetailViewController: UIViewController {
 
 extension PlaylistItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        /*viewModel?.playlist?.tracks.items.count ??*/ 0
+        viewModel?.playlist?.tracks.items?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TrackItemDetailTableViewCell") as? TrackItemDetailTableViewCell else { return UITableViewCell() }
         cell.delegate = viewModel as? any TrackItemDetailTableViewCellDelegate
-//        guard let artist = viewModel?.playlist?.tracks.items[indexPath.row].track.artists.first?.name,
-//              let track = viewModel?.playlist?.tracks.items[indexPath.row].track.name,
-//              let url = viewModel?.playlist?.tracks.items[indexPath.row].track.album.images.first?.url,
-//              let id = viewModel?.playlist?.tracks.items[indexPath.row].track.id
-//        else { return cell }
-//        cell.configure(track: track, artist: artist, image: url, id: id)
+        guard let artist = viewModel?.playlist?.tracks.items?[indexPath.row].track.artists.first?.name,
+              let track = viewModel?.playlist?.tracks.items?[indexPath.row].track.name,
+              let url = viewModel?.playlist?.tracks.items?[indexPath.row].track.album.images.first?.url,
+              let id = viewModel?.playlist?.tracks.items?[indexPath.row].track.id
+        else { return cell }
+        cell.configure(track: track, artist: artist, image: url, id: id)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
