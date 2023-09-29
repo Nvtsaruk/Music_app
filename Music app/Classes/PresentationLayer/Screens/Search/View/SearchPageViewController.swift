@@ -40,7 +40,6 @@ class SearchPageViewController: UIViewController {
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
-            //            self.numRows = viewModel?.categories?.categories.items.count ?? 0
             tableView.reloadData()
         }
     }
@@ -82,7 +81,7 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
         guard let tableTrackCell = tableView.dequeueReusableCell(withIdentifier: "TrackItemDetailTableViewCell") as? TrackItemDetailTableViewCell else { return UITableViewCell()}
         tableTrackCell.delegate = viewModel as? any TrackItemDetailTableViewCellDelegate
         guard let albumCount = viewModel?.searchModel?.artists.items.count else { return UITableViewCell() }
-        if indexPath.row < albumCount - 1 {
+        if indexPath.row < albumCount {
             if viewModel?.searchModel?.albums.items[indexPath.row].type == "album" {
                 guard let imageUrl = viewModel?.searchModel?.albums.items[indexPath.row].images.first?.url,
                       let album = viewModel?.searchModel?.albums.items[indexPath.row].name,
@@ -92,7 +91,7 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         guard let artistCount = viewModel?.searchModel?.artists.items.count else { return UITableViewCell() }
-        if indexPath.row < artistCount - 1 {
+        if indexPath.row < artistCount {
             if viewModel?.searchModel?.artists.items[indexPath.row].type == "artist" {
                 let imageUrl = viewModel?.searchModel?.artists.items[indexPath.row].images.first?.url
                 guard let artist = viewModel?.searchModel?.artists.items[indexPath.row].name
@@ -101,7 +100,7 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         guard let playlistCount = viewModel?.searchModel?.playlists.items.count else { return UITableViewCell() }
-        if indexPath.row < playlistCount - 1 {
+        if indexPath.row < playlistCount {
             if viewModel?.searchModel?.playlists.items[indexPath.row].type == "playlist" {
                 guard let imageUrl = viewModel?.searchModel?.playlists.items[indexPath.row].images.first?.url,
                       let playlist = viewModel?.searchModel?.playlists.items[indexPath.row].name
@@ -110,7 +109,7 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         guard let trackCount = viewModel?.searchModel?.tracks.items.count else { return UITableViewCell() }
-        if indexPath.row < trackCount - 1 {
+        if indexPath.row < trackCount {
             if viewModel?.searchModel?.tracks.items.count != 0 {
                 if viewModel?.searchModel?.tracks.items[indexPath.row].type == "track" {
                     guard let imageUrl = viewModel?.searchModel?.tracks.items[indexPath.row].album.images.first?.url,

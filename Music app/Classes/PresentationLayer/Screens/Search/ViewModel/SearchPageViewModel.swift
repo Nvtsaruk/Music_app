@@ -24,7 +24,7 @@ final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTab
         didSet {
             if cleared == false {
                 removeNilSongs()
-                cleared = true
+                self.cleared = true
             }
             updateClosure?()
         }
