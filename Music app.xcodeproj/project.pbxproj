@@ -83,7 +83,6 @@
 		CC68C04E2A825B50001016F0 /* MyMediaPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC68C04D2A825B50001016F0 /* MyMediaPageViewController.swift */; };
 		CC68C0502A825B9E001016F0 /* MyMediaPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC68C04F2A825B9E001016F0 /* MyMediaPageViewModel.swift */; };
 		CC68C0532A825C1A001016F0 /* MyMediaPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC68C0522A825C1A001016F0 /* MyMediaPageCoordinator.swift */; };
-		CC68C05C2A826626001016F0 /* QuizPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC68C05B2A826626001016F0 /* QuizPageCoordinator.swift */; };
 		CC68C0922A855D61001016F0 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC68C0912A855D61001016F0 /* ImageModel.swift */; };
 		CC68C0952A8A79FE001016F0 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = CC68C0942A8A79FE001016F0 /* SDWebImage */; };
 		CC7796762AB0DE8700FB67E8 /* ArtistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7796742AB0DE8700FB67E8 /* ArtistTableViewCell.swift */; };
@@ -194,7 +193,6 @@
 		CC68C04D2A825B50001016F0 /* MyMediaPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMediaPageViewController.swift; sourceTree = "<group>"; };
 		CC68C04F2A825B9E001016F0 /* MyMediaPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMediaPageViewModel.swift; sourceTree = "<group>"; };
 		CC68C0522A825C1A001016F0 /* MyMediaPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMediaPageCoordinator.swift; sourceTree = "<group>"; };
-		CC68C05B2A826626001016F0 /* QuizPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizPageCoordinator.swift; sourceTree = "<group>"; };
 		CC68C0912A855D61001016F0 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		CC7796742AB0DE8700FB67E8 /* ArtistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistTableViewCell.swift; sourceTree = "<group>"; };
 		CC7796752AB0DE8700FB67E8 /* ArtistTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArtistTableViewCell.xib; sourceTree = "<group>"; };
@@ -740,7 +738,6 @@
 				CC351E862A7D3A30003EF23D /* MainCoordinator.swift */,
 				CC68C0402A823F90001016F0 /* SearchPageCoordinator.swift */,
 				CC68C0522A825C1A001016F0 /* MyMediaPageCoordinator.swift */,
-				CC68C05B2A826626001016F0 /* QuizPageCoordinator.swift */,
 				CC351E912A7D3CD3003EF23D /* LoginCoordinator.swift */,
 				CC351EA62A7E7D82003EF23D /* MainPageCoordinator.swift */,
 				CC351E8E2A7D3C58003EF23D /* TabbarCoordinator.swift */,
@@ -1000,7 +997,6 @@
 				CC68C0462A824185001016F0 /* UserProfileViewModel.swift in Sources */,
 				CC351E922A7D3CD3003EF23D /* LoginCoordinator.swift in Sources */,
 				CC68C0392A8239E9001016F0 /* StoryboardEnum.swift in Sources */,
-				CC68C05C2A826626001016F0 /* QuizPageCoordinator.swift in Sources */,
 				CC16BCA62A7A3E27000850CD /* APIService.swift in Sources */,
 				CC68C0412A823F90001016F0 /* SearchPageCoordinator.swift in Sources */,
 				CC351E9D2A7D4565003EF23D /* CredentialStorageService.swift in Sources */,
