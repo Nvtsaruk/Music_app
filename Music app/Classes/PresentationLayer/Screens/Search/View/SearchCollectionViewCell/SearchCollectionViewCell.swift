@@ -1,14 +1,7 @@
-//
-//  SearchCollectionViewCell.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 7.09.23.
-//
-
 import UIKit
 
-class SearchCollectionViewCell: UICollectionViewCell {
-
+final class SearchCollectionViewCell: UICollectionViewCell {
+    //MARK: -IBOutlet
     @IBOutlet weak var containerView: UIView!
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -18,7 +11,6 @@ class SearchCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()
-        
     }
     
     private func setupUI() {
@@ -26,7 +18,5 @@ class SearchCollectionViewCell: UICollectionViewCell {
         containerView.clipsToBounds = true
         albumImage.layer.cornerRadius = 8
         albumImage.transform = CGAffineTransform(rotationAngle: 0.2)
-        
     }
-
 }

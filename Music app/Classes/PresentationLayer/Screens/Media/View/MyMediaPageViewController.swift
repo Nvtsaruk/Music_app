@@ -20,7 +20,7 @@ final class MyMediaPageViewController: UIViewController {
     
     private func setupUI() {
         setEmptyLabel()
-        titleLabel.text = NSLocalizedString("myPlaylists", comment: "")
+        titleLabel.text = MyMediaLocalization.myPlaylists.string
         tableView.delegate = self
         tableView.dataSource = self
         let tablePlaylistNib = UINib(nibName: XibNames.playlist.name, bundle: nil)
@@ -38,7 +38,7 @@ final class MyMediaPageViewController: UIViewController {
     private func setEmptyLabel() {
         guard let empty = viewModel?.databasePlaylist.isEmpty else { return }
         if empty {
-            emptyLabel.text = NSLocalizedString("emptyPlaylists", comment: "")
+            emptyLabel.text = MyMediaLocalization.emptyPlaylists.string
             emptyLabel.isHidden = false
         } else {
             emptyLabel.isHidden = true

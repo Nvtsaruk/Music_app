@@ -1,18 +1,14 @@
-//
-//  SearchPageViewController.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 7.09.23.
-//
-
 import UIKit
 
-class SearchPageViewController: UIViewController {
+final class SearchPageViewController: UIViewController {
     
-    
+    //MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    //MARK: - Variables
     var viewModel: SearchPageViewModelProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel?.start()
@@ -23,8 +19,10 @@ class SearchPageViewController: UIViewController {
     }
     
     private func setupUI() {
+        searchBar.placeholder = SearchPageLocalization.searchbarPlaceholder.string
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.keyboardDismissMode = .onDrag
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = UIColor.white
         let tableAlbumNib = UINib(nibName: "AlbumTableViewCell", bundle: nil)

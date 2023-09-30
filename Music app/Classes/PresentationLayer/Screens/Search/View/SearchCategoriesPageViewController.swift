@@ -1,20 +1,14 @@
-//
-//  SearchPageViewController.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 8.08.23.
-//
-
 import UIKit
 
 class SearchCategoriesPageViewController: UIViewController {
+    //MARK: - IBOutlet
+    @IBOutlet private weak var searchCollectionView: UICollectionView!
     
+    @IBOutlet private weak var searchContainer: UIView!
     
+    @IBOutlet private weak var searchContainerText: UILabel!
     
-    @IBOutlet weak var searchCollectionView: UICollectionView!
-    
-    @IBOutlet weak var searchContainer: UIView!
-    @IBOutlet weak var searchContainerText: UILabel!
+    //MARK: - Variables
     var viewModel: SearchCategoriesViewModel?
     
     var numRows: Int = 0 {
@@ -45,19 +39,24 @@ class SearchCategoriesPageViewController: UIViewController {
     private func setupUI() {
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = UIColor.white
+        
+        searchContainerText.text = SearchPageLocalization.searchbarPlaceholder.string
+        
         searchContainer.layer.cornerRadius = 8
         let didTap  = UITapGestureRecognizer(target: self, action: #selector(didTap))
         searchContainer.addGestureRecognizer(didTap)
     
-    
         searchCollectionView.dataSource = self
         searchCollectionView.delegate = self
+        
         let collectionNib = UINib(nibName: "SearchCollectionViewCell", bundle: nil)
         searchCollectionView.register(collectionNib, forCellWithReuseIdentifier: "SearchCollectionViewCell")
     }
+    
     @objc private func didTap() {
         viewModel?.showSearchPage()
     }
+    
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
@@ -85,9 +84,8 @@ extension SearchCategoriesPageViewController: UICollectionViewDelegate, UICollec
         cell.containerView.backgroundColor = colors.randomElement()
         return cell
     }
-    
-    
 }
+
 extension SearchCategoriesPageViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width / 2) - 4

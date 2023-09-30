@@ -19,21 +19,18 @@ enum SearchType {
     var type: String {
         switch self  {
             case .artist:
-                return NSLocalizedString("artist", comment: "")
+                return SearchPageLocalization.artist.string
             case .track:
-                return NSLocalizedString("track", comment: "")
+                return SearchPageLocalization.track.string
             case .album:
-                return NSLocalizedString("album", comment: "")
+                return SearchPageLocalization.album.string
             case .playlist:
-                return NSLocalizedString("playlist", comment: "")
+                return SearchPageLocalization.playlist.string
         }
     }
 }
 
 final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTableViewCellDelegate {
-    
-    
-    
     
     var coordinator: SearchPageCoordinator?
     var lastScheduledSearch: Timer?

@@ -25,6 +25,7 @@
 "artist" = "Исполнитель";
 "album" = "Альбом";
 "playlist" = "Плейлист";
+"searchbarPlaceholder" = "Что хочешь послушать?";
 
 //My media page
 "myPlaylists" = "Мои плейлисты";

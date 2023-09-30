@@ -25,6 +25,7 @@
 "artist" = "Artist";
 "album" = "Album";
 "playlist" = "Playlist";
+"searchbarPlaceholder" = "What do you want to listen?";
 
 //My media page
 "myPlaylists" = "My playlists";

@@ -1,4 +1,5 @@
 import Foundation
+
 enum ProfileLocalization {
     case myProfile
     case logout
@@ -24,6 +25,7 @@ enum ProfileLocalization {
         }
     }
 }
+
 enum MainScreenLocalization {
     case topList
     case relax
@@ -68,4 +70,65 @@ enum MainScreenLocalization {
     }
 }
 
+enum SearchPageLocalization {
+    case track
+    case artist
+    case album
+    case playlist
+    case searchbarPlaceholder
+    
+    var string: String {
+        switch self {
+            case .track:
+                return NSLocalizedString("track", comment: "")
+            case .artist:
+                return NSLocalizedString("artist", comment: "")
+            case .album:
+                return NSLocalizedString("album", comment: "")
+            case .playlist:
+                return NSLocalizedString("playlist", comment: "")
+            case .searchbarPlaceholder:
+                return NSLocalizedString("searchbarPlaceholder", comment: "")
+        }
+    }
+}
 
+enum MyMediaLocalization {
+    case myPlaylists
+    case emptyPlaylists
+    
+    var string: String {
+        switch self {
+            case .myPlaylists:
+                return NSLocalizedString("myPlaylists", comment: "")
+            case .emptyPlaylists:
+                return NSLocalizedString("emptyPlaylists", comment: "")
+        }
+    }
+}
+
+enum AddToPlaylistLocalization {
+    case createPlaylist
+    case ready
+    case playlistName
+    case message
+    case placeholder
+    case cancel
+    
+    var string: String {
+        switch self {
+            case .createPlaylist:
+                return NSLocalizedString("createPlaylist", comment: "")
+            case .ready:
+                return NSLocalizedString("ready", comment: "")
+            case .playlistName:
+                return NSLocalizedString("playlistName", comment: "")
+            case .message:
+                return NSLocalizedString("message", comment: "")
+            case .placeholder:
+                return NSLocalizedString("placeholder", comment: "")
+            case .cancel:
+                return NSLocalizedString("cancel", comment: "")
+        }
+    }
+}
