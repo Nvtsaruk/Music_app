@@ -1,27 +1,13 @@
 import UIKit
 
 final class TabBarController: UITabBarController, MainCoordinatorDelegate, AudioPlayerShowHideDelegate {
-    var playerInited: Bool = false {
-        didSet {
-        }
-    }
-    func showCompactPlayer() {
-        if playerInited == false {
-            showPlayerView()
-            playerInited = true
-        }
-        
-    }
-    
-    func showFullPlayer() {
-        removeView()
-        showFullPlayerView()
-    }
-    
+    //MARK: - Variables
+    var playerInited: Bool = false
     var timer = Timer()
     var coordinator: MainCoordinatorDelegate?
     var player: PlayerView = PlayerView()
     var playerViewModel: PlayerViewModelProtocol?
+    
     private enum TabBarItems {
         case mainPage
         case searchPage
@@ -59,6 +45,7 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
     
     private func setupTabBar() {
         AudioPlayerService.shared.showHideDelegate = self
+        
         tabBar.barTintColor = UIColor.black
         tabBar.isTranslucent = true
         tabBar.tintColor = .white
@@ -84,7 +71,18 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
         viewControllers?[1].tabBarItem.image = UIImage(systemName: TabBarItems.searchPage.iconName)
         viewControllers?[2].tabBarItem.title = TabBarItems.myMedia.title
         viewControllers?[2].tabBarItem.image = UIImage(systemName: TabBarItems.myMedia.iconName)
-        
+    }
+    
+    func showCompactPlayer() {
+        if playerInited == false {
+            showPlayerView()
+            playerInited = true
+        }
+    }
+    
+    func showFullPlayer() {
+        removeView()
+        showFullPlayerView()
     }
     
     private func removeView() {
@@ -95,7 +93,7 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
     private func hideView() {
         UIView.animate(withDuration: 0.3, animations: {
             self.player.alpha = 0
-            })
+        })
     }
     
     private func showPlayerView() {
@@ -105,8 +103,9 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
         view.addSubview(player)
         UIView.animate(withDuration: 0.3, animations: {
             self.player.alpha = 1
-            })
+        })
     }
+    
     private func showFullPlayerView() {
         removeView()
         let fullPlayer = FullPlayerViewController.instantiate()
@@ -115,8 +114,8 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
         fullPlayer.modalPresentationStyle = .fullScreen
         present(fullPlayer, animated: true)
     }
-    
 }
+
 extension TabBarController: Storyboarded {
     static func containingStoryboard() -> Storyboard {
         .TabBarController
