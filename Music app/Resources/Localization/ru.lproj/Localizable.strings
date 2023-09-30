@@ -1,4 +1,6 @@
 //User profile
+"myProfile" = "Мой профиль";
+"logout" = "Выйти";
 "plan" = "План:";
 "email" = "Почта:";
 "userID" = "ИД:";
@@ -17,3 +19,13 @@
 "afternoon" = "Добрый день";
 "evening" = "Добрый вечер";
 "night" = "Спокойной ночи";
+
+//Search page
+"track" = "Трек";
+"artist" = "Исполнитель";
+"album" = "Альбом";
+"playlist" = "Плейлист";
+
+//My media page
+"myPlaylists" = "Мои плейлисты";
+"emptyPlaylists" = "Пусто";

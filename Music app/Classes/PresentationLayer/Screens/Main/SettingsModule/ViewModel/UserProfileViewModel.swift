@@ -1,6 +1,5 @@
 import Foundation
 protocol UserProfileViewModelProtocol {
-    var title: String { get }
     func logout()
     func getUserInfo()
     func showDetails()
@@ -18,7 +17,6 @@ final class UserProfileViewModel: UserProfileViewModelProtocol {
             updateClosure?()
         }
     }
-    var title = "Settings"
     var isLoading: Bool = false {
         didSet {
             updateClosure?()

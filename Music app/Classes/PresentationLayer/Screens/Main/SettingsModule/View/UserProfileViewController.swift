@@ -1,10 +1,3 @@
-//
-//  UserProfileViewController.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 8.08.23.
-//
-
 import UIKit
 
 class UserProfileViewController: UIViewController {

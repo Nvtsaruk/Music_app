@@ -10,6 +10,26 @@ protocol SearchPageViewModelProtocol {
     func showAlbumDetail(id: String)
 }
 
+enum SearchType {
+    case artist
+    case track
+    case album
+    case playlist
+    
+    var type: String {
+        switch self  {
+            case .artist:
+                return NSLocalizedString("artist", comment: "")
+            case .track:
+                return NSLocalizedString("track", comment: "")
+            case .album:
+                return NSLocalizedString("album", comment: "")
+            case .playlist:
+                return NSLocalizedString("playlist", comment: "")
+        }
+    }
+}
+
 final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTableViewCellDelegate {
     
     

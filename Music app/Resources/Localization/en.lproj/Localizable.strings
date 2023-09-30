@@ -1,4 +1,6 @@
 //User profile
+"myProfile" = "My profile";
+"logout" = "Logout";
 "plan" = "Plan:";
 "email" = "Email:";
 "userID" = "UserID:";
@@ -17,4 +19,13 @@
 "afternoon" = "Good afternoon";
 "evening" = "Good evening";
 "night" = "Good night";
-//
+
+//Search page
+"track" = "Track";
+"artist" = "Artist";
+"album" = "Album";
+"playlist" = "Playlist";
+
+//My media page
+"myPlaylists" = "My playlists";
+"emptyPlaylists" = "Empty";

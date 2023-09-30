@@ -17,6 +17,7 @@ final class MyMediaPageViewController: UIViewController {
     }
     
     private func setupUI() {
+        titleLabel.text = NSLocalizedString("myPlaylists", comment: "")
         tableView.delegate = self
         tableView.dataSource = self
         let tablePlaylistNib = UINib(nibName: XibNames.playlist.name, bundle: nil)

@@ -143,13 +143,13 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
             case 0:
-                return "Artist"
+                return SearchType.artist.type
             case 1:
-                return "Track"
+                return SearchType.track.type
             case 2:
-                return "Playlist"
+                return SearchType.playlist.type
             default:
-                return "Album"
+                return SearchType.album.type
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
