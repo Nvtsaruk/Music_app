@@ -1,9 +1,10 @@
 import Foundation
 protocol MyMediaPageViewModelProtocol {
-    func start()
     var updateClosure:(() -> Void)? { get set }
     var databasePlaylist: [UserPlaylist] { get }
+    func start()
     func showPlaylist(id: Int)
+    func deletePlaylist(playlistIndex: Int)
 }
 
 final class MyMediaPageViewModel: MyMediaPageViewModelProtocol {
@@ -55,12 +56,15 @@ final class MyMediaPageViewModel: MyMediaPageViewModelProtocol {
         guard let playlist = playlist else { return }
         coordinator?.showItemDetail(id: "", playlist: playlist)
     }
+    func deletePlaylist(playlistIndex: Int) {
+        let playlistName = databasePlaylist[playlistIndex].playlistName
+        databasePlaylist.remove(at: playlistIndex)
+        DatabaseService.shared.deletePlaylist(playlistName: playlistName)
+    }
 }
 
 extension MyMediaPageViewModel: DatabaseServiceObserver {
     func dataBaseUpdated() {
         databasePlaylist = DatabaseService.shared.getPlaylists()
     }
-    
-    
 }

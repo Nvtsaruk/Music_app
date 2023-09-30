@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -40,25 +41,15 @@
                                 <rect key="frame" x="16" y="128" width="361" height="620"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sz5-vX-cwu">
-                                <rect key="frame" x="16" y="74" width="76.666666666666671" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Cancel"/>
-                                <connections>
-                                    <action selector="cancelButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="5sM-I7-70S"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Sz5-vX-cwu" firstAttribute="centerY" secondItem="AHJ-Sj-Wwc" secondAttribute="centerY" id="4Pv-4M-GMf"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="dVD-OC-nF2" secondAttribute="trailing" constant="16" id="8vb-br-geB"/>
                             <constraint firstItem="dVD-OC-nF2" firstAttribute="top" secondItem="AHJ-Sj-Wwc" secondAttribute="bottom" constant="19" id="HI0-tb-9Go"/>
                             <constraint firstItem="DPA-Mu-b0d" firstAttribute="top" secondItem="dVD-OC-nF2" secondAttribute="bottom" constant="20" id="KVN-5S-RcR"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="DPA-Mu-b0d" secondAttribute="bottom" constant="15" id="OyI-HP-hlm"/>
                             <constraint firstItem="AHJ-Sj-Wwc" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="TBs-mU-IJv"/>
-                            <constraint firstItem="Sz5-vX-cwu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="bwq-ww-g7t"/>
                             <constraint firstItem="DPA-Mu-b0d" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="cbA-hc-5lZ"/>
                             <constraint firstItem="dVD-OC-nF2" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="u1Q-vA-QIf"/>
                             <constraint firstItem="AHJ-Sj-Wwc" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="15" id="zXr-Mf-c0X"/>

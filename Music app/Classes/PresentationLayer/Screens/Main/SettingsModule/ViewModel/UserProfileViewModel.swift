@@ -10,6 +10,7 @@ protocol UserProfileViewModelProtocol {
 
 final class UserProfileViewModel: UserProfileViewModelProtocol {
     
+    //MARK: - Variables
     var updateClosure: (() -> Void)?
     var coordinator: MainPageCoordinator?
     var currentUser: UserProfile? {
@@ -22,6 +23,7 @@ final class UserProfileViewModel: UserProfileViewModelProtocol {
             updateClosure?()
         }
     }
+    
     func getUserInfo() {
         isLoading = true
         let url = NetworkConstants.userProfileUrl

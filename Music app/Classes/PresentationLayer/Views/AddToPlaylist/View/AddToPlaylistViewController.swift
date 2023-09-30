@@ -1,17 +1,10 @@
-//
-//  AddToPlaylistViewController.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 21.09.23.
-//
-
 import UIKit
 
 final class AddToPlaylistViewController: UIViewController {
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var readyButtonOutlet: UIButton!
-    @IBOutlet weak var createPlaylistButtonOutlet: UIButton!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var readyButtonOutlet: UIButton!
+    @IBOutlet private weak var createPlaylistButtonOutlet: UIButton!
     
     var viewModel: AddToPlaylistViewModelProtocol?
     
@@ -26,8 +19,8 @@ final class AddToPlaylistViewController: UIViewController {
     private func setupUI() {
         tableView.delegate = self
         tableView.dataSource = self
-        let tablePlaylistNib = UINib(nibName: "MyPlaylistTableViewCell", bundle: nil)
-        tableView.register(tablePlaylistNib, forCellReuseIdentifier: "MyPlaylistTableViewCell")
+        let tablePlaylistNib = UINib(nibName: XibNames.myPlaylist.name, bundle: nil)
+        tableView.register(tablePlaylistNib, forCellReuseIdentifier: XibNames.myPlaylist.name)
         readyButtonOutlet.layer.cornerRadius = readyButtonOutlet.frame.height / 2
         createPlaylistButtonOutlet.layer.cornerRadius = createPlaylistButtonOutlet.frame.height / 2
     }
@@ -42,7 +35,7 @@ final class AddToPlaylistViewController: UIViewController {
     }
     
     
-    @IBAction func cancelButtonAction(_ sender: Any) {
+    @IBAction private func cancelButtonAction(_ sender: Any) {
         viewModel?.cancel()
     }
     @IBAction func createPlaylistButtonAction(_ sender: Any) {
@@ -64,7 +57,7 @@ final class AddToPlaylistViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
         
     }
-    @IBAction func readyButtonAction(_ sender: Any) {
+    @IBAction private func readyButtonAction(_ sender: Any) {
         dismiss(animated: true)
     }
     
@@ -76,7 +69,7 @@ extension AddToPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let tablePlaylistCell = tableView.dequeueReusableCell(withIdentifier: "MyPlaylistTableViewCell") as? MyPlaylistTableViewCell else { return UITableViewCell()}
+        guard let tablePlaylistCell = tableView.dequeueReusableCell(withIdentifier: XibNames.myPlaylist.name) as? MyPlaylistTableViewCell else { return UITableViewCell()}
         guard let numTracks = viewModel?.playlist[indexPath.row].tracks.count,
               let name = viewModel?.playlist[indexPath.row].playlistName,
               let image = viewModel?.playlist[indexPath.row].tracks.first?.image
@@ -88,8 +81,7 @@ extension AddToPlaylistViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             viewModel?.deletePlaylist(playlistIndex: indexPath.row)
-//            objects.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
+            
         }
     }
     
