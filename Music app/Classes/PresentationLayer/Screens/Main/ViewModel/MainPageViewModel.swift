@@ -25,13 +25,13 @@ enum DayTime {
     var greeting: String {
         switch self {
             case .morning:
-                return NSLocalizedString("morning", comment: "")
+                return MainScreenLocalization.morning.string
             case .afternoon:
-                return NSLocalizedString("afternoon", comment: "")
+                return MainScreenLocalization.afternoon.string
             case .evening:
-                return NSLocalizedString("evening", comment: "")
+                return MainScreenLocalization.evening.string
             case .night:
-                return NSLocalizedString("night", comment: "")
+                return MainScreenLocalization.night.string
         }
     }
 }

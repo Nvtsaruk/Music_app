@@ -39,15 +39,15 @@ enum APIUrls: CaseIterable {
     var name: String {
         switch self {
             case .topPlaylists:
-                return NSLocalizedString("topList", comment: "")
+                return MainScreenLocalization.topList.string
             case .relax:
-                return NSLocalizedString("relax", comment: "")
+                return MainScreenLocalization.relax.string
             case .pop:
-                return NSLocalizedString("pop", comment: "")
+                return MainScreenLocalization.pop.string
             case .rock:
-                return NSLocalizedString("rock", comment: "")
+                return MainScreenLocalization.rock.string
             case .mood:
-                return NSLocalizedString("mood", comment: "")
+                return MainScreenLocalization.mood.string
         }
     }
     

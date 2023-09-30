@@ -5,12 +5,16 @@ protocol ViewDelegate: AnyObject {
     func reloadTableView()
 }
 
+extension ViewDelegate {
+    func reloadTableView() {}
+}
+
 final class MainPageViewController: UIViewController {
 
     //MARK: - IBOutlet
     
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var tableView: UITableView!
     
     //MARK: - Variables
     var viewModel: MainPageViewModelProtocol?
@@ -32,8 +36,10 @@ final class MainPageViewController: UIViewController {
         } 
         
         view.backgroundColor = .black
+        navigationController?.navigationBar.barTintColor = .black
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = UIColor.white
+        
         let headerNib = UINib(nibName: "HeaderTableViewCell", bundle: nil)
         tableView.register(headerNib, forCellReuseIdentifier: "HeaderTableViewCell")
         let topPlaylistsNib = UINib(nibName: "TopPlaylistTableViewCell", bundle: nil)
@@ -41,7 +47,6 @@ final class MainPageViewController: UIViewController {
         let playlistsTableViewNib = UINib(nibName: "PlaylistsTableViewCell", bundle: nil)
         tableView.register(playlistsTableViewNib, forCellReuseIdentifier: "PlaylistsTableViewCell")
     }
-    
     
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
@@ -53,17 +58,11 @@ final class MainPageViewController: UIViewController {
             self.loadingIndicator.stopAnimating()
         }
     }
-    
-
-
 }
 
 extension MainPageViewController: ViewDelegate {
     func showItemDetail(id: String) {
         viewModel?.showItemDetail(id: id)
-    }
-    func reloadTableView() {
-//        tableView.reloadData()
     }
 }
 
@@ -71,10 +70,11 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return (viewModel?.mainPageData.playlists.count ?? 0) + 1
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let headerCell = tableView.dequeueReusableCell(withIdentifier: "HeaderTableViewCell") as? HeaderTableViewCell else { return UITableViewCell() }
         guard let delegate = viewModel as? any HeaderTableViewCellDelegate,
@@ -85,7 +85,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
         guard let topPlaylists = tableView.dequeueReusableCell(withIdentifier: "TopPlaylistTableViewCell") as? TopPlaylistTableViewCell else { return UITableViewCell() }
         guard let playlistNames = self.viewModel?.mainPageData.playlistNames else { return UITableViewCell() }
         for (i, v) in playlistNames.enumerated() {
-            if v == NSLocalizedString("topList", comment: "") {
+            if v == MainScreenLocalization.topList.string {
                 topPlaylists.numRows = self.viewModel?.mainPageData.numRows[i] ?? 0
                 topPlaylists.collectionData = self.viewModel?.mainPageData.playlists[i]
             }
