@@ -10,7 +10,7 @@ class Colors {
         self.colorBottom = colorBottom
         self.gl = CAGradientLayer()
         self.gl.colors = [colorTop, colorBottom]
-        self.gl.locations = [0.0, 0.3]
+        self.gl.locations = [0.0, 0.5]
     }
 }
 
@@ -42,6 +42,9 @@ class UserDetailsViewController: UIViewController {
       
     
     private func setupUI() {
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = UIColor.white
+        
         avatarImage.layer.cornerRadius = avatarImage.frame.height / 2
         nameLabel.text = viewModel?.currentUser?.display_name
         let planLocalizedString = NSLocalizedString("plan", comment: "")

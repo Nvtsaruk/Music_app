@@ -1,18 +1,22 @@
 import UIKit
 
-class UserProfileViewController: UIViewController {
+final class UserProfileViewController: UIViewController {
     
     //MARK: - IBOutlet
     
-    @IBOutlet weak var logoutButtonOutlet: UIButton!
-    @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var profileDisplayName: UILabel!
+    @IBOutlet private weak var logoutButtonOutlet: UIButton!
     
-    @IBOutlet weak var userProfile: UIView!
-    var isLoading: Bool = false 
+    @IBOutlet private weak var profileImage: UIImageView!
+    @IBOutlet private weak var profileDisplayName: UILabel!
+    @IBOutlet private weak var myProfileLabel: UILabel!
+    
+    @IBOutlet private weak var userProfile: UIView!
+    
+    //MARK: - Variables
+    private var isLoading: Bool = false
     var viewModel: UserProfileViewModelProtocol?
     
-    let symbolConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .medium, scale: .medium)
+    private let symbolConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .medium, scale: .medium)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,12 +38,16 @@ class UserProfileViewController: UIViewController {
         }
     }
     private func setupUI() {
+        myProfileLabel.text = NSLocalizedString("myProfile", comment: "")
+        
         profileImage.layer.cornerRadius = profileImage.frame.height / 2
+        
         let userProfileDidTap = UITapGestureRecognizer(target: self, action: #selector(didTap(_ :)))
         userProfile.addGestureRecognizer(userProfileDidTap)
 
         view.backgroundColor = ColorConstants.backgroundColor
         
+        logoutButtonOutlet.setTitle(NSLocalizedString("logout", comment: ""), for: .normal)
         logoutButtonOutlet.layer.cornerRadius = 19
         logoutButtonOutlet.layer.borderColor = UIColor.white.cgColor
         logoutButtonOutlet.layer.borderWidth = 1
