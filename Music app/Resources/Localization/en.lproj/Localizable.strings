@@ -1,11 +1,20 @@
+//User profile
 "plan" = "Plan:";
 "email" = "Email:";
 "userID" = "UserID:";
 "country" = "Country:";
 
+//Main screen
 "topList" = "Top list";
 "relax" = "Relax";
 "pop" = "Pop";
 "rock" = "Rock";
 "mood" = "Mood";
-
+"main" = "Main";
+"search" = "Search";
+"media" = "My music";
+"morning" = "Good morning";
+"afternoon" = "Good afternoon";
+"evening" = "Good evening";
+"night" = "Good night"
+//

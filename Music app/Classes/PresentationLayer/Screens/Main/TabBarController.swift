@@ -48,11 +48,11 @@ final class TabBarController: UITabBarController, MainCoordinatorDelegate, Audio
         var title: String {
             switch self {
                 case .mainPage:
-                    return "Main"
+                    return NSLocalizedString("main", comment: "")
                 case .searchPage:
-                    return "Search"
+                    return NSLocalizedString("search", comment: "")
                 case .myMedia:
-                    return "My music"
+                    return NSLocalizedString("media", comment: "")
             }
         }
         var iconName: String {
