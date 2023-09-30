@@ -18,7 +18,11 @@ final class HeaderTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+    }
+    
+    func configure(delegate: HeaderTableViewCellDelegate, greeting: String) {
+        headerGreetingLabel.text = greeting
+        self.delegate = delegate
     }
     
     //MARK: -IBAction

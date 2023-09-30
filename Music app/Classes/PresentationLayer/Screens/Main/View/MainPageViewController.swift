@@ -77,6 +77,10 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let headerCell = tableView.dequeueReusableCell(withIdentifier: "HeaderTableViewCell") as? HeaderTableViewCell else { return UITableViewCell() }
+        guard let delegate = viewModel as? any HeaderTableViewCellDelegate,
+        let dayTime = viewModel?.getDayTime()
+        else { return headerCell}
+        headerCell.configure(delegate: delegate, greeting: dayTime)
         headerCell.delegate = viewModel as? any HeaderTableViewCellDelegate
         guard let topPlaylists = tableView.dequeueReusableCell(withIdentifier: "TopPlaylistTableViewCell") as? TopPlaylistTableViewCell else { return UITableViewCell() }
         guard let playlistNames = self.viewModel?.mainPageData.playlistNames else { return UITableViewCell() }

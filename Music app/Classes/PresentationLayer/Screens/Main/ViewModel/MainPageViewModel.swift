@@ -8,11 +8,32 @@ protocol MainPageViewModelProtocol {
     var mainPageData: MainPageData { get }
     var updateClosure:( ()->Void )? { get set }
     var isLoading: Bool { get }
+    func getDayTime() -> String
 }
 enum CellType {
     case header
     case topPlaylists
     case playlists
+}
+
+enum DayTime {
+    case morning
+    case afternoon
+    case evening
+    case night
+    
+    var greeting: String {
+        switch self {
+            case .morning:
+                return NSLocalizedString("morning", comment: "")
+            case .afternoon:
+                return NSLocalizedString("afternoon", comment: "")
+            case .evening:
+                return NSLocalizedString("evening", comment: "")
+            case .night:
+                return NSLocalizedString("night", comment: "")
+        }
+    }
 }
 
 struct MainPageData {
@@ -36,9 +57,24 @@ final class MainPageViewModel: MainPageViewModelProtocol {
             updateClosure?()
         }
     }
+    private let hour = Calendar.current.component(.hour, from: Date())
+    
     var mainPageData: MainPageData = MainPageData() {
         didSet {
             updateClosure?()
+        }
+    }
+    
+    func getDayTime() -> String {
+        switch hour{
+            case 6...11:
+                return DayTime.morning.greeting
+            case 12...17:
+                return DayTime.afternoon.greeting
+            case 18...24:
+                return DayTime.evening.greeting
+            default:
+                return DayTime.night.greeting
         }
     }
 
