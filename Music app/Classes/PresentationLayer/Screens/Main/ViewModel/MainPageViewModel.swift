@@ -10,6 +10,7 @@ protocol MainPageViewModelProtocol {
     var isLoading: Bool { get }
     func getDayTime() -> String
 }
+
 enum CellType {
     case header
     case topPlaylists
@@ -47,7 +48,6 @@ struct MainPageData {
     }
 }
 
-
 final class MainPageViewModel: MainPageViewModelProtocol {
     
     var updateClosure: (() -> Void)?
@@ -57,6 +57,7 @@ final class MainPageViewModel: MainPageViewModelProtocol {
             updateClosure?()
         }
     }
+    
     private let hour = Calendar.current.component(.hour, from: Date())
     
     var mainPageData: MainPageData = MainPageData() {
@@ -95,7 +96,6 @@ final class MainPageViewModel: MainPageViewModelProtocol {
         isLoading = false
     }
 
-    
     func start() {
         let headerCell = HeaderTableViewCell()
         headerCell.delegate = self
@@ -109,9 +109,7 @@ final class MainPageViewModel: MainPageViewModelProtocol {
     func logout() {
         LoginManager.shared.deleteAll()
     }
-    
 }
-
 
 extension MainPageViewModel: HeaderTableViewCellDelegate {
     func goToUserProfile() {
