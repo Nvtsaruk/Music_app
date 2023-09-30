@@ -1,23 +1,5 @@
 import UIKit
 
-class GradientTabBarController: UITabBarController {
-    
-    let gradientlayer = CAGradientLayer()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setGradientBackground(colorOne: .black, colorTwo: UIColor(white: 1, alpha: 0))
-    }
-    
-    func setGradientBackground(colorOne: UIColor, colorTwo: UIColor)  {
-        gradientlayer.frame = tabBar.bounds
-        gradientlayer.colors = [colorOne.cgColor, colorTwo.cgColor]
-        gradientlayer.locations = [0, 1]
-        gradientlayer.startPoint = CGPoint(x: 0.0, y: 1.0)
-        gradientlayer.endPoint = CGPoint(x: 0.0, y: 0.0)
-        self.tabBar.layer.insertSublayer(gradientlayer, at: 0)
-    }
-}
 final class TabBarController: UITabBarController, MainCoordinatorDelegate, AudioPlayerShowHideDelegate {
     var playerInited: Bool = false {
         didSet {
