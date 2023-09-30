@@ -300,7 +300,6 @@
 			children = (
 				CC68C07D2A83D55A001016F0 /* Classes */,
 				CC68C07E2A83D565001016F0 /* Resources */,
-				CC68C0372A8239D0001016F0 /* Extension */,
 				CC351E8C2A7D3B74003EF23D /* AppConstants.swift */,
 			);
 			path = "Music app";
@@ -565,17 +564,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		CC68C0372A8239D0001016F0 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				CC68C0382A8239E9001016F0 /* StoryboardEnum.swift */,
-				CC68C03A2A823D44001016F0 /* StoryboardedProtocol.swift */,
-				CC4AF6B02AB35F23008E966B /* UIImage+SdWebImage.swift */,
-				CCB1FCDA2AC46F62007713A2 /* XibEnum.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
 		CC68C0442A824172001016F0 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -802,6 +790,10 @@
 		CC7C617D2A8F9ABC009DCB9E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CC68C0382A8239E9001016F0 /* StoryboardEnum.swift */,
+				CC68C03A2A823D44001016F0 /* StoryboardedProtocol.swift */,
+				CC4AF6B02AB35F23008E966B /* UIImage+SdWebImage.swift */,
+				CCB1FCDA2AC46F62007713A2 /* XibEnum.swift */,
 				CC7C617E2A8F9AD3009DCB9E /* UIImage+AverageColor.swift */,
 				CCE459102AC80A19004D3CE8 /* GradientBackground.swift */,
 				CCE459122AC81B41004D3CE8 /* LocalizationEnum.swift */,
