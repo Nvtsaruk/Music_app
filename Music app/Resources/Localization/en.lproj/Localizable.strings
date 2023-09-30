@@ -29,3 +29,11 @@
 //My media page
 "myPlaylists" = "My playlists";
 "emptyPlaylists" = "Empty";
+
+//Add to playlist
+"createPlaylist" = "Create playlist";
+"ready" = "Ready";
+"playlistName" = "Playlist name";
+"message" = "Enter name of playlist";
+"placeholder" = "Enter playlist name";
+"cancel" = "Cancel";

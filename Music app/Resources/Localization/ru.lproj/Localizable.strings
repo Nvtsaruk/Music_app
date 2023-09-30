@@ -29,3 +29,11 @@
 //My media page
 "myPlaylists" = "Мои плейлисты";
 "emptyPlaylists" = "Пусто";
+
+//Add to playlist
+"createPlaylist" = "Создать плейлист";
+"ready" = "Готово";
+"playlistName" = "Название плейлиста";
+"message" = "Введите название плейлиста";
+"placeholder" = "Введите название плейлиста";
+"cancel" = "Отмена";

@@ -17,6 +17,8 @@ final class AddToPlaylistViewController: UIViewController {
     }
     
     private func setupUI() {
+        readyButtonOutlet.setTitle(NSLocalizedString("ready", comment: ""), for: .normal)
+        
         tableView.delegate = self
         tableView.dataSource = self
         let tablePlaylistNib = UINib(nibName: XibNames.myPlaylist.name, bundle: nil)

@@ -111,6 +111,7 @@
 		CCB1FCDB2AC46F62007713A2 /* XibEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1FCDA2AC46F62007713A2 /* XibEnum.swift */; };
 		CCC181C02AB9F5A2004205D1 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC181BF2AB9F5A2004205D1 /* Artist.swift */; };
 		CCE459112AC80A19004D3CE8 /* GradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE459102AC80A19004D3CE8 /* GradientBackground.swift */; };
+		CCE459132AC81B41004D3CE8 /* LocalizationEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE459122AC81B41004D3CE8 /* LocalizationEnum.swift */; };
 		CCE53F122ABD9EBF00F05F4F /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE53F112ABD9EBF00F05F4F /* DatabaseService.swift */; };
 		CCEAD48B2AB6DDDA0052BBCF /* ArtistItemDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEAD48A2AB6DDDA0052BBCF /* ArtistItemDetailViewModel.swift */; };
 		CCEAD48D2AB6E1230052BBCF /* ArtistItemDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCEAD48C2AB6E1230052BBCF /* ArtistItemDetail.storyboard */; };
@@ -221,6 +222,7 @@
 		CCB1FCDA2AC46F62007713A2 /* XibEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibEnum.swift; sourceTree = "<group>"; };
 		CCC181BF2AB9F5A2004205D1 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		CCE459102AC80A19004D3CE8 /* GradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackground.swift; sourceTree = "<group>"; };
+		CCE459122AC81B41004D3CE8 /* LocalizationEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationEnum.swift; sourceTree = "<group>"; };
 		CCE53F112ABD9EBF00F05F4F /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		CCEAD48A2AB6DDDA0052BBCF /* ArtistItemDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistItemDetailViewModel.swift; sourceTree = "<group>"; };
 		CCEAD48C2AB6E1230052BBCF /* ArtistItemDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArtistItemDetail.storyboard; sourceTree = "<group>"; };
@@ -802,6 +804,7 @@
 			children = (
 				CC7C617E2A8F9AD3009DCB9E /* UIImage+AverageColor.swift */,
 				CCE459102AC80A19004D3CE8 /* GradientBackground.swift */,
+				CCE459122AC81B41004D3CE8 /* LocalizationEnum.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1010,6 +1013,7 @@
 				CC68C03B2A823D44001016F0 /* StoryboardedProtocol.swift in Sources */,
 				CC16BC912A7A2FFD000850CD /* SceneDelegate.swift in Sources */,
 				CC0C6DC62AA1B02C00C18299 /* FullPlayerViewModel.swift in Sources */,
+				CCE459132AC81B41004D3CE8 /* LocalizationEnum.swift in Sources */,
 				CC7C61812A8FA109009DCB9E /* ToplistPlaylistModel.swift in Sources */,
 				CC351F242A7FBBF9003EF23D /* TopPlaylistCollectionViewCell.swift in Sources */,
 				CC4942F82AB6FC6F002E9F07 /* ArtistItemDetailViewController.swift in Sources */,

@@ -38,7 +38,7 @@ final class UserProfileViewController: UIViewController {
         }
     }
     private func setupUI() {
-        myProfileLabel.text = NSLocalizedString("myProfile", comment: "")
+        myProfileLabel.text = ProfileLocalization.myProfile.string
         
         profileImage.layer.cornerRadius = profileImage.frame.height / 2
         
@@ -47,7 +47,7 @@ final class UserProfileViewController: UIViewController {
 
         view.backgroundColor = ColorConstants.backgroundColor
         
-        logoutButtonOutlet.setTitle(NSLocalizedString("logout", comment: ""), for: .normal)
+        logoutButtonOutlet.setTitle(ProfileLocalization.logout.string, for: .normal)
         logoutButtonOutlet.layer.cornerRadius = 19
         logoutButtonOutlet.layer.borderColor = UIColor.white.cgColor
         logoutButtonOutlet.layer.borderWidth = 1

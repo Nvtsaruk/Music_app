@@ -36,10 +36,10 @@ final class UserDetailsViewController: UIViewController {
         avatarImage.layer.cornerRadius = avatarImage.frame.height / 2
         nameLabel.text = viewModel?.currentUser?.display_name
         
-        let planLocalizedString = NSLocalizedString("plan", comment: "")
-        let countryLocalizedString = NSLocalizedString("country", comment: "")
-        let userIDLocalizedString = NSLocalizedString("userID", comment: "")
-        let emailLocalizedString = NSLocalizedString("email", comment: "")
+        let planLocalizedString = ProfileLocalization.plan.string
+        let countryLocalizedString = ProfileLocalization.country.string
+        let userIDLocalizedString = ProfileLocalization.userID.string
+        let emailLocalizedString = ProfileLocalization.email.string
         
         planLabel.text = planLocalizedString + " " + (viewModel?.currentUser?.product ?? "")
         countryLabel.text = countryLocalizedString + " " + (viewModel?.currentUser?.country ?? "")
