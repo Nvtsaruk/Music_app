@@ -14,6 +14,7 @@ final class MyMediaPageCoordinator: Coordinator {
         myMediaPageViewController.viewModel = viewModel
         navigationController.pushViewController(myMediaPageViewController, animated: true)
     }
+    
     func showItemDetail(id: String, playlist: PlaylistModel) {
         let viewModel = PlaylistItemDetailViewModel()
         viewModel.playlist = playlist

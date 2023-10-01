@@ -31,8 +31,8 @@ final class AudioPlayerService {
         }
     }
     
-    var compactPlayerPresented: Bool = false
-    var itemIndex: Int = 0 {
+    private var compactPlayerPresented: Bool = false
+    private var itemIndex: Int = 0 {
         didSet {
             if itemIndex < 0 {
                 itemIndex = playerItem.count - 1
@@ -65,7 +65,7 @@ final class AudioPlayerService {
         state = .playing(playerItem)
     }
     
-    func play(url:URL) {
+    private func play(url:URL) {
         let playerItem = AVPlayerItem(url: url)
         self.player = AVPlayer(playerItem:playerItem)
         player.volume = 1.0

@@ -1,65 +1,9 @@
 import RealmSwift
-
-final class DatabaseUser: Object {
-    @Persisted var userId: String
-    @Persisted var playlists: List<DatabasePlaylist>
-    
-    convenience init(userId: String, playlist: List<DatabasePlaylist>) {
-        self.init()
-        self.userId = userId
-        self.playlists = playlist
-    }
-}
-
-final class DatabasePlaylist: Object {
-    @Persisted var playlistName: String
-    @Persisted var playlistImage: String
-    @Persisted var tracks: List<DatabaseTrack>
-    
-    convenience init(playlistName: String, playlistImage: String,tracks: List<DatabaseTrack>) {
-        self.init()
-        self.playlistName = playlistName
-        self.playlistImage = playlistImage
-        self.tracks = tracks
-    }
-}
-
-final class DatabaseTrack: Object {
-    @Persisted var artistName: String
-    @Persisted var trackName: String
-    @Persisted var image: String
-    @Persisted var trackId: String
-    
-    convenience init(_ model: UserPlaylistTrack) {
-        self.init()
-        self.artistName = model.artistName
-        self.trackName = model.trackName
-        self.image = model.image
-        self.trackId = model.trackID
-    }
-}
-
-struct UserPlaylist {
-    var playlistName: String
-    var tracks: [UserPlaylistTrack]
-}
-
-struct UserPlaylistTrack {
-    var artistName: String
-    var trackName: String
-    var image: String
-    var trackID: String
-}
-
-protocol DatabaseServiceObserver: AnyObject {
-    func dataBaseUpdated()
-}
-
 final class DatabaseService {
     static var shared = DatabaseService()
     private init() {}
     
-    private var observations = [ObjectIdentifier: Observation] ()
+    var observations = [ObjectIdentifier: Observation] ()
     
     let realm = try! Realm()
     
@@ -118,35 +62,5 @@ final class DatabaseService {
         }
         let playlists = realm.objects(DatabaseUser.self)
         baseDidChange()
-    }
-}
-
-private extension DatabaseService {
-    struct Observation {
-        weak var observer: DatabaseServiceObserver?
-    }
-}
-
-private extension DatabaseService {
-    func baseDidChange() {
-        for (id, observation) in observations {
-            guard let observer = observation.observer else {
-                observations.removeValue(forKey: id)
-                continue
-            }
-            observer.dataBaseUpdated()
-        }
-    }
-}
-
-extension DatabaseService {
-    func addObserver(_ observer: DatabaseServiceObserver) {
-        let id = ObjectIdentifier(observer)
-        observations[id] = Observation(observer: observer)
-    }
-    
-    func removeObserver(_ observer: DatabaseServiceObserver) {
-        let id = ObjectIdentifier(observer)
-        observations.removeValue(forKey: id)
     }
 }

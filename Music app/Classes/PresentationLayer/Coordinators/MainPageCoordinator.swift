@@ -56,6 +56,3 @@ final class MainPageCoordinator: Coordinator {
         delegate?.showLogin()
     }
 }
-
-
-

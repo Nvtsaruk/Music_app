@@ -15,6 +15,7 @@ final class SearchPageCoordinator: Coordinator {
         searchCategoriesViewController.viewModel = viewModel
         navigationController.pushViewController(searchCategoriesViewController, animated: false)
     }
+    
     func showSearchTabbar() {
         let viewModel = SearchPageViewModel()
         viewModel.coordinator = self
@@ -22,6 +23,7 @@ final class SearchPageCoordinator: Coordinator {
         searchPageViewController.viewModel = viewModel
         navigationController.pushViewController(searchPageViewController, animated: false)
     }
+    
     func popToRoot() {
         navigationController.popToRootViewController(animated: false)
     }
@@ -35,6 +37,7 @@ final class SearchPageCoordinator: Coordinator {
         categoriesDetailsViewController.viewModel = viewModel
         navigationController.pushViewController(categoriesDetailsViewController, animated: true)
     }
+    
     func showPlaylistDetail(id: String) {
         let viewModel = PlaylistItemDetailViewModel()
         viewModel.id = id
@@ -42,6 +45,7 @@ final class SearchPageCoordinator: Coordinator {
         playlistItemDetailViewController.viewModel = viewModel
         navigationController.pushViewController(playlistItemDetailViewController, animated: true)
     }
+    
     func showArtistDetail(id: String) {
         let viewModel = ArtistItemDetailViewModel()
         viewModel.coordinator = self
@@ -50,6 +54,7 @@ final class SearchPageCoordinator: Coordinator {
         artistItemDetailVC.viewModel = viewModel
         navigationController.pushViewController(artistItemDetailVC, animated: true)
     }
+    
     func showAlbumDetail(id: String) {
         let viewModel = AlbumItemDetailViewModel()
         viewModel.coordinator = self
@@ -58,6 +63,7 @@ final class SearchPageCoordinator: Coordinator {
         albumItemDetailVC.viewModel = viewModel
         navigationController.pushViewController(albumItemDetailVC, animated: true)
     }
+    
     func showAddToPlaylist(trackItem: UserPlaylistTrack) {
         let viewModel = AddToPlaylistViewModel()
         viewModel.trackItem = trackItem
