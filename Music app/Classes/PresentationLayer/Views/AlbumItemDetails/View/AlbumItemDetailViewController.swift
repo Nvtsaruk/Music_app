@@ -10,6 +10,7 @@ final class AlbumItemDetailViewController: UIViewController {
     @IBOutlet private var artistNameLabel: UILabel!
     @IBOutlet private var typeAndYearLabel: UILabel!
     
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet private var playPauseButtonOutlet: UIButton!
     
     @IBOutlet private var tableView: UITableView!
@@ -26,11 +27,13 @@ final class AlbumItemDetailViewController: UIViewController {
     }
     
     private func setupUI() {
+        if viewModel?.isLoading == true {
+            loadingIndicator.startAnimating()
+        }
         tableView.dataSource = self
         tableView.delegate = self
         let itemDetailNib = UINib(nibName: "TrackItemDetailTableViewCell", bundle: nil)
         tableView.register(itemDetailNib, forCellReuseIdentifier: "TrackItemDetailTableViewCell")
-        
     }
     
     private func bindViewModel() {
@@ -51,7 +54,7 @@ final class AlbumItemDetailViewController: UIViewController {
             } else {
                 self.playPauseButtonOutlet.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
             }
-            
+            loadingIndicator.stopAnimating()
             tableView.reloadData()
             albumTitleLabel.text = viewModel?.album?.name
             artistNameLabel.text = viewModel?.album?.tracks.items.first?.artists.first?.name

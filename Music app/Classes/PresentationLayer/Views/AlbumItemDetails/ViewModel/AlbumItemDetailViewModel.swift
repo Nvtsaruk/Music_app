@@ -1,20 +1,19 @@
 
 import Foundation
 protocol AlbumItemDetailViewModelProtocol {
-    func start()
-    func getAlbumItems()
     var details: String { get set }
     var album: Album? { get }
     var updateClosure:(() -> Void)? { get set }
-    func playButtonAction()
-        func addPlayItems(itemIndex: Int)
     var isPlaying: Bool { get set }
+    var isLoading: Bool { get }
+    func playButtonAction()
+    func addPlayItems(itemIndex: Int)
+    func start()
+    func getAlbumItems()
 }
 
 final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, TrackItemDetailTableViewCellDelegate {
-    
-    
-    
+
     var coordinator: SearchPageCoordinator?
     var id: String?
     var playingThisPlaylist: Bool = false
@@ -25,6 +24,12 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, TrackIte
     }
     
     var isPlaying: Bool = false {
+        didSet {
+            updateClosure?()
+        }
+    }
+    
+    var isLoading: Bool = false {
         didSet {
             updateClosure?()
         }
@@ -80,6 +85,7 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, TrackIte
     }
     
     func getAlbumItems() {
+        isLoading = true
         let url = NetworkConstants.baseUrl + NetworkConstants.albums + (id ?? "")
         APIService.getData(Album.self, url: url) { result in
             switch result {
@@ -89,7 +95,7 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, TrackIte
                     ErrorHandler.shared.handleError(error: error)
             }
         }
-
+        
     }
     
     func playButtonAction() {
@@ -130,5 +136,5 @@ extension AlbumItemDetailViewModel: AudioPlayerServiceObserver {
     func audioPlayerPaused(item: PlayerItemModel) {
         isPlaying = false
     }
-
+    
 }
