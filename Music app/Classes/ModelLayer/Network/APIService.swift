@@ -6,10 +6,6 @@ enum ResultRequest<T> {
     case failure(CustomErrors)
 }
 
-struct Token {
-    var accessToken: String
-}
-
 final class APIService {
     static let sessionManager: Session = {
         let interceptor = APIRequestInterceptor()

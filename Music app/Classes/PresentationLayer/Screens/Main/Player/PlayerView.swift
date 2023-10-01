@@ -50,8 +50,6 @@ final class PlayerView: UIView {
         container.layer.cornerRadius = 8
         container.clipsToBounds = true
         trackImage.layer.cornerRadius = 8
-//        guard let url = URL(string: "https://charts-images.scdn.co/assets/locale_en/viral/daily/region_global_large.jpg") else { return }
-//        trackImage.sd_setImage(with: url, placeholderImage: .checkmark)
         let didTap  = UITapGestureRecognizer(target: self, action: #selector(didTap))
         container.addGestureRecognizer(didTap)
     }

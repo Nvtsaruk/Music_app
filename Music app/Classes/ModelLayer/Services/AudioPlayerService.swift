@@ -30,7 +30,7 @@ final class AudioPlayerService {
             stateDidChange()
         }
     }
-
+    
     var compactPlayerPresented: Bool = false
     var itemIndex: Int = 0 {
         didSet {
@@ -39,6 +39,7 @@ final class AudioPlayerService {
             } else if itemIndex == playerItem.count {
                 itemIndex = 0
             }
+            
             let urlString = playerItem[itemIndex].url
             guard let url = URL(string: urlString) else { return }
             play(url: url)
@@ -69,8 +70,8 @@ final class AudioPlayerService {
         self.player = AVPlayer(playerItem:playerItem)
         player.volume = 1.0
         player.play()
-        
     }
+    
     func playPause() {
         switch state {
             case .idle:
@@ -86,12 +87,10 @@ final class AudioPlayerService {
     
     func nextItem() {
         itemIndex += 1
-//        let playerItem = playerItem[itemIndex]
     }
     
     func previousItem() {
         itemIndex -= 1
-//        let playerItem = playerItem[itemIndex]
     }
     
     func presentCompactPlayer() {
@@ -120,20 +119,20 @@ private extension AudioPlayerService {
 private extension AudioPlayerService {
     func stateDidChange() {
         for (id, observation) in observations {
-                    guard let observer = observation.observer else {
-                        observations.removeValue(forKey: id)
-                        continue
-                    }
-
-                    switch state {
-                    case .idle:
-                        observer.audioPlayerDidStop()
-                        case .playing(let item):
-                        observer.audioPlayerPlaying(item: item)
-                        case .paused(let item):
-                        observer.audioPlayerPaused(item: item)
-                    }
-                }
+            guard let observer = observation.observer else {
+                observations.removeValue(forKey: id)
+                continue
+            }
+            
+            switch state {
+                case .idle:
+                    observer.audioPlayerDidStop()
+                case .playing(let item):
+                    observer.audioPlayerPlaying(item: item)
+                case .paused(let item):
+                    observer.audioPlayerPaused(item: item)
+            }
+        }
     }
 }
 extension AudioPlayerService {
@@ -141,7 +140,7 @@ extension AudioPlayerService {
         let id = ObjectIdentifier(observer)
         observations[id] = Observation(observer: observer)
     }
-
+    
     func removeObserver(_ observer: AudioPlayerServiceObserver) {
         let id = ObjectIdentifier(observer)
         observations.removeValue(forKey: id)

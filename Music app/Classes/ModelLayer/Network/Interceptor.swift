@@ -2,17 +2,17 @@ import Foundation
 import Alamofire
 
 final class APIRequestInterceptor: RequestInterceptor {
-    private var token: Token = Token(accessToken: "")
+    private var token: TokenRequest = TokenRequest(access_token: "", expires_in: 0, refresh_token: "")
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         do {
             let data = try CredentialStorageService().getPassword(for: KeychainConstants.accessToken.key)
-            self.token.accessToken = String(decoding: data ?? Data(), as: UTF8.self)
+            self.token.access_token = String(decoding: data ?? Data(), as: UTF8.self)
         } catch {
             CustomErrors.brokenAccessToken.createAllert()
         }
         var urlRequest = urlRequest
-        urlRequest.headers.add(.authorization(bearerToken: token.accessToken))
+        urlRequest.headers.add(.authorization(bearerToken: token.access_token))
         completion(.success(urlRequest))
     }
     

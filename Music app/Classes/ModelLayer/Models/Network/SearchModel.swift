@@ -7,12 +7,10 @@ struct SearchResults: Decodable {
 
 struct SearchAlbum: Decodable {
     let items: [SearchAlbumItem]
-    let total: Int
 }
 
 struct SearchArtists: Decodable {
     let items: [SearchArtistsItem]
-    let total: Int
 }
 struct SearchPlaylists: Decodable {
     let items: [PlaylistModel]
@@ -38,15 +36,11 @@ struct SearchArtistsItem: Decodable {
     let type: String
 }
 
-
-
 struct SearchAlbumItemArtists: Decodable {
     let id: String
     let name: String
     let type: String
 }
-
-
 
 struct SearchTracksItem: Decodable {
     let album: SearchTracksItemAlbum

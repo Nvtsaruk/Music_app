@@ -2,7 +2,7 @@ import Alamofire
 import Foundation
 
 struct TokenRequest:Codable {
-    let access_token: String
+    var access_token: String
     let expires_in: Int
     let refresh_token: String?
 }
@@ -19,8 +19,8 @@ final class LoginManager {
         guard let base64String = data?.base64EncodedString() else { return }
         
         let headers: HTTPHeaders = [
-            "Content-Type" : "application/x-www-form-urlencoded",
-            "Authorization" : "Basic \(base64String)"
+            .contentType("application/x-www-form-urlencoded"),
+            .authorization("Basic \(base64String)")
         ]
         
         let parameters: [String: String] = [
@@ -58,8 +58,8 @@ final class LoginManager {
         guard let base64String = data?.base64EncodedString() else { return }
         
         let headers: HTTPHeaders = [
-            "Content-Type" : "application/x-www-form-urlencoded",
-            "Authorization" : "Basic \(base64String)"
+            .contentType("application/x-www-form-urlencoded"),
+            .authorization("Basic \(base64String)")
         ]
         var refreshToken = ""
         do {
