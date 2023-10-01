@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -97,16 +98,6 @@
                                     <action selector="nextButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="BuT-TY-9RW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMl-A8-8ZB">
-                                <rect key="frame" x="22" y="590.66666666666663" width="53" height="37"/>
-                                <color key="tintColor" systemColor="tintColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
-                                    <imageReference key="image" image="plus.circle" catalog="system" symbolScale="large" variableValue="0.0"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="19"/>
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                            </button>
                             <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qV7-D9-KNF">
                                 <rect key="frame" x="4" y="40" width="88" height="67"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -124,7 +115,6 @@
                         <constraints>
                             <constraint firstItem="Qa8-xK-vAf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="4aw-JB-wBh"/>
                             <constraint firstItem="jIl-g1-4pz" firstAttribute="centerY" secondItem="JCb-We-2ez" secondAttribute="centerY" id="8kF-j4-Zgm"/>
-                            <constraint firstItem="hMl-A8-8ZB" firstAttribute="centerY" secondItem="jIl-g1-4pz" secondAttribute="centerY" id="D0h-y8-OXF"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Qa8-xK-vAf" secondAttribute="trailing" constant="32" id="DtG-Az-QYg"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fu7-2l-HlV" secondAttribute="trailing" constant="32" id="Fqg-Pe-6OM"/>
                             <constraint firstItem="fu7-2l-HlV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="L7d-0r-8Gc"/>
@@ -141,7 +131,6 @@
                             <constraint firstItem="X5C-xT-gGh" firstAttribute="centerY" secondItem="JCb-We-2ez" secondAttribute="centerY" id="rYW-w6-dXT"/>
                             <constraint firstItem="5xT-qx-RzE" firstAttribute="top" secondItem="Qa8-xK-vAf" secondAttribute="bottom" constant="24" id="sYF-Tm-Oo7"/>
                             <constraint firstItem="HmT-wx-dhp" firstAttribute="top" secondItem="5xT-qx-RzE" secondAttribute="bottom" constant="8" id="t4m-8V-00P"/>
-                            <constraint firstItem="jIl-g1-4pz" firstAttribute="leading" secondItem="hMl-A8-8ZB" secondAttribute="trailing" id="u2E-jm-sab"/>
                         </constraints>
                     </view>
                     <connections>
@@ -161,10 +150,9 @@
     </scenes>
     <resources>
         <image name="backward.end.fill" catalog="system" width="128" height="101"/>
-        <image name="downArrow" width="32" height="32"/>
+        <image name="downArrow" width="28" height="28"/>
         <image name="forward.end.fill" catalog="system" width="128" height="101"/>
         <image name="play.circle.fill" catalog="system" width="128" height="123"/>
-        <image name="plus.circle" catalog="system" width="128" height="123"/>
         <systemColor name="tintColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

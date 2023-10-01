@@ -668,6 +668,8 @@
 		CC68C0842A83D673001016F0 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				CCE53F112ABD9EBF00F05F4F /* DatabaseService.swift */,
+				CC79F5F72AC98ABE0005932F /* DatabaseService+Observer.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -677,8 +679,6 @@
 			children = (
 				CC351E9C2A7D4565003EF23D /* CredentialStorageService.swift */,
 				CC3A38C52A9F483D009E4036 /* AudioPlayerService.swift */,
-				CCE53F112ABD9EBF00F05F4F /* DatabaseService.swift */,
-				CC79F5F72AC98ABE0005932F /* DatabaseService+Observer.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
