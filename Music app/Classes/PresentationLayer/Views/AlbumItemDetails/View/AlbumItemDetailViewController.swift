@@ -32,8 +32,8 @@ final class AlbumItemDetailViewController: UIViewController {
         }
         tableView.dataSource = self
         tableView.delegate = self
-        let itemDetailNib = UINib(nibName: "TrackItemDetailTableViewCell", bundle: nil)
-        tableView.register(itemDetailNib, forCellReuseIdentifier: "TrackItemDetailTableViewCell")
+        let itemDetailNib = UINib(nibName: XibNames.trackItemDetailTableViewCell.name, bundle: nil)
+        tableView.register(itemDetailNib, forCellReuseIdentifier: XibNames.trackItemDetailTableViewCell.name)
     }
     
     private func bindViewModel() {
@@ -73,7 +73,7 @@ extension AlbumItemDetailViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TrackItemDetailTableViewCell") as? TrackItemDetailTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: XibNames.trackItemDetailTableViewCell.name) as? TrackItemDetailTableViewCell else { return UITableViewCell() }
         cell.delegate = viewModel as? any TrackItemDetailTableViewCellDelegate
         guard let artist = viewModel?.album?.tracks.items[indexPath.row].artists.first?.name,
               let track = viewModel?.album?.tracks.items[indexPath.row].name,

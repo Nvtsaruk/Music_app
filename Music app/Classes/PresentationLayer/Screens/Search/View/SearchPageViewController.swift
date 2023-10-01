@@ -29,14 +29,14 @@ final class SearchPageViewController: UIViewController {
         tableView.keyboardDismissMode = .onDrag
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = UIColor.white
-        let tableAlbumNib = UINib(nibName: "AlbumTableViewCell", bundle: nil)
-        tableView.register(tableAlbumNib, forCellReuseIdentifier: "AlbumTableViewCell")
-        let tablePlaylistNib = UINib(nibName: "PlaylistTableViewCell", bundle: nil)
-        tableView.register(tablePlaylistNib, forCellReuseIdentifier: "PlaylistTableViewCell")
-        let tableArtistNib = UINib(nibName: "ArtistTableViewCell", bundle: nil)
-        tableView.register(tableArtistNib, forCellReuseIdentifier: "ArtistTableViewCell")
-        let tableTrackNib = UINib(nibName: "TrackItemDetailTableViewCell", bundle: nil)
-        tableView.register(tableTrackNib, forCellReuseIdentifier: "TrackItemDetailTableViewCell")
+        let tableAlbumNib = UINib(nibName: XibNames.albumTableViewCell.name, bundle: nil)
+        tableView.register(tableAlbumNib, forCellReuseIdentifier: XibNames.albumTableViewCell.name)
+        let tablePlaylistNib = UINib(nibName: XibNames.playlist.name, bundle: nil)
+        tableView.register(tablePlaylistNib, forCellReuseIdentifier: XibNames.playlist.name)
+        let tableArtistNib = UINib(nibName: XibNames.artistTableViewCell.name, bundle: nil)
+        tableView.register(tableArtistNib, forCellReuseIdentifier: XibNames.artistTableViewCell.name)
+        let tableTrackNib = UINib(nibName: XibNames.trackItemDetailTableViewCell.name, bundle: nil)
+        tableView.register(tableTrackNib, forCellReuseIdentifier: XibNames.trackItemDetailTableViewCell.name)
     }
     
     private func bindViewModel() {
@@ -77,11 +77,11 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let tableAlbumCell = tableView.dequeueReusableCell(withIdentifier: "AlbumTableViewCell") as? AlbumTableViewCell else { return UITableViewCell()}
-        guard let tableArtistCell = tableView.dequeueReusableCell(withIdentifier: "ArtistTableViewCell") as? ArtistTableViewCell else {
+        guard let tableAlbumCell = tableView.dequeueReusableCell(withIdentifier: XibNames.albumTableViewCell.name) as? AlbumTableViewCell else { return UITableViewCell()}
+        guard let tableArtistCell = tableView.dequeueReusableCell(withIdentifier: XibNames.artistTableViewCell.name) as? ArtistTableViewCell else {
             return UITableViewCell()}
-        guard let tablePlaylistCell = tableView.dequeueReusableCell(withIdentifier: "PlaylistTableViewCell") as? PlaylistTableViewCell else { return UITableViewCell()}
-        guard let tableTrackCell = tableView.dequeueReusableCell(withIdentifier: "TrackItemDetailTableViewCell") as? TrackItemDetailTableViewCell else { return UITableViewCell()}
+        guard let tablePlaylistCell = tableView.dequeueReusableCell(withIdentifier: XibNames.playlist.name) as? PlaylistTableViewCell else { return UITableViewCell()}
+        guard let tableTrackCell = tableView.dequeueReusableCell(withIdentifier: XibNames.trackItemDetailTableViewCell.name) as? TrackItemDetailTableViewCell else { return UITableViewCell()}
         tableTrackCell.delegate = viewModel as? any TrackItemDetailTableViewCellDelegate
         guard let albumCount = viewModel?.searchModel?.artists.items.count else { return UITableViewCell() }
         if indexPath.row < albumCount {

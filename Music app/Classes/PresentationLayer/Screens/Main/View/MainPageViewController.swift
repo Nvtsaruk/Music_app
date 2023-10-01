@@ -42,8 +42,8 @@ final class MainPageViewController: UIViewController {
         
         let headerNib = UINib(nibName: XibNames.headerTableViewCell.name, bundle: nil)
         tableView.register(headerNib, forCellReuseIdentifier: XibNames.headerTableViewCell.name)
-        let topPlaylistsNib = UINib(nibName: "TopPlaylistTableViewCell", bundle: nil)
-        tableView.register(topPlaylistsNib, forCellReuseIdentifier: "TopPlaylistTableViewCell")
+        let topPlaylistsNib = UINib(nibName: XibNames.topPlaylistTableViewCell.name, bundle: nil)
+        tableView.register(topPlaylistsNib, forCellReuseIdentifier: XibNames.topPlaylistTableViewCell.name)
         let playlistsTableViewNib = UINib(nibName: XibNames.playlists.name, bundle: nil)
         tableView.register(playlistsTableViewNib, forCellReuseIdentifier: XibNames.playlists.name)
     }
@@ -82,7 +82,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
         else { return headerCell}
         headerCell.configure(delegate: delegate, greeting: dayTime)
         headerCell.delegate = viewModel as? any HeaderTableViewCellDelegate
-        guard let topPlaylists = tableView.dequeueReusableCell(withIdentifier: "TopPlaylistTableViewCell") as? TopPlaylistTableViewCell else { return UITableViewCell() }
+        guard let topPlaylists = tableView.dequeueReusableCell(withIdentifier: XibNames.topPlaylistTableViewCell.name) as? TopPlaylistTableViewCell else { return UITableViewCell() }
         guard let playlistNames = self.viewModel?.mainPageData.playlistNames else { return UITableViewCell() }
         for (i, v) in playlistNames.enumerated() {
             if v == MainScreenLocalization.topList.string {

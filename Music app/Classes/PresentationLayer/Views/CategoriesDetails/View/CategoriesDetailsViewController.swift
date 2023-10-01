@@ -27,8 +27,8 @@ final class CategoriesDetailsViewController: UIViewController {
             loadingIndicator.startAnimating()
         }
         nameLabel.text = viewModel?.name
-        let collectionNib = UINib(nibName: "PlaylistsCollectionViewCell", bundle: nil)
-        collectionView.register(collectionNib, forCellWithReuseIdentifier: "PlaylistsCollectionViewCell")
+        let collectionNib = UINib(nibName: XibNames.playlistsCollectionViewCell.name, bundle: nil)
+        collectionView.register(collectionNib, forCellWithReuseIdentifier: XibNames.playlistsCollectionViewCell.name)
         collectionView.delegate = self
         collectionView.dataSource = self
     }
@@ -50,7 +50,7 @@ extension CategoriesDetailsViewController: UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaylistsCollectionViewCell", for: indexPath) as? PlaylistsCollectionViewCell else { return UICollectionViewCell()}
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: XibNames.playlistsCollectionViewCell.name, for: indexPath) as? PlaylistsCollectionViewCell else { return UICollectionViewCell()}
         guard let description = collectionData?.playlists.items[indexPath.row].description,
               let url = collectionData?.playlists.items[indexPath.row].images[0].url
         else { return cell }

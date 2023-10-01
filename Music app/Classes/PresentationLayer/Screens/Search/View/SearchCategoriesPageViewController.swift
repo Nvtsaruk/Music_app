@@ -55,8 +55,8 @@ final class SearchCategoriesPageViewController: UIViewController {
         searchCollectionView.dataSource = self
         searchCollectionView.delegate = self
         
-        let collectionNib = UINib(nibName: "SearchCollectionViewCell", bundle: nil)
-        searchCollectionView.register(collectionNib, forCellWithReuseIdentifier: "SearchCollectionViewCell")
+        let collectionNib = UINib(nibName: XibNames.searchCollectionViewCell.name, bundle: nil)
+        searchCollectionView.register(collectionNib, forCellWithReuseIdentifier: XibNames.searchCollectionViewCell.name)
     }
     
     @objc private func didTap() {
@@ -84,7 +84,7 @@ extension SearchCategoriesPageViewController: UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: "SearchCollectionViewCell", for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell()}
+        guard let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: XibNames.searchCollectionViewCell.name, for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell()}
         guard let titleName = viewModel?.categories?.categories.items[indexPath.row].name,
               let url = viewModel?.categories?.categories.items[indexPath.row].icons.first?.url,
               let color = colors.randomElement()

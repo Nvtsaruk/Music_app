@@ -36,8 +36,8 @@ final class PlaylistItemDetailViewController: UIViewController {
         itemImage.layer.shadowRadius = 30
         
         descriptionLabel.text = viewModel?.details
-        let itemDetailNib = UINib(nibName: "TrackItemDetailTableViewCell", bundle: nil)
-        tableView.register(itemDetailNib, forCellReuseIdentifier: "TrackItemDetailTableViewCell")
+        let itemDetailNib = UINib(nibName: XibNames.trackItemDetailTableViewCell.name, bundle: nil)
+        tableView.register(itemDetailNib, forCellReuseIdentifier: XibNames.trackItemDetailTableViewCell.name)
         tableView.reloadData()
         guard let url = viewModel?.playlist?.images.first?.url else { return }
             self.itemImage.webImage(url: url)
@@ -85,7 +85,7 @@ extension PlaylistItemDetailViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TrackItemDetailTableViewCell") as? TrackItemDetailTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: XibNames.trackItemDetailTableViewCell.name) as? TrackItemDetailTableViewCell else { return UITableViewCell() }
         cell.delegate = viewModel as? any TrackItemDetailTableViewCellDelegate
         guard let artist = viewModel?.playlist?.tracks.items?[indexPath.row].track.artists.first?.name,
               let track = viewModel?.playlist?.tracks.items?[indexPath.row].track.name,
