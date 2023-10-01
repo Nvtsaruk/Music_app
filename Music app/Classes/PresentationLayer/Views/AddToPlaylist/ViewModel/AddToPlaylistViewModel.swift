@@ -37,7 +37,22 @@ final class AddToPlaylistViewModel: AddToPlaylistViewModelProtocol {
                 case .success(let data):
                     self.currentUser = data
                 case .failure(let error):
-                    print("Custom Error -> \(error)")
+                    switch error {
+                        case .receivedError:
+                            CustomErrors.receivedError.createAllert()
+                        case .linkError:
+                            CustomErrors.linkError.createAllert()
+                        case .dataError:
+                            CustomErrors.dataError.createAllert()
+                        case .jsonDecodeError:
+                            CustomErrors.jsonDecodeError.createAllert()
+                        case .brokenAccessToken:
+                            CustomErrors.brokenAccessToken.createAllert()
+                        case .authError:
+                            CustomErrors.authError.createAllert()
+                        case .otherError:
+                            CustomErrors.otherError.createAllert()
+                    }
             }
         }
     }

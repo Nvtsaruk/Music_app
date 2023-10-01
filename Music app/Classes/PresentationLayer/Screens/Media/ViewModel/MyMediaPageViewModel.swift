@@ -31,7 +31,6 @@ final class MyMediaPageViewModel: MyMediaPageViewModelProtocol {
     private func getPlaylist(id: Int) {
         playlist = PlaylistModel(description: "", id: "", images: [ImageModel(url: "")], name: "", owner: PlaylistModelOwner(display_name: "", id: "", type: ""), tracks: PlaylistModelTracks(items: [PlaylistModelTracksItem(added_at: "",added_by: PlaylistModelTracksItemUser(id: "", type: ""), track: Track(album: TrackAlbum(album_type: "", artists: [TrackAlbumArtist(id: "", name: "", type: "")], id: "", images: [ImageModel(url: "")], name: "", release_date: "", type: ""), artists: [TrackAlbumArtist(id: "", name: "", type: "")], id: "", name: "", preview_url: "", type: ""))]), type: "")
         playlist?.name = databasePlaylist[id].playlistName
-        print(databasePlaylist[id].playlistName)
         guard let imageURL = databasePlaylist[id].tracks.first?.image else { return }
         playlist?.images = [ImageModel(url: imageURL)]
         var tracksArray: [PlaylistModelTracksItem] = []

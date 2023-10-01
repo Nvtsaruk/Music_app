@@ -40,12 +40,12 @@ final class MainPageViewController: UIViewController {
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = UIColor.white
         
-        let headerNib = UINib(nibName: "HeaderTableViewCell", bundle: nil)
-        tableView.register(headerNib, forCellReuseIdentifier: "HeaderTableViewCell")
+        let headerNib = UINib(nibName: XibNames.headerTableViewCell.name, bundle: nil)
+        tableView.register(headerNib, forCellReuseIdentifier: XibNames.headerTableViewCell.name)
         let topPlaylistsNib = UINib(nibName: "TopPlaylistTableViewCell", bundle: nil)
         tableView.register(topPlaylistsNib, forCellReuseIdentifier: "TopPlaylistTableViewCell")
-        let playlistsTableViewNib = UINib(nibName: "PlaylistsTableViewCell", bundle: nil)
-        tableView.register(playlistsTableViewNib, forCellReuseIdentifier: "PlaylistsTableViewCell")
+        let playlistsTableViewNib = UINib(nibName: XibNames.playlists.name, bundle: nil)
+        tableView.register(playlistsTableViewNib, forCellReuseIdentifier: XibNames.playlists.name)
     }
     
     private func bindViewModel() {
@@ -76,7 +76,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let headerCell = tableView.dequeueReusableCell(withIdentifier: "HeaderTableViewCell") as? HeaderTableViewCell else { return UITableViewCell() }
+        guard let headerCell = tableView.dequeueReusableCell(withIdentifier: XibNames.headerTableViewCell.name) as? HeaderTableViewCell else { return UITableViewCell() }
         guard let delegate = viewModel as? any HeaderTableViewCellDelegate,
         let dayTime = viewModel?.getDayTime()
         else { return headerCell}
@@ -92,7 +92,7 @@ extension MainPageViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         topPlaylists.delegate = self
-        guard let playlists = tableView.dequeueReusableCell(withIdentifier: "PlaylistsTableViewCell") as? PlaylistsTableViewCell else { return UITableViewCell() }
+        guard let playlists = tableView.dequeueReusableCell(withIdentifier: XibNames.playlists.name) as? PlaylistsTableViewCell else { return UITableViewCell() }
         if indexPath.section >= 2 {
             playlists.numRows = self.viewModel?.mainPageData.numRows[indexPath.section - 1] ?? 0
             playlists.collectionData = self.viewModel?.mainPageData.playlists[indexPath.section - 1]

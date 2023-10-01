@@ -86,7 +86,7 @@ final class AlbumItemDetailViewModel: AlbumItemDetailViewModelProtocol, TrackIte
                 case .success(let data):
                     self.album = data
                 case .failure(let error):
-                    print("Custom Error -> \(error)")
+                    ErrorHandler.shared.handleError(error: error)
             }
         }
 

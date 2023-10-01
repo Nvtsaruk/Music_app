@@ -89,7 +89,7 @@ final class MainPageViewModel: MainPageViewModelProtocol {
                         self.mainPageData.playlists.append(data)
                         self.mainPageData.numRows.append(data.playlists.items.count)
                     case .failure(let error):
-                        print("Custom Error -> \(error)")
+                        ErrorHandler.shared.handleError(error: error)
                 }
             }
         }

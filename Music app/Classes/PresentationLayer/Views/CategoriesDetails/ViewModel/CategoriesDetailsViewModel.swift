@@ -28,7 +28,7 @@ final class CategoriesDetailsViewModel: CategoriesDetailsViewModelProtocol {
                 case .success(let data):
                     self.playlists = data
                 case .failure(let error):
-                    print("Custom Error -> \(error)")
+                    ErrorHandler.shared.handleError(error: error)
             }
         }
     }

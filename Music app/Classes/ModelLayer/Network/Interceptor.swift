@@ -9,7 +9,7 @@ class APIRequestInterceptor: RequestInterceptor {
             let data = try CredentialStorageService().getPassword(for: KeychainConstants.accessToken.key)
             self.token.accessToken = String(decoding: data ?? Data(), as: UTF8.self)
         } catch {
-            print(error)
+            CustomErrors.brokenAccessToken.createAllert()
         }
         var urlRequest = urlRequest
         urlRequest.headers.add(.authorization(bearerToken: token.accessToken))

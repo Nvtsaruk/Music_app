@@ -29,7 +29,7 @@ final class SearchCategoriesViewModel: SearchCategoriesViewModelProtocol {
                     case .success(let data):
                         self.categories = data
                     case .failure(let error):
-                        print("Custom Error -> \(error)")
+                        ErrorHandler.shared.handleError(error: error)
                 }
             }
     }

@@ -33,7 +33,7 @@ final class UserProfileViewModel: UserProfileViewModelProtocol {
                     self.isLoading = false
                     self.currentUser = data
                 case .failure(let error):
-                    print("Custom Error -> \(error)")
+                    ErrorHandler.shared.handleError(error: error)
             }
         }
     }

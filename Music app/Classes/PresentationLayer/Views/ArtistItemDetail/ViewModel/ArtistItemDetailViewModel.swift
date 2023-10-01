@@ -62,7 +62,7 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, TrackI
                 case .success(let data):
                     self.artist = data
                 case .failure(let error):
-                    print("Custom Error -> \(error)")
+                    ErrorHandler.shared.handleError(error: error)
             }
         }
     }
@@ -73,7 +73,7 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, TrackI
                 case .success(let data):
                     self.topTracks = data.tracks
                 case .failure(let error):
-                    print("Custom Error -> \(error)")
+                    ErrorHandler.shared.handleError(error: error)
             }
         }
     }
@@ -122,7 +122,6 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, TrackI
 
 extension ArtistItemDetailViewModel: AudioPlayerServiceObserver {
     func audioPlayerPlaying(item: PlayerItemModel) {
-        print("Here")
         isPlaying = true
     }
     

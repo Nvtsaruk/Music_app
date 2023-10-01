@@ -80,7 +80,7 @@ final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTab
                 case .success(let data):
                     self.searchModel = data
                 case .failure(let error):
-                    print("Custom Error -> \(error)")
+                    ErrorHandler.shared.handleError(error: error)
             }
         }
     }

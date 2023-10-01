@@ -80,7 +80,7 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Tr
                     self.playlist = data
                     self.details = data.description
                 case .failure(let error):
-                    print("Custom Error -> \(error)")
+                    ErrorHandler.shared.handleError(error: error)
             }
         }
         

@@ -43,6 +43,7 @@ struct UserPlaylist {
     var playlistName: String
     var tracks: [UserPlaylistTrack]
 }
+
 struct UserPlaylistTrack {
     var artistName: String
     var trackName: String
@@ -53,8 +54,6 @@ struct UserPlaylistTrack {
 protocol DatabaseServiceObserver: AnyObject {
     func dataBaseUpdated()
 }
-
-
 
 final class DatabaseService {
     static var shared = DatabaseService()
@@ -97,9 +96,6 @@ final class DatabaseService {
     
     func getPlaylists() -> [UserPlaylist] {
         let playlists = realm.objects(DatabaseUser.self)
-//        let userPlaylists = playlists.where {
-//            $0.userId == "31rxgvo6ng6ry35wjsoes7xrzspa"
-//        }
         var userPlaylistsArray: [UserPlaylist] = []
         playlists.forEach { item in
             var tracks: [UserPlaylistTrack] = []
@@ -121,7 +117,6 @@ final class DatabaseService {
             realm.delete(playlist)
         }
         let playlists = realm.objects(DatabaseUser.self)
-        print(playlists.count)
         baseDidChange()
     }
 }
