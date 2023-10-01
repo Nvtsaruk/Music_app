@@ -21,6 +21,9 @@ final class PlaylistItemDetailViewController: UIViewController {
     }
     
     private func setupUI() {
+        guard let url = viewModel?.playlist?.images.first?.url else { return }
+        setBackGround(url: url)
+        
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = UIColor.white
         tableView.dataSource = self
@@ -44,14 +47,7 @@ final class PlaylistItemDetailViewController: UIViewController {
             guard let self = self else { return }
             guard let url = viewModel?.playlist?.images.first?.url else { return }
                 self.itemImage.webImage(url: url)
-            if let imageCached = SDImageCache.shared.imageFromMemoryCache(forKey: url) {
-                let colorTop = imageCached.findAverageColor()?.cgColor ?? CGColor(red: 1, green: 1, blue: 1, alpha: 1)
-                let colors = Colors(colorTop: colorTop, colorBottom: CGColor(gray: 0, alpha: 1))
-                view.backgroundColor = UIColor.clear
-                let backgroundLayer = colors.gl
-                backgroundLayer?.frame = view.frame
-                view.layer.insertSublayer(backgroundLayer ?? CAGradientLayer(), at: 0)
-            }
+            setBackGround(url: url)
             if self.viewModel?.isPlaying == true {
                 self.playButtonOutlet.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
             } else {
@@ -60,6 +56,16 @@ final class PlaylistItemDetailViewController: UIViewController {
             descriptionLabel.text = viewModel?.details
             tableView.reloadData()
             
+        }
+    }
+    private func setBackGround(url: String) {
+        if let imageCached = SDImageCache.shared.imageFromMemoryCache(forKey: url) {
+            let colorTop = imageCached.findAverageColor()?.cgColor ?? CGColor(red: 1, green: 1, blue: 1, alpha: 1)
+            let colors = Colors(colorTop: colorTop, colorBottom: CGColor(gray: 0, alpha: 1))
+            view.backgroundColor = UIColor.clear
+            let backgroundLayer = colors.gl
+            backgroundLayer?.frame = view.frame
+            view.layer.insertSublayer(backgroundLayer ?? CAGradientLayer(), at: 0)
         }
     }
     
