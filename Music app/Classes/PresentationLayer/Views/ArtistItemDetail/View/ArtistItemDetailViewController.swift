@@ -4,6 +4,7 @@ final class ArtistItemDetailViewController: UIViewController {
     
     @IBOutlet private weak var artistImage: UIImageView!
     
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var playPauseButtonOutlet: UIButton!
     @IBOutlet private weak var artistNameLabel: UILabel!
     @IBOutlet private weak var tableView: UITableView!
@@ -18,6 +19,10 @@ final class ArtistItemDetailViewController: UIViewController {
     }
     
     private func setupUI() {
+        if viewModel?.isLoading == true {
+            loadingIndicator.startAnimating()
+        }
+
         tableView.dataSource = self
         tableView.delegate = self
         let itemDetailNib = UINib(nibName: "TrackItemDetailTableViewCell", bundle: nil)
@@ -27,11 +32,16 @@ final class ArtistItemDetailViewController: UIViewController {
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
+            if viewModel?.isLoading == true {
+                loadingIndicator.startAnimating()
+            }
+
             guard let imageURL = viewModel?.artist?.images.first?.url,
                   let artistName = viewModel?.artist?.name
             else { return }
             artistNameLabel.text = artistName
             artistImage.webImage(url: imageURL)
+            loadingIndicator.stopAnimating()
             tableView.reloadData()
             if self.viewModel?.isPlaying == true {
                 self.playPauseButtonOutlet.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
@@ -47,9 +57,9 @@ final class ArtistItemDetailViewController: UIViewController {
 }
 
 extension ArtistItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            viewModel?.topTracks.count ?? 0
-        }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel?.topTracks.count ?? 0
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let trackCell = tableView.dequeueReusableCell(withIdentifier: "TrackItemDetailTableViewCell") as? TrackItemDetailTableViewCell else { return UITableViewCell() }

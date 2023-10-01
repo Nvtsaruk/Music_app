@@ -1,13 +1,15 @@
 import Foundation
 protocol ArtistItemDetailViewModelProtocol {
-    func start()
+    var isPlaying: Bool { get set }
     var artist: Artist? { get }
     var topTracks: [Track] { get }
-    func getArtistInfo()
     var updateClosure: (() -> Void)? { get set }
+    var isLoading: Bool { get }
+    func start()
+    func getArtistInfo()
     func addPlayItems(itemIndex: Int)
     func playButtonAction()
-    var isPlaying: Bool { get set }
+    
 }
 
 final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, TrackItemDetailTableViewCellDelegate {
@@ -41,6 +43,13 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, TrackI
             updateClosure?()
         }
     }
+    
+    var isLoading: Bool = false {
+        didSet {
+            updateClosure?()
+        }
+    }
+    
     func addToPlaylist(trackId: String) {
         topTracks.forEach{ item in
             if item.id == trackId {
@@ -56,6 +65,7 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, TrackI
     }
     
     func getArtistInfo() {
+        isLoading = true
         let url = NetworkConstants.baseUrl + NetworkConstants.artists + (id ?? "")
         APIService.getData(Artist.self, url: url) { result in
             switch result {
@@ -67,6 +77,7 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, TrackI
         }
     }
     func getArtistTracks() {
+        isLoading = true
         let url = NetworkConstants.baseUrl + NetworkConstants.artists + (id ?? "") + NetworkConstants.topTracks
         APIService.getData(ArtistTopTrackModel.self, url: url) { result in
             switch result {
