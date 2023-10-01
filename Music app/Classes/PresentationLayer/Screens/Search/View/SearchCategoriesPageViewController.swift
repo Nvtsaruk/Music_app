@@ -1,6 +1,6 @@
 import UIKit
 
-class SearchCategoriesPageViewController: UIViewController {
+final class SearchCategoriesPageViewController: UIViewController {
     //MARK: - IBOutlet
     @IBOutlet private weak var searchCollectionView: UICollectionView!
     
@@ -45,7 +45,7 @@ class SearchCategoriesPageViewController: UIViewController {
         searchContainer.layer.cornerRadius = 8
         let didTap  = UITapGestureRecognizer(target: self, action: #selector(didTap))
         searchContainer.addGestureRecognizer(didTap)
-    
+        
         searchCollectionView.dataSource = self
         searchCollectionView.delegate = self
         
@@ -78,10 +78,12 @@ extension SearchCategoriesPageViewController: UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: "SearchCollectionViewCell", for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell()}
-        cell.titleLabel.text = viewModel?.categories?.categories.items[indexPath.row].name
-        let url = viewModel?.categories?.categories.items[indexPath.row].icons.first?.url
-        cell.albumImage.webImage(url: url)
-        cell.containerView.backgroundColor = colors.randomElement()
+        guard let titleName = viewModel?.categories?.categories.items[indexPath.row].name,
+              let url = viewModel?.categories?.categories.items[indexPath.row].icons.first?.url,
+              let color = colors.randomElement()
+        else { return cell}
+        
+        cell.configure(title: titleName, url: url, color: color)
         return cell
     }
 }

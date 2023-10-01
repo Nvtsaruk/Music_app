@@ -1,6 +1,6 @@
 import UIKit
 
-class MainPageCoordinator: Coordinator {
+final class MainPageCoordinator: Coordinator {
     
     weak var delegate: MainCoordinatorDelegate?
     

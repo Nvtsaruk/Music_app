@@ -1,12 +1,10 @@
 import UIKit
-
 protocol HeaderTableViewCellDelegate: AnyObject {
     func goToUserProfile()
 }
 final class HeaderTableViewCell: UITableViewCell {
-    
     //MARK: -IBOutlet
-    @IBOutlet weak var headerGreetingLabel: UILabel!
+    @IBOutlet private weak var headerGreetingLabel: UILabel!
     
     //MARK: - Variables
     weak var delegate: HeaderTableViewCellDelegate?
@@ -26,7 +24,7 @@ final class HeaderTableViewCell: UITableViewCell {
     }
     
     //MARK: -IBAction
-    @IBAction func settingButtonAction(_ sender: Any) {
+    @IBAction private func settingButtonAction(_ sender: Any) {
         delegate?.goToUserProfile()
     }
 }

@@ -11,7 +11,7 @@ protocol FullPlayerViewModelProtocol: PlayerViewModelProtocol {
     func stopTimer()
     func setPlaybackTime(time: Float)
 }
-class FullPlayerModel: PlayerViewModel, FullPlayerViewModelProtocol {
+final class FullPlayerModel: PlayerViewModel, FullPlayerViewModelProtocol {
     var playbackTimer: Timer?
     
     var currentPosition: String = ""{

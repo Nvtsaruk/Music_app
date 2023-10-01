@@ -1,7 +1,7 @@
 import Foundation
 import Alamofire
 
-class APIRequestInterceptor: RequestInterceptor {
+final class APIRequestInterceptor: RequestInterceptor {
     private var token: Token = Token(accessToken: "")
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {

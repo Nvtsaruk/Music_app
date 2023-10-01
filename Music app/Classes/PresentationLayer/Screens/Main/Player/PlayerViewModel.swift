@@ -11,11 +11,11 @@ protocol PlayerViewModelProtocol {
     
     
 }
+
 protocol PlayerViewModelDelegate: AnyObject {
     func startPlaying()
     func stopPlaying()
 }
-
 
 class PlayerViewModel: PlayerViewModelProtocol, AudioPlayerServiceObserver {
     func audioPlayerPlaying(item: PlayerItemModel) {
@@ -33,7 +33,6 @@ class PlayerViewModel: PlayerViewModelProtocol, AudioPlayerServiceObserver {
     func audioPlayerDidStop() {
         
     }
-    
 
     weak var delegate: PlayerViewModelDelegate?
     var playerItemData: PlayerItemModel? {
@@ -57,13 +56,17 @@ class PlayerViewModel: PlayerViewModelProtocol, AudioPlayerServiceObserver {
             updatePlayerState?()
         }
     }
+    
     var updatePlayerState: (() -> Void)?
+    
     func playPauseButtonAction() {
         AudioPlayerService.shared.playPause()
     }
+    
     func showFullPlayer() {
         AudioPlayerService.shared.presentFullPlayer()
     }
+    
     func showCompactPlayer() {
         AudioPlayerService.shared.presentCompactPlayer()
     }

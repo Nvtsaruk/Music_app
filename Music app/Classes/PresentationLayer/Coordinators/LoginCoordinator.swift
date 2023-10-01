@@ -1,5 +1,5 @@
 import UIKit
-class LoginCoordinator: Coordinator {
+final class LoginCoordinator: Coordinator {
     
     let navigationController: UINavigationController
     

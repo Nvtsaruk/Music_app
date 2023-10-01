@@ -7,7 +7,7 @@ struct TokenRequest:Codable {
     let refresh_token: String?
 }
 
-class LoginManager {
+final class LoginManager {
     static let shared = LoginManager()
     
     private init() {}

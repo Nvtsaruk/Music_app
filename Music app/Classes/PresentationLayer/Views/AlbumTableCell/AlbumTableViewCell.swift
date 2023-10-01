@@ -1,23 +1,14 @@
-//
-//  AlbumTableViewCell.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 12.09.23.
-//
-
 import UIKit
-
-
-
-class AlbumTableViewCell: UITableViewCell {
-
+final class AlbumTableViewCell: UITableViewCell {
+    //MARK: - IBOutlet
     @IBOutlet private weak var artistName: UILabel!
     @IBOutlet private weak var albumName: UILabel!
     @IBOutlet private weak var albumImage: UIImageView!
+    
+    //MARK: - Variables
     var itemType: String = ""
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
     
     func configure(artist: String, album: String, imageUrl: String) {
@@ -28,8 +19,5 @@ class AlbumTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-    
 }

@@ -1,24 +1,17 @@
-//
-//  ItemDetailTableViewCell.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 18.08.23.
-//
-
 import UIKit
 
 protocol TrackItemDetailTableViewCellDelegate: AnyObject {
     func addToPlaylist(trackId: String)
 }
 
-class TrackItemDetailTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var albumImage: UIImageView!
+final class TrackItemDetailTableViewCell: UITableViewCell {
+    //MARK: -IBOutlet
+    @IBOutlet private weak var albumImage: UIImageView!
     
-
-    @IBOutlet weak var artistNameLabel: UILabel!
-    @IBOutlet weak var trackNameLabel: UILabel!
+    @IBOutlet private weak var artistNameLabel: UILabel!
+    @IBOutlet private weak var trackNameLabel: UILabel!
     
+    //MARK: -Variables
     var delegate: TrackItemDetailTableViewCellDelegate?
     
     var trackId: String = ""
@@ -32,14 +25,14 @@ class TrackItemDetailTableViewCell: UITableViewCell {
 
     }
     
-    @IBAction func addToPlaylistButtonAction(_ sender: Any) {
+    @IBAction private func addToPlaylistButtonAction(_ sender: Any) {
         delegate?.addToPlaylist(trackId: trackId)
     }
+    
     func configure(track: String, artist: String, image: String, id: String) {
         albumImage.webImage(url: image)
         artistNameLabel.text = artist
         trackNameLabel.text = track
         trackId = id
     }
-    
 }

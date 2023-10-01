@@ -4,15 +4,15 @@ import SDWebImage
 final class AlbumItemDetailViewController: UIViewController {
     //MARK: -IBOutlets
     
-    @IBOutlet var albumImageOutlet: UIImageView!
+    @IBOutlet private var albumImageOutlet: UIImageView!
     
-    @IBOutlet var albumTitleLabel: UILabel!
-    @IBOutlet var artistNameLabel: UILabel!
-    @IBOutlet var typeAndYearLabel: UILabel!
+    @IBOutlet private var albumTitleLabel: UILabel!
+    @IBOutlet private var artistNameLabel: UILabel!
+    @IBOutlet private var typeAndYearLabel: UILabel!
     
-    @IBOutlet var playPauseButtonOutlet: UIButton!
+    @IBOutlet private var playPauseButtonOutlet: UIButton!
     
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet private var tableView: UITableView!
     //MARK: -Variables
     
     var viewModel: AlbumItemDetailViewModelProtocol?
@@ -59,7 +59,7 @@ final class AlbumItemDetailViewController: UIViewController {
         }
     }
     
-    @IBAction func playPauseButtonAction(_ sender: Any) {
+    @IBAction private func playPauseButtonAction(_ sender: Any) {
         viewModel?.playButtonAction()
     }
 }

@@ -2,11 +2,11 @@ import UIKit
 
 final class ArtistItemDetailViewController: UIViewController {
     
-    @IBOutlet weak var artistImage: UIImageView!
+    @IBOutlet private weak var artistImage: UIImageView!
     
-    @IBOutlet weak var playPauseButtonOutlet: UIButton!
-    @IBOutlet weak var artistNameLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var playPauseButtonOutlet: UIButton!
+    @IBOutlet private weak var artistNameLabel: UILabel!
+    @IBOutlet private weak var tableView: UITableView!
     var viewModel: ArtistItemDetailViewModelProtocol?
     
     override func viewDidLoad() {

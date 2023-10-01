@@ -1,17 +1,10 @@
-//
-//  CategoriesDetailsViewController.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 11.09.23.
-//
-
 import UIKit
-
-class CategoriesDetailsViewController: UIViewController {
+final class CategoriesDetailsViewController: UIViewController {
     //MARK: - IBOutlets
     
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    
     //MARK: - Variables
     var viewModel: CategoriesDetailsViewModelProtocol?
     var numRows: Int = 0
@@ -35,7 +28,7 @@ class CategoriesDetailsViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
     }
-
+    
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
@@ -52,9 +45,10 @@ extension CategoriesDetailsViewController: UICollectionViewDelegate, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaylistsCollectionViewCell", for: indexPath) as? PlaylistsCollectionViewCell else { return UICollectionViewCell()}
-        cell.descriptionLabel.text = collectionData?.playlists.items[indexPath.row].description
-        guard let url = collectionData?.playlists.items[indexPath.row].images[0].url else { return cell }
-        cell.imageView.webImage(url: url)
+        guard let description = collectionData?.playlists.items[indexPath.row].description,
+              let url = collectionData?.playlists.items[indexPath.row].images[0].url
+        else { return cell }
+        cell.configure(description: description, imageUrl: url)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -68,9 +62,9 @@ extension CategoriesDetailsViewController: UICollectionViewDelegateFlowLayout {
         let height = (collectionView.frame.height / 3) - 1
         let width = (collectionView.frame.width / 2) - 1
         return CGSize(width: width, height: height)
-
+        
     }
-
+    
 }
 
 extension CategoriesDetailsViewController: Storyboarded {

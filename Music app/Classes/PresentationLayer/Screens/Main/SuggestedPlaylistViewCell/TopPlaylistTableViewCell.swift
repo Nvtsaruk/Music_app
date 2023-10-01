@@ -1,24 +1,13 @@
-//
-//  SuggestedPlaylistTableViewCell.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 6.08.23.
-//
-
 import UIKit
 import SDWebImage
 
 final class TopPlaylistTableViewCell: UITableViewCell {
-    
     //MARK: -IBOutlet
-    
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     //MARK: -Variables
     weak var delegate: ViewDelegate?
-    
     var numRows = 0
-    
     var collectionData: Toplist? {
         didSet{
             self.collectionView.reloadData()
@@ -32,11 +21,9 @@ final class TopPlaylistTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        
         self.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.delegate = self
-        
         let collectionNib = UINib(nibName: "TopPlaylistCollectionViewCell", bundle: nil)
         collectionView.register(collectionNib, forCellWithReuseIdentifier: "TopPlaylistCollectionViewCell")
     }
@@ -44,10 +31,7 @@ final class TopPlaylistTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
-    
 }
 
 extension TopPlaylistTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {

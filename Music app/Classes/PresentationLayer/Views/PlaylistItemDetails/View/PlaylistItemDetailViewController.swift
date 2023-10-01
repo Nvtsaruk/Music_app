@@ -3,12 +3,13 @@ import SDWebImage
 
 final class PlaylistItemDetailViewController: UIViewController {
     
+    //MARK: - IBOutlet
+    @IBOutlet private weak var playButtonOutlet: UIButton!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var itemImage: UIImageView!
+    @IBOutlet private weak var descriptionLabel: UILabel!
     
-    @IBOutlet weak var playButtonOutlet: UIButton!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var itemImage: UIImageView!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    
+    //MARK: - Variables
     var viewModel: PlaylistItemDetailViewModelProtocol?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +64,7 @@ final class PlaylistItemDetailViewController: UIViewController {
     }
     
     
-    @IBAction func playButtonAction(_ sender: Any) {
+    @IBAction private func playButtonAction(_ sender: Any) {
         viewModel?.playButtonAction()
     }
 }

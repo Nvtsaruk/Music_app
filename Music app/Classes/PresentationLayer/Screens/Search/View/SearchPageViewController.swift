@@ -1,10 +1,9 @@
 import UIKit
-
 final class SearchPageViewController: UIViewController {
     
     //MARK: - IBOutlets
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var searchBar: UISearchBar!
     
     //MARK: - Variables
     var viewModel: SearchPageViewModelProtocol?
@@ -133,11 +132,11 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-        func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
-            let header = view as! UITableViewHeaderFooterView
-            header.textLabel?.textColor = UIColor.white
-            header.textLabel?.text = header.textLabel!.text!.capitalized
-        }
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor.white
+        header.textLabel?.text = header.textLabel!.text!.capitalized
+    }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
             case 0:
