@@ -77,7 +77,7 @@ extension AlbumItemDetailViewController: UITableViewDataSource, UITableViewDeleg
               let url = viewModel?.album?.images.first?.url,
               let id = viewModel?.album?.tracks.items[indexPath.row].id
         else { return cell}
-        cell.configure(track: track, artist: artist, image: url, id: id)
+        cell.configure(track: track, artist: artist, image: url, id: id, showButton: true)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

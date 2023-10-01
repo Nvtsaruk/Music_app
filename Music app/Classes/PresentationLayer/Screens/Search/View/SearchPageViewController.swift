@@ -114,7 +114,7 @@ extension SearchPageViewController: UITableViewDelegate, UITableViewDataSource {
                           let artist = viewModel?.searchModel?.tracks.items[indexPath.row].artists.first?.name,
                           let id = viewModel?.searchModel?.tracks.items[indexPath.row].id
                     else { return UITableViewCell()}
-                    tableTrackCell.configure(track: track, artist: artist, image: imageUrl, id: id)
+                    tableTrackCell.configure(track: track, artist: artist, image: imageUrl, id: id, showButton: true)
                 }
             }
         }

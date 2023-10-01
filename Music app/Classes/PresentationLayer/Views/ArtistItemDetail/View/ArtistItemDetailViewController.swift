@@ -47,16 +47,7 @@ final class ArtistItemDetailViewController: UIViewController {
 }
 
 extension ArtistItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
-    //    func numberOfSections(in tableView: UITableView) -> Int {
-    //        4
-    //    }
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//            switch section {
-//                case 0:
-//                    return viewModel?.topTracks.count ?? 0
-//                default:
-//                    return 0
-//            }
             viewModel?.topTracks.count ?? 0
         }
     
@@ -68,7 +59,7 @@ extension ArtistItemDetailViewController: UITableViewDelegate, UITableViewDataSo
               let url = viewModel?.topTracks[indexPath.row].album.images.first?.url,
               let id = viewModel?.topTracks[indexPath.row].id
         else { return trackCell }
-        trackCell.configure(track: track, artist: artist, image: url, id: id)
+        trackCell.configure(track: track, artist: artist, image: url, id: id, showButton: true)
         return trackCell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

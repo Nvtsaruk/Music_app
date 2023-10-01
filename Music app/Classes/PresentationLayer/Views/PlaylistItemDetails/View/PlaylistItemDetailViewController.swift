@@ -82,7 +82,13 @@ extension PlaylistItemDetailViewController: UITableViewDelegate, UITableViewData
               let url = viewModel?.playlist?.tracks.items?[indexPath.row].track.album.images.first?.url,
               let id = viewModel?.playlist?.tracks.items?[indexPath.row].track.id
         else { return cell }
-        cell.configure(track: track, artist: artist, image: url, id: id)
+        var showAddButton: Bool
+        if let playlistID = viewModel?.id {
+            showAddButton = true
+        } else {
+            showAddButton = false
+        }
+        cell.configure(track: track, artist: artist, image: url, id: id, showButton: showAddButton)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -1,3 +1,3 @@
 struct ImageModel: Decodable {
-    var url: String
+    let url: String
 }

@@ -8,6 +8,7 @@ protocol PlaylistItemDetailViewModelProtocol {
     func playButtonAction()
     func addPlayItems(itemIndex: Int)
     var isPlaying: Bool { get set }
+    var id: String? { get }
 }
 
 final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, TrackItemDetailTableViewCellDelegate {
