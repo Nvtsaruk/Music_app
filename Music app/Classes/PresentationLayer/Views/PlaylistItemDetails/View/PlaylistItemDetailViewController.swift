@@ -15,15 +15,11 @@ final class PlaylistItemDetailViewController: UIViewController {
         super.viewDidLoad()
         viewModel?.start()
         viewModel?.getItems()
-        
         bindViewModel()
         setupUI()
     }
     
     private func setupUI() {
-        guard let url = viewModel?.playlist?.images.first?.url else { return }
-        setBackGround(url: url)
-        
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = UIColor.white
         tableView.dataSource = self
@@ -40,6 +36,7 @@ final class PlaylistItemDetailViewController: UIViewController {
         tableView.reloadData()
         guard let url = viewModel?.playlist?.images.first?.url else { return }
             self.itemImage.webImage(url: url)
+        setBackGround(url: url)
     }
     
     private func bindViewModel() {

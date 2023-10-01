@@ -10,6 +10,7 @@ final class UserProfileViewController: UIViewController {
     @IBOutlet private weak var profileDisplayName: UILabel!
     @IBOutlet private weak var myProfileLabel: UILabel!
     
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var userProfile: UIView!
     
     //MARK: - Variables
@@ -25,19 +26,10 @@ final class UserProfileViewController: UIViewController {
         bindViewModel()
     }
     
-    private func bindViewModel() {
-        viewModel?.updateClosure = { [weak self] in
-            guard let self = self else { return }
-            self.isLoading = ((viewModel?.isLoading) != nil)
-            self.profileDisplayName.text = self.viewModel?.currentUser?.display_name
-            if let url = viewModel?.currentUser?.images.first?.url {
-                self.profileImage.webImage(url: url)
-            } else {
-                self.profileImage.image = UIImage(systemName: "person", withConfiguration: symbolConfig)
-            }
-        }
-    }
     private func setupUI() {
+        if viewModel?.isLoading == true {
+            loadingIndicator.startAnimating()
+        }
         myProfileLabel.text = ProfileLocalization.myProfile.string
         
         profileImage.layer.cornerRadius = profileImage.frame.height / 2
@@ -51,6 +43,20 @@ final class UserProfileViewController: UIViewController {
         logoutButtonOutlet.layer.cornerRadius = 19
         logoutButtonOutlet.layer.borderColor = UIColor.white.cgColor
         logoutButtonOutlet.layer.borderWidth = 1
+    }
+    
+    private func bindViewModel() {
+        viewModel?.updateClosure = { [weak self] in
+            guard let self = self else { return }
+            self.isLoading = ((viewModel?.isLoading) != nil)
+            self.profileDisplayName.text = self.viewModel?.currentUser?.display_name
+            if let url = viewModel?.currentUser?.images.first?.url {
+                self.profileImage.webImage(url: url)
+            } else {
+                self.profileImage.image = UIImage(systemName: "person", withConfiguration: symbolConfig)
+            }
+            self.loadingIndicator.stopAnimating()
+        }
     }
     
     @objc private func didTap(_ sender: UIGestureRecognizer) {

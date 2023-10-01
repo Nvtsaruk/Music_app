@@ -20,6 +20,7 @@ final class UserProfileViewModel: UserProfileViewModelProtocol {
     }
     var isLoading: Bool = false {
         didSet {
+            print(isLoading)
             updateClosure?()
         }
     }
