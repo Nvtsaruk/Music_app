@@ -2,6 +2,7 @@ import UIKit
 final class CategoriesDetailsViewController: UIViewController {
     //MARK: - IBOutlets
     
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var collectionView: UICollectionView!
     

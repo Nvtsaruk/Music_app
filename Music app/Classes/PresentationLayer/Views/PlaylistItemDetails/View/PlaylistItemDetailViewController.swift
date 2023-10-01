@@ -7,6 +7,7 @@ final class PlaylistItemDetailViewController: UIViewController {
     @IBOutlet private weak var playButtonOutlet: UIButton!
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var itemImage: UIImageView!
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var descriptionLabel: UILabel!
     
     //MARK: - Variables
@@ -20,6 +21,10 @@ final class PlaylistItemDetailViewController: UIViewController {
     }
     
     private func setupUI() {
+        if viewModel?.isLoading == true {
+            loadingIndicator.startAnimating()
+        }
+        
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = UIColor.white
         tableView.dataSource = self
@@ -51,10 +56,11 @@ final class PlaylistItemDetailViewController: UIViewController {
                 self.playButtonOutlet.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
             }
             descriptionLabel.text = viewModel?.details
+            loadingIndicator.stopAnimating()
             tableView.reloadData()
-            
         }
     }
+    
     private func setBackGround(url: String) {
         if let imageCached = SDImageCache.shared.imageFromMemoryCache(forKey: url) {
             let colorTop = imageCached.findAverageColor()?.cgColor ?? CGColor(red: 1, green: 1, blue: 1, alpha: 1)
@@ -63,6 +69,7 @@ final class PlaylistItemDetailViewController: UIViewController {
             let backgroundLayer = colors.gl
             backgroundLayer?.frame = view.frame
             view.layer.insertSublayer(backgroundLayer ?? CAGradientLayer(), at: 0)
+            loadingIndicator.stopAnimating()
         }
     }
     

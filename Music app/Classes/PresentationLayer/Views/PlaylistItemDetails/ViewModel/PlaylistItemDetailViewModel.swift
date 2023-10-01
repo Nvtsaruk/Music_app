@@ -5,6 +5,7 @@ protocol PlaylistItemDetailViewModelProtocol {
     var details: String { get set }
     var playlist: PlaylistModel? { get }
     var updateClosure:(() -> Void)? { get set }
+    var isLoading: Bool { get }
     func start()
     func getItems()
     func playButtonAction()
@@ -24,6 +25,12 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Tr
     }
     
     var isPlaying: Bool = false {
+        didSet {
+            updateClosure?()
+        }
+    }
+    
+    var isLoading: Bool = false {
         didSet {
             updateClosure?()
         }
@@ -74,18 +81,22 @@ final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, Tr
     }
     
     func getItems() {
-        guard let id = id else { return }
-        let url = NetworkConstants.baseUrl + NetworkConstants.playlists + (id)
-        APIService.getData(PlaylistModel.self, url: url) { result in
-            switch result {
-                case .success(let data):
-                    self.playlist = data
-                    self.details = data.description
-                case .failure(let error):
-                    ErrorHandler.shared.handleError(error: error)
+        isLoading = true
+//        guard let id = id else { return }
+        if let id = id {
+            let url = NetworkConstants.baseUrl + NetworkConstants.playlists + (id)
+            APIService.getData(PlaylistModel.self, url: url) { result in
+                switch result {
+                    case .success(let data):
+                        self.playlist = data
+                        self.details = data.description
+                    case .failure(let error):
+                        ErrorHandler.shared.handleError(error: error)
+                }
             }
+        } else {
+            isLoading = false
         }
-        
     }
     
     func playButtonAction() {
