@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -65,6 +66,10 @@
                                     <constraint firstAttribute="bottom" secondItem="AhR-zw-1Iv" secondAttribute="bottom" id="v8C-uk-wfg"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Q7T-m5-mpH">
+                                <rect key="frame" x="178" y="420" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -74,11 +79,14 @@
                             <constraint firstItem="YcI-2B-NPr" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Jx3-iH-6Dc"/>
                             <constraint firstItem="TYc-AX-NV6" firstAttribute="leading" secondItem="YcI-2B-NPr" secondAttribute="leading" id="Kpz-TS-4LD"/>
                             <constraint firstItem="TYc-AX-NV6" firstAttribute="trailing" secondItem="YcI-2B-NPr" secondAttribute="trailing" id="SEW-VS-KXg"/>
+                            <constraint firstItem="Q7T-m5-mpH" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="X7j-wx-hlR"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="YcI-2B-NPr" secondAttribute="bottom" id="bBL-oP-WSk"/>
                             <constraint firstItem="TYc-AX-NV6" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="mNA-eM-vJz"/>
+                            <constraint firstItem="Q7T-m5-mpH" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="nR6-Nr-uVF"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loadingIndicator" destination="Q7T-m5-mpH" id="kRs-dJ-HPL"/>
                         <outlet property="searchCollectionView" destination="YcI-2B-NPr" id="F9n-zB-iMO"/>
                         <outlet property="searchContainer" destination="TYc-AX-NV6" id="qRh-aW-P7L"/>
                         <outlet property="searchContainerText" destination="EiF-HB-bMe" id="mF2-Hw-Wc6"/>

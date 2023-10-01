@@ -1,9 +1,10 @@
 import Foundation
 protocol SearchPageViewModelProtocol {
-    func start()
-    func search(item: String)
     var searchModel: SearchResults? { get }
     var updateClosure:( ()->Void )? { get set }
+    var isLoading: Bool { get }
+    func start()
+    func search(item: String)
     func backToSearchCategories()
     func showPlaylistDetail(id: String)
     func showArtistDetail(id: String)
@@ -34,7 +35,6 @@ final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTab
     
     var coordinator: SearchPageCoordinator?
     var lastScheduledSearch: Timer?
-    
     var updateClosure: (() -> Void)?
     private var cleared = false
     var searchModel: SearchResults? {
@@ -47,6 +47,12 @@ final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTab
         }
     }
     
+    var isLoading: Bool = false {
+        didSet {
+            updateClosure?()
+        }
+    }
+    
     func start() {
         let trackDetailsCell = TrackItemDetailTableViewCell()
         trackDetailsCell.delegate = self
@@ -55,7 +61,6 @@ final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTab
     func search(item: String) {
         lastScheduledSearch?.invalidate()
         lastScheduledSearch = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(searchQuery(_:)), userInfo: item, repeats: false)
-        
     }
     
     func addToPlaylist(trackId: String) {
@@ -73,6 +78,7 @@ final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTab
     }
     
     @objc private func searchQuery(_ timer: Timer) {
+        isLoading = true
         guard let text = timer.userInfo else { return }
         let url = NetworkConstants.baseUrl + NetworkConstants.search + ((text as AnyObject).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
         APIService.getData(SearchResults.self, url: url) { result in

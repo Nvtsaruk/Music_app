@@ -30,20 +30,27 @@
                                 <rect key="frame" x="8" y="123" width="377" height="687"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="wQ3-1X-DhJ">
+                                <rect key="frame" x="178" y="420" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="9dR-Qk-DVY" secondAttribute="trailing" constant="8" id="B4W-SG-aQ6"/>
                             <constraint firstItem="9dR-Qk-DVY" firstAttribute="top" secondItem="grB-t4-XEt" secondAttribute="bottom" constant="8" id="SYD-5N-a9S"/>
+                            <constraint firstItem="wQ3-1X-DhJ" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="SpW-VY-vsh"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="9dR-Qk-DVY" secondAttribute="bottom" constant="8" id="TLX-u6-MB6"/>
                             <constraint firstItem="9dR-Qk-DVY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="WO5-PO-WjV"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="grB-t4-XEt" secondAttribute="trailing" id="YYV-Df-50w"/>
+                            <constraint firstItem="wQ3-1X-DhJ" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="oGy-aj-xgm"/>
                             <constraint firstItem="grB-t4-XEt" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="p6u-ru-EJ3"/>
                             <constraint firstItem="grB-t4-XEt" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="yUg-uI-UIy"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loadingIndicator" destination="wQ3-1X-DhJ" id="ya9-nx-uzQ"/>
                         <outlet property="searchBar" destination="grB-t4-XEt" id="6DN-ao-5xd"/>
                         <outlet property="tableView" destination="9dR-Qk-DVY" id="cFS-Cq-mCd"/>
                     </connections>

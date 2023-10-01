@@ -1,14 +1,15 @@
 import Foundation
 protocol PlaylistItemDetailViewModelProtocol {
-    func start()
-    func getItems()
+    var isPlaying: Bool { get set }
+    var id: String? { get }
     var details: String { get set }
     var playlist: PlaylistModel? { get }
     var updateClosure:(() -> Void)? { get set }
+    func start()
+    func getItems()
     func playButtonAction()
     func addPlayItems(itemIndex: Int)
-    var isPlaying: Bool { get set }
-    var id: String? { get }
+
 }
 
 final class PlaylistItemDetailViewModel: PlaylistItemDetailViewModelProtocol, TrackItemDetailTableViewCellDelegate {

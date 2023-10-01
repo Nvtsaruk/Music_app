@@ -6,6 +6,8 @@ final class SearchCategoriesPageViewController: UIViewController {
     
     @IBOutlet private weak var searchContainer: UIView!
     
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
+    
     @IBOutlet private weak var searchContainerText: UILabel!
     
     //MARK: - Variables
@@ -37,6 +39,10 @@ final class SearchCategoriesPageViewController: UIViewController {
     }
     
     private func setupUI() {
+        if viewModel?.isLoading == true {
+            loadingIndicator.startAnimating()
+        }
+        
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = UIColor.white
         
@@ -61,6 +67,7 @@ final class SearchCategoriesPageViewController: UIViewController {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
             self.numRows = viewModel?.categories?.categories.items.count ?? 0
+            self.loadingIndicator.stopAnimating()
             searchCollectionView.reloadData()
         }
     }

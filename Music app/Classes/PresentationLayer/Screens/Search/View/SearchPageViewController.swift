@@ -3,6 +3,7 @@ final class SearchPageViewController: UIViewController {
     
     //MARK: - IBOutlets
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var searchBar: UISearchBar!
     
     //MARK: - Variables
@@ -18,6 +19,10 @@ final class SearchPageViewController: UIViewController {
     }
     
     private func setupUI() {
+        loadingIndicator.stopAnimating()
+        if viewModel?.isLoading == true {
+            loadingIndicator.startAnimating()
+        }
         searchBar.placeholder = SearchPageLocalization.searchbarPlaceholder.string
         tableView.dataSource = self
         tableView.delegate = self
@@ -37,6 +42,7 @@ final class SearchPageViewController: UIViewController {
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
+            self.loadingIndicator.stopAnimating()
             tableView.reloadData()
         }
     }

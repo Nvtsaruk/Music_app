@@ -1,9 +1,10 @@
 import Foundation
 protocol SearchCategoriesViewModelProtocol {
-    func showSearchPage()
     var updateClosure:( ()->Void )? { get set }
-    func getCategories()
     var categories: AllCategories? { get }
+    var isLoading: Bool { get }
+    func showSearchPage()
+    func getCategories()
     func showDetails(id: String, name: String)
 }
 
@@ -14,10 +15,16 @@ final class SearchCategoriesViewModel: SearchCategoriesViewModelProtocol {
             updateClosure?()
         }
     }
+    
     var coordinator: SearchPageCoordinator?
     
     var updateClosure: (() -> Void)?
     
+    var isLoading: Bool = false {
+        didSet {
+            updateClosure?()
+        }
+    }
     
     func showSearchPage() {
         coordinator?.showSearchTabbar()
