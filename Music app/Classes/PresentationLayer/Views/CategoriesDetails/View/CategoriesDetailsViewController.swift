@@ -2,7 +2,7 @@ import UIKit
 final class CategoriesDetailsViewController: UIViewController {
     //MARK: - IBOutlets
     
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var collectionView: UICollectionView!
     
@@ -23,6 +23,9 @@ final class CategoriesDetailsViewController: UIViewController {
     }
     
     private func setupUI() {
+        if viewModel?.isLoading == true {
+            loadingIndicator.startAnimating()
+        }
         nameLabel.text = viewModel?.name
         let collectionNib = UINib(nibName: "PlaylistsCollectionViewCell", bundle: nil)
         collectionView.register(collectionNib, forCellWithReuseIdentifier: "PlaylistsCollectionViewCell")
@@ -35,6 +38,8 @@ final class CategoriesDetailsViewController: UIViewController {
             guard let self = self else { return }
             self.numRows = viewModel?.playlists?.playlists.items.count ?? 0
             self.collectionData = viewModel?.playlists
+            loadingIndicator.stopAnimating()
+            collectionView.reloadData()
         }
     }
 }
