@@ -6,6 +6,7 @@ protocol PlayerViewModelProtocol {
     func showFullPlayer()
     func showCompactPlayer()
     func initPlayer()
+    var updateClosure: (() -> Void)? { get set }
     var playerItemData: PlayerItemModel? { get }
     
     
@@ -57,6 +58,7 @@ class PlayerViewModel: PlayerViewModelProtocol, AudioPlayerServiceObserver {
         }
     }
     
+    var updateClosure: (() -> Void)?
     var updatePlayerState: (() -> Void)?
     
     func playPauseButtonAction() {

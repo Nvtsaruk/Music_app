@@ -150,6 +150,5 @@ extension PlaylistItemDetailViewModel: AudioPlayerServiceObserver {
     func audioPlayerPaused(item: PlayerItemModel) {
         isPlaying = false
     }
-
 }
 

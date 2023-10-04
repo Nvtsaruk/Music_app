@@ -49,9 +49,7 @@ final class FullPlayerModel: PlayerViewModel, FullPlayerViewModelProtocol {
     
     func getCurrentPlaybackTime() {
         guard let currentPlaybackTime = AudioPlayerService.shared.player.currentItem?.currentTime().seconds else { return }
-        
         currentPosition = getTime(time: currentPlaybackTime)
-        
     }
 
     func getSliderPosition() -> Float {
@@ -78,9 +76,11 @@ final class FullPlayerModel: PlayerViewModel, FullPlayerViewModelProtocol {
     
     func nextItem() {
         AudioPlayerService.shared.nextItem()
+        updateClosure?()
     }
     
     func previousItem() {
         AudioPlayerService.shared.previousItem()
+        updateClosure?()
     }
 }

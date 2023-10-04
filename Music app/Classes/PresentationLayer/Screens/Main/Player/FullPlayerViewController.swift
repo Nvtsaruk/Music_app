@@ -1,8 +1,10 @@
 import UIKit
+import SDWebImage
 final class FullPlayerViewController: UIViewController {
     //MARK: - IBOutlet
     @IBOutlet private weak var albumImage: UIImageView!
     
+    @IBOutlet private weak var backgroundImage: UIImageView!
     @IBOutlet private weak var trackNameLabel: UILabel!
     @IBOutlet private weak var songLengthLabel: UILabel!
     @IBOutlet private weak var currentPlaybackTimeLabel: UILabel!
@@ -14,8 +16,10 @@ final class FullPlayerViewController: UIViewController {
     
     //MARK: - Variables
     var viewModel: FullPlayerViewModelProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindUpdateClosure()
         bindViewModel()
         viewModel?.initPlayer()
         albumImage.webImage(url: viewModel?.playerItemData?.imageURL ?? "")
@@ -25,10 +29,33 @@ final class FullPlayerViewController: UIViewController {
     }
     
     private func setupUI() {
+        setBackground()
         navigationController?.navigationBar.barTintColor = .black
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
         navigationController?.navigationBar.topItem?.leftBarButtonItem?.tintColor = .white
         navigationController?.navigationBar.tintColor = UIColor.white
+    }
+    
+    private func bindUpdateClosure() {
+        viewModel?.updateClosure = { [weak self] in
+            guard let self = self else { return }
+            guard let url = viewModel?.playerItemData?.imageURL else { return }
+            albumImage.webImage(url: url)
+            setBackground()
+            trackNameLabel.text = viewModel?.playerItemData?.trackName
+            artistNameLabel.text = viewModel?.playerItemData?.artistName
+            self.songLengthLabel.text = self.viewModel?.getSongLength()
+        }
+    }
+    private func setBackground() {
+        guard let image = self.albumImage.image?.cgImage else { return }
+        print(image)
+        let inputImage = CIImage(cgImage: image)
+        let filter = CIFilter(name: "CIGaussianBlur")
+        filter?.setValue(inputImage, forKey: "inputImage")
+        filter?.setValue(50, forKey: "inputRadius")
+        let blurred = filter?.outputImage
+        self.backgroundImage.image = UIImage(ciImage: blurred!)
     }
     
     private func bindViewModel() {
@@ -41,10 +68,6 @@ final class FullPlayerViewController: UIViewController {
             }
             playbackPositionSlider.setValue(viewModel?.getSliderPosition() ?? 0, animated: false)
             viewModel?.updatePlaybackTime()
-            albumImage.webImage(url: viewModel?.playerItemData?.imageURL ?? "")
-            trackNameLabel.text = viewModel?.playerItemData?.trackName
-            artistNameLabel.text = viewModel?.playerItemData?.artistName
-            self.songLengthLabel.text = self.viewModel?.getSongLength()
             self.currentPlaybackTimeLabel.text = self.viewModel?.currentPosition
         }
     }
