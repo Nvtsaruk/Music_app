@@ -123,5 +123,4 @@ final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTab
     func backToSearchCategories() {
         coordinator?.popToRoot()
     }
-
 }
