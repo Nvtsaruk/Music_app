@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -40,28 +41,17 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ea3-Gw-Kqk">
-                        <rect key="frame" x="447" y="148.66666666666666" width="20" height="18.666666666666657"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="20" id="FF8-G1-2rd"/>
-                            <constraint firstAttribute="height" constant="20" id="lWH-qk-dA1"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="ea3-Gw-Kqk" secondAttribute="trailing" constant="8" id="GmY-W0-G4e"/>
                     <constraint firstItem="s0a-ZY-Eho" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="PxA-hi-daI"/>
                     <constraint firstItem="M8C-zO-1AF" firstAttribute="leading" secondItem="s0a-ZY-Eho" secondAttribute="trailing" constant="8" id="din-kx-XGz"/>
                     <constraint firstItem="s0a-ZY-Eho" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ovR-0u-VD8"/>
                     <constraint firstItem="M8C-zO-1AF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="q0P-rD-4Su"/>
-                    <constraint firstItem="ea3-Gw-Kqk" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="y8c-SK-v5h"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="checkBoxImage" destination="ea3-Gw-Kqk" id="iUq-Sh-sAL"/>
                 <outlet property="contentView" destination="H2p-sc-9uM" id="wfC-DW-uOQ"/>
                 <outlet property="numberOfTracksLabel" destination="x4I-tv-SU9" id="hEi-0R-6cM"/>
                 <outlet property="playlistImage" destination="s0a-ZY-Eho" id="Wyp-tO-cbN"/>
@@ -70,7 +60,4 @@
             <point key="canvasLocation" x="72.51908396946564" y="-63.732394366197184"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="circle" catalog="system" width="128" height="123"/>
-    </resources>
 </document>

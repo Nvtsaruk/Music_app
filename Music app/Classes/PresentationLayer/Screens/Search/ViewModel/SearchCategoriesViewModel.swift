@@ -1,23 +1,30 @@
 import Foundation
 protocol SearchCategoriesViewModelProtocol {
-    func showSearchPage()
     var updateClosure:( ()->Void )? { get set }
-    func getCategories()
     var categories: AllCategories? { get }
+    var isLoading: Bool { get }
+    func showSearchPage()
+    func getCategories()
     func showDetails(id: String, name: String)
 }
 
 final class SearchCategoriesViewModel: SearchCategoriesViewModelProtocol {
     
-    var categories: AllCategories? = AllCategories() {
+    var categories: AllCategories? {
         didSet {
             updateClosure?()
         }
     }
+    
     var coordinator: SearchPageCoordinator?
     
     var updateClosure: (() -> Void)?
     
+    var isLoading: Bool = false {
+        didSet {
+            updateClosure?()
+        }
+    }
     
     func showSearchPage() {
         coordinator?.showSearchTabbar()
@@ -29,7 +36,7 @@ final class SearchCategoriesViewModel: SearchCategoriesViewModelProtocol {
                     case .success(let data):
                         self.categories = data
                     case .failure(let error):
-                        print("Custom Error -> \(error)")
+                        ErrorHandler.shared.handleError(error: error)
                 }
             }
     }

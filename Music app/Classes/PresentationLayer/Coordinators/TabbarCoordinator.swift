@@ -1,6 +1,6 @@
 import UIKit
 
-class TabBarCoordinator: Coordinator, MainCoordinatorDelegate {
+final class TabBarCoordinator: Coordinator, MainCoordinatorDelegate {
     
     var coordinator: MainCoordinatorDelegate?
     
@@ -22,4 +22,3 @@ class TabBarCoordinator: Coordinator, MainCoordinatorDelegate {
         coordinator?.showLogin()
     }
 }
-

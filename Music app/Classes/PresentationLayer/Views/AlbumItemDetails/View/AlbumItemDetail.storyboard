@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -50,6 +51,10 @@
                                 <rect key="frame" x="0.0" y="476" width="393" height="332"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="1oU-s8-tE3">
+                                <rect key="frame" x="178" y="420" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXJ-o5-6jJ">
                                 <rect key="frame" x="16" y="320" width="55" height="27"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
@@ -76,6 +81,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="yUG-sQ-fc4" secondAttribute="bottom" constant="10" id="83a-JN-URx"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="UIm-Dd-ykI" secondAttribute="trailing" constant="16" id="8rd-g0-v3w"/>
                             <constraint firstItem="UIm-Dd-ykI" firstAttribute="top" secondItem="yfZ-0y-JKI" secondAttribute="bottom" id="Dqc-3N-Cdi"/>
+                            <constraint firstItem="1oU-s8-tE3" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="FbH-0L-1cp"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="yUG-sQ-fc4" secondAttribute="trailing" id="G5Y-5k-OZT"/>
                             <constraint firstItem="hI6-TC-J49" firstAttribute="leading" secondItem="YXJ-o5-6jJ" secondAttribute="leading" id="HMs-jo-edb"/>
                             <constraint firstItem="zLn-ZY-z4X" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="70" id="KFt-Mn-P8b"/>
@@ -85,6 +91,7 @@
                             <constraint firstItem="yUG-sQ-fc4" firstAttribute="top" secondItem="UIm-Dd-ykI" secondAttribute="bottom" constant="8" symbolic="YES" id="bsi-xd-FiW"/>
                             <constraint firstItem="yfZ-0y-JKI" firstAttribute="top" secondItem="hI6-TC-J49" secondAttribute="bottom" constant="7" id="c6d-pu-LHe"/>
                             <constraint firstItem="YXJ-o5-6jJ" firstAttribute="top" secondItem="zLn-ZY-z4X" secondAttribute="bottom" constant="8" id="mUd-fl-A2I"/>
+                            <constraint firstItem="1oU-s8-tE3" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="rb5-eo-p9S"/>
                             <constraint firstItem="UIm-Dd-ykI" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="reK-uS-izb"/>
                             <constraint firstItem="YXJ-o5-6jJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="vbk-kO-2eS"/>
                             <constraint firstItem="hI6-TC-J49" firstAttribute="top" secondItem="YXJ-o5-6jJ" secondAttribute="bottom" constant="7" id="yK3-AB-WxD"/>
@@ -94,6 +101,7 @@
                         <outlet property="albumImageOutlet" destination="zLn-ZY-z4X" id="s6X-f3-0AZ"/>
                         <outlet property="albumTitleLabel" destination="YXJ-o5-6jJ" id="A3j-Mz-7ip"/>
                         <outlet property="artistNameLabel" destination="hI6-TC-J49" id="z7E-hT-4Pw"/>
+                        <outlet property="loadingIndicator" destination="1oU-s8-tE3" id="Vst-pO-BWc"/>
                         <outlet property="playPauseButtonOutlet" destination="sQb-b1-mZN" id="DLB-mF-EGb"/>
                         <outlet property="tableView" destination="yUG-sQ-fc4" id="nbU-AN-VCo"/>
                         <outlet property="typeAndYearLabel" destination="yfZ-0y-JKI" id="K9b-sS-sJ5"/>

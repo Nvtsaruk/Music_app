@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -17,6 +18,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="82b-as-UW9">
+                                <rect key="frame" x="-245.66666666666666" y="-31" width="884.33333333333337" height="884"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="82b-as-UW9" secondAttribute="height" multiplier="1:1" id="anI-P4-cdx"/>
+                                </constraints>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qa8-xK-vAf">
                                 <rect key="frame" x="32" y="99" width="329" height="329"/>
                                 <constraints>
@@ -97,16 +104,6 @@
                                     <action selector="nextButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="BuT-TY-9RW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMl-A8-8ZB">
-                                <rect key="frame" x="22" y="590.66666666666663" width="53" height="37"/>
-                                <color key="tintColor" systemColor="tintColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain">
-                                    <imageReference key="image" image="plus.circle" catalog="system" symbolScale="large" variableValue="0.0"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="19"/>
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                            </button>
                             <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qV7-D9-KNF">
                                 <rect key="frame" x="4" y="40" width="88" height="67"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -122,13 +119,14 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="82b-as-UW9" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="1f2-5v-qbh"/>
                             <constraint firstItem="Qa8-xK-vAf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="4aw-JB-wBh"/>
                             <constraint firstItem="jIl-g1-4pz" firstAttribute="centerY" secondItem="JCb-We-2ez" secondAttribute="centerY" id="8kF-j4-Zgm"/>
-                            <constraint firstItem="hMl-A8-8ZB" firstAttribute="centerY" secondItem="jIl-g1-4pz" secondAttribute="centerY" id="D0h-y8-OXF"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Qa8-xK-vAf" secondAttribute="trailing" constant="32" id="DtG-Az-QYg"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fu7-2l-HlV" secondAttribute="trailing" constant="32" id="Fqg-Pe-6OM"/>
                             <constraint firstItem="fu7-2l-HlV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="32" id="L7d-0r-8Gc"/>
                             <constraint firstItem="5xT-qx-RzE" firstAttribute="leading" secondItem="Qa8-xK-vAf" secondAttribute="leading" id="OUS-J9-Q04"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="82b-as-UW9" secondAttribute="bottom" constant="-35" id="Obk-Ns-19t"/>
                             <constraint firstItem="X5C-xT-gGh" firstAttribute="leading" secondItem="JCb-We-2ez" secondAttribute="trailing" constant="7.3333333333333428" id="PlG-hW-Ub5"/>
                             <constraint firstItem="HmT-wx-dhp" firstAttribute="trailing" secondItem="5xT-qx-RzE" secondAttribute="trailing" id="SCj-7A-oej"/>
                             <constraint firstItem="JCb-We-2ez" firstAttribute="leading" secondItem="jIl-g1-4pz" secondAttribute="trailing" constant="8.6666666666666572" id="SOD-tl-wsm"/>
@@ -141,12 +139,13 @@
                             <constraint firstItem="X5C-xT-gGh" firstAttribute="centerY" secondItem="JCb-We-2ez" secondAttribute="centerY" id="rYW-w6-dXT"/>
                             <constraint firstItem="5xT-qx-RzE" firstAttribute="top" secondItem="Qa8-xK-vAf" secondAttribute="bottom" constant="24" id="sYF-Tm-Oo7"/>
                             <constraint firstItem="HmT-wx-dhp" firstAttribute="top" secondItem="5xT-qx-RzE" secondAttribute="bottom" constant="8" id="t4m-8V-00P"/>
-                            <constraint firstItem="jIl-g1-4pz" firstAttribute="leading" secondItem="hMl-A8-8ZB" secondAttribute="trailing" id="u2E-jm-sab"/>
+                            <constraint firstItem="82b-as-UW9" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="-90" id="wUY-VX-Q3p"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="albumImage" destination="Qa8-xK-vAf" id="dnr-NX-sh3"/>
                         <outlet property="artistNameLabel" destination="HmT-wx-dhp" id="bwu-C5-PQV"/>
+                        <outlet property="backgroundImage" destination="82b-as-UW9" id="6m4-XS-j7v"/>
                         <outlet property="currentPlaybackTimeLabel" destination="Ehk-7m-HOx" id="mb0-Gf-PSd"/>
                         <outlet property="playPauseButtonOutlet" destination="JCb-We-2ez" id="60W-ct-PgS"/>
                         <outlet property="playbackPositionSlider" destination="fu7-2l-HlV" id="gOG-xf-aeh"/>
@@ -161,10 +160,9 @@
     </scenes>
     <resources>
         <image name="backward.end.fill" catalog="system" width="128" height="101"/>
-        <image name="downArrow" width="32" height="32"/>
+        <image name="downArrow" width="28" height="28"/>
         <image name="forward.end.fill" catalog="system" width="128" height="101"/>
         <image name="play.circle.fill" catalog="system" width="128" height="123"/>
-        <image name="plus.circle" catalog="system" width="128" height="123"/>
         <systemColor name="tintColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

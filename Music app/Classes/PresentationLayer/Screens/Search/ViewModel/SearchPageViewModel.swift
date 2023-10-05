@@ -1,32 +1,54 @@
 import Foundation
 protocol SearchPageViewModelProtocol {
+    var searchModel: SearchResults? { get }
+    var updateClosure:( ()->Void )? { get set }
+    var isLoading: Bool { get }
     func start()
     func search(item: String)
-    var searchModel: SearchResults { get }
-    var updateClosure:( ()->Void )? { get set }
     func backToSearchCategories()
     func showPlaylistDetail(id: String)
     func showArtistDetail(id: String)
     func showAlbumDetail(id: String)
 }
 
+enum SearchType {
+    case artist
+    case track
+    case album
+    case playlist
+    
+    var type: String {
+        switch self  {
+            case .artist:
+                return SearchPageLocalization.artist.string
+            case .track:
+                return SearchPageLocalization.track.string
+            case .album:
+                return SearchPageLocalization.album.string
+            case .playlist:
+                return SearchPageLocalization.playlist.string
+        }
+    }
+}
+
 final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTableViewCellDelegate {
-    
-    
-    
     
     var coordinator: SearchPageCoordinator?
     var lastScheduledSearch: Timer?
-    
     var updateClosure: (() -> Void)?
-    var cleared = false
-    var searchModel: SearchResults = SearchResults() {
+    private var cleared = false
+    var searchModel: SearchResults? {
         didSet {
             if cleared == false {
                 removeNilSongs()
-                cleared = true
+                self.cleared = true
             }
-            print(searchModel.tracks.items.count)
+            updateClosure?()
+        }
+    }
+    
+    var isLoading: Bool = false {
+        didSet {
             updateClosure?()
         }
     }
@@ -39,14 +61,13 @@ final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTab
     func search(item: String) {
         lastScheduledSearch?.invalidate()
         lastScheduledSearch = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(searchQuery(_:)), userInfo: item, repeats: false)
-        
     }
     
     func addToPlaylist(trackId: String) {
-        searchModel.tracks.items.forEach{ item in
+        searchModel?.tracks.items.forEach{ item in
             if item.id == trackId {
                 guard let artistName = item.artists.first?.name,
-                      let image = item.album.images?.first?.url
+                      let image = item.album.images.first?.url
                 else { return }
                 let trackName = item.name
                 let track = item.preview_url
@@ -54,10 +75,10 @@ final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTab
                 coordinator?.showAddToPlaylist(trackItem: trackItem)
             }
         }
-        
     }
     
     @objc private func searchQuery(_ timer: Timer) {
+        isLoading = true
         guard let text = timer.userInfo else { return }
         let url = NetworkConstants.baseUrl + NetworkConstants.search + ((text as AnyObject).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
         APIService.getData(SearchResults.self, url: url) { result in
@@ -65,21 +86,23 @@ final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTab
                 case .success(let data):
                     self.searchModel = data
                 case .failure(let error):
-                    print("Custom Error -> \(error)")
+                    ErrorHandler.shared.handleError(error: error)
             }
         }
     }
+    
     func removeNilSongs() {
         var indexArray: [String] = []
-        searchModel.tracks.items.forEach { item in
+        searchModel?.tracks.items.forEach { item in
             if item.preview_url == nil {
                 indexArray.append(item.id)
             }
         }
         indexArray.forEach { id in
-            for (i, v) in searchModel.tracks.items.enumerated() {
+            guard let enumeratedSearchModel = searchModel else { return }
+            for (i, v) in enumeratedSearchModel.tracks.items.enumerated() {
                 if id == v.id {
-                    searchModel.tracks.items.remove(at: i)
+                    searchModel?.tracks.items.remove(at: i)
                 }
             }
         }
@@ -100,5 +123,4 @@ final class SearchPageViewModel: SearchPageViewModelProtocol, TrackItemDetailTab
     func backToSearchCategories() {
         coordinator?.popToRoot()
     }
-
 }

@@ -1,26 +1,16 @@
-//
-//  PlaylistsTableViewCell.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 21.08.23.
-//
-
 import UIKit
-
-class PlaylistsTableViewCell: UITableViewCell {
+final class PlaylistsTableViewCell: UITableViewCell {
+    //MARK: - IBOutlet
+    @IBOutlet private weak var collectionView: UICollectionView!
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    
+    //MARK: - Variables
     weak var delegate: ViewDelegate?
-    
-    var numRows = 0 
-    
+    var numRows = 0
     var collectionData: Toplist? {
         didSet{
             self.collectionView.reloadData()
         }
     }
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,18 +18,15 @@ class PlaylistsTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        let collectionNib = UINib(nibName: "PlaylistsCollectionViewCell", bundle: nil)
-        collectionView.register(collectionNib, forCellWithReuseIdentifier: "PlaylistsCollectionViewCell")
+        let collectionNib = UINib(nibName: XibNames.playlistsCollectionViewCell.name, bundle: nil)
+        collectionView.register(collectionNib, forCellWithReuseIdentifier: XibNames.playlistsCollectionViewCell.name)
         collectionView.delegate = self
         collectionView.dataSource = self
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
-    
 }
 
 extension PlaylistsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -48,18 +35,18 @@ extension PlaylistsTableViewCell: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaylistsCollectionViewCell", for: indexPath) as? PlaylistsCollectionViewCell else { return UICollectionViewCell()}
-        cell.descriptionLabel.text = collectionData?.playlists?.items?[indexPath.row].description
-        guard let url = collectionData?.playlists?.items?[indexPath.row].images?[0].url else { return cell }
-        cell.imageView.webImage(url: url)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: XibNames.playlistsCollectionViewCell.name, for: indexPath) as? PlaylistsCollectionViewCell else { return UICollectionViewCell()}
+        guard let description = collectionData?.playlists.items[indexPath.row].description,
+              let url = collectionData?.playlists.items[indexPath.row].images[0].url
+        else { return cell }
+        cell.configure(description: description, imageUrl: url)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.showItemDetail(id: collectionData?.playlists?.items?[indexPath.row].id ?? "")
+        delegate?.showItemDetail(id: collectionData?.playlists.items[indexPath.row].id ?? "")
     }
-    
-    
 }
+
 extension PlaylistsTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = (collectionView.frame.height)

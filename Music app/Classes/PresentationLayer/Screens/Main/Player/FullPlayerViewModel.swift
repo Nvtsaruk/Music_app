@@ -11,7 +11,7 @@ protocol FullPlayerViewModelProtocol: PlayerViewModelProtocol {
     func stopTimer()
     func setPlaybackTime(time: Float)
 }
-class FullPlayerModel: PlayerViewModel, FullPlayerViewModelProtocol {
+final class FullPlayerModel: PlayerViewModel, FullPlayerViewModelProtocol {
     var playbackTimer: Timer?
     
     var currentPosition: String = ""{
@@ -35,28 +35,26 @@ class FullPlayerModel: PlayerViewModel, FullPlayerViewModelProtocol {
     }
     
     func setPlaybackTime(time: Float) {
-        AudioPlayerService.shared.player?.seek(to: CMTime(seconds: Double(time * 30), preferredTimescale: 30), toleranceBefore: CMTime(seconds: 1, preferredTimescale: 30), toleranceAfter: CMTime(seconds: 1, preferredTimescale: 30)) {_ in
+        AudioPlayerService.shared.player.seek(to: CMTime(seconds: Double(time * 30), preferredTimescale: 30), toleranceBefore: CMTime(seconds: 1, preferredTimescale: 30), toleranceAfter: CMTime(seconds: 1, preferredTimescale: 30)) {_ in
             self.updatePlaybackTime()
         }
     }
     
     func getSongLength() -> String {
-        guard let duration = AudioPlayerService.shared.player?.currentItem?.duration.seconds else { return "" }
+        guard let duration = AudioPlayerService.shared.player.currentItem?.duration.seconds else { return "" }
         
         let length = getTime(time: duration)
         return length
     }
     
     func getCurrentPlaybackTime() {
-        guard let currentPlaybackTime = AudioPlayerService.shared.player?.currentItem?.currentTime().seconds else { return }
-        
+        guard let currentPlaybackTime = AudioPlayerService.shared.player.currentItem?.currentTime().seconds else { return }
         currentPosition = getTime(time: currentPlaybackTime)
-        
     }
 
     func getSliderPosition() -> Float {
-        guard let duration = AudioPlayerService.shared.player?.currentItem?.duration.seconds else { return 0 }
-        guard let currentPlaybackTime = AudioPlayerService.shared.player?.currentItem?.currentTime().seconds else { return 0}
+        guard let duration = AudioPlayerService.shared.player.currentItem?.duration.seconds else { return 0 }
+        guard let currentPlaybackTime = AudioPlayerService.shared.player.currentItem?.currentTime().seconds else { return 0}
         let position = currentPlaybackTime / duration
         if round(currentPlaybackTime) == round(duration) {
             nextItem()
@@ -78,9 +76,11 @@ class FullPlayerModel: PlayerViewModel, FullPlayerViewModelProtocol {
     
     func nextItem() {
         AudioPlayerService.shared.nextItem()
+        updateClosure?()
     }
     
     func previousItem() {
         AudioPlayerService.shared.previousItem()
+        updateClosure?()
     }
 }

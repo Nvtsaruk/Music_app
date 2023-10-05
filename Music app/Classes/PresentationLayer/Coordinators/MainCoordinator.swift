@@ -24,11 +24,10 @@ final class MainCoordinator: Coordinator, MainCoordinatorDelegate {
         let loginCoordinator = LoginCoordinator(navigationController: navigationController)
         loginCoordinator.start()
     }
+    
     private func startTabBar() {
-
         let tabbarCoordinator = TabBarCoordinator(navigationController: navigationController)
         tabbarCoordinator.coordinator = self
         tabbarCoordinator.start()
-
     }
 }

@@ -1,13 +1,16 @@
 import Alamofire
+import Foundation
 
 struct TokenRequest:Codable {
-    let access_token: String
+    var access_token: String
     let expires_in: Int
     let refresh_token: String?
 }
 
-class LoginManager {
+final class LoginManager {
     static let shared = LoginManager()
+    
+    private init() {}
     
     func getToken(loginCode: String) {
         
@@ -16,8 +19,8 @@ class LoginManager {
         guard let base64String = data?.base64EncodedString() else { return }
         
         let headers: HTTPHeaders = [
-            "Content-Type" : "application/x-www-form-urlencoded",
-            "Authorization" : "Basic \(base64String)"
+            .contentType("application/x-www-form-urlencoded"),
+            .authorization("Basic \(base64String)")
         ]
         
         let parameters: [String: String] = [
@@ -34,7 +37,18 @@ class LoginManager {
                     CredentialStorageService().saveAccessToken(token: accessToken)
                     CredentialStorageService().saveRefreshToken(token: refreshToken)
                 case .failure(let error):
-                    print(error)
+                    switch error {
+                        case .createURLRequestFailed(error: _):
+                            CustomErrors.linkError.createAllert()
+                        case .invalidURL(url: _):
+                            CustomErrors.linkError.createAllert()
+                        case .requestAdaptationFailed(error: _):
+                            CustomErrors.dataError.createAllert()
+                        case .responseSerializationFailed(reason: _):
+                            CustomErrors.jsonDecodeError.createAllert()
+                        default:
+                            CustomErrors.otherError.createAllert()
+                    }
             }
         }
     }
@@ -44,15 +58,15 @@ class LoginManager {
         guard let base64String = data?.base64EncodedString() else { return }
         
         let headers: HTTPHeaders = [
-            "Content-Type" : "application/x-www-form-urlencoded",
-            "Authorization" : "Basic \(base64String)"
+            .contentType("application/x-www-form-urlencoded"),
+            .authorization("Basic \(base64String)")
         ]
         var refreshToken = ""
         do {
             let keychainRefresh = try CredentialStorageService().getPassword(for: KeychainConstants.refreshToken.key)
             refreshToken = String(decoding: keychainRefresh ?? Data(), as: UTF8.self)
         } catch {
-            print(error)
+            CustomErrors.authError.createAllert()
         }
         
         let parameters: [String: String] = [
@@ -63,11 +77,10 @@ class LoginManager {
         AF.request(NetworkConstants.tokenAPIUrl, method: .post, parameters: parameters, encoder: URLEncodedFormParameterEncoder.default, headers: headers).responseDecodable(of: TokenRequest.self) { response in
             switch response.result {
                 case .success(let value):
-                    // Handle the successful response
                     guard let accessToken = value.access_token.data(using: .utf8) else { return }
                     CredentialStorageService().saveAccessToken(token: accessToken)
-                case .failure(let error):
-                    print(error)
+                case .failure(_):
+                    CustomErrors.authError.createAllert()
             }
         }
     }
@@ -78,7 +91,6 @@ class LoginManager {
                 kSecAttrSynchronizable: kSecAttrSynchronizableAny
             ] as CFDictionary)
             if status != errSecSuccess && status != errSecItemNotFound {
-                //Error while removing class $0
             }
         }
     }

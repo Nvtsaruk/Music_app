@@ -1,20 +1,16 @@
-//
-//  SearchPageViewController.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 8.08.23.
-//
-
 import UIKit
 
-class SearchCategoriesPageViewController: UIViewController {
+final class SearchCategoriesPageViewController: UIViewController {
+    //MARK: - IBOutlet
+    @IBOutlet private weak var searchCollectionView: UICollectionView!
     
+    @IBOutlet private weak var searchContainer: UIView!
     
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
     
-    @IBOutlet weak var searchCollectionView: UICollectionView!
+    @IBOutlet private weak var searchContainerText: UILabel!
     
-    @IBOutlet weak var searchContainer: UIView!
-    @IBOutlet weak var searchContainerText: UILabel!
+    //MARK: - Variables
     var viewModel: SearchCategoriesViewModel?
     
     var numRows: Int = 0 {
@@ -43,23 +39,35 @@ class SearchCategoriesPageViewController: UIViewController {
     }
     
     private func setupUI() {
+        if viewModel?.isLoading == true {
+            loadingIndicator.startAnimating()
+        }
+        
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = UIColor.white
+        
+        searchContainerText.text = SearchPageLocalization.searchbarPlaceholder.string
+        
         searchContainer.layer.cornerRadius = 8
         let didTap  = UITapGestureRecognizer(target: self, action: #selector(didTap))
         searchContainer.addGestureRecognizer(didTap)
-    
-    
+        
         searchCollectionView.dataSource = self
         searchCollectionView.delegate = self
-        let collectionNib = UINib(nibName: "SearchCollectionViewCell", bundle: nil)
-        searchCollectionView.register(collectionNib, forCellWithReuseIdentifier: "SearchCollectionViewCell")
+        
+        let collectionNib = UINib(nibName: XibNames.searchCollectionViewCell.name, bundle: nil)
+        searchCollectionView.register(collectionNib, forCellWithReuseIdentifier: XibNames.searchCollectionViewCell.name)
     }
+    
     @objc private func didTap() {
         viewModel?.showSearchPage()
     }
+    
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
             self.numRows = viewModel?.categories?.categories.items.count ?? 0
+            self.loadingIndicator.stopAnimating()
             searchCollectionView.reloadData()
         }
     }
@@ -76,19 +84,19 @@ extension SearchCategoriesPageViewController: UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: "SearchCollectionViewCell", for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell()}
-        cell.titleLabel.text = viewModel?.categories?.categories.items[indexPath.row].name
-        let url = viewModel?.categories?.categories.items[indexPath.row].icons.first?.url
-        cell.albumImage.webImage(url: url)
-        cell.containerView.backgroundColor = colors.randomElement()
+        guard let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: XibNames.searchCollectionViewCell.name, for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell()}
+        guard let titleName = viewModel?.categories?.categories.items[indexPath.row].name,
+              let url = viewModel?.categories?.categories.items[indexPath.row].icons.first?.url,
+              let color = colors.randomElement()
+        else { return cell}
+        
+        cell.configure(title: titleName, url: url, color: color)
         return cell
     }
-    
-    
 }
+
 extension SearchCategoriesPageViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = (collectionView.frame.height)
         let width = (collectionView.frame.width / 2) - 4
         return CGSize(width: width, height: 90)
     }

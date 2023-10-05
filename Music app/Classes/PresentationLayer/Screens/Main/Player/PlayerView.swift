@@ -1,14 +1,13 @@
-
 import UIKit
-
-class PlayerView: UIView {
+final class PlayerView: UIView {
+    //MARK: - IBOutlet
+    @IBOutlet private weak var playButtonOutlet: UIButton!
+    @IBOutlet private weak var artistNameLabel: UILabel!
+    @IBOutlet private weak var trackNameLabel: UILabel!
+    @IBOutlet private weak var trackImage: UIImageView!
+    @IBOutlet private weak var container: UIView!
     
-    @IBOutlet weak var playButtonOutlet: UIButton!
-    @IBOutlet weak var artistNameLabel: UILabel!
-    @IBOutlet weak var trackNameLabel: UILabel!
-    @IBOutlet weak var trackImage: UIImageView!
-    @IBOutlet weak var container: UIView!
-    
+    //MARK: - Variables
     var viewModel: PlayerViewModelProtocol?
     
     required init?(coder: NSCoder) {
@@ -20,8 +19,8 @@ class PlayerView: UIView {
         super.init(frame: frame)
         self.alpha = 0
         self.configureView()
-        
     }
+    
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
         bindViewModel()
@@ -37,14 +36,13 @@ class PlayerView: UIView {
                 self.playButtonOutlet.setImage(UIImage(systemName: "play.fill"), for: .normal)
             }
             
-            self.trackImage.webImage(url: self.viewModel?.playerItemData?.image ?? "")
+            self.trackImage.webImage(url: self.viewModel?.playerItemData?.imageURL ?? "")
             self.trackNameLabel.text = self.viewModel?.playerItemData?.trackName
             self.artistNameLabel.text = self.viewModel?.playerItemData?.artistName
         }
     }
     
     private func configureView() {
-        
         let subview = self.loadViewFromXib()
         subview.frame = self.bounds
         subview.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -52,8 +50,6 @@ class PlayerView: UIView {
         container.layer.cornerRadius = 8
         container.clipsToBounds = true
         trackImage.layer.cornerRadius = 8
-        guard let url = URL(string: "https://charts-images.scdn.co/assets/locale_en/viral/daily/region_global_large.jpg") else { return }
-        trackImage.sd_setImage(with: url, placeholderImage: .checkmark)
         let didTap  = UITapGestureRecognizer(target: self, action: #selector(didTap))
         container.addGestureRecognizer(didTap)
     }

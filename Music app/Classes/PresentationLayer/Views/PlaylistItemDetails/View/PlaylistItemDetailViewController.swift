@@ -3,23 +3,30 @@ import SDWebImage
 
 final class PlaylistItemDetailViewController: UIViewController {
     
+    //MARK: - IBOutlet
+    @IBOutlet private weak var playButtonOutlet: UIButton!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var itemImage: UIImageView!
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var descriptionLabel: UILabel!
     
-    @IBOutlet weak var playButtonOutlet: UIButton!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var itemImage: UIImageView!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    
+    //MARK: - Variables
     var viewModel: PlaylistItemDetailViewModelProtocol?
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel?.start()
         viewModel?.getItems()
-        descriptionLabel.text = viewModel?.details
         bindViewModel()
         setupUI()
     }
     
     private func setupUI() {
+        if viewModel?.isLoading == true {
+            loadingIndicator.startAnimating()
+        }
+        
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = UIColor.white
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -28,57 +35,70 @@ final class PlaylistItemDetailViewController: UIViewController {
         itemImage.layer.shadowOpacity = 0.2
         itemImage.layer.shadowRadius = 30
         
-        let itemDetailNib = UINib(nibName: "TrackItemDetailTableViewCell", bundle: nil)
-        tableView.register(itemDetailNib, forCellReuseIdentifier: "TrackItemDetailTableViewCell")
+        descriptionLabel.text = viewModel?.details
+        let itemDetailNib = UINib(nibName: XibNames.trackItemDetailTableViewCell.name, bundle: nil)
+        tableView.register(itemDetailNib, forCellReuseIdentifier: XibNames.trackItemDetailTableViewCell.name)
         tableView.reloadData()
-        guard let url = viewModel?.playlist.images?.first?.url else { return }
+        guard let url = viewModel?.playlist?.images.first?.url else { return }
             self.itemImage.webImage(url: url)
+        setBackGround(url: url)
     }
     
     private func bindViewModel() {
         viewModel?.updateClosure = { [weak self] in
             guard let self = self else { return }
-            guard let url = viewModel?.playlist.images?.first?.url else { return }
+            guard let url = viewModel?.playlist?.images.first?.url else { return }
                 self.itemImage.webImage(url: url)
-            if let imageCached = SDImageCache.shared.imageFromMemoryCache(forKey: url) {
-                var colorTop = imageCached.findAverageColor()?.cgColor ?? CGColor(red: 1, green: 1, blue: 1, alpha: 1)
-                let colors = Colors(colorTop: colorTop, colorBottom: CGColor(gray: 0, alpha: 1))
-                view.backgroundColor = UIColor.clear
-                let backgroundLayer = colors.gl
-                backgroundLayer?.frame = view.frame
-                view.layer.insertSublayer(backgroundLayer ?? CAGradientLayer(), at: 0)
-            }
+            setBackGround(url: url)
             if self.viewModel?.isPlaying == true {
                 self.playButtonOutlet.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
             } else {
                 self.playButtonOutlet.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
             }
             descriptionLabel.text = viewModel?.details
+            loadingIndicator.stopAnimating()
             tableView.reloadData()
-            
+        }
+    }
+    
+    private func setBackGround(url: String) {
+        if let imageCached = SDImageCache.shared.imageFromMemoryCache(forKey: url) {
+            let colorTop = imageCached.findAverageColor()?.cgColor ?? CGColor(red: 1, green: 1, blue: 1, alpha: 1)
+            let colors = Colors(colorTop: colorTop, colorBottom: CGColor(gray: 0, alpha: 1))
+            view.backgroundColor = UIColor.clear
+            let backgroundLayer = colors.gl
+            backgroundLayer?.frame = view.frame
+            view.layer.insertSublayer(backgroundLayer ?? CAGradientLayer(), at: 0)
+            loadingIndicator.stopAnimating()
         }
     }
     
     
-    @IBAction func playButtonAction(_ sender: Any) {
+    @IBAction private func playButtonAction(_ sender: Any) {
         viewModel?.playButtonAction()
     }
 }
 
 extension PlaylistItemDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel?.playlist.tracks?.items?.count ?? 0
+        viewModel?.playlist?.tracks.items?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TrackItemDetailTableViewCell") as? TrackItemDetailTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: XibNames.trackItemDetailTableViewCell.name) as? TrackItemDetailTableViewCell else { return UITableViewCell() }
         cell.delegate = viewModel as? any TrackItemDetailTableViewCellDelegate
-        guard let artist = viewModel?.playlist.tracks?.items?[indexPath.row].track?.artists?.first?.name,
-              let track = viewModel?.playlist.tracks?.items?[indexPath.row].track?.name,
-              let url = viewModel?.playlist.tracks?.items?[indexPath.row].track?.album?.images?.first?.url,
-              let id = viewModel?.playlist.tracks?.items?[indexPath.row].track?.id
+        guard let artist = viewModel?.playlist?.tracks.items?[indexPath.row].track.artists.first?.name,
+              let track = viewModel?.playlist?.tracks.items?[indexPath.row].track.name,
+              let url = viewModel?.playlist?.tracks.items?[indexPath.row].track.album.images.first?.url,
+              let id = viewModel?.playlist?.tracks.items?[indexPath.row].track.id
         else { return cell }
-        cell.configure(track: track, artist: artist, image: url, id: id)
+        var showAddButton: Bool
+        if let playlistID = viewModel?.id {
+            showAddButton = true
+        } else {
+            showAddButton = false
+        }
+        cell.configure(track: track, artist: artist, image: url, id: id, showButton: showAddButton)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

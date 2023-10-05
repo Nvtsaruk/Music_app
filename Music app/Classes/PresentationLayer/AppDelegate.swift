@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 2.08.23.
-//
-
 import UIKit
 import CoreData
 

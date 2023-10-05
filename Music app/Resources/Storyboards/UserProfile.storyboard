@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -18,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ge5-IV-UzY">
-                                <rect key="frame" x="158" y="419.66666666666669" width="77.333333333333314" height="38"/>
+                                <rect key="frame" x="158" y="479.66666666666669" width="77.333333333333314" height="38.000000000000057"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="RLy-g5-PcT"/>
                                 </constraints>
@@ -33,7 +34,7 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="90"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SnM-LM-wul">
-                                        <rect key="frame" x="16" y="6.6666666666666643" width="80" height="77.333333333333343"/>
+                                        <rect key="frame" x="16" y="6.3333333333333357" width="80" height="77.333333333333314"/>
                                         <color key="backgroundColor" systemColor="systemGray2Color"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -79,19 +80,27 @@
                                     <constraint firstItem="Co9-rb-b2t" firstAttribute="centerY" secondItem="SnM-LM-wul" secondAttribute="centerY" id="vXJ-4b-G4r"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="QUU-pm-bgv">
+                                <rect key="frame" x="178" y="420" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Ge5-IV-UzY" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="6BD-Pf-Hjb"/>
                             <constraint firstItem="y7O-HO-Wp1" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Ja8-1j-c58"/>
+                            <constraint firstItem="QUU-pm-bgv" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="N6P-Tf-68Z"/>
                             <constraint firstItem="y7O-HO-Wp1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="WVD-1M-XcJ"/>
-                            <constraint firstItem="Ge5-IV-UzY" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="ig2-QJ-0Si"/>
+                            <constraint firstItem="QUU-pm-bgv" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="XuU-R1-JvM"/>
+                            <constraint firstItem="Ge5-IV-UzY" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" constant="60" id="ig2-QJ-0Si"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="y7O-HO-Wp1" secondAttribute="trailing" id="oLS-mi-5fx"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loadingIndicator" destination="QUU-pm-bgv" id="neg-4Q-zTA"/>
                         <outlet property="logoutButtonOutlet" destination="Ge5-IV-UzY" id="9Lo-PJ-Wsb"/>
+                        <outlet property="myProfileLabel" destination="Nfi-D6-9Sf" id="pSJ-Ff-hcD"/>
                         <outlet property="profileDisplayName" destination="zIN-8u-ZDS" id="8IM-Uv-eJl"/>
                         <outlet property="profileImage" destination="SnM-LM-wul" id="CPu-Td-NPI"/>
                         <outlet property="userProfile" destination="y7O-HO-Wp1" id="rwc-o0-Gyp"/>

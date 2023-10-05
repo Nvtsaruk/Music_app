@@ -1,3 +1,4 @@
+import Foundation
 enum NetworkConstants {
     static let redirectURI = "https://igly.by"
     static let baseAPICodeUrl = "https://accounts.spotify.com/authorize"
@@ -38,15 +39,15 @@ enum APIUrls: CaseIterable {
     var name: String {
         switch self {
             case .topPlaylists:
-                return "Хит-парады"
+                return MainScreenLocalization.topList.string
             case .relax:
-                return "Релакс"
+                return MainScreenLocalization.relax.string
             case .pop:
-                return "Поп"
+                return MainScreenLocalization.pop.string
             case .rock:
-                return "Рок"
+                return MainScreenLocalization.rock.string
             case .mood:
-                return "Настроение"
+                return MainScreenLocalization.mood.string
         }
     }
     

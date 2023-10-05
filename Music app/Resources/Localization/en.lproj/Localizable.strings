@@ -1,0 +1,40 @@
+//User profile
+"myProfile" = "My profile";
+"logout" = "Logout";
+"plan" = "Plan:";
+"email" = "Email:";
+"userID" = "UserID:";
+"country" = "Country:";
+
+//Main screen
+"topList" = "Top list";
+"relax" = "Relax";
+"pop" = "Pop";
+"rock" = "Rock";
+"mood" = "Mood";
+"main" = "Main";
+"search" = "Search";
+"media" = "My music";
+"morning" = "Good morning";
+"afternoon" = "Good afternoon";
+"evening" = "Good evening";
+"night" = "Good night";
+
+//Search page
+"track" = "Track";
+"artist" = "Artist";
+"album" = "Album";
+"playlist" = "Playlist";
+"searchbarPlaceholder" = "What do you want to listen?";
+
+//My media page
+"myPlaylists" = "My playlists";
+"emptyPlaylists" = "Empty";
+
+//Add to playlist
+"createPlaylist" = "Create playlist";
+"ready" = "Ready";
+"playlistName" = "Playlist name";
+"message" = "Enter name of playlist";
+"placeholder" = "Enter playlist name";
+"cancel" = "Cancel";

@@ -1,22 +1,21 @@
 import Foundation
 protocol ArtistItemDetailViewModelProtocol {
-    func start()
+    var isPlaying: Bool { get set }
     var artist: Artist? { get }
     var topTracks: [Track] { get }
-    func getArtistInfo()
     var updateClosure: (() -> Void)? { get set }
+    var isLoading: Bool { get }
+    func start()
+    func getArtistInfo()
     func addPlayItems(itemIndex: Int)
     func playButtonAction()
-    var isPlaying: Bool { get set }
+    
 }
 
-final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioPlayerDelegateForDetails, TrackItemDetailTableViewCellDelegate {
+final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, TrackItemDetailTableViewCellDelegate {
     func start() {
-        let trackCell = TrackItemDetailTableViewCell()
-        trackCell.delegate = self
+        AudioPlayerService.shared.addObserver(self)
     }
-    
-    
     
     var updateClosure: (() -> Void)?
     var coordinator: SearchPageCoordinator?
@@ -44,11 +43,18 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
             updateClosure?()
         }
     }
+    
+    var isLoading: Bool = false {
+        didSet {
+            updateClosure?()
+        }
+    }
+    
     func addToPlaylist(trackId: String) {
         topTracks.forEach{ item in
             if item.id == trackId {
-                guard let artistName = item.artists?.first?.name,
-                      let image = item.album?.images?.first?.url
+                guard let artistName = item.artists.first?.name,
+                      let image = item.album.images.first?.url
                 else { return }
                 let trackName = item.name
                 let track = item.preview_url
@@ -59,39 +65,38 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
     }
     
     func getArtistInfo() {
+        isLoading = true
         let url = NetworkConstants.baseUrl + NetworkConstants.artists + (id ?? "")
         APIService.getData(Artist.self, url: url) { result in
             switch result {
                 case .success(let data):
                     self.artist = data
                 case .failure(let error):
-                    print("Custom Error -> \(error)")
+                    ErrorHandler.shared.handleError(error: error)
             }
         }
-        
-        AudioPlayerService.shared.detailsDelegate = self
     }
     func getArtistTracks() {
+        isLoading = true
         let url = NetworkConstants.baseUrl + NetworkConstants.artists + (id ?? "") + NetworkConstants.topTracks
         APIService.getData(ArtistTopTrackModel.self, url: url) { result in
             switch result {
                 case .success(let data):
                     self.topTracks = data.tracks
                 case .failure(let error):
-                    print("Custom Error -> \(error)")
+                    ErrorHandler.shared.handleError(error: error)
             }
         }
-        AudioPlayerService.shared.detailsDelegate = self
     }
     
     func addPlayItems(itemIndex: Int) {
         var playerPlaylist: [PlayerItemModel] = []
         topTracks.forEach { item in
             guard let url = item.preview_url else { return }
-            guard let imageUrl = item.album?.images?.first?.url else { return }
-            guard let artistName = item.artists?.first?.name else { return }
+            guard let imageUrl = item.album.images.first?.url else { return }
+            guard let artistName = item.artists.first?.name else { return }
             let trackName = item.name
-            let playerItem = PlayerItemModel(url: url, image: imageUrl, trackName: trackName, artistName: artistName)
+            let playerItem = PlayerItemModel(url: url, imageURL: imageUrl, trackName: trackName, artistName: artistName)
             playerPlaylist.append(playerItem)
         }
         AudioPlayerService.shared.addPlaylistForPlayer(playerPlaylist, itemIndex: itemIndex)
@@ -123,17 +128,15 @@ final class ArtistItemDetailViewModel: ArtistItemDetailViewModelProtocol, AudioP
             }
         }
     }
-    
-    func audioPlayerDidStartPlaying() {
+
+}
+
+extension ArtistItemDetailViewModel: AudioPlayerServiceObserver {
+    func audioPlayerPlaying(item: PlayerItemModel) {
         isPlaying = true
     }
     
-    func audioPlayerDidStopPlaying() {
+    func audioPlayerPaused(item: PlayerItemModel) {
         isPlaying = false
     }
-    
-    func sendTrackInfo(playerItem: PlayerItemModel) {
-        
-    }
 }
-

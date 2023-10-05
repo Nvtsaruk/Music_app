@@ -1,18 +1,10 @@
-//
-//  ArtistTableViewCell.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 12.09.23.
-//
-
 import UIKit
-
-class ArtistTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var artistName: UILabel!
-    @IBOutlet weak var artistImage: UIImageView!
+final class ArtistTableViewCell: UITableViewCell {
+    //MARK: - IBOutlet
+    @IBOutlet private weak var artistName: UILabel!
+    @IBOutlet private weak var artistImage: UIImageView!
     
-    
+    //MARK: - Variables
     var itemType: String = ""
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,10 +18,8 @@ class ArtistTableViewCell: UITableViewCell {
         artistName.text = name
         artistImage.webImage(url: image)
     }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-    
 }

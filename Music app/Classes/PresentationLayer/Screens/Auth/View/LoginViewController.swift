@@ -1,14 +1,7 @@
-//
-//  LoginViewController.swift
-//  Music app
-//
-//  Created by Tsaruk Nick on 3.08.23.
-//
-
 import UIKit
 import WebKit
 
-class LoginViewController: UIViewController, WKNavigationDelegate {
+final class LoginViewController: UIViewController, WKNavigationDelegate {
 
     var viewModel: LoginViewModelProtocol?
     
@@ -41,6 +34,7 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
         guard let code = component?.queryItems?.first(where: { $0.name == "code" })?.value else { return }
         viewModel?.loginCode = code
     }
+    
     private func hideWebView() {
         viewModel?.updateClosure = { [weak self] in
             self?.webView.removeFromSuperview()
@@ -55,6 +49,4 @@ extension LoginViewController: Storyboarded {
     static func containingStoryboard() -> Storyboard {
         return .Login
     }
-    
-    
 }

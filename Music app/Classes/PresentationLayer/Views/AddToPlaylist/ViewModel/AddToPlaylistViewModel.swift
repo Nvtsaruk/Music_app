@@ -17,7 +17,7 @@ final class AddToPlaylistViewModel: AddToPlaylistViewModelProtocol {
     }
     var trackImage: String = ""
     var updateClosure: (() -> Void)?
-    var currentUser: UserProfile = UserProfile()
+    var currentUser: UserProfile?
     
     var playlist: [UserPlaylist] = [] {
         didSet {
@@ -37,15 +37,30 @@ final class AddToPlaylistViewModel: AddToPlaylistViewModelProtocol {
                 case .success(let data):
                     self.currentUser = data
                 case .failure(let error):
-                    print("Custom Error -> \(error)")
+                    switch error {
+                        case .receivedError:
+                            CustomErrors.receivedError.createAllert()
+                        case .linkError:
+                            CustomErrors.linkError.createAllert()
+                        case .dataError:
+                            CustomErrors.dataError.createAllert()
+                        case .jsonDecodeError:
+                            CustomErrors.jsonDecodeError.createAllert()
+                        case .brokenAccessToken:
+                            CustomErrors.brokenAccessToken.createAllert()
+                        case .authError:
+                            CustomErrors.authError.createAllert()
+                        case .otherError:
+                            CustomErrors.otherError.createAllert()
+                    }
             }
         }
     }
     
     func createPlaylist(playlistName: String) {
-        print(playlistName)
-        let userId = currentUser.id
-        guard let trackItem = trackItem else { return }
+        guard let trackItem = trackItem,
+        let userId = currentUser?.id
+        else { return }
         DatabaseService.shared.createPlaylist(userId: userId, playlistName: playlistName, item: trackItem)
         updatePlaylists()
     }

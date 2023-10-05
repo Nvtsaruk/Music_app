@@ -1,10 +1,6 @@
 import UIKit
 
-//protocol MainPage: Coordinator {
-//    func goToUserProfile()
-//}
-
-class MainPageCoordinator: Coordinator {
+final class MainPageCoordinator: Coordinator {
     
     weak var delegate: MainCoordinatorDelegate?
     
@@ -34,7 +30,6 @@ class MainPageCoordinator: Coordinator {
         let viewModel = UserDetailsViewModel()
         viewModel.coordinator = self
         viewModel.currentUser = currentUser
-        // TODO: - delegate
         let userDetailsViewController = UserDetailsViewController.instantiate()
         userDetailsViewController.viewModel = viewModel
         navigationController.pushViewController(userDetailsViewController, animated: true)
@@ -61,6 +56,3 @@ class MainPageCoordinator: Coordinator {
         delegate?.showLogin()
     }
 }
-
-
-

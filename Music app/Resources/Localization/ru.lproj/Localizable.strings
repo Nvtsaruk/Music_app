@@ -1,0 +1,40 @@
+//User profile
+"myProfile" = "Мой профиль";
+"logout" = "Выйти";
+"plan" = "План:";
+"email" = "Почта:";
+"userID" = "ИД:";
+"country" = "Страна:";
+
+//Main screen
+"topList" = "Хит-парады";
+"relax" = "Релакс";
+"pop" = "Поп";
+"rock" = "Рок";
+"mood" = "Настроение";
+"main" = "Главная";
+"search" = "Поиск";
+"media" = "Моя медиатека";
+"morning" = "Доброе утро";
+"afternoon" = "Добрый день";
+"evening" = "Добрый вечер";
+"night" = "Спокойной ночи";
+
+//Search page
+"track" = "Трек";
+"artist" = "Исполнитель";
+"album" = "Альбом";
+"playlist" = "Плейлист";
+"searchbarPlaceholder" = "Что хочешь послушать?";
+
+//My media page
+"myPlaylists" = "Мои плейлисты";
+"emptyPlaylists" = "Пусто";
+
+//Add to playlist
+"createPlaylist" = "Создать плейлист";
+"ready" = "Готово";
+"playlistName" = "Название плейлиста";
+"message" = "Введите название плейлиста";
+"placeholder" = "Введите название плейлиста";
+"cancel" = "Отмена";
