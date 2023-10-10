@@ -46,7 +46,7 @@ Instead of using Spotify user playlist feature, I saved playlists to local datab
 
 ## Built With
 
-<p>This app was build using MVVM-C architecture. Used such frameworks as UIKit, Alamofire, Realm, SDWebImage. Frameworks were integrated with Swift Package Manger. I've used Observer and Delegate paterns.</p>
+<p>This app was build using MVVM-C architecture. Frameworks were integrated with Swift Package Manger. I've used Observer and Delegate paterns.</p>
 <br>
 <ul>
     <li>UIKit</li>
@@ -54,6 +54,9 @@ Instead of using Spotify user playlist feature, I saved playlists to local datab
     <li>Alamofire</li>
     <li>Realm</li>
     <li>SDWebImage</li>
+    <li>Caching</li>
+    <li>Dependency Injection</li>
+    <li>XCode Instruments</li>
 </ul>
 
 <p>Alamofire was used for getting and parsing data from Spotify WEB API, Realm for storing user playlists locally. SDWebImage was used for geting images by passing url to it and cache images for later use.
