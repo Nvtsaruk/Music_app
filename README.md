@@ -48,9 +48,14 @@ Instead of using Spotify user playlist feature, I saved playlists to local datab
 
 <p>This app was build using MVVM-C architecture. Used such frameworks as UIKit, Alamofire, Realm, SDWebImage. Frameworks were integrated with Swift Package Manger. I've used Observer and Delegate paterns.</p>
 <br>
-* UIKit
-* AVFoundation
-* Alamofire
+<ul>
+    <li>UIKit</li>
+    <li>AVFoundation</li>
+    <li>Alamofire</li>
+    <li>Realm</li>
+    <li>SDWebImage</li>
+</ul>
+
 <p>Alamofire was used for getting and parsing data from Spotify WEB API, Realm for storing user playlists locally. SDWebImage was used for geting images by passing url to it and cache images for later use.
 Cached images were used for generating average color and then passing it to generate gradient for background</p>
 
