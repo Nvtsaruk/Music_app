@@ -49,6 +49,7 @@ Instead of using Spotify user playlist feature, I saved playlists to local datab
 <p>This app was build using MVVM-C architecture. Frameworks were integrated with Swift Package Manger. I've used Observer and Delegate paterns.</p>
 <br>
 <ul>
+    <li>Keychain</li>
     <li>UIKit</li>
     <li>AVFoundation</li>
     <li>Alamofire</li>
